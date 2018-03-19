@@ -4,6 +4,7 @@ project(migration_office)
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(migration_office
-        main.cpp
+        src/main.cpp
         LICENSE
-        README.md)
+        README.md
+        src/Person.cpp src/Person.h src/Feature.cpp src/Feature.h src/Passport.cpp src/Passport.h)
