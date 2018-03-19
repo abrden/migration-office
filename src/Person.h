@@ -2,23 +2,18 @@
 #define MIGRATION_OFFICE_PERSON_H
 
 #include <list>
-#include "Passport.h"
 #include "Feature.h"
 
 class Person {
 
-    private:
-        const unsigned int id;
-        const Passport passport;
-        const bool resident;
+    protected:
         const std::list<Feature> features;
 
     public:
-        Person(unsigned int dni, Passport passport, bool resident, std::list<Feature> features);
-        const unsigned int getId();
-        bool isResident();
+        Person(std::list<Feature> features);
         const std::list<Feature> getFeatures();
-        ~Person();
+        virtual bool hasId() = 0;
+        virtual ~Person();
 
 };
 

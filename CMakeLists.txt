@@ -7,4 +7,4 @@ add_executable(migration_office
         src/main.cpp
         LICENSE
         README.md
-        src/Person.cpp src/Person.h src/Feature.cpp src/Feature.h src/Passport.cpp src/Passport.h)
+        src/Person.cpp src/Person.h src/Feature.cpp src/Feature.h src/Passport.cpp src/Passport.h src/Resident.cpp src/Resident.h src/Foreigner.cpp src/Foreigner.h)
