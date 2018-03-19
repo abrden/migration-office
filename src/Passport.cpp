@@ -1,7 +1,7 @@
 #include "Passport.h"
 
-bool Passport::stampPassport() {
-    return true;
+void Passport::stampPassport() {
+    return;
 }
 
 Passport::~Passport() {}

@@ -4,7 +4,7 @@
 class Passport {
 
     public:
-        bool stampPassport();
+        void stampPassport();
         ~Passport();
 
 };

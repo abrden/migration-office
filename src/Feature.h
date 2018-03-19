@@ -10,7 +10,6 @@ class Feature {
 
     public:
         explicit Feature(std::string feature);
-        const std::string getFeature();
         ~Feature();
 
 };
