@@ -9,6 +9,8 @@ RUN apt install -y \
 RUN mkdir /src
 RUN mkdir /build
 COPY . /src
+COPY install.sh /build
 WORKDIR /build
+RUN chmod a+x install.sh
 RUN cmake ../src && make
-CMD ["valgrind", "./migration_office"]
+CMD ["./install.sh"]
