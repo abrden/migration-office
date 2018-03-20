@@ -3,8 +3,16 @@ project(migration_office)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(migration_office
-        src/main.cpp
-        LICENSE
-        README.md
-        src/Person.cpp src/Person.h src/Feature.cpp src/Feature.h src/Passport.cpp src/Passport.h src/Resident.cpp src/Resident.h src/Foreigner.cpp src/Foreigner.h src/Stamper.cpp src/Stamper.h)
+#if(CMAKE_COMPILER_IS_GNUCXX)
+#    # Errors and warnings.
+#    set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -Wno-conversion -Wno-unused-parameter -Wextra -Wtype-limits -pedantic -pedantic-errors")
+#    # Valgrind and debug
+#    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_RELEASE} -O0 -ggdb3 -DDEBUG")
+#    # Optimizing
+#    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3 -DNDEBUG")
+#endif(CMAKE_COMPILER_IS_GNUCXX)
+
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+add_subdirectory(src/main/)
