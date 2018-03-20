@@ -6,11 +6,8 @@ RUN apt install -y \
     cmake \
     valgrind
 
-RUN mkdir /src
-RUN mkdir /build
-COPY . /src
-COPY install.sh /build
-WORKDIR /build
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
 RUN chmod a+x install.sh
-RUN cmake ../src && make
 CMD ["./install.sh"]
