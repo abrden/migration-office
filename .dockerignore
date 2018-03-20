@@ -1,0 +1,9 @@
+# git
+.git
+
+# IntelliJ
+.idea
+
+# CMake
+CMakeFiles
+CMakeCache.txt

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 2.8.12.2)
 project(migration_office)
 
 set(CMAKE_CXX_STANDARD 11)
