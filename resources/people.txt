@@ -1,0 +1,2 @@
+Agustina,Barbetta,true,38464269,tez blanca;ojos oscuros
+Manuel,Porto,false,,oso grizzly
