@@ -6,15 +6,15 @@ sudo: required
 matrix:
   include:
       # works on Precise and Trusty
-      - os: linux
-        addons:
-          apt:
-            sources:
-              - ubuntu-toolchain-r-test
-            packages:
-              - g++-4.8
-        env:
-           - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.8
+      env:
+        - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
 
     # works on Precise and Trusty
     - os: linux
