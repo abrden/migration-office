@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-RUN apt update
+RUN apt update -qq
 RUN apt install -y \
     build-essential \
     wget \

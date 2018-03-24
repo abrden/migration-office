@@ -13,6 +13,3 @@ valgrind --leak-check=full\
          --show-leak-kinds=all\
          --trace-children=yes\
          --error-exitcode=1 --errors-for-leak-kinds=all ./tests
-echo "Valgrind exit code" $?
-echo "==================== Done ===================="
-exit $?
