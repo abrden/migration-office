@@ -28,6 +28,8 @@ matrix:
          - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
 
 before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y valgrind
   - wget https://cmake.org/files/v3.5/cmake-3.5.1-Linux-x86_64.sh
   - sudo sh cmake-3.5.1-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir
   - eval "${MATRIX_EVAL}"
