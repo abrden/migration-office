@@ -11,7 +11,7 @@ class Resident : public Person {
 
     public:
         Resident(unsigned int id, std::list<Feature>& features);
-        const unsigned int getId();
+        unsigned int getId();
         bool hasId() override;
         ~Resident() override;
 
