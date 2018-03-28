@@ -7,11 +7,11 @@
 class WantedPersonAlert {
 
     private:
-        const std::list<Feature> personFeatures;
+        const std::list<Feature*> personFeatures;
 
     public:
-        WantedPersonAlert(std::list<Feature> personFeatures);
-        const std::list<Feature> getFeatures();
+        WantedPersonAlert(std::list<Feature*> personFeatures);
+        const std::list<Feature*> getFeatures();
         ~WantedPersonAlert();
 
 };
