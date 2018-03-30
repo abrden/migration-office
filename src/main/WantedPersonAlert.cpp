@@ -3,7 +3,7 @@
 WantedPersonAlert::WantedPersonAlert(const int timestamp, const std::list<Feature*>& person_features) : timestamp(timestamp),
                                                                                                        person_features(person_features) {}
 
-const std::list<Feature*> WantedPersonAlert::get_features() {
+const std::list<Feature*>& WantedPersonAlert::get_features() {
     return person_features;
 }
 
