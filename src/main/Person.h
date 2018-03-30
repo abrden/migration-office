@@ -7,11 +7,11 @@
 class Person {
 
     protected:
-        const std::list<Feature> features;
+        std::list<Feature*> features;
 
     public:
-        Person(std::list<Feature> features);
-        const std::list<Feature> getFeatures();
+        Person(std::list<Feature*> features);
+        std::list<Feature*> getFeatures();
         virtual bool hasId() = 0;
         virtual ~Person();
 
