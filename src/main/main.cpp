@@ -18,8 +18,5 @@ std::list<std::string> init_fugitives_list() {
 
 int main(int argc, char* argv[]) {
     std::cout << "Hello, World! This is the Conculandia Migration Office." << std::endl;
-    MinisterOfSecurity m("../resources/alerts.txt");
-    std::list<WantedPersonAlert*> wpa = m.get_alerts();
-    std::cout << wpa.size() << std::endl;
     return 0;
 }
