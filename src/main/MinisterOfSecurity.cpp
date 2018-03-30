@@ -38,5 +38,8 @@ std::list<WantedPersonAlert*>& MinisterOfSecurity::get_alerts() {
 }
 
 MinisterOfSecurity::~MinisterOfSecurity() {
-    while (!alerts.empty()) delete alerts.back();
+    while (!alerts.empty()) {
+        delete alerts.back();
+        alerts.pop_back();
+    }
 }

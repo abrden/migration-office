@@ -12,5 +12,8 @@ int WantedPersonAlert::get_timestamp() const {
 }
 
 WantedPersonAlert::~WantedPersonAlert() {
-    while (!person_features.empty()) delete person_features.back();
+    while (!person_features.empty()) {
+        delete person_features.back();
+        person_features.pop_back();
+    }
 }

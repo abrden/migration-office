@@ -8,7 +8,7 @@ class WantedPersonAlert {
 
     private:
         const int timestamp;
-        const std::list<Feature*> person_features;
+        std::list<Feature*> person_features;
 
     public:
         WantedPersonAlert(const int timestamp, const std::list<Feature*>& person_features);
