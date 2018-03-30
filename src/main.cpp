@@ -7,13 +7,13 @@
 
 std::list<std::string> init_fugitives_list() {
     std::ifstream ifs("../resources/fugitives.txt");
-    std::list<std::string> fugitivesList;
-    std::string fugitiveId;
+    std::list<std::string> fugitives_list;
+    std::string fugitive_id;
 
-    while (getline(ifs, fugitiveId)) {
-        fugitivesList.emplace_back(fugitiveId);
+    while (getline(ifs, fugitive_id)) {
+        fugitives_list.emplace_back(fugitive_id);
     }
-    return fugitivesList;
+    return fugitives_list;
 }
 
 std::list<WantedPersonAlert*> init_wanted_alerts_list() {
@@ -23,20 +23,20 @@ std::list<WantedPersonAlert*> init_wanted_alerts_list() {
 
     while (getline(ifs, line)) {
 
-        std::list<Feature*> wantedPersonFeatures;
+        std::list<Feature*> wanted_person_features;
 
         std::stringstream ss(line);
-        std::string featureStr;
+        std::string feature_str;
 
-        getline(ss, featureStr, ',');
-        int timestamp = stoi(featureStr);
+        getline(ss, feature_str, ',');
+        int timestamp = stoi(feature_str);
 
-        while (getline(ss, featureStr, ','))  {
-            Feature* feature = new Feature(featureStr);
-            wantedPersonFeatures.emplace_back(feature);
+        while (getline(ss, feature_str, ','))  {
+            Feature* feature = new Feature(feature_str);
+            wanted_person_features.emplace_back(feature);
         }
 
-        alerts.emplace_back(new WantedPersonAlert(timestamp, wantedPersonFeatures));
+        alerts.emplace_back(new WantedPersonAlert(timestamp, wanted_person_features));
     }
 
     return alerts;
