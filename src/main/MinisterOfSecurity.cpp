@@ -32,6 +32,10 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
     alerts.sort(order_by_timestamp);
 }
 
+std::list<WantedPersonAlert*> MinisterOfSecurity::get_alerts() {
+    return alerts;
+}
+
 MinisterOfSecurity::~MinisterOfSecurity() {
     while (!alerts.empty()) delete alerts.back();
 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5.1)>>>>>>> b57dd236526329f549e78e162662196bd17a9af6
+cmake_minimum_required(VERSION 3.5.1)
 project(migration_office)
 
 if(CMAKE_COMPILER_IS_GNUCXX)

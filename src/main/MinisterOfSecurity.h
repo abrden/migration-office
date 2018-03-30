@@ -10,6 +10,7 @@ class MinisterOfSecurity {
 
     public:
         MinisterOfSecurity(const std::string& alerts_file_path);
+        std::list<WantedPersonAlert*> get_alerts();
         ~MinisterOfSecurity();
 
 };
