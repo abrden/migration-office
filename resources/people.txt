@@ -1,2 +1,3 @@
-Agustina,Barbetta,true,38464269,tez blanca;ojos oscuros
-Manuel,Porto,false,,oso grizzly
+timestamp,resident,id,name,last_name,features
+0,1,38464269,Agustina,Barbetta,tez blanca;ojos oscuros
+0,1,1234567,Manuel,Porto,tez blanca;ojos verdes;barbudo
