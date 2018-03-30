@@ -1,9 +1,14 @@
 #include "WantedPersonAlert.h"
 
-WantedPersonAlert::WantedPersonAlert(std::list<Feature*> personFeatures) : personFeatures(personFeatures) {}
+WantedPersonAlert::WantedPersonAlert(const int timestamp, const std::list<Feature*>& person_features) : timestamp(timestamp),
+                                                                                                       person_features(person_features) {}
 
-const std::list<Feature*> WantedPersonAlert::getFeatures() {
-    return personFeatures;
+const std::list<Feature*> WantedPersonAlert::get_features() {
+    return person_features;
+}
+
+const int WantedPersonAlert::get_timestamp() {
+    return timestamp;
 }
 
 WantedPersonAlert::~WantedPersonAlert() {}
