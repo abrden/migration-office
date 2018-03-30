@@ -7,7 +7,7 @@ const std::list<Feature*> WantedPersonAlert::get_features() {
     return person_features;
 }
 
-const int WantedPersonAlert::get_timestamp() {
+const int WantedPersonAlert::get_timestamp() const {
     return timestamp;
 }
 

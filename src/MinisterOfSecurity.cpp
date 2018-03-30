@@ -3,6 +3,10 @@
 #include <fstream>
 #include <sstream>
 
+bool order_by_timestamp(const WantedPersonAlert* first, const WantedPersonAlert* second) {
+    return first->get_timestamp() <= second->get_timestamp();
+}
+
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
     std::ifstream ifs(alerts_file_path);
     std::string line;
@@ -24,6 +28,8 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
 
         alerts.push_back(new WantedPersonAlert(timestamp, wanted_person_features));
     }
+
+    alerts.sort(order_by_timestamp);
 }
 
 MinisterOfSecurity::~MinisterOfSecurity() {

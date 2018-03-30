@@ -2,7 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include <list>
-#include "MinisterOfSecurity.h"
 
 std::list<std::string> init_fugitives_list() {
     std::ifstream ifs("../resources/fugitives.txt");

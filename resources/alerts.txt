@@ -1,3 +1,3 @@
-0,petiso,orejudo
+2,petiso,orejudo
 0,sombrero cónico
 4,gatuno
