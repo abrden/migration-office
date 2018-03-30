@@ -3,7 +3,7 @@
 Resident::Resident(unsigned int id, std::list<Feature>& features) :
         Person(features), id(id) {}
 
-const unsigned int Resident::getId() {
+unsigned int Resident::getId() {
     return id;
 }
 

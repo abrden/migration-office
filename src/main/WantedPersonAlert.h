@@ -13,7 +13,7 @@ class WantedPersonAlert {
     public:
         WantedPersonAlert(const int timestamp, const std::list<Feature*>& person_features);
         const std::list<Feature*> get_features();
-        const int get_timestamp() const;
+        int get_timestamp() const;
         ~WantedPersonAlert();
 
 };
