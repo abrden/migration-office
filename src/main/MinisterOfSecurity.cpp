@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <iostream>
 
 bool order_by_timestamp(const WantedPersonAlert* first, const WantedPersonAlert* second) {
     return first->get_timestamp() <= second->get_timestamp();
@@ -32,7 +33,7 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
     alerts.sort(order_by_timestamp);
 }
 
-std::list<WantedPersonAlert*> MinisterOfSecurity::get_alerts() {
+std::list<WantedPersonAlert*>& MinisterOfSecurity::get_alerts() {
     return alerts;
 }
 
