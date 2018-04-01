@@ -6,7 +6,7 @@
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) : Spawner(alerts_file_path) {}
 
-std::list<std::pair<int, WantedPersonAlert*>> MinisterOfSecurity::load_items(const std::string& alerts_file_path) {
+std::list<std::pair<int, Spawnable*>> MinisterOfSecurity::load_items(const std::string& alerts_file_path) {
     std::ifstream ifs(alerts_file_path);
     std::string line;
 

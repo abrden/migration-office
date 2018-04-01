@@ -8,7 +8,7 @@ class MinisterOfSecurity : public Spawner {
 
     public:
         explicit MinisterOfSecurity(const std::string& alerts_file_path);
-        std::list<std::pair<int, WantedPersonAlert*>> load_items(const std::string& file_path);
+        std::list<std::pair<int, Spawnable*>> load_items(const std::string& file_path);
         ~MinisterOfSecurity();
 
 };
