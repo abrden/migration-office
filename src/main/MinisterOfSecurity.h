@@ -4,11 +4,14 @@
 #include "WantedPersonAlert.h"
 #include "Spawner.h"
 
-class MinisterOfSecurity : public Spawner {
+class MinisterOfSecurity {
+
+    private:
+        std::list<std::pair<int, WantedPersonAlert*>> alarms;
+        std::list<std::pair<int, WantedPersonAlert*>> load_alarms(const std::string& file_path);
 
     public:
         explicit MinisterOfSecurity(const std::string& alerts_file_path);
-        std::list<std::pair<int, Spawnable*>> load_items(const std::string& file_path);
         ~MinisterOfSecurity();
 
 };

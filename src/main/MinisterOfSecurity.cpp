@@ -4,9 +4,11 @@
 #include <sstream>
 #include <iostream>
 
-MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) : Spawner(alerts_file_path) {}
+MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
+    alarms = load_alarms(alerts_file_path);
+}
 
-std::list<std::pair<int, Spawnable*>> MinisterOfSecurity::load_items(const std::string& alerts_file_path) {
+std::list<std::pair<int, WantedPersonAlert*>> MinisterOfSecurity::load_alarms(const std::string& alerts_file_path) {
     std::ifstream ifs(alerts_file_path);
     std::string line;
 
@@ -25,10 +27,15 @@ std::list<std::pair<int, Spawnable*>> MinisterOfSecurity::load_items(const std::
             wanted_person_features.push_back(feature);
         }
 
-        items.emplace_back(std::make_pair(timestamp, new WantedPersonAlert(wanted_person_features)));
+        alarms.emplace_back(std::make_pair(timestamp, new WantedPersonAlert(wanted_person_features)));
     }
 
-    return items;
+    return alarms;
 }
 
-MinisterOfSecurity::~MinisterOfSecurity() {}
+MinisterOfSecurity::~MinisterOfSecurity() {
+    while (!alarms.empty()) {
+        delete alarms.back().second;
+        alarms.pop_back();
+    }
+}

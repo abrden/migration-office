@@ -9,15 +9,13 @@
 
 class Spawner {
 
-    protected:
-        std::list<std::pair<int, Spawnable*>> items;
+    private:
+        std::list<std::pair<int, Spawnable*>>& items;
 
     public:
-        explicit Spawner(const std::string& file_path);
-        virtual std::list<std::pair<int, Spawnable*>> load_items(const std::string& file_path) = 0;
+        explicit Spawner(std::list<std::pair<int, Spawnable*>>& items);
         void run();
-        const std::list<std::pair<int, Spawnable*>>& get_items();
-        virtual ~Spawner();
+        ~Spawner();
 
 };
 
