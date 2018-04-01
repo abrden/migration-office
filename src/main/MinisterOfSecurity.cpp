@@ -8,7 +8,7 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
     alerts = load_alarms(alerts_file_path);
 }
 
-std::list<std::pair<int, WantedPersonAlert*>> MinisterOfSecurity::load_alarms(const std::string& alerts_file_path) {
+std::list<std::pair<int, Spawnable*>> MinisterOfSecurity::load_alarms(const std::string& alerts_file_path) {
     std::ifstream ifs(alerts_file_path);
     std::string line;
 
@@ -33,7 +33,7 @@ std::list<std::pair<int, WantedPersonAlert*>> MinisterOfSecurity::load_alarms(co
     return alerts;
 }
 
-const std::list<std::pair<int, WantedPersonAlert*>>& MinisterOfSecurity::get_alerts() {
+std::list<std::pair<int, Spawnable*>>& MinisterOfSecurity::get_alerts() {
     return alerts;
 }
 

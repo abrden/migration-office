@@ -7,12 +7,12 @@
 class MinisterOfSecurity {
 
     private:
-        std::list<std::pair<int, WantedPersonAlert*>> alerts;
-        std::list<std::pair<int, WantedPersonAlert*>> load_alarms(const std::string& file_path);
+        std::list<std::pair<int, Spawnable*>> alerts;
+        std::list<std::pair<int, Spawnable*>> load_alarms(const std::string& file_path);
 
     public:
         explicit MinisterOfSecurity(const std::string& alerts_file_path);
-        const std::list<std::pair<int, WantedPersonAlert*>>& get_alerts();
+        std::list<std::pair<int, Spawnable*>>& get_alerts();
         ~MinisterOfSecurity();
 
 };
