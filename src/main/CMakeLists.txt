@@ -2,4 +2,4 @@ project(main)
 
 file(GLOB SOURCES "*.h" "*.cpp")
 
-add_executable(${PROJECT_NAME} ${SOURCES} Spawner.cpp Spawner.h Spawnable.h)
+add_executable(${PROJECT_NAME} ${SOURCES})
