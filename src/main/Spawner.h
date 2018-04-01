@@ -7,13 +7,14 @@
 #include <string>
 #include <utility>
 
+template <class T>
 class Spawner {
 
     private:
-        std::list<std::pair<int, Spawnable*>>& items;
+        std::list<std::pair<int, T*>>& items;
 
     public:
-        explicit Spawner(std::list<std::pair<int, Spawnable*>>& items);
+        explicit Spawner(std::list<std::pair<int, T*>>& items);
         void run();
         ~Spawner();
 

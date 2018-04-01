@@ -1,11 +1,14 @@
 #include "Spawner.h"
 
-Spawner::Spawner(std::list<std::pair<int, Spawnable*>>& items) : items(items) {
+template <class T>
+Spawner<T>::Spawner(std::list<std::pair<int, T*>>& items) : items(items) {
     items.sort();
 }
 
-void Spawner::run() {
+template <class T>
+void Spawner<T>::run() {
     // TODO
 }
 
-Spawner::~Spawner() {}
+template <class T>
+Spawner<T>::~Spawner() {}

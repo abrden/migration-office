@@ -5,7 +5,7 @@
 
 TEST_CASE("Spawner", "[feature]") {
     MinisterOfSecurity m("../resources/alerts.txt");
-    std::list<std::pair<int, Spawnable*>>& wpa = m.get_alerts();
-    Spawner s(wpa);
+    std::list<std::pair<int, WantedPersonAlert*>>& wpa = m.get_alerts();
+    Spawner<WantedPersonAlert> s(wpa);
     REQUIRE(wpa.size() == 3);
 }
