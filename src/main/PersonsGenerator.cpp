@@ -43,7 +43,7 @@ PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
 
         // TODO don't use magic numbers, define them in a enum
 //        int timestamp = stoi(tokenized_line[0]);
-        bo<ol resident = stoi(tokenized_line[1]) == 1 ? true : false;
+        bool resident = stoi(tokenized_line[1]) == 1 ? true : false;
         int id = stoi(tokenized_line[2]);
         std::string name = tokenized_line[3];
         std::string last_name = tokenized_line[4];
