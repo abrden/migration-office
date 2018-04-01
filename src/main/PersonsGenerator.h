@@ -12,7 +12,9 @@ private:
 
 public:
     explicit PersonsGenerator(const std::string& persons_file_path);
-
+    
+    const std::queue<std::pair<unsigned int,Person*>>& get_persons();
+    
     virtual ~PersonsGenerator();
 };
 

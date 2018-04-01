@@ -4,7 +4,7 @@
 
 #include <fstream>
 #include <sstream>
-#include <list>
+#include <iostream>
 
 enum Fields {
     timestamp = 0,
@@ -15,11 +15,9 @@ enum Fields {
     features_start = 5
 };
 
-std::vector<std::string> get_next_line_and_split_into_tokens(std::istream &str)
+std::vector<std::string> split_line_into_tokens(std::string &line)
 {
     std::vector<std::string> result;
-    std::string line;
-    std::getline(str,line);
 
     std::stringstream lineStream(line);
     std::string cell;
@@ -41,9 +39,10 @@ PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
     std::ifstream ifs(persons_file_path);
     std::string line;
 
-    while (getline(ifs, line)) {
-
-        std::vector<std::string> tokenized_line = get_next_line_and_split_into_tokens(ifs);
+    // Get header
+    std::getline(ifs, line);
+    while (std::getline(ifs, line)) {
+        std::vector<std::string> tokenized_line = split_line_into_tokens(line);
 
         int timestamp = stoi(tokenized_line[Fields::timestamp]);
         bool resident = stoi(tokenized_line[Fields::resident]) == 1;
@@ -60,6 +59,10 @@ PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
         }
     }
     // TODO sort persons array
+}
+
+const std::queue<std::pair<unsigned int,Person*>>& PersonsGenerator::get_persons() {
+ return persons;
 }
 
 PersonsGenerator::~PersonsGenerator() {
