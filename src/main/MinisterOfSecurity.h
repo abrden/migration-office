@@ -2,15 +2,13 @@
 #define MIGRATION_OFFICE_MINISTEROFSECURITY_H
 
 #include "WantedPersonAlert.h"
+#include "Spawner.h"
 
-class MinisterOfSecurity {
-
-    private:
-        std::list<WantedPersonAlert*> alerts;
+class MinisterOfSecurity : public Spawner {
 
     public:
-        MinisterOfSecurity(const std::string& alerts_file_path);
-        const std::list<WantedPersonAlert*>& get_alerts();
+        explicit MinisterOfSecurity(const std::string& alerts_file_path);
+        std::list<std::pair<int, WantedPersonAlert*>> load_items(const std::string& file_path);
         ~MinisterOfSecurity();
 
 };
