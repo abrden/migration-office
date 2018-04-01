@@ -28,12 +28,6 @@ std::vector<std::string> get_next_line_and_split_into_tokens(std::istream &str)
     {
         result.push_back(cell);
     }
-    // This checks for a trailing comma with no data after it.
-//    if (!lineStream && cell.empty())
-//    {
-//        // If there was a trailing comma then add an empty element.
-//        result.push_back("");
-//    }
     return result;
 }
 
