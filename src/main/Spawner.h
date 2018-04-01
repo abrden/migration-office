@@ -4,7 +4,6 @@
 #include "Spawnable.h"
 
 #include <list>
-#include <string>
 #include <utility>
 
 template <class T>
