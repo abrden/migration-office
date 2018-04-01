@@ -6,6 +6,15 @@
 #include <sstream>
 #include <list>
 
+enum Fields {
+    timestamp = 0,
+    resident = 1,
+    id = 2,
+    name = 3,
+    last_name = 4,
+    features_start = 5
+};
+
 std::vector<std::string> get_next_line_and_split_into_tokens(std::istream &str)
 {
     std::vector<std::string> result;
@@ -44,11 +53,11 @@ PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
 
         // TODO don't use magic numbers, define them in a enum
 //        int timestamp = stoi(tokenized_line[0]);
-        bool resident = stoi(tokenized_line[1]) == 1;
-        auto id = (unsigned int) stoi(tokenized_line[2]);
-        std::string name = tokenized_line[3];
-        std::string last_name = tokenized_line[4];
-        std::vector<std::string> raw_features(tokenized_line.begin() + 5, tokenized_line.end());
+        bool resident = stoi(tokenized_line[Fields::resident]) == 1;
+        auto id = (unsigned int) stoi(tokenized_line[Fields::id]);
+        std::string name = tokenized_line[Fields::name];
+        std::string last_name = tokenized_line[Fields::last_name];
+        std::vector<std::string> raw_features(tokenized_line.begin() + Fields::features_start, tokenized_line.end());
         std::list<Feature*> person_features = extract_features(raw_features);
 
         if (resident) {
