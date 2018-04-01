@@ -5,7 +5,7 @@
 #include <iostream>
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
-    alarms = load_alarms(alerts_file_path);
+    alerts = load_alarms(alerts_file_path);
 }
 
 std::list<std::pair<int, WantedPersonAlert*>> MinisterOfSecurity::load_alarms(const std::string& alerts_file_path) {
@@ -27,15 +27,19 @@ std::list<std::pair<int, WantedPersonAlert*>> MinisterOfSecurity::load_alarms(co
             wanted_person_features.push_back(feature);
         }
 
-        alarms.emplace_back(std::make_pair(timestamp, new WantedPersonAlert(wanted_person_features)));
+        alerts.emplace_back(std::make_pair(timestamp, new WantedPersonAlert(wanted_person_features)));
     }
 
-    return alarms;
+    return alerts;
+}
+
+const std::list<std::pair<int, WantedPersonAlert*>>& MinisterOfSecurity::get_alerts() {
+    return alerts;
 }
 
 MinisterOfSecurity::~MinisterOfSecurity() {
-    while (!alarms.empty()) {
-        delete alarms.back().second;
-        alarms.pop_back();
+    while (!alerts.empty()) {
+        delete alerts.back().second;
+        alerts.pop_back();
     }
 }
