@@ -8,10 +8,10 @@
 class PersonsGenerator {
 
 private:
-    std::queue<Person*> persons;
+    std::queue<std::pair<unsigned int,Person*>> persons;
 
 public:
-    PersonsGenerator(const std::string& persons_file_path);
+    explicit PersonsGenerator(const std::string& persons_file_path);
 
     virtual ~PersonsGenerator();
 };

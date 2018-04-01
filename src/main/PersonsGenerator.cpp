@@ -51,8 +51,7 @@ PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
 
         std::vector<std::string> tokenized_line = get_next_line_and_split_into_tokens(ifs);
 
-        // TODO don't use magic numbers, define them in a enum
-//        int timestamp = stoi(tokenized_line[0]);
+        int timestamp = stoi(tokenized_line[Fields::timestamp]);
         bool resident = stoi(tokenized_line[Fields::resident]) == 1;
         auto id = (unsigned int) stoi(tokenized_line[Fields::id]);
         std::string name = tokenized_line[Fields::name];
@@ -61,18 +60,17 @@ PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
         std::list<Feature*> person_features = extract_features(raw_features);
 
         if (resident) {
-            persons.push(new Resident(id, person_features));
+            persons.push(std::make_pair(timestamp, new Resident(id, person_features)));
         } else {
-            persons.push(new Foreigner(Passport(), person_features));
+            persons.push(std::make_pair(timestamp, new Foreigner(Passport(), person_features)));
         }
     }
-
-//    persons.sort(order_by_timestamp);
+    // TODO sort persons array
 }
 
 PersonsGenerator::~PersonsGenerator() {
     while(!persons.empty()) {
-        delete persons.front();
+        delete persons.front().second;
         persons.pop();
     }
 
