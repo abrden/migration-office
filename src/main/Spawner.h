@@ -1,8 +1,6 @@
 #ifndef MIGRATION_OFFICE_SPAWNER_H
 #define MIGRATION_OFFICE_SPAWNER_H
 
-#include "Spawnable.h"
-
 #include <list>
 #include <utility>
 

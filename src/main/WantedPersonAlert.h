@@ -3,9 +3,8 @@
 
 #include <list>
 #include "Feature.h"
-#include "Spawnable.h"
 
-class WantedPersonAlert : public Spawnable {
+class WantedPersonAlert {
 
     private:
         std::list<Feature*> person_features;
