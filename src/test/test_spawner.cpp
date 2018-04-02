@@ -16,7 +16,7 @@ TEST_CASE("Spawner sort") {
     }
 
     SECTION("persons") {
-        PersonsGenerator pg("../resources/persons.txt");
+        PersonsGenerator pg("../resources/people.txt");
         Spawnables& p = pg.get_persons();
         Spawner s(p);
 

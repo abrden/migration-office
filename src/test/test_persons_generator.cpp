@@ -2,7 +2,7 @@
 
 #include "catch.hpp"
 
-TEST_CASE("PersonsGenerator", "[feature]") {
+TEST_CASE("PersonsGenerator") {
     PersonsGenerator pg("../resources/people.txt");
     Spawnables& persons = pg.get_persons();
 
