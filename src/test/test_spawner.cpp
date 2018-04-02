@@ -5,15 +5,15 @@
 
 TEST_CASE("Spawner sort") {
     MinisterOfSecurity m("../resources/alerts.txt");
-    std::list<std::pair<int, WantedPersonAlert*>>& wpa = m.get_alerts();
-    Spawner<WantedPersonAlert> s(wpa);
-    REQUIRE(wpa.front().first == 0);
-    REQUIRE(wpa.back().first == 4);
+    Alerts& a = m.get_alerts();
+    Spawner s(a);
+    REQUIRE(a.get_items().front().first == 0);
+    REQUIRE(a.get_items().back().first == 4);
 }
 
 TEST_CASE("Spawner run") {
     MinisterOfSecurity m("../resources/alerts.txt");
-    std::list<std::pair<int, WantedPersonAlert*>>& wpa = m.get_alerts();
-    Spawner<WantedPersonAlert> s(wpa);
+    Alerts& a = m.get_alerts();
+    Spawner s(a);
     s.run();
 }

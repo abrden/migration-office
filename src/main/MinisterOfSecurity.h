@@ -3,16 +3,17 @@
 
 #include "WantedPersonAlert.h"
 #include "Spawner.h"
+#include "Alerts.h"
 
 class MinisterOfSecurity {
 
     private:
-        std::list<std::pair<int, WantedPersonAlert*>> alerts;
-        std::list<std::pair<int, WantedPersonAlert*>> load_alarms(const std::string& file_path);
+        Alerts alerts;
+        void load_alerts(const std::string& file_path);
 
     public:
         explicit MinisterOfSecurity(const std::string& alerts_file_path);
-        std::list<std::pair<int, WantedPersonAlert*>>& get_alerts();
+        Alerts& get_alerts();
         ~MinisterOfSecurity();
 
 };

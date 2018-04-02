@@ -2,8 +2,8 @@
 #include "catch.hpp"
 #include <list>
 
-TEST_CASE("Minister", "[feature]") {
+TEST_CASE("Minister") {
     MinisterOfSecurity m("../resources/alerts.txt");
-    std::list<std::pair<int, WantedPersonAlert*>>& wpa = m.get_alerts();
-    REQUIRE(wpa.size() == 3);
+    Alerts& a = m.get_alerts();
+    REQUIRE(a.get_items().size() == 3);
 }
