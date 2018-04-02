@@ -4,11 +4,11 @@
 #include <sstream>
 #include <iostream>
 
-bool order_by_timestamp(const WantedPersonAlert* first, const WantedPersonAlert* second) {
-    return first->get_timestamp() <= second->get_timestamp();
+MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
+    alerts = load_alarms(alerts_file_path);
 }
 
-MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
+std::list<std::pair<int, WantedPersonAlert*>> MinisterOfSecurity::load_alarms(const std::string& alerts_file_path) {
     std::ifstream ifs(alerts_file_path);
     std::string line;
 
@@ -27,19 +27,19 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
             wanted_person_features.push_back(feature);
         }
 
-        alerts.push_back(new WantedPersonAlert(timestamp, wanted_person_features));
+        alerts.emplace_back(std::make_pair(timestamp, new WantedPersonAlert(wanted_person_features)));
     }
 
-    alerts.sort(order_by_timestamp);
+    return alerts;
 }
 
-const std::list<WantedPersonAlert*>& MinisterOfSecurity::get_alerts() {
+std::list<std::pair<int, WantedPersonAlert*>>& MinisterOfSecurity::get_alerts() {
     return alerts;
 }
 
 MinisterOfSecurity::~MinisterOfSecurity() {
     while (!alerts.empty()) {
-        delete alerts.back();
+        delete alerts.back().second;
         alerts.pop_back();
     }
 }

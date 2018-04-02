@@ -1,13 +1,13 @@
 language: cpp
 
-dist: trusty
 sudo: required
 
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y valgrind
-  - wget https://cmake.org/files/v3.5/cmake-3.5.1-Linux-x86_64.sh
-  - sudo sh cmake-3.5.1-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir
-
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+install:
+  - docker build -t migration_office .
 script:
-  - ./install.sh
+  - docker run migration_office
