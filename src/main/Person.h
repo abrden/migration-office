@@ -3,17 +3,18 @@
 
 #include <list>
 #include "Feature.h"
+#include "Spawnable.h"
 
-class Person {
+class Person : public Spawnable {
 
     protected:
         std::list<Feature*> features;
 
     public:
-        Person(std::list<Feature*> features);
+        explicit Person(std::list<Feature*> features);
         std::list<Feature*> getFeatures();
         virtual bool hasId() = 0;
-        virtual ~Person();
+        ~Person();
 
 };
 

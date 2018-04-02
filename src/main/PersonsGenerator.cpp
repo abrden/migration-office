@@ -51,21 +51,13 @@ PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
         std::list<Feature*> person_features = extract_features(raw_features);
 
         if (resident) {
-            persons.push(std::make_pair(timestamp, new Resident(id, person_features)));
+            persons.push_spawnable(timestamp, new Resident(id, person_features));
         } else {
-            persons.push(std::make_pair(timestamp, new Foreigner(Passport(), person_features)));
+            persons.push_spawnable(timestamp, new Foreigner(Passport(), person_features));
         }
     }
 }
 
-const std::queue<std::pair<unsigned int, Person*>>& PersonsGenerator::get_persons() {
+Spawnables& PersonsGenerator::get_persons() {
     return persons;
-}
-
-PersonsGenerator::~PersonsGenerator() {
-    while (!persons.empty()) {
-        delete persons.front().second;
-        persons.pop();
-    }
-
 }

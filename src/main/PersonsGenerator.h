@@ -2,20 +2,21 @@
 #define MIGRATION_OFFICE_PERSONQUEUE_H
 
 #include "Person.h"
+#include "Spawnables.h"
 
 #include <queue>
 
 class PersonsGenerator {
 
 private:
-    std::queue<std::pair<unsigned int,Person*>> persons;
+    Spawnables persons;
 
 public:
     explicit PersonsGenerator(const std::string& persons_file_path);
     
-    const std::queue<std::pair<unsigned int,Person*>>& get_persons();
+    Spawnables& get_persons();
     
-    virtual ~PersonsGenerator();
+    virtual ~PersonsGenerator() = default;
 };
 
 
