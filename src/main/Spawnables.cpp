@@ -1,14 +1,14 @@
 #include "Spawnables.h"
 
-Spawnables::const_iterator Spawnables::begin() {
+Spawnables::iterator Spawnables::begin() {
     return items.begin();
 }
 
-Spawnables::const_iterator Spawnables::end() {
+Spawnables::iterator Spawnables::end() {
     return items.end();
 }
 
-Spawnables::const_iterator Spawnables::erase(Spawnables::const_iterator iterator) {
+Spawnables::iterator Spawnables::erase(Spawnables::iterator iterator) {
     return items.erase(iterator);
 }
 

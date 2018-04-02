@@ -12,10 +12,10 @@ class Spawnables {
         std::list<std::pair<int, Spawnable*>> items;
 
     public:
-        typedef std::list<std::pair<int, Spawnable*>>::const_iterator const_iterator;
-        Spawnables::const_iterator begin();
-        Spawnables::const_iterator end();
-        Spawnables::const_iterator erase(Spawnables::const_iterator iterator);
+        typedef std::list<std::pair<int, Spawnable*>>::iterator iterator;
+        Spawnables::iterator begin();
+        Spawnables::iterator end();
+        Spawnables::iterator erase(Spawnables::iterator iterator);
         void sort_by_ascending_timestamp();
         bool empty();
         std::list<std::pair<int, Spawnable*>>& get_items();

@@ -14,7 +14,7 @@ void Spawner::run() {
     while (!items.empty()) {
         std::time_t t = std::time(0);
 
-        for (Spawnables::const_iterator iterator = items.begin(), end = items.end();
+        for (Spawnables::iterator iterator = items.begin(), end = items.end();
              iterator != end && (*iterator).first <= (t - t0);
              ++iterator) {
             // TODO Spawn the item! Add to WantedPersonsList
