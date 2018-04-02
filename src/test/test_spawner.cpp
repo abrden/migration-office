@@ -36,7 +36,7 @@ TEST_CASE("Spawner run") {
     }
 
     SECTION("with persons") {
-        PersonsGenerator pg("../resources/persons.txt");
+        PersonsGenerator pg("../resources/people.txt");
         Spawnables& p = pg.get_persons();
         Spawner s(p);
 
