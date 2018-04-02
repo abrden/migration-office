@@ -1,12 +1,11 @@
-FROM ubuntu:14.04
+FROM ubuntu:17.10
 
-RUN apt update -qq
-RUN apt install -y \
+RUN apt-get update -qq
+RUN apt-get install -y \
     build-essential \
     wget \
-    valgrind
-RUN wget https://cmake.org/files/v3.5/cmake-3.5.1-Linux-x86_64.sh
-RUN sh cmake-3.5.1-Linux-x86_64.sh --prefix=/usr/local --exclude-subdir
+    valgrind \
+    cmake
 RUN mkdir /app
 COPY . /app
 WORKDIR /app
