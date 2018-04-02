@@ -34,6 +34,7 @@ std::list<Feature*> extract_features(std::vector<std::string> raw_features) {
 }
 
 PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
+    // TODO add exception handling
     std::ifstream ifs(persons_file_path);
     std::string line;
 
