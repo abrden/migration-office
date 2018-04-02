@@ -27,11 +27,11 @@ void MinisterOfSecurity::load_alerts(const std::string& alerts_file_path) {
             wanted_person_features.push_back(feature);
         }
 
-        alerts.push_alert(timestamp, new WantedPersonAlert(wanted_person_features));
+        alerts.push_spawnable(timestamp, new WantedPersonAlert(wanted_person_features));
     }
 }
 
-Alerts& MinisterOfSecurity::get_alerts() {
+Spawnables& MinisterOfSecurity::get_alerts() {
     return alerts;
 }
 

@@ -18,6 +18,7 @@ class Spawnables {
         Spawnables::iterator erase(Spawnables::iterator iterator);
         void sort_by_ascending_timestamp();
         bool empty();
+        void push_spawnable(int timestamp, Spawnable* spawnable);
         std::list<std::pair<int, Spawnable*>>& get_items();
         virtual ~Spawnables();
 
