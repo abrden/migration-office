@@ -4,21 +4,17 @@
 #include <ctime>
 #include <iostream>
 
-template class Spawner<WantedPersonAlert>;
-
-template <class T>
-Spawner<T>::Spawner(std::list<std::pair<int, T*>>& items) : items(items) {
-    items.sort();
+Spawner::Spawner(Spawnables& items) : items(items) {
+    items.sort_by_ascending_timestamp();
 }
 
-template <class T>
-void Spawner<T>::run() {
+void Spawner::run() {
     std::time_t t0 = std::time(0);
 
     while (!items.empty()) {
         std::time_t t = std::time(0);
 
-        for (typename std::list<std::pair<int, T*>>::const_iterator iterator = items.begin(), end = items.end();
+        for (Spawnables::iterator iterator = items.begin(), end = items.end();
              iterator != end && (*iterator).first <= (t - t0);
              ++iterator) {
             // TODO Spawn the item! Add to WantedPersonsList
@@ -29,5 +25,4 @@ void Spawner<T>::run() {
     }
 }
 
-template <class T>
-Spawner<T>::~Spawner() {}
+Spawner::~Spawner() {}

@@ -3,15 +3,15 @@
 
 #include <list>
 #include <utility>
+#include "Spawnables.h"
 
-template <class T>
 class Spawner {
 
     private:
-        std::list<std::pair<int, T*>>& items;
+        Spawnables& items;
 
     public:
-        explicit Spawner(std::list<std::pair<int, T*>>& items);
+        explicit Spawner(Spawnables& items);
         void run();
         ~Spawner();
 

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "==================== Creating build directory ===================="
-mkdir -p build && cd build
+rm -rf build
+mkdir build && cd build
 echo "==================== Done ===================="
 
 echo "==================== Compiling project ===================="
