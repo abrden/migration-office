@@ -1,7 +1,7 @@
 #include "Spawner.h"
 #include "WantedPersonAlert.h"
 
-#include<ctime>
+#include <ctime>
 #include <iostream>
 
 template class Spawner<WantedPersonAlert>;
@@ -21,7 +21,7 @@ void Spawner<T>::run() {
         for (typename std::list<std::pair<int, T*>>::const_iterator iterator = items.begin(), end = items.end();
              iterator != end && (*iterator).first <= (t - t0);
              ++iterator) {
-            // TODO Spawn the item!
+            // TODO Spawn the item! Add to WantedPersonsList
             std::cout << "Time passed: " << (t - t0) << " - Spawning item with timestamp " << (*iterator).first << std::endl;
             delete (*iterator).second; // FIXME temporary deletion to avoid mem leak
             iterator = items.erase(iterator);
