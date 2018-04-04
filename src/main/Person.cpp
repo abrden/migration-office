@@ -1,9 +1,14 @@
 #include "Person.h"
 
-Person::Person(std::list<Feature> features) : features(features) {}
+Person::Person(std::list<Feature*> features) : features(features) {}
 
-const std::list<Feature> Person::getFeatures() {
+std::list<Feature*> Person::getFeatures() {
     return features;
 }
 
-Person::~Person() {}
+Person::~Person() {
+    while (!features.empty()) {
+        delete features.back();
+        features.pop_back();
+    }
+}

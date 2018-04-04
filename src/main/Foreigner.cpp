@@ -1,6 +1,6 @@
 #include "Foreigner.h"
 
-Foreigner::Foreigner(Passport passport, std::list<Feature>& features) :
+Foreigner::Foreigner(Passport passport, std::list<Feature*> features) :
         Person(features), passport(passport) {}
 
 const Passport Foreigner::getPassport() {

@@ -7,10 +7,9 @@ class Resident : public Person {
 
     private:
         const unsigned int id;
-        const std::list<Feature> features;
 
     public:
-        Resident(unsigned int id, std::list<Feature>& features);
+        Resident(unsigned int id, std::list<Feature*> features);
         unsigned int getId();
         bool hasId() override;
         ~Resident() override;

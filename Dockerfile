@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
-RUN apt update -qq
-RUN apt install -y \
+RUN apt-get update -qq
+RUN apt-get install -y \
     build-essential \
     wget \
     valgrind
