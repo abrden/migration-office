@@ -8,7 +8,9 @@ std::list<std::string> init_fugitives_list() {
     std::list<std::string> fugitives_list;
     std::string fugitive_id;
 
-    while (getline(ifs, fugitive_id)) {
+    // Get header
+    std::getline(ifs, fugitive_id);
+    while (std::getline(ifs, fugitive_id)) {
         fugitives_list.emplace_back(fugitive_id);
     }
     return fugitives_list;
