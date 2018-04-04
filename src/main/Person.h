@@ -7,7 +7,7 @@
 
 class Person : public Spawnable {
 
-    protected:
+    private:
         std::list<Feature*> features;
 
     public:
