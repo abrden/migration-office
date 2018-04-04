@@ -7,7 +7,6 @@ class Resident : public Person {
 
     private:
         const unsigned int id;
-        const std::list<Feature*> features;
 
     public:
         Resident(unsigned int id, std::list<Feature*> features);
