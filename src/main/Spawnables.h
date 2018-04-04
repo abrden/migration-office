@@ -8,7 +8,7 @@
 
 class Spawnables {
 
-    protected:
+    private:
         std::list<std::pair<int, Spawnable*>> items;
 
     public:
