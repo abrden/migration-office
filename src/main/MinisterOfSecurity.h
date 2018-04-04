@@ -13,7 +13,7 @@ class MinisterOfSecurity {
     public:
         explicit MinisterOfSecurity(const std::string& alerts_file_path);
         Spawnables& get_alerts();
-        ~MinisterOfSecurity();
+        ~MinisterOfSecurity() = default;
 
 };
 

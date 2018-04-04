@@ -13,7 +13,7 @@ class Spawner {
     public:
         explicit Spawner(Spawnables& items);
         void run();
-        ~Spawner();
+        ~Spawner() = default;
 
 };
 

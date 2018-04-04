@@ -34,5 +34,3 @@ void MinisterOfSecurity::load_alerts(const std::string& alerts_file_path) {
 Spawnables& MinisterOfSecurity::get_alerts() {
     return alerts;
 }
-
-MinisterOfSecurity::~MinisterOfSecurity() {}

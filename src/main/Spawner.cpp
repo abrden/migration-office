@@ -24,5 +24,3 @@ void Spawner::run() {
         }
     }
 }
-
-Spawner::~Spawner() {}
