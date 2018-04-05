@@ -1,8 +1,9 @@
 #include "Spawner.h"
 #include "MinisterOfSecurity.h"
+#include "PersonsGenerator.h"
+
 #include "catch.hpp"
 #include <list>
-#include <src/main/PersonsGenerator.h>
 
 TEST_CASE("Spawner sort") {
 

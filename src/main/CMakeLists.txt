@@ -1,5 +1,5 @@
-project(main)
+project(migration_office)
 
-file(GLOB SOURCES "*.h" "*.cpp")
-
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_subdirectory(migration_booth)
+add_subdirectory(migration_office)
+add_subdirectory(old_main)
