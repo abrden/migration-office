@@ -10,5 +10,3 @@ const Passport Foreigner::get_passport() {
 bool Foreigner::has_id() {
     return false;
 }
-
-Foreigner::~Foreigner() {}

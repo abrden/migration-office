@@ -13,8 +13,6 @@ class Foreigner : public Person {
         Foreigner(Passport passport, std::list<Feature*> features);
         const Passport get_passport();
         bool has_id() override;
-        ~Foreigner() override;
-
 };
 
 

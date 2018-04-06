@@ -10,5 +10,3 @@ unsigned int Resident::get_id() {
 bool Resident::has_id() {
     return true;
 }
-
-Resident::~Resident() {}
