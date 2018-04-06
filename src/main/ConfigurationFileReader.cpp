@@ -29,3 +29,14 @@ void ConfigurationFileReader::load_alerts(const std::string& alerts_file_path, S
         alerts.push_spawnable(timestamp, new WantedPersonAlert(wanted_person_features));
     }
 }
+
+void ConfigurationFileReader::load_fugitives_ids(std::list<std::string>& fugitives_ids) {
+    std::ifstream ifs("../resources/fugitives.txt");
+    std::string fugitive_id;
+
+    // Get header
+    std::getline(ifs, fugitive_id);
+    while (std::getline(ifs, fugitive_id)) {
+        fugitives_ids.emplace_back(fugitive_id);
+    }
+}
