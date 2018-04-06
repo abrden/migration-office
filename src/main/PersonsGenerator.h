@@ -4,19 +4,16 @@
 #include "Person.h"
 #include "Spawnables.h"
 
-#include <queue>
-
 class PersonsGenerator {
 
-private:
-    Spawnables persons;
+    private:
+        Spawnables persons;
 
-public:
-    explicit PersonsGenerator(const std::string& persons_file_path);
-    
-    Spawnables& get_persons();
-    
-    virtual ~PersonsGenerator() = default;
+    public:
+        explicit PersonsGenerator(const std::string& people_file_path);
+        Spawnables& get_persons();
+        virtual ~PersonsGenerator() = default;
+
 };
 
 
