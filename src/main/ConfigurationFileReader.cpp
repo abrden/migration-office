@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "ConfigurationFileReader.h"
-#include "Feature.h"
 #include "WantedPersonAlert.h"
 #include "Resident.h"
 #include "Foreigner.h"
@@ -22,33 +21,38 @@ std::vector<std::string> ConfigurationFileReader::split_line_into_tokens(std::st
     return result;
 }
 
+std::list<Feature*> ConfigurationFileReader::extract_features(std::vector<std::string>& raw_features) {
+    std::list<Feature*> l;
+    for (auto const &i : raw_features) l.push_back(new Feature(i));
+    return l;
+}
+
+enum ALERTS_FIELDS {
+    alert_timestamp = 0,
+    alert_features_start = 1
+};
+
 void ConfigurationFileReader::load_alerts(const std::string& alerts_file_path, Spawnables& alerts) {
+    // TODO add exception handling
     std::ifstream ifs(alerts_file_path);
     std::string line;
 
     // Get header
     std::getline(ifs, line);
     while (std::getline(ifs, line)) {
+        std::vector<std::string> tokenized_line = split_line_into_tokens(line);
 
-        std::list<Feature*> wanted_person_features;
-
-        std::stringstream ss(line);
-        std::string feature_str;
-
-        std::getline(ss, feature_str, SEPARATOR);
-        int timestamp = stoi(feature_str);
-
-        while (std::getline(ss, feature_str, SEPARATOR))  {
-            Feature* feature = new Feature(feature_str);
-            wanted_person_features.push_back(feature);
-        }
+        int timestamp = stoi(tokenized_line[ALERTS_FIELDS::alert_timestamp]);
+        std::vector<std::string> raw_features(tokenized_line.begin() + ALERTS_FIELDS::alert_features_start, tokenized_line.end());
+        std::list<Feature*> wanted_person_features = extract_features(raw_features);
 
         alerts.push_spawnable(timestamp, new WantedPersonAlert(wanted_person_features));
     }
 }
 
-void ConfigurationFileReader::load_fugitives_ids(std::list<std::string>& fugitives_ids) {
-    std::ifstream ifs("../resources/fugitives.txt");
+void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path, std::list<std::string>& fugitives_ids) {
+    // TODO add exception handling
+    std::ifstream ifs(fugitives_file_path);
     std::string fugitive_id;
 
     // Get header
@@ -59,19 +63,13 @@ void ConfigurationFileReader::load_fugitives_ids(std::list<std::string>& fugitiv
 }
 
 enum PEOPLE_FIELDS {
-    timestamp = 0,
-    resident = 1,
-    id = 2,
-    name = 3,
-    last_name = 4,
-    features_start = 5
+    person_timestamp = 0,
+    person_resident = 1,
+    person_id = 2,
+    person_name = 3,
+    person_last_name = 4,
+    person_features_start = 5
 };
-
-std::list<Feature*> ConfigurationFileReader::extract_features(std::vector<std::string>& raw_features) {
-    std::list<Feature*> l;
-    for (auto const &i : raw_features) l.push_back(new Feature(i));
-    return l;
-}
 
 void ConfigurationFileReader::load_persons(const std::string& people_file_path, Spawnables& persons) {
     // TODO add exception handling
@@ -83,12 +81,12 @@ void ConfigurationFileReader::load_persons(const std::string& people_file_path, 
     while (std::getline(ifs, line)) {
         std::vector<std::string> tokenized_line = split_line_into_tokens(line);
 
-        int timestamp = stoi(tokenized_line[PEOPLE_FIELDS::timestamp]);
-        bool resident = stoi(tokenized_line[PEOPLE_FIELDS::resident]) == 1;
-        unsigned int id = (unsigned int) stoi(tokenized_line[PEOPLE_FIELDS::id]);
-        std::string name = tokenized_line[PEOPLE_FIELDS::name];
-        std::string last_name = tokenized_line[PEOPLE_FIELDS::last_name];
-        std::vector<std::string> raw_features(tokenized_line.begin() + PEOPLE_FIELDS::features_start, tokenized_line.end());
+        int timestamp = stoi(tokenized_line[PEOPLE_FIELDS::person_timestamp]);
+        bool resident = stoi(tokenized_line[PEOPLE_FIELDS::person_resident]) == 1;
+        unsigned int id = (unsigned int) stoi(tokenized_line[PEOPLE_FIELDS::person_id]);
+        std::string name = tokenized_line[PEOPLE_FIELDS::person_name];
+        std::string last_name = tokenized_line[PEOPLE_FIELDS::person_last_name];
+        std::vector<std::string> raw_features(tokenized_line.begin() + PEOPLE_FIELDS::person_features_start, tokenized_line.end());
         std::list<Feature*> person_features = extract_features(raw_features);
 
         if (resident) {
