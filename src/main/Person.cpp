@@ -2,7 +2,7 @@
 
 Person::Person(std::list<Feature*> features) : features(features) {}
 
-std::list<Feature*> Person::getFeatures() {
+std::list<Feature*> Person::get_features() {
     return features;
 }
 

@@ -3,11 +3,11 @@
 Resident::Resident(unsigned int id, std::list<Feature*> features) :
         Person(features), id(id) {}
 
-unsigned int Resident::getId() {
+unsigned int Resident::get_id() {
     return id;
 }
 
-bool Resident::hasId() {
+bool Resident::has_id() {
     return true;
 }
 

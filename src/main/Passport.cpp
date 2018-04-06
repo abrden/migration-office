@@ -1,6 +1,6 @@
 #include "Passport.h"
 
-void Passport::stampPassport() {
+void Passport::stamp_passport() {
     return;
 }
 
