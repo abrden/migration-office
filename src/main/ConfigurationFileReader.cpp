@@ -7,7 +7,7 @@
 #include "Resident.h"
 #include "Foreigner.h"
 
-#define SEPARATOR ','
+const static char SEPARATOR = ',';
 
 enum ALERTS_FIELDS {
     alert_timestamp = 0,
