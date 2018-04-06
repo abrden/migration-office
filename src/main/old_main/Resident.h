@@ -10,9 +10,8 @@ class Resident : public Person {
 
     public:
         Resident(unsigned int id, std::list<Feature*> features);
-        unsigned int getId();
-        bool hasId() override;
-        ~Resident() override;
+        unsigned int get_id();
+        bool has_id() override;
 
 };
 

@@ -12,8 +12,8 @@ class Person : public Spawnable {
 
     public:
         explicit Person(std::list<Feature*> features);
-        std::list<Feature*> getFeatures();
-        virtual bool hasId() = 0;
+        std::list<Feature*> get_features();
+        virtual bool has_id() = 0;
         ~Person();
 
 };
