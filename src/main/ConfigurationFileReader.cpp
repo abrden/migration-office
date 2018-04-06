@@ -9,6 +9,20 @@
 
 #define SEPARATOR ','
 
+enum ALERTS_FIELDS {
+    alert_timestamp = 0,
+    alert_features_start = 1
+};
+
+enum PEOPLE_FIELDS {
+    person_timestamp = 0,
+    person_resident = 1,
+    person_id = 2,
+    person_name = 3,
+    person_last_name = 4,
+    person_features_start = 5
+};
+
 std::vector<std::string> ConfigurationFileReader::split_line_into_tokens(std::string& line) {
     std::vector<std::string> result;
 
@@ -26,11 +40,6 @@ std::list<Feature*> ConfigurationFileReader::extract_features(std::vector<std::s
     for (auto const &i : raw_features) l.push_back(new Feature(i));
     return l;
 }
-
-enum ALERTS_FIELDS {
-    alert_timestamp = 0,
-    alert_features_start = 1
-};
 
 void ConfigurationFileReader::load_alerts(const std::string& alerts_file_path, Spawnables& alerts) {
     // TODO add exception handling
@@ -61,15 +70,6 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
         fugitives_ids.emplace_back(fugitive_id);
     }
 }
-
-enum PEOPLE_FIELDS {
-    person_timestamp = 0,
-    person_resident = 1,
-    person_id = 2,
-    person_name = 3,
-    person_last_name = 4,
-    person_features_start = 5
-};
 
 void ConfigurationFileReader::load_persons(const std::string& people_file_path, Spawnables& persons) {
     // TODO add exception handling
