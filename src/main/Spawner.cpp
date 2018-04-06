@@ -23,4 +23,6 @@ void Spawner::run() {
             iterator = items.erase(iterator);
         }
     }
+
+    std::cout << "I'm done spawning" << std::endl;
 }

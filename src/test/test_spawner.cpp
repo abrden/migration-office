@@ -20,8 +20,8 @@ TEST_CASE("Spawner sort") {
         Spawnables& p = pg.get_persons();
         Spawner s(p);
 
-        REQUIRE(p.get_items().front().first == 0);
-        REQUIRE(p.get_items().back().first == 1);
+        REQUIRE(p.get_items().front().first == 2);
+        REQUIRE(p.get_items().back().first == 5);
     }
 }
 
