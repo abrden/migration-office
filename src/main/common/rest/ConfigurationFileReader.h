@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "src/main/common/Spawnables.h"
-#include "Feature.h"
+#include "Spawnables.h"
+#include "src/main/common/entities/Feature.h"
 
 class ConfigurationFileReader {
 

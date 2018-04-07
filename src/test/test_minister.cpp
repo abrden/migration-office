@@ -1,4 +1,4 @@
-#include "src/main/common/MinisterOfSecurity.h"
+#include "MinisterOfSecurity.h"
 #include "catch.hpp"
 #include <list>
 

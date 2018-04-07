@@ -1,8 +1,8 @@
 #ifndef MIGRATION_OFFICE_PERSONQUEUE_H
 #define MIGRATION_OFFICE_PERSONQUEUE_H
 
-#include "src/main/common/Person.h"
-#include "src/main/common/Spawnables.h"
+#include "src/main/common/entities/Person.h"
+#include "Spawnables.h"
 
 class PersonsGenerator {
 

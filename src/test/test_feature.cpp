@@ -1,4 +1,4 @@
-#include "src/main/common/Feature.h"
+#include "Feature.h"
 #include "catch.hpp"
 #include <list>
 
