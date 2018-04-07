@@ -66,7 +66,6 @@ int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_num
         }
     }
 
-
     if (!booths) {
         // TODO Log: No booths number, using default
     }
@@ -88,13 +87,13 @@ int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_num
 }
 
 int main(int argc, char *argv[]) {
-
     bool debug;
     int booths_number;
     int stampers_number;
     std::string people_file, alerts_file, fugitives_file, log_file;
 
-    read_arguments(argc, argv, booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
+    int err = read_arguments(argc, argv, booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
+    if (err) exit(err); //FIXME
 
     MigrationOffice office(booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
 
@@ -106,6 +105,8 @@ int main(int argc, char *argv[]) {
     std::cout << "fugitives file = " << fugitives_file << std::endl;
     std::cout << "debug = " << debug << std::endl;
     std::cout << "log file = " << log_file << std::endl;
+
+    office.open_booths();
 
     exit(0);
 }
