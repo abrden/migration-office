@@ -13,7 +13,7 @@ class WantedPersonAlert : public Spawnable {
     public:
         explicit WantedPersonAlert(const std::list<Feature*>& person_features);
         const std::list<Feature*>& get_features();
-        ~WantedPersonAlert();
+        ~WantedPersonAlert() override;
 
 };
 

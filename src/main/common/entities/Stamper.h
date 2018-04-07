@@ -5,7 +5,7 @@ class Stamper {
 
     public:
         void stamp();
-        ~Stamper();
+        ~Stamper() = default;
 
 };
 

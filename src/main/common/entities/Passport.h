@@ -5,7 +5,7 @@ class Passport {
 
     public:
         void stamp_passport();
-        ~Passport();
+        ~Passport() = default;
 
 };
 
