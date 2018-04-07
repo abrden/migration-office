@@ -1,4 +1,4 @@
-#include "PersonsGenerator.h"
+#include "src/main/common/PersonsGenerator.h"
 
 #include "catch.hpp"
 

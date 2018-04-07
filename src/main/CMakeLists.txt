@@ -1,5 +1,6 @@
 project(migration_office)
 
+add_subdirectory(common)
 add_subdirectory(migration_booth)
 add_subdirectory(migration_office)
-add_subdirectory(old_main)
+add_subdirectory(ministry_of_security)

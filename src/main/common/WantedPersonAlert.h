@@ -2,8 +2,8 @@
 #define MIGRATION_OFFICE_WANTEDPERSONALERT_H
 
 #include <list>
-#include "Feature.h"
-#include "Spawnable.h"
+#include "src/main/common/Feature.h"
+#include "src/main/common/Spawnable.h"
 
 class WantedPersonAlert : public Spawnable {
 

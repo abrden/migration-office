@@ -2,7 +2,7 @@
 #define MIGRATION_OFFICE_MINISTEROFSECURITY_H
 
 #include "WantedPersonAlert.h"
-#include "Spawner.h"
+#include "src/main/common/Spawner.h"
 
 class MinisterOfSecurity {
 

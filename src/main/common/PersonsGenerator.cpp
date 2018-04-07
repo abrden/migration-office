@@ -1,5 +1,5 @@
 #include "PersonsGenerator.h"
-#include "ConfigurationFileReader.h"
+#include "src/main/common/ConfigurationFileReader.h"
 
 PersonsGenerator::PersonsGenerator(const std::string& persons_file_path) {
     ConfigurationFileReader fr;

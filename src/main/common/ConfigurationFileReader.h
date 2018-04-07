@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Spawnables.h"
+#include "src/main/common/Spawnables.h"
 #include "Feature.h"
 
 class ConfigurationFileReader {
