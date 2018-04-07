@@ -3,7 +3,7 @@
 
 #include <list>
 #include "Feature.h"
-#include "Spawnable.h"
+#include "src/main/common/rest/Spawnable.h"
 
 class Person : public Spawnable {
 
