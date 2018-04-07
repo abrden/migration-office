@@ -6,7 +6,8 @@ mkdir build && cd build
 echo "==================== Done ===================="
 
 echo "==================== Compiling project ===================="
-cmake .. && make
+NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
+cmake .. && make -j$NUMCPUS
 echo "==================== Done ===================="
 
 echo "==================== Running tests ===================="
