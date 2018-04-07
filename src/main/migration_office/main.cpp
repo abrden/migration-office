@@ -1,6 +1,8 @@
 #include <iostream>
 #include <getopt.h>
 
+#include "MigrationOffice.h"
+
 const static int DEFAULT_BOOTHS_NUMBER = 10;
 const static int DEFAULT_STAMPERS_NUMBER = 5;
 const static std::string DEFAULT_LOG = "log";
@@ -9,13 +11,14 @@ enum ERRORS {
    NO_CONFIG_FILE = 1
 };
 
-int main(int argc, char *argv[]) {
+int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_number,
+                   std::string& people_file, std::string& alerts_file, std::string& fugitives_file,
+                   bool& debug, std::string& log_file) {
 
-    bool booths, stampers, people, alerts, fugitives, debug, log;
+    bool booths, stampers, people, alerts, fugitives, log;
     booths = stampers = people = alerts = fugitives = debug = log = false;
-    int booths_number = DEFAULT_BOOTHS_NUMBER;
-    int stampers_number = DEFAULT_STAMPERS_NUMBER;
-    std::string people_file, alerts_file, fugitives_file, log_file;
+    booths_number = DEFAULT_BOOTHS_NUMBER;
+    stampers_number = DEFAULT_STAMPERS_NUMBER;
     log_file = DEFAULT_LOG;
 
     int flag = 0;
@@ -34,10 +37,12 @@ int main(int argc, char *argv[]) {
             case 'b' :
                 booths = true;
                 booths_number = std::stoi(optarg);
+                // TODO handle invalid conversion exception
                 break;
             case 's' :
                 stampers = true;
                 stampers_number = std::stoi(optarg);
+                // TODO handle invalid conversion exception
                 break;
             case 'p' :
                 people = true;
@@ -72,12 +77,26 @@ int main(int argc, char *argv[]) {
 
     if (!people || !alerts || !fugitives) {
         std::cerr << "fatal: Configuration file missing" << std::endl;
-        return ERRORS::NO_CONFIG_FILE;
+        return ERRORS::NO_CONFIG_FILE; // TODO set errno
     }
 
     if (!log) {
         // TODO Log: No log path, using default
     }
+
+    return 0;
+}
+
+int main(int argc, char *argv[]) {
+
+    bool debug;
+    int booths_number;
+    int stampers_number;
+    std::string people_file, alerts_file, fugitives_file, log_file;
+
+    read_arguments(argc, argv, booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
+
+    MigrationOffice office(booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
 
     std::cout << "Welcome to the Conculandia Migration Office!" << std::endl;
     std::cout << "booths number = " << booths_number << std::endl;
