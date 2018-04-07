@@ -1,9 +1,9 @@
 #include <iostream>
 #include <getopt.h>
 
-#define DEFAULT_BOOTHS_NUMBER 10
-#define DEFAULT_STAMPERS_NUMBER 5
-#define DEFAULT_LOG "log"
+const static int DEFAULT_BOOTHS_NUMBER = 10;
+const static int DEFAULT_STAMPERS_NUMBER = 5;
+const static std::string DEFAULT_LOG = "log";
 
 enum ERRORS {
    NO_CONFIG_FILE = 1
@@ -33,11 +33,11 @@ int main(int argc, char *argv[]) {
         switch (flag) {
             case 'b' :
                 booths = true;
-                booths_number = atoi(optarg);
+                booths_number = std::stoi(optarg);
                 break;
             case 's' :
                 stampers = true;
-                stampers_number = atoi(optarg);
+                stampers_number = std::stoi(optarg);
                 break;
             case 'p' :
                 people = true;
