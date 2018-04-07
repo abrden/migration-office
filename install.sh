@@ -7,7 +7,7 @@ echo "==================== Done ===================="
 
 echo "==================== Compiling project ===================="
 NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
-cmake .. && make -j$NUMCPUS
+cmake -DCMAKE_BUILD_TYPE=Release .. && make -j$NUMCPUS
 echo "==================== Done ===================="
 
 echo "==================== Running tests ===================="
