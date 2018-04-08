@@ -4,8 +4,8 @@
 
 #include "ConfigurationFileReader.h"
 #include "WantedPersonAlert.h"
-#include "src/main/common/entities/Resident.h"
-#include "src/main/common/entities/Foreigner.h"
+#include "Resident.h"
+#include "Foreigner.h"
 
 const static char SEPARATOR = ',';
 

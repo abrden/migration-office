@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Spawnables.h"
-#include "src/main/common/entities/Feature.h"
+#include "Feature.h"
 
 class ConfigurationFileReader {
 

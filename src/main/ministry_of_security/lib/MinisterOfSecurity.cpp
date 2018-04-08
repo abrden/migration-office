@@ -1,5 +1,5 @@
 #include "MinisterOfSecurity.h"
-#include "ConfigurationFileReader.h"
+#include "src/main/common/configuration_file_reader/ConfigurationFileReader.h"
 
 #include <fstream>
 #include <sstream>
