@@ -1,10 +1,11 @@
 #ifndef MIGRATION_OFFICE_MIGRATIONBOOTH_H
 #define MIGRATION_OFFICE_MIGRATIONBOOTH_H
 
+#include "Person.h"
+#include "Resident.h"
+#include "Foreigner.h"
+
 #include <string>
-#include <src/main/common/entities/Person.h>
-#include <src/main/common/entities/Resident.h>
-#include <src/main/common/entities/Foreigner.h>
 
 class MigrationBooth {
 

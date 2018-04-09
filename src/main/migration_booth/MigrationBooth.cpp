@@ -1,6 +1,7 @@
-#include <iostream>
-#include <src/main/common/entities/Stamper.h>
+#include "Stamper.h"
 #include "MigrationBooth.h"
+
+#include <iostream>
 
 MigrationBooth::MigrationBooth(const std::string people_file, const std::string alerts_file,
                                const std::string fugitives_file,
