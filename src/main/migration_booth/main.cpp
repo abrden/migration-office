@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
     MigrationBooth booth(argv[ARGUMENTS::PEOPLE_FILE_POS], argv[ARGUMENTS::ALERTS_FILE_POS], argv[ARGUMENTS::FUGITIVES_FILE_POS],
                          std::stoi(argv[ARGUMENTS::DEBUG_POS]), argv[ARGUMENTS::LOG_FILE_POS]);
 
-
+    booth.open();
 
     exit(0);
 }
