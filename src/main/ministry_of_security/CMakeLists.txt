@@ -1,7 +1,9 @@
 project(ministry_of_security)
 
-file(GLOB SOURCES "*.cpp")
+add_subdirectory(lib)
 
-add_executable(${PROJECT_NAME} "main.cpp")
+set(SOURCES "main.cpp")
 
-target_link_libraries(${PROJECT_NAME} LINK_PUBLIC rest)
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME} LINK_PUBLIC ministry_of_security_lib)

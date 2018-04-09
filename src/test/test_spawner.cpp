@@ -1,6 +1,6 @@
-#include "src/main/common/rest/Spawner.h"
-#include "src/main/common/rest/MinisterOfSecurity.h"
-#include "src/main/common/rest/PersonsGenerator.h"
+#include "Spawner.h"
+#include "MinisterOfSecurity.h"
+#include "PersonsGenerator.h"
 
 #include "catch.hpp"
 #include <list>
