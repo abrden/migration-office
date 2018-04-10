@@ -15,12 +15,13 @@ enum ALERTS_FIELDS {
 };
 
 enum PEOPLE_FIELDS {
-    person_timestamp = 0,
-    person_resident = 1,
-    person_id = 2,
-    person_name = 3,
-    person_last_name = 4,
-    person_features_start = 5
+    person_timestamp,
+    person_resident,
+    person_id,
+    person_passport_id,
+    person_name,
+    person_last_name,
+    person_features_start
 };
 
 std::vector<std::string> ConfigurationFileReader::split_line_into_tokens(std::string& line) {
@@ -84,6 +85,7 @@ void ConfigurationFileReader::load_persons(const std::string& people_file_path, 
         int timestamp = stoi(tokenized_line[PEOPLE_FIELDS::person_timestamp]);
         bool resident = stoi(tokenized_line[PEOPLE_FIELDS::person_resident]) == 1;
         unsigned int id = (unsigned int) stoi(tokenized_line[PEOPLE_FIELDS::person_id]);
+        std::string passport_id = tokenized_line[PEOPLE_FIELDS::person_passport_id];
         std::string name = tokenized_line[PEOPLE_FIELDS::person_name];
         std::string last_name = tokenized_line[PEOPLE_FIELDS::person_last_name];
         std::vector<std::string> raw_features(tokenized_line.begin() + PEOPLE_FIELDS::person_features_start, tokenized_line.end());
@@ -92,7 +94,7 @@ void ConfigurationFileReader::load_persons(const std::string& people_file_path, 
         if (resident) {
             persons.push_spawnable(timestamp, new Resident(id, person_features));
         } else {
-            persons.push_spawnable(timestamp, new Foreigner(Passport(), person_features));
+            persons.push_spawnable(timestamp, new Foreigner(Passport(passport_id), person_features));
         }
     }
 }
