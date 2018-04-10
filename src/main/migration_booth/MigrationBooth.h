@@ -6,6 +6,7 @@
 #include "Foreigner.h"
 #include "PersonsQueue.h"
 #include "Stampers.h"
+#include "Police.h"
 
 #include <string>
 
@@ -18,6 +19,7 @@ class MigrationBooth {
 
         PersonsQueue queue;
         Stampers stampers;
+        Police police;
 
 
         void attend_resident(Resident* resident);
@@ -26,11 +28,6 @@ class MigrationBooth {
         // Do we need this?
         std::list<Resident*> arrived_residents;
         std::list<Foreigner*> arrived_foreigners;
-
-        // FIXME we dont belong here
-        bool is_fugitive(Resident* resident);
-        bool is_wanted_person(Foreigner* foreigner);
-        void report_to_police(Resident* resident);
 
     public:
         MigrationBooth(const std::string people_file, const std::string alerts_file, const std::string fugitives_file,

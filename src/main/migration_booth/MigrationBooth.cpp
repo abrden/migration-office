@@ -9,32 +9,17 @@ MigrationBooth::MigrationBooth(const std::string people_file, const std::string 
         : people_file(people_file), alerts_file(alerts_file), fugitives_file(fugitives_file),
           debug(debug), log_file(log_file) {}
 
-bool MigrationBooth::is_fugitive(Resident* resident) {
-    // TODO
-    return false;
-}
-
-void MigrationBooth::report_to_police(Resident* resident) {
-    // TODO
-    std::cout << "Resident " << resident->get_id() << " you are arrested" << std::endl;
-}
-
 void MigrationBooth::attend_resident(Resident* resident) {
-    if (!is_fugitive(resident)) {
+    if (!police.is_fugitive(resident)) {
         std::cout << "Welcome to Conculandia, resident " << resident->get_id() << std::endl;
         arrived_residents.emplace_back(resident);
     } else {
-        report_to_police(resident);
+        police.report(resident);
     }
 }
 
-bool MigrationBooth::is_wanted_person(Foreigner* foreigner) {
-    // TODO
-    return false;
-}
-
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
-    if (is_wanted_person(foreigner)) {
+    if (police.is_wanted_person(foreigner)) {
         std::cout << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
     } else {
         Stamper* stamper = stampers.get_stamper();
