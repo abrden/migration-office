@@ -33,16 +33,11 @@ bool MigrationBooth::is_wanted_person(Foreigner* foreigner) {
     return false;
 }
 
-Stamper* MigrationBooth::get_stamper() {
-    // TODO
-    return new Stamper();
-}
-
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
     if (is_wanted_person(foreigner)) {
         std::cout << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
     } else {
-        Stamper* stamper = get_stamper();
+        Stamper* stamper = stampers.get_stamper();
         foreigner->get_passport().stamp_passport(*stamper);
         std::cout << "Welcome to Conculandia foreigner " << foreigner->get_passport().get_id() << std::endl;
         arrived_foreigners.emplace_back(foreigner);

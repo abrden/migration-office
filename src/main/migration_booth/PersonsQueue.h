@@ -6,9 +6,6 @@
 
 class PersonsQueue {
 
-    private:
-        //TODO
-
     public:
         bool empty();
         Person* front();

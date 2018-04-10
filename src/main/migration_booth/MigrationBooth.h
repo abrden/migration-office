@@ -5,6 +5,7 @@
 #include "Resident.h"
 #include "Foreigner.h"
 #include "PersonsQueue.h"
+#include "Stampers.h"
 
 #include <string>
 
@@ -16,16 +17,17 @@ class MigrationBooth {
         const std::string log_file;
 
         PersonsQueue queue;
+        Stampers stampers;
+
+
+        void attend_resident(Resident* resident);
+        void attend_foreigner(Foreigner* foreigner);
 
         // Do we need this?
         std::list<Resident*> arrived_residents;
         std::list<Foreigner*> arrived_foreigners;
 
-        void attend_resident(Resident* resident);
-        void attend_foreigner(Foreigner* foreigner);
-
         // FIXME we dont belong here
-        Stamper* get_stamper();
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report_to_police(Resident* resident);
