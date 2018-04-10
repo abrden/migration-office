@@ -14,7 +14,7 @@ class MigrationBooth {
         const bool debug;
         const std::string log_file;
 
-        std::list<int> arrived_residents_ids;
+        std::list<Resident*> arrived_residents;
 
         void attend_resident(Resident* resident);
         void attend_foreigner(Foreigner* foreigner);

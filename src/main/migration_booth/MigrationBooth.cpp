@@ -35,7 +35,7 @@ void MigrationBooth::report_to_police(Resident* resident) {
 void MigrationBooth::attend_resident(Resident* resident) {
     if (!is_fugitive(resident)) {
         std::cout << "Welcome to Conculandia, resident " << resident->get_id() << std::endl;
-        arrived_residents_ids.emplace_back(resident->get_id());
+        arrived_residents.emplace_back(resident);
     } else {
         report_to_police(resident);
     }
@@ -53,11 +53,11 @@ Stamper* MigrationBooth::get_stamper() {
 
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
     if (is_wanted_person(foreigner)) {
-        std::cout << "Foreigner, you are deported" << std::endl;
+        std::cout << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
     } else {
         Stamper* stamper = get_stamper();
         foreigner->get_passport().stamp_passport(*stamper);
-        std::cout << "Welcome to Conculandia foreigner" << std::endl;
+        std::cout << "Welcome to Conculandia foreigner " << foreigner->get_passport().get_id() << std::endl;
     }
 }
 

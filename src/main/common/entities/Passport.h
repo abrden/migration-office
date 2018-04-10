@@ -13,6 +13,7 @@ class Passport {
     public:
         Passport(std::string& id);
         void stamp_passport(Stamper& stamper);
+        const std::string& get_id();
         ~Passport();
 
 };
