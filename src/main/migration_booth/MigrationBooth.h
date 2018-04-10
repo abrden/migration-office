@@ -4,6 +4,7 @@
 #include "Person.h"
 #include "Resident.h"
 #include "Foreigner.h"
+#include "PersonsQueue.h"
 
 #include <string>
 
@@ -14,7 +15,11 @@ class MigrationBooth {
         const bool debug;
         const std::string log_file;
 
+        PersonsQueue queue;
+
+        // Do we need this?
         std::list<Resident*> arrived_residents;
+        std::list<Foreigner*> arrived_foreigners;
 
         void attend_resident(Resident* resident);
         void attend_foreigner(Foreigner* foreigner);
@@ -24,8 +29,6 @@ class MigrationBooth {
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report_to_police(Resident* resident);
-        bool queue_empty();
-        Person* front();
 
     public:
         MigrationBooth(const std::string people_file, const std::string alerts_file, const std::string fugitives_file,

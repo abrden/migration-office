@@ -9,19 +9,6 @@ MigrationBooth::MigrationBooth(const std::string people_file, const std::string 
         : people_file(people_file), alerts_file(alerts_file), fugitives_file(fugitives_file),
           debug(debug), log_file(log_file) {}
 
-bool MigrationBooth::queue_empty() {
-    // TODO
-    return false;
-}
-
-Person* MigrationBooth::front() {
-    // TODO
-    std::list<Feature*> features;
-    features.emplace_back(new Feature("redish hair"));
-    features.emplace_back(new Feature("green eyes"));
-    return new Resident(13641107, features);
-}
-
 bool MigrationBooth::is_fugitive(Resident* resident) {
     // TODO
     return false;
@@ -58,12 +45,13 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
         Stamper* stamper = get_stamper();
         foreigner->get_passport().stamp_passport(*stamper);
         std::cout << "Welcome to Conculandia foreigner " << foreigner->get_passport().get_id() << std::endl;
+        arrived_foreigners.emplace_back(foreigner);
     }
 }
 
 void MigrationBooth::open() {
-    while (!queue_empty()) {
-        Person* person = front();
+    while (!queue.empty()) {
+        Person* person = queue.front();
         if (person->has_id())
             attend_resident((Resident*)person);
         else

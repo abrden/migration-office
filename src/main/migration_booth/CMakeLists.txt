@@ -2,6 +2,6 @@ project(migration_booth)
 
 file(GLOB SOURCES "*.h" "*.cpp")
 
-add_executable(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME} ${SOURCES} PersonsQueue.cpp PersonsQueue.h)
 
 target_link_libraries(${PROJECT_NAME} LINK_PUBLIC entities)
