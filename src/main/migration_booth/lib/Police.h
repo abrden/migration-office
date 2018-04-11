@@ -10,6 +10,7 @@ class Police {
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report(Resident* resident);
+        void add_fugitive(const unsigned int id);
 
 };
 
