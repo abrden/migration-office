@@ -1,6 +1,6 @@
 project(ministry_of_security_lib)
 
-file(GLOB SOURCES "*.cpp")
+file(GLOB SOURCES "*.cpp" "*.h")
 
 add_library(${PROJECT_NAME} ${SOURCES})
 
