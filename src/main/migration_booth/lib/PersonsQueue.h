@@ -2,13 +2,13 @@
 #define MIGRATION_OFFICE_PERSONSQUEUE_H
 
 
-#include "Pipe.h"
+#include "PipeReader.h"
 #include "Person.h"
 
 class PersonsQueue {
 
     private:
-        Pipe pipe;
+        PipeReader pipe;
 
     public:
         bool empty();
