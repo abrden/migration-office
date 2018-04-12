@@ -21,7 +21,6 @@ class MigrationBooth {
         Stampers stampers;
         Police police;
 
-
         void attend_resident(Resident* resident);
         void attend_foreigner(Foreigner* foreigner);
 
