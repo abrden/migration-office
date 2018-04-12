@@ -8,7 +8,7 @@ bool PersonsQueue::empty() {
 
 Person* PersonsQueue::front() {
     // TODO lock
-    Person* person;
+    Person* person = NULL;
     ssize_t bytes_read = pipe.pipe_read(static_cast<void*>(person), sizeof(Person*));
     if (bytes_read != sizeof(Person*)) {
         // TODO error handling
