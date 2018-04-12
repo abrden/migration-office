@@ -1,8 +1,8 @@
 #include "PipeReader.h"
 
 PipeReader::PipeReader() {
-    close(descriptors[ESCRITURA]);
-    fd = descriptors[LECTURA];
+    close(descriptors[WRITE]);
+    fd = descriptors[READ];
 }
 
 ssize_t PipeReader::pipe_read(void* buffer, int buffer_size) {

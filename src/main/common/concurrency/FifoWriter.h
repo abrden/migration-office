@@ -1,5 +1,5 @@
-#ifndef FIFOESCRITURA_H_
-#define FIFOESCRITURA_H_
+#ifndef MIGRATION_OFFICE_FIFOWRITER_H
+#define MIGRATION_OFFICE_FIFOWRITER_H
 
 #include "Fifo.h"
 
@@ -13,4 +13,4 @@ class FifoWriter : public Fifo {
 
 };
 
-#endif /* FIFOESCRITURA_H_ */
+#endif /* MIGRATION_OFFICE_FIFOWRITER_H */

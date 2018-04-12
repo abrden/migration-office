@@ -1,5 +1,5 @@
-#ifndef FIFOLECTURA_H_
-#define FIFOLECTURA_H_
+#ifndef MIGRATION_OFFICE_FIFOREADER_H
+#define MIGRATION_OFFICE_FIFOREADER_H
 
 #include "Fifo.h"
 
@@ -13,4 +13,4 @@ class FifoReader : public Fifo {
 
 };
 
-#endif /* FIFOLECTURA_H_ */
+#endif /* MIGRATION_OFFICE_FIFOREADER_H */

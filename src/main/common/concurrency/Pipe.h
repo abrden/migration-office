@@ -1,5 +1,5 @@
-#ifndef PIPE_H_
-#define PIPE_H_
+#ifndef MIGRATION_OFFICE_PIPE_H
+#define MIGRATION_OFFICE_PIPE_H
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -8,8 +8,8 @@ class Pipe {
 
 	protected:
 		int descriptors[2];
-		static const int LECTURA = 0;
-		static const int ESCRITURA = 1;
+		static const int READ = 0;
+		static const int WRITE = 1;
 
 	public:
 		Pipe();
@@ -17,4 +17,4 @@ class Pipe {
 
 };
 
-#endif /* PIPE_H_ */
+#endif /* MIGRATION_OFFICE_PIPE_H */

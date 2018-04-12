@@ -1,5 +1,5 @@
-#ifndef FIFO_H_
-#define FIFO_H_
+#ifndef MIGRATION_OFFICE_FIFO_H
+#define MIGRATION_OFFICE_FIFO_H
 
 #include <string>
 #include <sys/types.h>
@@ -22,4 +22,4 @@ class Fifo {
 
 };
 
-#endif /* FIFO_H_ */
+#endif /* MIGRATION_OFFICE_FIFO_H */

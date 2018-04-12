@@ -1,5 +1,5 @@
-#ifndef MEMORIACOMPARTIDA2_H_
-#define MEMORIACOMPARTIDA2_H_
+#ifndef MIGRATION_OFFICE_SHAREDMEMORY_H
+#define MIGRATION_OFFICE_SHAREDMEMORY_H
 
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -142,9 +142,9 @@ template <class T> T SharedMemory<T>::read() const {
 }
 
 template <class T> int SharedMemory<T>::attached_processes() const {
-    shm_id estado;
-	shmctl(this->shm_id, IPC_STAT, &estado);
-	return estado.shm_nattch;
+    shm_id state;
+	shmctl(this->shm_id, IPC_STAT, &state);
+	return state.shm_nattch;
 }
 
-#endif
+#endif /* MIGRATION_OFFICE_SHAREDMEMORY_H */

@@ -16,4 +16,4 @@ class PipeReader : public Pipe {
 };
 
 
-#endif //MIGRATION_OFFICE_PIPEREADER_H
+#endif /* MIGRATION_OFFICE_PIPEREADER_H */

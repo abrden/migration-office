@@ -16,4 +16,4 @@ class PipeWriter : public Pipe {
 };
 
 
-#endif //MIGRATION_OFFICE_PIPEWRITER_H
+#endif /* MIGRATION_OFFICE_PIPEWRITER_H */
