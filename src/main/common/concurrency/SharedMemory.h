@@ -100,8 +100,8 @@ SharedMemory<T>::SharedMemory(const std::string& file_path, const char letter) :
 }
 
 template<class T>
-SharedMemory<T>::SharedMemory(const SharedMemory& origin) : shmId(origin.shmId) {
-    void* tmp_ptr = shmat(origen.shmId, NULL, 0);
+SharedMemory<T>::SharedMemory(const SharedMemory& origin) : shm_id(origin.shm_id) {
+    void* tmp_ptr = shmat(origin.shm_id, NULL, 0);
 
     if (tmp_ptr != (void*) -1) {
         this->data_ptr = static_cast<T*>(tmp_ptr);
@@ -152,7 +152,7 @@ T SharedMemory<T>::read() const {
 
 template<class T>
 int SharedMemory<T>::attached_processes() const {
-    shm_id state;
+    shmid_ds state;
     shmctl(this->shm_id, IPC_STAT, &state);
     return state.shm_nattch;
 }
