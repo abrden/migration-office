@@ -2,9 +2,7 @@
 
 #include "Lock.h"
 
-Lock::Lock(const std::string name) {
-
-    this->name = name;
+Lock::Lock(const std::string name) : name(name) {
     this->fl.l_type = F_WRLCK;
     this->fl.l_whence = SEEK_SET;
     this->fl.l_start = 0;

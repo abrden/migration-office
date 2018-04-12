@@ -1,7 +1,6 @@
 #ifndef MIGRATION_OFFICE_LOCK_H
 #define MIGRATION_OFFICE_LOCK_H
 
-//#include <unistd.h>
 #include <fcntl.h>
 #include <string>
 
@@ -9,7 +8,7 @@ class Lock {
   private:
     struct flock fl;
     int fd;
-    std::string name;
+    const std::string name;
 
   public:
     Lock(const std::string name);
