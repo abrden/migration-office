@@ -12,7 +12,7 @@ protected:
     const std::string name;
 
 public:
-    explicit Lock(const std::string name);
+    explicit Lock(const std::string &name);
 
     virtual int lock() = 0;
 

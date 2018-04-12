@@ -2,7 +2,7 @@
 
 #include "unistd.h"
 
-Lock::Lock(const std::string name) : name(name) {}
+Lock::Lock(const std::string &name) : name(name) {}
 
 int Lock::unlock() {
     this->fl.l_type = F_UNLCK;
