@@ -32,7 +32,7 @@ TEST_CASE("Police") {
 //    SECTION("is_wanted_person", ".") {
 //        Police p;
 //
-//        REQUIRE(p != NULL);
+//        REQUIRE(p.is_wanted_person());
 //    }
 }
 
