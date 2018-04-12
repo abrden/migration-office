@@ -20,22 +20,14 @@ class SharedMemory {
 
     public:
         SharedMemory();
-
-        void create(const std::string& file_path, const char letter);
-
-        void free();
-
         SharedMemory(const std::string& file_path, const char letter);
-
         SharedMemory(const SharedMemory& origin);
-
-        ~SharedMemory();
-
+        void create(const std::string& file_path, const char letter);
+        void free();
         SharedMemory<T>& operator=(const SharedMemory& origin);
-
         void write(const T& data);
-
         T read() const;
+        ~SharedMemory();
 
 };
 
