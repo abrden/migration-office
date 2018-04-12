@@ -7,6 +7,7 @@ bool PersonsQueue::empty() {
 }
 
 Person* PersonsQueue::front() {
+    /*
     // TODO lock
     Person* person = NULL;
     ssize_t bytes_read = pipe.pipe_read(static_cast<void*>(person), sizeof(Person*));
@@ -15,7 +16,7 @@ Person* PersonsQueue::front() {
     }
     // TODO access shared memory
     // TODO unlock
-
+    */
     std::list<Feature*> features;
     features.emplace_back(new Feature("redish hair"));
     features.emplace_back(new Feature("green eyes"));
