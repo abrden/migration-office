@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <vector>
+#include <sys/wait.h>
 
 #include "MigrationOffice.h"
 
@@ -17,7 +18,10 @@ void MigrationOffice::open_booths() {
     for (int i = 0; i < booths_number; i++) {
         pid_t pid = fork();
 
-        if (pid) {
+        if (pid < 0) {
+            perror("FORK FAILED\n");
+            return;
+        } else if (pid > 0) {
             booths_pids.emplace_back(pid);
         } else {
             std::string debug_flag = debug ? "1" : "0";
@@ -29,7 +33,18 @@ void MigrationOffice::open_booths() {
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
 
-            execv("build/migration_booth", &booth_argv[0]);
+            execv("./migration_booth", &booth_argv[0]);
         }
     }
+}
+
+void MigrationOffice::close_booths() {
+    while (!booths_pids.empty()) {
+        wait(nullptr);
+        booths_pids.pop_back();
+    };
+}
+
+MigrationOffice::~MigrationOffice() {
+    close_booths();
 }
