@@ -5,7 +5,7 @@
 #include "catch.hpp"
 
 // TODO
-TEST_CASE("Police") {
+TEST_CASE("Police", "[.]") {
 
     SECTION("is_fugitive") {
         SECTION("with non fugitive id") {
@@ -18,7 +18,7 @@ TEST_CASE("Police") {
             REQUIRE(p.is_fugitive(&r) == false);
         }
 
-        SECTION("with fugitive id", "[.]") {
+        SECTION("with fugitive id") {
             Police p;
             const unsigned int FUGITIVE_ID = 123456789;
             std::list<Feature*> features = { new Feature("ojos verdes") };
@@ -29,10 +29,10 @@ TEST_CASE("Police") {
         }
     }
 
-//    SECTION("is_wanted_person", ".") {
-//        Police p;
-//
+    SECTION("is_wanted_person", ".") {
+        Police p;
+
 //        REQUIRE(p.is_wanted_person());
-//    }
+    }
 }
 
