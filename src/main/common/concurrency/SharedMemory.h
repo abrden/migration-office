@@ -5,9 +5,9 @@
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <string>
-#include <string.h>
+#include <cstring>
 #include <iostream>
-#include <errno.h>
+#include <cerrno>
 
 template<class T>
 class SharedMemory {
@@ -128,7 +128,7 @@ SharedMemory<T>::~SharedMemory() {
 template<class T>
 SharedMemory<T> &SharedMemory<T>::operator=(const SharedMemory &origin) {
     this->shm_id = origin.shm_id;
-    void* tmp_ptr = shmat(this->shm_id, NULL, 0);
+    void *tmp_ptr = shmat(this->shm_id, NULL, 0);
 
     if (tmp_ptr != (void*) -1) {
         this->data_ptr = static_cast<T*>(tmp_ptr);
@@ -137,7 +137,7 @@ SharedMemory<T> &SharedMemory<T>::operator=(const SharedMemory &origin) {
         throw message;
     }
 
-    return* this;
+    return *this;
 }
 
 template<class T>
