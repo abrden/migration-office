@@ -33,7 +33,7 @@ template <class T> class SharedMemory {
 
 template <class T> SharedMemory<T>::SharedMemory() : shm_id(0), data_ptr(NULL) {}
 
-template <class T> void SharedMemory<T>::crear(const std::string& file_path, const char letter) {
+template <class T> void SharedMemory<T>::create(const std::string& file_path, const char letter) {
 	key_t key = ftok(file_path.c_str(), letter);
 
 	if (key > 0) {
