@@ -16,3 +16,5 @@ void Police::report(Resident* resident) {
     // TODO
     std::cout << "Resident " << resident->get_id() << " you are arrested" << std::endl;
 }
+
+void Police::add_fugitive(const unsigned int id) {}
