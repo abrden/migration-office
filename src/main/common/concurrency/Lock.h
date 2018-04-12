@@ -5,21 +5,21 @@
 #include <string>
 
 class Lock {
-  private:
+
+protected:
     struct flock fl;
     int fd;
     const std::string name;
 
-  public:
-    Lock(const std::string name);
+public:
+    explicit Lock(const std::string name);
 
-    ~Lock();
-
-    int lock();
+    virtual int lock() = 0;
 
     int unlock();
 
-    ssize_t write(const void *buffer, const ssize_t buffsize) const;
+    ~Lock();
 };
+
 
 #endif //MIGRATION_OFFICE_LOCK_H
