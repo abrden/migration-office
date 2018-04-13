@@ -6,7 +6,7 @@ mkdir build && cd build
 echo "==================== Done ===================="
 
 echo "==================== Compiling project ===================="
-cmake .. && make
+cmake -DCMAKE_BUILD_TYPE=Release .. && make -j2
 echo "==================== Done ===================="
 
 echo "==================== Running tests ===================="
