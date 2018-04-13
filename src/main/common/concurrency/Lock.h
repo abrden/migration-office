@@ -18,7 +18,7 @@ public:
 
     int unlock();
 
-    ~Lock();
+    virtual ~Lock();
 };
 
 
