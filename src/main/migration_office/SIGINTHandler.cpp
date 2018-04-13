@@ -4,7 +4,7 @@
 #include <signal.h>
 #include <iostream>
 
-SIGINTHandler::SIGINTHandler() {}
+SIGINTHandler::SIGINTHandler() = default;
 
 SIGINTHandler::~SIGINTHandler() = default;
 
