@@ -45,3 +45,14 @@ void MigrationBooth::open() {
     }
     SignalHandler::destroy();
 }
+
+MigrationBooth::~MigrationBooth() {
+    while (!arrived_residents.empty()) {
+        delete arrived_residents.back();
+        arrived_residents.pop_back();
+    }
+    while (!arrived_foreigners.empty()) {
+        delete arrived_foreigners.back();
+        arrived_foreigners.pop_back();
+    }
+}

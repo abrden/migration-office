@@ -34,6 +34,7 @@ class MigrationBooth {
         MigrationBooth(const std::string people_file, const std::string alerts_file, const std::string fugitives_file,
                        const bool debug, const std::string log_file);
         void open();
+        ~MigrationBooth();
 
 };
 
