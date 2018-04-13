@@ -11,7 +11,7 @@ class Passport {
         const std::string id;
 
     public:
-        Passport(std::string& id);
+        explicit Passport(std::string& id);
         void stamp_passport(Stamper* stamper);
         const std::string& get_id();
         ~Passport();

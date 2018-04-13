@@ -13,7 +13,7 @@ class SIGINTHandler : public EventHandler {
     public:
         SIGINTHandler();
         ~SIGINTHandler();
-        virtual int handle_signal(int signum);
+        virtual int handle_signal(int signum) override;
         sig_atomic_t get_graceful_quit() const;
 
 };

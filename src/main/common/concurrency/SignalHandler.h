@@ -13,7 +13,7 @@ class SignalHandler {
 		static SignalHandler* instance;
 		static EventHandler* signal_handlers[NSIG];
 
-		SignalHandler(void);
+		SignalHandler();
 		static void dispatcher(int signum);
 
 	public:
