@@ -3,6 +3,7 @@
 #include "SignalHandler.h"
 
 #include <iostream>
+#include <unistd.h>
 
 MigrationBooth::MigrationBooth(const std::string people_file, const std::string alerts_file,
                                const std::string fugitives_file,
@@ -40,6 +41,7 @@ void MigrationBooth::open() {
             attend_resident((Resident*)person);
         else
             attend_foreigner((Foreigner*)person);
+        sleep(2); // FIXME sleepy sleep to avoid killing my cpu
     }
     SignalHandler::destroy();
 }

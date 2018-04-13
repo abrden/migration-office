@@ -108,5 +108,7 @@ int main(int argc, char *argv[]) {
 
     office.open_booths();
 
+    office.wait_booths();
+
     exit(0);
 }

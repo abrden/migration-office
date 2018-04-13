@@ -38,13 +38,11 @@ void MigrationOffice::open_booths() {
     }
 }
 
-void MigrationOffice::close_booths() {
+void MigrationOffice::wait_booths() {
     while (!booths_pids.empty()) {
-        wait(nullptr);
-        booths_pids.pop_back();
-    };
+        pid_t child_pid = wait(nullptr);
+        booths_pids.remove(child_pid);
+    }
 }
 
-MigrationOffice::~MigrationOffice() {
-    close_booths();
-}
+MigrationOffice::~MigrationOffice() {}
