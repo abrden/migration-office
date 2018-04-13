@@ -6,19 +6,16 @@
 
 class Lock {
 
-protected:
-    struct flock fl;
-    int fd;
-    const std::string name;
+    protected:
+        struct flock fl;
+        int fd;
+        const std::string name;
 
-public:
-    explicit Lock(const std::string& name);
-
-    virtual int lock() = 0;
-
-    int unlock();
-
-    virtual ~Lock();
+    public:
+        explicit Lock(const std::string& name);
+        virtual int lock() = 0;
+        int unlock();
+        virtual ~Lock();
 };
 
 

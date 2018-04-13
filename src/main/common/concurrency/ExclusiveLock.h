@@ -8,10 +8,9 @@
 
 class ExclusiveLock : public Lock {
 
-  public:
-    explicit ExclusiveLock(const std::string& name);
-
-    int lock() override;
+    public:
+        explicit ExclusiveLock(const std::string& name);
+        int lock() override;
 
 };
 

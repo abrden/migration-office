@@ -8,10 +8,9 @@
 
 class SharedLock : public Lock {
 
-public:
-    explicit SharedLock(const std::string& name);
-
-    int lock() override;
+    public:
+        explicit SharedLock(const std::string& name);
+        int lock() override;
 };
 
 
