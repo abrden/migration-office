@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <vector>
 #include <sys/wait.h>
+#include <system_error>
 
 #include "SignalHandler.h"
 
@@ -24,8 +25,7 @@ void MigrationOffice::open_booths() {
         pid_t pid = fork();
 
         if (pid < 0) {
-            perror("FORK FAILED\n");
-            return;
+            throw std::system_error(errno, std::generic_category());
         } else if (pid > 0) {
             booths_pids.emplace_back(pid);
         } else {
