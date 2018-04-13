@@ -9,10 +9,10 @@ Spawner::Spawner(Spawnables& items) : items(items) {
 }
 
 void Spawner::run() {
-    std::time_t t0 = std::time(0);
+    std::time_t t0 = std::time(nullptr);
 
     while (!items.empty()) {
-        std::time_t t = std::time(0);
+        std::time_t t = std::time(nullptr);
 
         for (Spawnables::iterator iterator = items.begin(), end = items.end();
              iterator != end && (*iterator).first <= (t - t0);

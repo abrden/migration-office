@@ -4,7 +4,7 @@
 class Spawnable {
 
     public:
-        virtual ~Spawnable() {};
+        virtual ~Spawnable() = default;
 
 };
 

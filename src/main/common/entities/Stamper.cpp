@@ -1,7 +1,5 @@
 #include "Stamper.h"
 
-void Stamper::stamp() {
-    return;
-}
+void Stamper::stamp() {}
 
 Stamper::~Stamper() = default;
