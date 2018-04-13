@@ -1,17 +1,15 @@
 #include "SIGINTHandler.h"
 
 #include <assert.h>
+#include <signal.h>
+#include <iostream>
 
-SIGINTHandler::SIGINTHandler() : graceful_quit(0) {}
+SIGINTHandler::SIGINTHandler() {}
 
 SIGINTHandler::~SIGINTHandler() {}
 
 int SIGINTHandler::handle_signal(int signum) {
     assert(signum == SIGINT);
-    graceful_quit = 1;
+    std::cout << "I'm waiting for my booths to close" << std::endl;
     return 0;
-}
-
-sig_atomic_t SIGINTHandler::get_graceful_quit() const {
-    return graceful_quit;
 }

@@ -4,6 +4,8 @@
 #include <list>
 #include <string>
 
+#include <src/main/migration_office/SIGINTHandler.h>
+
 class MigrationOffice {
 
     private:
@@ -12,6 +14,7 @@ class MigrationOffice {
         const bool debug;
         const std::string log_file;
 
+        SIGINTHandler sigint_handler;
         std::list<pid_t> booths_pids;
 
     public:
