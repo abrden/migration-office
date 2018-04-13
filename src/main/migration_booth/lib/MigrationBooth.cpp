@@ -43,10 +43,11 @@ void MigrationBooth::open() {
             attend_foreigner((Foreigner*)person);
         sleep(2); // FIXME sleepy sleep to avoid killing my cpu
     }
-    SignalHandler::destroy();
+
 }
 
 MigrationBooth::~MigrationBooth() {
+    SignalHandler::destroy();
     while (!arrived_residents.empty()) {
         delete arrived_residents.back();
         arrived_residents.pop_back();

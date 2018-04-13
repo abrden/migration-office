@@ -49,7 +49,8 @@ void MigrationOffice::wait_booths() {
         pid_t child_pid = wait(nullptr);
         booths_pids.remove(child_pid);
     }
-    SignalHandler::destroy();
 }
 
-MigrationOffice::~MigrationOffice() {}
+MigrationOffice::~MigrationOffice() {
+    SignalHandler::destroy();
+}
