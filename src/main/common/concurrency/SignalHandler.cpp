@@ -1,22 +1,22 @@
 #include "SignalHandler.h"
 
-SignalHandler* SignalHandler::instance = NULL;
+SignalHandler* SignalHandler::instance = nullptr;
 EventHandler* SignalHandler::signal_handlers[NSIG];
 
 SignalHandler::SignalHandler() {
 }
 
 SignalHandler *SignalHandler::get_instance() {
-    if (instance == NULL)
+    if (instance == nullptr)
         instance = new SignalHandler();
 
     return instance;
 }
 
 void SignalHandler::destroy() {
-    if (instance != NULL) {
+    if (instance != nullptr) {
         delete (instance);
-        instance = NULL;
+        instance = nullptr;
     }
 }
 
@@ -40,6 +40,6 @@ void SignalHandler::dispatcher(int signum) {
 }
 
 int SignalHandler::remove_handler(int signum) {
-    SignalHandler::signal_handlers[signum] = NULL;
+    SignalHandler::signal_handlers[signum] = nullptr;
     return 0;
 }
