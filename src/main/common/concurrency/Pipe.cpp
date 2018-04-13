@@ -4,4 +4,4 @@ Pipe::Pipe() {
 	pipe(this->descriptors);
 }
 
-Pipe::~Pipe() {}
+Pipe::~Pipe() = default;
