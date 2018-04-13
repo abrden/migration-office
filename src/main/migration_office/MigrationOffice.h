@@ -4,7 +4,7 @@
 #include <list>
 #include <string>
 
-#include <src/main/migration_office/SIGINTHandler.h>
+#include "SIGINTHandler.h"
 
 class MigrationOffice {
 
