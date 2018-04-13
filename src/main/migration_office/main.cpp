@@ -110,5 +110,5 @@ int main(int argc, char *argv[]) {
 
     office.wait_booths();
 
-    exit(0);
+    return 0;
 }
