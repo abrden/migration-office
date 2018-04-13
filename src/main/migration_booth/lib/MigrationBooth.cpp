@@ -1,5 +1,4 @@
 #include "MigrationBooth.h"
-
 #include "SignalHandler.h"
 
 #include <iostream>
