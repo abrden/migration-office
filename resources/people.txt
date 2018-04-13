@@ -1,3 +1,3 @@
-timestamp,resident,id,name,last_name,features
-5,1,38464269,Agustina,Barbetta,tez blanca,ojos oscuros
-2,1,1234567,Manuel,Porto,tez blanca,ojos verdes,barbudo
+timestamp,resident,id,passport_id,name,last_name,features
+5,1,38464269,,Agustina,Barbetta,tez blanca,ojos oscuros
+2,0,1234567,PORTOÑOL123,Manuel,Porto,tez blanca,ojos verdes,barbudo

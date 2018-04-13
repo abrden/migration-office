@@ -10,7 +10,7 @@ class Feature {
 
     public:
         explicit Feature(std::string feature);
-        ~Feature() = default;
+        ~Feature();
 
 };
 

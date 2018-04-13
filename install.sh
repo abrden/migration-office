@@ -6,8 +6,7 @@ mkdir build && cd build
 echo "==================== Done ===================="
 
 echo "==================== Compiling project ===================="
-NUMCPUS=`grep -c '^processor' /proc/cpuinfo`
-cmake -DCMAKE_BUILD_TYPE=Release .. && make -j$NUMCPUS
+cmake -DCMAKE_BUILD_TYPE=Release .. && make -j2
 echo "==================== Done ===================="
 
 echo "==================== Running tests ===================="
