@@ -5,11 +5,11 @@
 
 class FifoWriter : public Fifo {
 
-	public:
-		explicit FifoWriter(const std::string nombre);
-		void fifo_open() override;
-		ssize_t fifo_write(const void* buffer,const ssize_t buffsize) const;
-		~FifoWriter() override;
+    public:
+        explicit FifoWriter(const std::string nombre);
+        void fifo_open() override;
+        ssize_t fifo_write(const void* buffer, const ssize_t buffsize) const;
+        ~FifoWriter() override;
 
 };
 

@@ -9,16 +9,16 @@
 
 class Fifo {
 
-	public:
-		explicit Fifo(const std::string name);
-		virtual void fifo_open() = 0;
-		void fifo_close();
-		void fifo_unlink() const;
-		virtual ~Fifo();
+    public:
+        explicit Fifo(const std::string name);
+        virtual void fifo_open() = 0;
+        void fifo_close();
+        void fifo_unlink() const;
+        virtual ~Fifo();
 
-	protected:
-		std::string name;
-		int fd;
+    protected:
+        std::string name;
+        int fd;
 
 };
 

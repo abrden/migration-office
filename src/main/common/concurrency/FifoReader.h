@@ -5,11 +5,11 @@
 
 class FifoReader : public Fifo {
 
-	public:
-		explicit FifoReader(const std::string name);
-		void fifo_open() override;
-		ssize_t fifo_read(void* buffer, const ssize_t buffsize) const;
-		~FifoReader() override;
+    public:
+        explicit FifoReader(const std::string name);
+        void fifo_open() override;
+        ssize_t fifo_read(void *buffer, const ssize_t buffsize) const;
+        ~FifoReader() override;
 
 };
 

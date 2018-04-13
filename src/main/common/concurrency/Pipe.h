@@ -6,14 +6,14 @@
 
 class Pipe {
 
-	protected:
-		int descriptors[2];
-		static const int READ = 0;
-		static const int WRITE = 1;
+    protected:
+        int descriptors[2];
+        static const int READ = 0;
+        static const int WRITE = 1;
 
-	public:
-		Pipe();
-		virtual ~Pipe();
+    public:
+        Pipe();
+        virtual ~Pipe();
 
 };
 
