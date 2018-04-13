@@ -32,7 +32,7 @@ int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_num
             {"log", required_argument, 0, 'l'}
     };
 
-    while ((flag = getopt_long(argc, argv, "b:s:p:a:f:dl:", opts, NULL)) != -1) {
+    while ((flag = getopt_long(argc, argv, "b:s:p:a:f:dl:", opts, nullptr)) != -1) {
         switch (flag) {
             case 'b' :
                 booths = true;
@@ -63,6 +63,8 @@ int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_num
                 log = true;
                 log_file = optarg;
                 break;
+
+                // TODO: handle default case
         }
     }
 
