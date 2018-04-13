@@ -28,7 +28,7 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
         std::cout << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
     } else {
         Stamper* stamper = stampers.get_stamper();
-        foreigner->get_passport().stamp_passport(*stamper);
+        foreigner->get_passport().stamp_passport(stamper);
         std::cout << "Welcome to Conculandia foreigner " << foreigner->get_passport().get_id() << std::endl;
         arrived_foreigners.emplace_back(foreigner);
     }
