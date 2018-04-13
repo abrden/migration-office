@@ -37,6 +37,7 @@ void MigrationOffice::open_booths() {
             booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
+            booth_argv.push_back(NULL);
 
             execv("./migration_booth", &booth_argv[0]);
         }
