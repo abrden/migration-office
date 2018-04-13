@@ -3,8 +3,7 @@
 SignalHandler* SignalHandler::instance = nullptr;
 EventHandler* SignalHandler::signal_handlers[NSIG];
 
-SignalHandler::SignalHandler() {
-}
+SignalHandler::SignalHandler() = default;
 
 SignalHandler *SignalHandler::get_instance() {
     if (instance == nullptr)

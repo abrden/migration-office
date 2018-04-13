@@ -3,8 +3,7 @@
 FifoReader::FifoReader(const std::string name) : Fifo(name) {
 }
 
-FifoReader::~FifoReader() {
-}
+FifoReader::~FifoReader() = default;
 
 void FifoReader::fifo_open() {
 	fd = open(name.c_str(), O_RDONLY);
