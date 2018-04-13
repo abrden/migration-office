@@ -4,7 +4,7 @@
 
 SIGINTHandler::SIGINTHandler() : graceful_quit(0) {}
 
-SIGINTHandler::~SIGINTHandler() {}
+SIGINTHandler::~SIGINTHandler() = default;
 
 int SIGINTHandler::handle_signal(int signum) {
     assert(signum == SIGINT);

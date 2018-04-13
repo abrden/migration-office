@@ -5,7 +5,7 @@ class EventHandler {
 
 	public:
 		virtual int handle_signal(int signum) = 0;
-		virtual ~EventHandler() {};
+		virtual ~EventHandler() = default;
 };
 
 #endif /* MIGRATION_OFFICE_EVENTHANDLER_H */

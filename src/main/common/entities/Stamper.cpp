@@ -4,4 +4,4 @@ void Stamper::stamp() {
     return;
 }
 
-Stamper::~Stamper() {}
+Stamper::~Stamper() = default;

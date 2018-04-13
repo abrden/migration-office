@@ -6,7 +6,7 @@
 
 SIGINTHandler::SIGINTHandler() {}
 
-SIGINTHandler::~SIGINTHandler() {}
+SIGINTHandler::~SIGINTHandler() = default;
 
 int SIGINTHandler::handle_signal(int signum) {
     assert(signum == SIGINT);

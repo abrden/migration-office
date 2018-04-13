@@ -2,4 +2,4 @@
 
 Feature::Feature(std::string feature) : feature(feature) {}
 
-Feature::~Feature() {}
+Feature::~Feature() = default;

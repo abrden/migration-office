@@ -8,4 +8,4 @@ const std::string& Passport::get_id() {
     return id;
 }
 
-Passport::~Passport() {}
+Passport::~Passport() = default;
