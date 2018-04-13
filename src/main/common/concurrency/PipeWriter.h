@@ -11,7 +11,7 @@ class PipeWriter : public Pipe {
     public:
         PipeWriter();
         ssize_t pipe_write(const void* data, int data_size);
-        ~PipeWriter();
+        ~PipeWriter() override;
 
 };
 

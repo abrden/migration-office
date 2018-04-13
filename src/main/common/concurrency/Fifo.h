@@ -10,7 +10,7 @@
 class Fifo {
 
 	public:
-		Fifo(const std::string name);
+		explicit Fifo(const std::string name);
 		virtual void fifo_open() = 0;
 		void fifo_close();
 		void fifo_unlink() const;

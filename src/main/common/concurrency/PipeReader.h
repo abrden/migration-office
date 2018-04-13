@@ -11,7 +11,7 @@ class PipeReader : public Pipe {
     public:
         PipeReader();
         ssize_t pipe_read(void* buffer, int buffer_size);
-        ~PipeReader();
+        ~PipeReader() override;
 
 };
 
