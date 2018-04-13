@@ -8,7 +8,7 @@ class SIGINTHandler : public EventHandler {
     public:
         SIGINTHandler();
         ~SIGINTHandler() override;
-        virtual int handle_signal(int signum) override;
+        int handle_signal(int signum) override;
 
 };
 
