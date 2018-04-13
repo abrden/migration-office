@@ -3,11 +3,11 @@
 #include "unistd.h"
 #include <system_error>
 
-Lock::Lock(const std::string &name) : name(name) {}
+Lock::Lock(const std::string& name) : name(name) {}
 
 int Lock::unlock() {
-    this->fl.l_type = F_UNLCK;
-    int unlock_fd = fcntl(this->fd, F_SETLK, &(this->fl));
+    fl.l_type = F_UNLCK;
+    int unlock_fd = fcntl(fd, F_SETLK, &(fl));
     if (unlock_fd == -1) {
         throw std::system_error(errno, std::generic_category());
     }
@@ -15,5 +15,5 @@ int Lock::unlock() {
 }
 
 Lock::~Lock() {
-    close(this->fd);
+    close(fd);
 }
