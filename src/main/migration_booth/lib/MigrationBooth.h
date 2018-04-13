@@ -4,6 +4,7 @@
 #include "Person.h"
 #include "Resident.h"
 #include "Foreigner.h"
+#include "SIGINTHandler.h"
 #include "PersonsQueue.h"
 #include "Stampers.h"
 #include "Police.h"
@@ -17,6 +18,7 @@ class MigrationBooth {
         const bool debug;
         const std::string log_file;
 
+        SIGINTHandler sigint_handler;
         PersonsQueue queue;
         Stampers stampers;
         Police police;

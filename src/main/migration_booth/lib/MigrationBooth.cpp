@@ -1,5 +1,6 @@
-#include "Stamper.h"
 #include "MigrationBooth.h"
+
+#include "SignalHandler.h"
 
 #include <iostream>
 
@@ -7,7 +8,10 @@ MigrationBooth::MigrationBooth(const std::string people_file, const std::string 
                                const std::string fugitives_file,
                                const bool debug, const std::string log_file)
         : people_file(people_file), alerts_file(alerts_file), fugitives_file(fugitives_file),
-          debug(debug), log_file(log_file) {}
+          debug(debug), log_file(log_file) {
+
+    SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
+}
 
 void MigrationBooth::attend_resident(Resident* resident) {
     if (!police.is_fugitive(resident)) {
@@ -30,11 +34,12 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
 }
 
 void MigrationBooth::open() {
-    while (!queue.empty()) {
+    while (sigint_handler.get_graceful_quit() == 0) {
         Person* person = queue.front();
         if (person->has_id())
             attend_resident((Resident*)person);
         else
             attend_foreigner((Foreigner*)person);
     }
+    SignalHandler::destroy();
 }
