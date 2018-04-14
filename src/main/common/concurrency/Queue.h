@@ -18,7 +18,7 @@ class Queue {
             Queue(const std::string &archivo, const char letra);
             ~Queue();
             int write(const T &dato) const;
-            int read(const int tipo, T *buffer) const;
+            ssize_t read(const int tipo, T *buffer) const;
             int destroy() const;
             
 };
@@ -51,8 +51,8 @@ int Queue<T>::write(const T &dato) const {
 }
 
 template<class T>
-int Queue<T>::read(const int tipo, T *buffer) const {
-    int resultado = msgrcv(this->id, static_cast<void *>(buffer), sizeof(T) - sizeof(long), tipo, 0);
+ssize_t Queue<T>::read(const int tipo, T *buffer) const {
+    ssize_t resultado = msgrcv(this->id, static_cast<void *>(buffer), sizeof(T) - sizeof(long), tipo, 0);
     return resultado;
 }
 

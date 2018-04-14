@@ -2,13 +2,13 @@
 #define MIGRATION_OFFICE_PERSONSQUEUE_H
 
 #include "Queue.h"
-#include "Message.h"
+#include "PersonMessage.h"
 #include "Person.h"
 
 class PersonsQueue {
 
     private:
-        Queue<message> queue;
+        Queue<person_message> queue;
 
     public:
         PersonsQueue();
