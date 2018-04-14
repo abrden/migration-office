@@ -14,7 +14,7 @@ class ConfigurationFileReader {
 
     public:
         void load_alerts(const std::string& file_path, Spawnables& alerts);
-        void load_fugitives_ids(const std::string& fugitives_file_path, std::list<std::string>& fugitives_ids);
+        void load_fugitives_ids(const std::string &fugitives_file_path, std::vector<unsigned int> &fugitives_ids);
         void load_persons(const std::string& people_file_path, Spawnables& persons);
 
 };
