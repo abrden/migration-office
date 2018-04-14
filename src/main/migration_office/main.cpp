@@ -109,6 +109,7 @@ int main(int argc, char *argv[]) {
     std::cout << "log file = " << log_file << std::endl;
 
     office.open_booths();
+    office.open_ministry_of_security();
 
     office.wait_booths();
 

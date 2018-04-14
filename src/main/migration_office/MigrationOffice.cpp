@@ -19,6 +19,26 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
 }
 
 
+void MigrationOffice::open_ministry_of_security() {
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        throw std::system_error(errno, std::generic_category());
+    } else if (pid > 0) {
+        ministry_of_security_pid = pid;
+    } else {
+        std::string debug_flag = debug ? "1" : "0";
+
+        std::vector<char*> booth_argv;
+        booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
+        booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
+        booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+        booth_argv.push_back(const_cast<char*>(log_file.c_str()));
+        booth_argv.push_back(nullptr);
+
+        execv("./ministry_of_security", &booth_argv[0]);
+    }
+}
 
 void MigrationOffice::open_booths() {
     for (int i = 0; i < booths_number; i++) {
@@ -42,6 +62,10 @@ void MigrationOffice::open_booths() {
             execv("./migration_booth", &booth_argv[0]);
         }
     }
+}
+
+void MigrationOffice::wait_ministry_of_security() {
+    waitpid(ministry_of_security_pid, nullptr, 0);
 }
 
 void MigrationOffice::wait_booths() {
