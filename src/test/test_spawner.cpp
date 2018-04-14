@@ -8,7 +8,7 @@
 TEST_CASE("Spawner sort") {
 
     SECTION("security alerts") {
-        MinisterOfSecurity m("../resources/alerts.txt");
+        MinisterOfSecurity m("../resources/alerts.txt", "../resources/fugitives.txt");
         Spawnables& a = m.get_alerts();
         Spawner s(a);
 
@@ -29,7 +29,7 @@ TEST_CASE("Spawner sort") {
 TEST_CASE("Spawner run") {
 
     SECTION("with security alerts") {
-        MinisterOfSecurity m("../resources/alerts.txt");
+        MinisterOfSecurity m("../resources/alerts.txt", "../resources/fugitives.txt");
         Spawnables& a = m.get_alerts();
         Spawner s(a);
 

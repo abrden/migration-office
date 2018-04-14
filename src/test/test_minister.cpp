@@ -3,7 +3,7 @@
 #include <list>
 
 TEST_CASE("Minister") {
-    MinisterOfSecurity m("../resources/alerts.txt");
+    MinisterOfSecurity m("../resources/alerts.txt", "../resources/fugitives.txt");
     Spawnables& a = m.get_alerts();
     REQUIRE(a.get_items().size() == 3);
 }
