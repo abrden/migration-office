@@ -1,6 +1,10 @@
 #include "PersonsQueue.h"
 #include "Resident.h"
 
+const  std::string file_path = "/bin/ls";
+
+PersonsQueue::PersonsQueue() : queue("/bin/ls", 'A') {}
+
 bool PersonsQueue::empty() {
     // TODO
     return false;
@@ -17,6 +21,9 @@ Person* PersonsQueue::front() {
     // TODO access shared memory
     // TODO unlock
     */
+
+
+
     std::list<Feature*> features;
     features.emplace_back(new Feature("redish hair"));
     features.emplace_back(new Feature("green eyes"));

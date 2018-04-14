@@ -1,10 +1,9 @@
 #ifndef MENSAJES_H_
 #define MENSAJES_H_
 
-#define	PETICION	1
-#define	RESPUESTA	2
-#define TEXT_SIZE	255
-
+const int PETITION = 1;
+const int RESPONSE = 2;
+const int TEXT_SIZE = 255;
 
 typedef struct message {
 	long mtype;
