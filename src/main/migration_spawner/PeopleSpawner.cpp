@@ -10,6 +10,10 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
 
+void PeopleSpawner::spawn(Spawnable* spawnable) {
+
+}
+
 bool PeopleSpawner::quit() {
     return sigint_handler.get_graceful_quit() == 1;
 }

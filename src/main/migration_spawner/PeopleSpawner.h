@@ -19,6 +19,7 @@ class PeopleSpawner : public Spawner {
 
     public:
         PeopleSpawner(const std::string& people_file, const bool debug, const std::string& log_file);
+        void spawn(Spawnable* spawnable);
         bool quit() override;
         ~PeopleSpawner() override;
 
