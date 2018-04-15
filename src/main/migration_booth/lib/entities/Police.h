@@ -1,7 +1,6 @@
 #ifndef MIGRATION_OFFICE_POLICE_H
 #define MIGRATION_OFFICE_POLICE_H
 
-#include "SharedMemory.h"
 #include "Resident.h"
 #include "Foreigner.h"
 
@@ -10,7 +9,6 @@
 class Police {
 
     private:
-        SharedMemory<std::vector<unsigned int>> sm;
         std::vector<unsigned int> fugitives;
     public:
         Police();

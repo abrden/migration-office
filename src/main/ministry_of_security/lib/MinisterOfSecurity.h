@@ -3,14 +3,13 @@
 
 #include "WantedPersonAlert.h"
 #include "Spawner.h"
-#include "SharedMemory.h"
 
 #include <vector>
+
 
 class MinisterOfSecurity {
 
     private:
-        SharedMemory<std::vector<unsigned int>> sm;
         Spawnables alerts;
         std::vector<unsigned int> fugitives;
 
