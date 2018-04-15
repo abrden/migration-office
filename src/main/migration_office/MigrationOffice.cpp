@@ -25,7 +25,7 @@ void MigrationOffice::open_ministry_of_security() {
     if (pid < 0) {
         throw std::system_error(errno, std::generic_category());
     } else if (pid > 0) {
-        ministry_of_security_pid = pid;
+        children_pids.push_back(pid);
     } else {
         std::string debug_flag = debug ? "1" : "0";
 
@@ -47,7 +47,7 @@ void MigrationOffice::open_booths() {
         if (pid < 0) {
             throw std::system_error(errno, std::generic_category());
         } else if (pid > 0) {
-            booths_pids.emplace_back(pid);
+            children_pids.emplace_back(pid);
         } else {
             std::string debug_flag = debug ? "1" : "0";
 
@@ -64,17 +64,14 @@ void MigrationOffice::open_booths() {
     }
 }
 
-void MigrationOffice::wait_ministry_of_security() {
-    waitpid(ministry_of_security_pid, nullptr, 0);
-}
-
-void MigrationOffice::wait_booths() {
-    while (!booths_pids.empty()) {
+void MigrationOffice::wait_children() {
+    while (!children_pids.empty()) {
         pid_t child_pid = wait(nullptr);
-        booths_pids.remove(child_pid);
+        children_pids.remove(child_pid);
     }
 }
 
 MigrationOffice::~MigrationOffice() {
+    wait_children();
     SignalHandler::destroy();
 }
