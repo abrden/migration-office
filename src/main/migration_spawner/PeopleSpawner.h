@@ -5,6 +5,7 @@
 
 #include "Spawnables.h"
 #include "Spawner.h"
+#include "FifoWriter.h"
 #include "SIGINTHandler.h"
 
 class PeopleSpawner : public Spawner {
@@ -16,6 +17,7 @@ class PeopleSpawner : public Spawner {
 
         SIGINTHandler sigint_handler;
         Spawnables people;
+        FifoWriter fifo;
 
     public:
         PeopleSpawner(const std::string& people_file, const bool debug, const std::string& log_file);
