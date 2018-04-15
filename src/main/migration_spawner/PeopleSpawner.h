@@ -7,7 +7,7 @@
 #include "Spawner.h"
 #include "SIGINTHandler.h"
 
-class PeopleSpawner {
+class PeopleSpawner : public Spawner {
 
     private:
         const std::string people_file;
@@ -16,12 +16,11 @@ class PeopleSpawner {
 
         SIGINTHandler sigint_handler;
         Spawnables people;
-        Spawner spawner;
 
     public:
         PeopleSpawner(const std::string& people_file, const bool debug, const std::string& log_file);
-        void start();
-        ~PeopleSpawner();
+        bool quit() override;
+        ~PeopleSpawner() override;
 
 };
 

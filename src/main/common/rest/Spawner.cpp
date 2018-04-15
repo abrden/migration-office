@@ -4,14 +4,14 @@
 #include <ctime>
 #include <iostream>
 
-Spawner::Spawner(Spawnables& items) : items(items) {
-    items.sort_by_ascending_timestamp();
-}
+Spawner::Spawner(Spawnables& items) : items(items) {}
 
 void Spawner::run() {
+    items.sort_by_ascending_timestamp();
+    
     std::time_t t0 = std::time(nullptr);
 
-    while (!items.empty()) {
+    while (!items.empty() || !quit()) {
         std::time_t t = std::time(nullptr);
 
         for (Spawnables::iterator iterator = items.begin(), end = items.end();

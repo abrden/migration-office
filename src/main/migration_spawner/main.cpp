@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 
     PeopleSpawner spawner(argv[ARGUMENTS::PEOPLE_FILE_POS], std::stoi(argv[ARGUMENTS::DEBUG_POS]), argv[ARGUMENTS::LOG_FILE_POS]);
 
-    spawner.start();
+    spawner.run();
 
     return 0;
 }

@@ -3,7 +3,10 @@
 
 #include <list>
 #include <utility>
+#include <string>
+
 #include "Spawnables.h"
+#include "ConfigurationFileReader.h"
 
 class Spawner {
 
@@ -13,7 +16,8 @@ class Spawner {
     public:
         explicit Spawner(Spawnables& items);
         void run();
-        ~Spawner() = default;
+        virtual bool quit() = 0;
+        virtual ~Spawner() = default;
 
 };
 
