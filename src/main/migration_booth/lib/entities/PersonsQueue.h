@@ -11,7 +11,6 @@ class PersonsQueue {
 
     public:
         PersonsQueue();
-        bool empty();
         Person* front();
 
 };

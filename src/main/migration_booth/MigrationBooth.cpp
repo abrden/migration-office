@@ -40,7 +40,6 @@ void MigrationBooth::open() {
             attend_resident((Resident*)person);
         else
             attend_foreigner((Foreigner*)person);
-        sleep(2); // FIXME sleepy sleep to avoid killing my cpu
     }
 
 }
