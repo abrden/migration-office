@@ -17,9 +17,9 @@ bool PersonsQueue::empty() {
 }
 
 Person* PersonsQueue::front() {
-    int buffer_size;
+    unsigned long buffer_size;
     std::cout << "Trying to read size" << std::endl;
-    fifo.fifo_read(static_cast<void*>(&buffer_size), sizeof(int));
+    fifo.fifo_read(static_cast<void*>(&buffer_size), sizeof(unsigned long));
     std::cout << "I read " << buffer_size << std::endl;
 
     char buffer[BUFF_SIZE + 1]; //TODO raise exception if size exceeds BUFF_SIZE

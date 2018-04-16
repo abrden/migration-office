@@ -25,7 +25,8 @@ void PeopleSpawner::spawn(Spawnable* spawnable) {
     unsigned long serialization_length = serialized_person.size();
     std::cout << "The length is " << serialization_length << std::endl;
     fifo.fifo_write(&serialization_length, sizeof(unsigned long));
-    fifo.fifo_write(serialized_person.c_str(), sizeof(char) * serialization_length);
+    ssize_t bytes_sent = fifo.fifo_write(serialized_person.c_str(), sizeof(char) * serialization_length);
+    std::cout << "I sent " << bytes_sent << " bytes" << std::endl;
 }
 
 bool PeopleSpawner::quit() {
