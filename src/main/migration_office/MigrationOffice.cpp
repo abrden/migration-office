@@ -37,9 +37,6 @@ void MigrationOffice::open_booths() {
 
             std::vector<char*> booth_argv;
             booth_argv.push_back(const_cast<char*>(booth_binary.c_str()));
-            booth_argv.push_back(const_cast<char*>(people_file.c_str()));
-            booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
-            booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);
