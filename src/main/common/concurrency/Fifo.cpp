@@ -1,7 +1,11 @@
+#include <system_error>
 #include "Fifo.h"
 
 Fifo::Fifo(const std::string name) : name(name), fd(-1) {
-	mknod(static_cast<const char*>(name.c_str()), S_IFIFO|0666, 0);
+	if (mknod(static_cast<const char*>(name.c_str()), S_IFIFO|0666, 0) == -1) {
+	    // FIXME throwing error when file already exists
+//	    throw std::system_error(errno, std::system_category(), "Error in mknod: could not create file.");
+	};
 }
 
 void Fifo::fifo_close() {
