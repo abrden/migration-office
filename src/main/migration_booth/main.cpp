@@ -12,7 +12,6 @@ enum ARGUMENTS {
 };
 
 int main(int argc, char* argv[]) {
-    sleep(2);
 //    std::cout << "Welcome to the Conculandia Migration Booth " << getpid() << "!" << std::endl;
 //    std::cout << "people file = " << argv[ARGUMENTS::PEOPLE_FILE_POS] << std::endl;
 //    std::cout << "alerts file = " << argv[ARGUMENTS::ALERTS_FILE_POS] << std::endl;

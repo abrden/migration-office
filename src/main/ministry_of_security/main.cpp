@@ -21,7 +21,6 @@ int main(int argc, char* argv[]) {
     MinisterOfSecurity ms(argv[ARGUMENTS::ALERTS_FILE_POS],
                           argv[ARGUMENTS::FUGITIVES_FILE_POS],
                           static_cast<size_t>(std::stoi(argv[ARGUMENTS::BOOTHS_NUMBER_POS])));
-    ms.send_fugitives();
-    sleep(4); // FIXME sleep to give time for booths to finish reading fugitives
+    ms.open();
     return 0;
 }
