@@ -1,11 +1,11 @@
-#include <src/main/common/entities/Foreigner.h>
+#include "Foreigner.h"
+#include "PersonDeserializer.h"
 #include "PersonsQueue.h"
 #include "Resident.h"
 
-const static std::string file_path = "/bin/ls";
-const static char letter = 'A';
+const static std::string fifo_file = "./migration_spawner";
 
-PersonsQueue::PersonsQueue() : queue(file_path, letter) {}
+PersonsQueue::PersonsQueue() : fifo(fifo_file) {}
 
 bool PersonsQueue::empty() {
     // TODO
@@ -13,19 +13,13 @@ bool PersonsQueue::empty() {
 }
 
 Person* PersonsQueue::front() {
-    person_message message;
-    queue.read(PETITION, &message);
+    int buffer_size;
+    fifo.fifo_read(&buffer_size, sizeof(int));
 
-    std::list<Feature*> features;
-    for (int i = 0; i < message.features_size; i++) {
-        std::string feature(message.features[i]);
-        features.emplace_back(new Feature(feature));
-    }
+    char* buffer = nullptr;
+    fifo.fifo_read(buffer, buffer_size);
 
-    if (message.is_resident) {
-        return new Resident(message.id, features);
-    } else {
-        std::string passport_id(message.passport_id);
-        return new Foreigner(passport_id, features);
-    }
+    std::string serialized_person(buffer);
+
+    return PersonDeserializer::deserialize(serialized_person);
 }
