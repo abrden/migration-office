@@ -21,12 +21,14 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
 
 void PeopleSpawner::spawn(Spawnable* spawnable) {
     std::string serialized_person = PersonSerializer::serialize((Person*)spawnable);
-    std::cout << "I serialized " << serialized_person << std::endl;
+    std::cout << "[PEOPLE SPAWNER] I serialized " << serialized_person << std::endl;
+
     unsigned long serialization_length = serialized_person.size();
-    std::cout << "The length is " << serialization_length << std::endl;
+    std::cout << "[PEOPLE SPAWNER] The length is " << serialization_length << std::endl;
+
     fifo.fifo_write(&serialization_length, sizeof(unsigned long));
     ssize_t bytes_sent = fifo.fifo_write(serialized_person.c_str(), sizeof(char) * serialization_length);
-    std::cout << "I sent " << bytes_sent << " bytes" << std::endl;
+    std::cout << "[PEOPLE SPAWNER] I sent " << bytes_sent << " bytes" << std::endl;
 }
 
 bool PeopleSpawner::quit() {
