@@ -23,7 +23,11 @@ Spawnables& MinisterOfSecurity::get_alerts() {
 void MinisterOfSecurity::send_fugitives() {
     unsigned long n_fugitives = fugitives.size();
     fifo.fifo_open();
-    std::cout << "I'm the prestigious Pato Bullrich and I'm sending " << fugitives.size() << " fugitives!" << std::endl;
-    fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(unsigned long));
-    std::cout << "Fugitives sent" << std::endl;
+
+    for(int i = 0; i < 4; i++) {
+        std::cout << "I'm the prestigious Pato Bullrich and I'm sending " << fugitives.size() << " fugitives!" << std::endl;
+        fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(unsigned long));
+        fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
+        std::cout << "Fugitives sent" << std::endl;
+    }
 }
