@@ -9,16 +9,17 @@ static const char LOCK_FILE[] = "/tmp/archivolock";
 static const size_t BUFFERSIZE = 2;
 
 Police::Police() : fifo(FILE_NAME) {
-    sleep(3);
     std::cout << "Creating lock" << std::endl;
     ExclusiveLock lock(LOCK_FILE);
     fifo.fifo_open();
     std::cout << "opened fifo" << std::endl;
     unsigned long n_fugitives;
     lock.lock();
-    fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(unsigned long));
+    ssize_t read_1 = fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(unsigned long));
+    std::cout << "Read: " << read_1 << std::endl;
     unsigned int fugi[BUFFERSIZE];
-    fifo.fifo_read(static_cast<void*>(fugi), sizeof(unsigned int) * n_fugitives);
+    ssize_t read_2 = fifo.fifo_read(static_cast<void*>(fugi), sizeof(unsigned int) * n_fugitives);
+    std::cout << "Read: " << read_2 << std::endl;
     lock.unlock();
     fugitives.assign(fugi, std::end(fugi));
     std::cout << "I'm the prestigious Policia Bonaerense, I received " << n_fugitives << " fugitives ids" << std::endl;

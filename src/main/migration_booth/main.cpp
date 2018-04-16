@@ -12,12 +12,13 @@ enum ARGUMENTS {
 };
 
 int main(int argc, char* argv[]) {
-    std::cout << "Welcome to the Conculandia Migration Booth " << getpid() << "!" << std::endl;
-    std::cout << "people file = " << argv[ARGUMENTS::PEOPLE_FILE_POS] << std::endl;
-    std::cout << "alerts file = " << argv[ARGUMENTS::ALERTS_FILE_POS] << std::endl;
-    std::cout << "fugitives file = " << argv[ARGUMENTS::FUGITIVES_FILE_POS] << std::endl;
-    std::cout << "debug = " << argv[ARGUMENTS::DEBUG_POS] << std::endl;
-    std::cout << "log file = " << argv[ARGUMENTS::LOG_FILE_POS] << std::endl;
+    sleep(2);
+//    std::cout << "Welcome to the Conculandia Migration Booth " << getpid() << "!" << std::endl;
+//    std::cout << "people file = " << argv[ARGUMENTS::PEOPLE_FILE_POS] << std::endl;
+//    std::cout << "alerts file = " << argv[ARGUMENTS::ALERTS_FILE_POS] << std::endl;
+//    std::cout << "fugitives file = " << argv[ARGUMENTS::FUGITIVES_FILE_POS] << std::endl;
+//    std::cout << "debug = " << argv[ARGUMENTS::DEBUG_POS] << std::endl;
+//    std::cout << "log file = " << argv[ARGUMENTS::LOG_FILE_POS] << std::endl;
 
     MigrationBooth booth(argv[ARGUMENTS::PEOPLE_FILE_POS], argv[ARGUMENTS::ALERTS_FILE_POS], argv[ARGUMENTS::FUGITIVES_FILE_POS],
                          std::stoi(argv[ARGUMENTS::DEBUG_POS]), argv[ARGUMENTS::LOG_FILE_POS]);
