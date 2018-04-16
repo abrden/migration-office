@@ -3,10 +3,12 @@
 #include "PersonsQueue.h"
 #include "Resident.h"
 
-const static std::string fifo_file = "/tmp/spawner_fifo";
-const static int BUFF_SIZE = 1024;
+static const std::string fifo_file = "/tmp/spawnerfifo";
+static const int BUFF_SIZE = 1024;
 
-PersonsQueue::PersonsQueue() : fifo(fifo_file) {}
+PersonsQueue::PersonsQueue() : fifo(fifo_file) {
+    fifo.fifo_open();
+}
 
 bool PersonsQueue::empty() {
     // TODO
@@ -14,6 +16,7 @@ bool PersonsQueue::empty() {
 }
 
 Person* PersonsQueue::front() {
+    /*
     int buffer_size;
     fifo.fifo_read(&buffer_size, sizeof(int));
 
@@ -23,7 +26,7 @@ Person* PersonsQueue::front() {
     std::string serialized_person(buffer, buffer_size);
 
     //return PersonDeserializer::deserialize(serialized_person);
-
+    */
     std::list<Feature*> l;
     return new Resident(13641107, l);
 }

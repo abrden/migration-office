@@ -1,6 +1,6 @@
 #include "FifoWriter.h"
 
-FifoWriter::FifoWriter(const std::string nombre) : Fifo(nombre) {
+FifoWriter::FifoWriter(const std::string name) : Fifo(name) {
 }
 
 FifoWriter::~FifoWriter() = default;
