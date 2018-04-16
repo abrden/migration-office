@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Foreigner.h"
 #include "PersonDeserializer.h"
 #include "PersonsQueue.h"
@@ -16,17 +17,22 @@ bool PersonsQueue::empty() {
 }
 
 Person* PersonsQueue::front() {
-    /*
     int buffer_size;
-    fifo.fifo_read(&buffer_size, sizeof(int));
+    std::cout << "Trying to read size" << std::endl;
+    fifo.fifo_read(static_cast<void*>(&buffer_size), sizeof(int));
+    std::cout << "I read " << buffer_size << std::endl;
 
-    char buffer[BUFF_SIZE]; //TODO raise exception if size exceeds BUFF_SIZE
-    fifo.fifo_read(buffer, sizeof(char) * buffer_size);
+    char buffer[BUFF_SIZE + 1]; //TODO raise exception if size exceeds BUFF_SIZE
+    buffer[BUFF_SIZE] = '\0';
+    std::cout << "Trying to read serialized person" << std::endl;
+    ssize_t bytes_read = fifo.fifo_read(static_cast<void*>(buffer), sizeof(char) * buffer_size);
+    std::cout << "I read " << bytes_read << " bytes" << std::endl;
 
     std::string serialized_person(buffer, buffer_size);
+    std::cout << "I read " << serialized_person << std::endl;
 
     //return PersonDeserializer::deserialize(serialized_person);
-    */
+
     std::list<Feature*> l;
     return new Resident(13641107, l);
 }
