@@ -4,14 +4,15 @@
 #include "Police.h"
 
 // TODO review this
-const std::string FILE_NAME = "/bin/ls";
-const char LETTER = 'A';
+static const char FILE_NAME[] = "/tmp/archivofifo";
+static const char LOCK_FILE[] = "/tmp/archivolock";
 
-Police::Police() {
-    SharedLock l("../.gitignore");
-    l.lock();
-    std::cout << "I'm the prestigious Policia Bonaerense, I received " << fugitives.size() << " fugitives ids" << std::endl;
-    l.unlock();
+Police::Police() : fifo(FILE_NAME) {
+    fifo.fifo_open();
+    std::cout << "opened fifo" << std::endl;
+    unsigned long n_fugitives;
+    fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(unsigned long));
+    std::cout << "I'm the prestigious Policia Bonaerense, I received " << n_fugitives << " fugitives ids" << std::endl;
 }
 
 bool Police::is_fugitive(Resident* resident) {

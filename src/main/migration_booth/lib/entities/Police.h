@@ -3,12 +3,14 @@
 
 #include "Resident.h"
 #include "Foreigner.h"
+#include "FifoReader.h"
 
 #include <vector>
 
 class Police {
 
     private:
+        FifoReader fifo;
         std::vector<unsigned int> fugitives;
     public:
         Police();

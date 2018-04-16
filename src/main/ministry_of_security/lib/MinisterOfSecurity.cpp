@@ -1,16 +1,16 @@
 #include "MinisterOfSecurity.h"
 #include "ConfigurationFileReader.h"
+#include "ExclusiveLock.h"
 
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include "ExclusiveLock.h"
 
-const std::string FILE_NAME = "/bin/ls";
-const char LETTER = 'A';
+static const char FILE_NAME[] = "/tmp/archivofifo";
+static const char LOCK_FILE[] = "/tmp/archivolock";
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
-                                       const std::string& fugitives_file_path) {
+                                       const std::string& fugitives_file_path) : fifo(FILE_NAME) {
     ConfigurationFileReader fr;
     fr.load_alerts(alerts_file_path, alerts);
     fr.load_fugitives_ids(fugitives_file_path, fugitives);
@@ -21,8 +21,9 @@ Spawnables& MinisterOfSecurity::get_alerts() {
 }
 
 void MinisterOfSecurity::send_fugitives() {
-    ExclusiveLock l("../.gitignore");
-    l.lock();
+    unsigned long n_fugitives = fugitives.size();
+    fifo.fifo_open();
     std::cout << "I'm the prestigious Pato Bullrich and I'm sending " << fugitives.size() << " fugitives!" << std::endl;
-    l.unlock();
+    fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(unsigned long));
+    std::cout << "Fugitives sent" << std::endl;
 }

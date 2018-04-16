@@ -5,11 +5,13 @@
 #include "Spawner.h"
 
 #include <vector>
+#include <src/main/common/concurrency/FifoWriter.h>
 
 
 class MinisterOfSecurity {
 
     private:
+        FifoWriter fifo;
         Spawnables alerts;
         std::vector<unsigned int> fugitives;
 
