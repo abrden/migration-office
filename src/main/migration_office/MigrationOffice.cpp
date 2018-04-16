@@ -34,6 +34,7 @@ void MigrationOffice::open_ministry_of_security() {
         booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
         booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         booth_argv.push_back(const_cast<char*>(log_file.c_str()));
+        booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
         booth_argv.push_back(nullptr);
 
         execv("./ministry_of_security", &booth_argv[0]);
