@@ -17,7 +17,7 @@ Person* PersonsQueue::front() {
     fifo.fifo_read(&buffer_size, sizeof(int));
 
     char* buffer = nullptr;
-    fifo.fifo_read(buffer, buffer_size);
+    fifo.fifo_read(buffer, sizeof(char) * buffer_size);
 
     std::string serialized_person(buffer);
 
