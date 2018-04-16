@@ -1,9 +1,8 @@
 #include "FifoReader.h"
 
 FifoReader::FifoReader(const std::string name) : Fifo(name) {
+	fifo_open();
 }
-
-FifoReader::~FifoReader() = default;
 
 void FifoReader::fifo_open() {
 	fd = open(name.c_str(), O_RDONLY);

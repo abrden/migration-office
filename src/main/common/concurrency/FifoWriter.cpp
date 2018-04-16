@@ -1,9 +1,8 @@
 #include "FifoWriter.h"
 
 FifoWriter::FifoWriter(const std::string nombre) : Fifo(nombre) {
+	fifo_open();
 }
-
-FifoWriter::~FifoWriter() = default;
 
 void FifoWriter::fifo_open() {
 	fd = open(name.c_str(), O_WRONLY);
