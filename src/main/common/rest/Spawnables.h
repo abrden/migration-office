@@ -5,21 +5,22 @@
 
 #include <utility>
 #include <list>
+#include <string>
 
 class Spawnables {
 
     private:
-        std::list<std::pair<int, Spawnable*>> items;
+        std::list<std::pair<int, std::string>> items;
 
     public:
-        typedef std::list<std::pair<int, Spawnable*>>::iterator iterator;
+        typedef std::list<std::pair<int, std::string>>::iterator iterator;
         Spawnables::iterator begin();
         Spawnables::iterator end();
         Spawnables::iterator erase(Spawnables::iterator iterator);
         void sort_by_ascending_timestamp();
         bool empty();
-        void push_spawnable(int timestamp, Spawnable* spawnable);
-        std::list<std::pair<int, Spawnable*>>& get_items();
+        void push_spawnable(int timestamp, std::string spawnable);
+        std::list<std::pair<int, std::string>>& get_items();
         virtual ~Spawnables();
 
 };
