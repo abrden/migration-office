@@ -5,7 +5,7 @@
 #include "ConfigurationFileReader.h"
 #include "PeopleSpawner.h"
 
-const static std::string fifo_file = "./migration_spawner";
+const static std::string fifo_file = "/tmp/spawner_fifo";
 
 PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, const std::string& log_file)
         : Spawner(people), people_file(people_file), debug(debug), log_file(log_file), fifo(fifo_file) {

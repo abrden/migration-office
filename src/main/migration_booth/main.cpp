@@ -4,7 +4,7 @@
 #include "MigrationBooth.h"
 
 enum ARGUMENTS {
-    PEOPLE_FILE_POS,
+    PEOPLE_FILE_POS = 1,
     ALERTS_FILE_POS,
     FUGITIVES_FILE_POS,
     DEBUG_POS,

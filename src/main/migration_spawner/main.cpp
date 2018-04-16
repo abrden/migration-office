@@ -4,7 +4,7 @@
 #include "PeopleSpawner.h"
 
 enum ARGUMENTS {
-    PEOPLE_FILE_POS,
+    PEOPLE_FILE_POS = 1,
     DEBUG_POS,
     LOG_FILE_POS
 };
