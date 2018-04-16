@@ -3,9 +3,9 @@
 
 #include "WantedPersonAlert.h"
 #include "Spawner.h"
+#include "FifoWriter.h"
 
 #include <vector>
-#include <src/main/common/concurrency/FifoWriter.h>
 
 
 class MinisterOfSecurity {
