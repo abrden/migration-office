@@ -38,7 +38,6 @@ void MinisterOfSecurity::send_alerts() {
 
 void MinisterOfSecurity::send_fugitives() {
     size_t n_fugitives = fugitives.size();
-    fifo.fifo_open();
 
     for(size_t i = 0; i < booths_number; i++) {
         std::cout << "I'm the prestigious Pato Bullrich and I'm sending " << fugitives.size() << " fugitives!" << std::endl;

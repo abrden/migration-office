@@ -13,9 +13,6 @@ Police::Police() : fugitives_fifo(FILE_NAME), fugitives_fifo_lock(LOCK_FILE) {
 }
 
 void Police::receive_fugitives() {
-    std::cout << "Opening fifo" << std::endl;
-    fugitives_fifo.fifo_open();
-    std::cout << "opened fugitives_fifo" << std::endl;
 
     size_t n_fugitives;
     fugitives_fifo_lock.lock();
@@ -31,6 +28,7 @@ void Police::receive_fugitives() {
     std::cout << "First fugitive is: " << fugitives.at(0) << std::endl;
     std::cout << "Second fugitive is: " << fugitives.at(1) << std::endl;
 }
+
 bool Police::is_fugitive(Resident* resident) {
     // TODO
     return false;
