@@ -17,17 +17,21 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
     fr.load_fugitives_ids(fugitives_file_path, fugitives);
 }
 
+void MinisterOfSecurity::open() {
+    return; // TODO not implemented
+}
+
 Spawnables& MinisterOfSecurity::get_alerts() {
     return alerts;
 }
 
 void MinisterOfSecurity::send_fugitives() {
-    unsigned long n_fugitives = fugitives.size();
+    size_t n_fugitives = fugitives.size();
     fifo.fifo_open();
 
     for(size_t i = 0; i < booths_number; i++) {
         std::cout << "I'm the prestigious Pato Bullrich and I'm sending " << fugitives.size() << " fugitives!" << std::endl;
-        fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(unsigned long));
+        fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(size_t));
         fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
         std::cout << "Fugitives sent" << std::endl;
     }

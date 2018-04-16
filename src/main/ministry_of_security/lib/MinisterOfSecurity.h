@@ -20,6 +20,7 @@ class MinisterOfSecurity {
         MinisterOfSecurity(const std::string& alerts_file_path,
                            const std::string& fugitives_file_path,
                            const size_t booths_number);
+        void open();
         void send_fugitives();
         Spawnables& get_alerts();
         ~MinisterOfSecurity() = default;
