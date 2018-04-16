@@ -4,14 +4,18 @@
 #include "Resident.h"
 #include "Foreigner.h"
 #include "FifoReader.h"
+#include "ExclusiveLock.h"
 
 #include <vector>
 
 class Police {
 
     private:
-        FifoReader fifo;
+        FifoReader fugitives_fifo;
+        ExclusiveLock fugitives_fifo_lock;
         std::vector<unsigned int> fugitives;
+
+        void receive_fugitives();
     public:
         Police();
         bool is_fugitive(Resident* resident);
