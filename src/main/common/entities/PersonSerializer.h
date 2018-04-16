@@ -4,10 +4,12 @@
 
 #include "Person.h"
 
+#include <string>
+
 class PersonSerializer {
 
     public:
-        static char* serialize(Person* person);
+        static std::string serialize(Person* person);
 
 };
 

@@ -1,5 +1,4 @@
 #include "Spawner.h"
-#include "WantedPersonAlert.h"
 
 #include <ctime>
 #include <iostream>

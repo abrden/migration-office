@@ -19,8 +19,8 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
 }
 
 void PeopleSpawner::spawn(Spawnable* spawnable) {
-    char* serialized_person = PersonSerializer::serialize((Person*)spawnable);
-    fifo.fifo_write(serialized_person, ((int*)serialized_person)[0]);
+    std::string serialized_person = PersonSerializer::serialize((Person*)spawnable);
+    fifo.fifo_write(serialized_person.c_str(), serialized_person.size());
 }
 
 bool PeopleSpawner::quit() {
