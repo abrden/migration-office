@@ -8,7 +8,7 @@ static const char FILE_NAME[] = "/tmp/archivofifo";
 static const char LOCK_FILE[] = "/tmp/archivolock";
 static const size_t BUFFERSIZE = 2;
 
-Police::Police() : fugitives_fifo(FILE_NAME), fugitives_fifo_lock(LOCK_FILE) {
+Police::Police() : fugitives_fifo(FILE_NAME), fugitives_fifo_lock(FILE_NAME) {
     receive_fugitives();
 }
 

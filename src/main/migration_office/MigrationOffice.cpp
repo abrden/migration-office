@@ -30,6 +30,7 @@ void MigrationOffice::open_ministry_of_security() {
         std::string debug_flag = debug ? "1" : "0";
 
         std::vector<char*> booth_argv;
+        booth_argv.push_back(const_cast<char*>("./ministry_of_security"));
         booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
         booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
         booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
@@ -53,6 +54,7 @@ void MigrationOffice::open_booths() {
             std::string debug_flag = debug ? "1" : "0";
 
             std::vector<char*> booth_argv;
+            booth_argv.push_back(const_cast<char*>("./migration_booth"));
             booth_argv.push_back(const_cast<char*>(people_file.c_str()));
             booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
             booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));

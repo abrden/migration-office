@@ -3,7 +3,7 @@
 #include "MinisterOfSecurity.h"
 
 enum ARGUMENTS {
-    ALERTS_FILE_POS,
+    ALERTS_FILE_POS = 1,
     FUGITIVES_FILE_POS,
     DEBUG_POS,
     LOG_FILE_POS,
