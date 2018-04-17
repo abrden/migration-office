@@ -7,6 +7,9 @@
 
 #include "SignalHandler.h"
 
+static const std::string MS_PROCESS = "./ministry_of_security";
+static const std::string MB_PROCESS = "./migration_booth";
+
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
                                  const std::string fugitives_file,
@@ -30,7 +33,7 @@ void MigrationOffice::open_ministry_of_security() {
         std::string debug_flag = debug ? "1" : "0";
 
         std::vector<char*> booth_argv;
-        booth_argv.push_back(const_cast<char*>("./ministry_of_security"));
+        booth_argv.push_back(const_cast<char*>(MS_PROCESS.c_str()));
         booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
         booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
         booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
@@ -38,7 +41,7 @@ void MigrationOffice::open_ministry_of_security() {
         booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
         booth_argv.push_back(nullptr);
 
-        execv("./ministry_of_security", &booth_argv[0]);
+        execv(booth_argv[0], &booth_argv[0]);
     }
 }
 
@@ -54,7 +57,7 @@ void MigrationOffice::open_booths() {
             std::string debug_flag = debug ? "1" : "0";
 
             std::vector<char*> booth_argv;
-            booth_argv.push_back(const_cast<char*>("./migration_booth"));
+            booth_argv.push_back(const_cast<char*>(MB_PROCESS.c_str()));
             booth_argv.push_back(const_cast<char*>(people_file.c_str()));
             booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
             booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
@@ -62,7 +65,7 @@ void MigrationOffice::open_booths() {
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);
 
-            execv("./migration_booth", &booth_argv[0]);
+            execv(booth_argv[0], &booth_argv[0]);
         }
     }
 }
