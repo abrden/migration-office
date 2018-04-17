@@ -8,8 +8,8 @@
 
 #include "SignalHandler.h"
 
-const static std::string booth_binary = "./migration_booth";
-const static std::string spawner_binary = "./migration_spawner";
+const static std::string BOOTH_BINARY = "./migration_booth";
+const static std::string SPAWNER_BINARY = "./migration_spawner";
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -36,7 +36,7 @@ void MigrationOffice::open_booths() {
             std::string debug_flag = debug ? "1" : "0";
 
             std::vector<char*> booth_argv;
-            booth_argv.push_back(const_cast<char*>(booth_binary.c_str()));
+            booth_argv.push_back(const_cast<char*>(BOOTH_BINARY.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);
@@ -57,7 +57,7 @@ void MigrationOffice::fork_spawner() {
         std::string debug_flag = debug ? "1" : "0";
 
         std::vector<char*> spawner_argv;
-        spawner_argv.push_back(const_cast<char*>(spawner_binary.c_str()));
+        spawner_argv.push_back(const_cast<char*>(SPAWNER_BINARY.c_str()));
         spawner_argv.push_back(const_cast<char*>(people_file.c_str()));
         spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
