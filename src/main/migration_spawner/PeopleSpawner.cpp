@@ -6,10 +6,10 @@
 #include "ConfigurationFileReader.h"
 #include "PeopleSpawner.h"
 
-static const std::string fifo_file = "/tmp/spawnerfifo";
+static const std::string FIFO_FILE = "/tmp/spawnerfifo";
 
 PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, const std::string& log_file)
-        : Spawner(people), people_file(people_file), debug(debug), log_file(log_file), fifo(fifo_file) {
+        : Spawner(people), people_file(people_file), debug(debug), log_file(log_file), fifo(FIFO_FILE) {
 
     ConfigurationFileReader fr;
     fr.load_persons(people_file, people);
