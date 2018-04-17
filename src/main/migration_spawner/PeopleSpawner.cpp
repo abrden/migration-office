@@ -37,4 +37,5 @@ bool PeopleSpawner::quit() {
 
 PeopleSpawner::~PeopleSpawner() {
     SignalHandler::destroy();
+    fifo.fifo_close();
 }

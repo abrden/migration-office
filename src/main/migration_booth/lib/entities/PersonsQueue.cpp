@@ -15,17 +15,17 @@ Person* PersonsQueue::front() {
     fifo_lock.lock();
     unsigned long buffer_size;
     std::cout << "[PERSONS QUEUE] Trying to read size" << std::endl;
-    fifo.fifo_read(static_cast<void*>(&buffer_size), sizeof(unsigned long));
-    std::cout << "[PERSONS QUEUE] I read " << buffer_size << std::endl;
+    ssize_t bytes_read = fifo.fifo_read(static_cast<void*>(&buffer_size), sizeof(unsigned long));
+    if (bytes_read != sizeof(unsigned long)) return nullptr;
+    std::cout << "[PERSONS QUEUE] I read size: " << buffer_size << std::endl;
 
     char buffer[BUFF_SIZE]; //TODO raise exception if size exceeds BUFF_SIZE
     std::cout << "[PERSONS QUEUE] Trying to read serialized person" << std::endl;
-    ssize_t bytes_read = fifo.fifo_read(static_cast<void*>(buffer), sizeof(char) * buffer_size);
-    std::cout << "[PERSONS QUEUE] I read " << bytes_read << " bytes" << std::endl;
+    bytes_read = fifo.fifo_read(static_cast<void*>(buffer), sizeof(char) * buffer_size);
     fifo_lock.unlock();
 
     std::string serialized_person(buffer, buffer_size);
-    std::cout << "[PERSONS QUEUE] I read " << serialized_person << std::endl;
+    std::cout << "[PERSONS QUEUE] I read person: " << serialized_person << std::endl;
 
     return PersonDeserializer::deserialize(serialized_person);
 }
