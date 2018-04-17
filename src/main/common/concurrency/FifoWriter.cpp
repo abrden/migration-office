@@ -8,7 +8,7 @@ FifoWriter::FifoWriter(const std::string nombre) : Fifo(nombre) {
 void FifoWriter::fifo_open() {
 	fd = open(name.c_str(), O_WRONLY);
 	if (fd == -1) {
-	    throw std::system_error(errno, std::system_category(), "Error in open: could not open file.");
+	    throw std::system_error(errno, std::system_category(), "Error in open: could not open Fifo file in write mode.");
 	}
 }
 

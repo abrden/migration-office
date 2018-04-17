@@ -60,7 +60,7 @@ void ConfigurationFileReader::load_alerts(const std::string& alerts_file_path, S
     }
 }
 
-void ConfigurationFileReader::load_fugitives_ids(const std::string &fugitives_file_path,
+void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path,
                                                  std::vector<unsigned int> &fugitives_ids) {
     // TODO add exception handling
     std::ifstream ifs(fugitives_file_path);

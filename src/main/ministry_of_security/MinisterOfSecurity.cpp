@@ -7,12 +7,11 @@
 #include <sstream>
 #include <iostream>
 
-static const char FILE_NAME[] = "/tmp/archivofifo";
-static const char LOCK_FILE[] = "/tmp/archivolock";
+static const std::string FIFO_FILE = "/tmp/archivofifo";
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::string& fugitives_file_path,
-                                       const size_t booths_number) : fifo(FILE_NAME), booths_number(booths_number) {
+                                       const size_t booths_number) : fifo(FIFO_FILE), booths_number(booths_number) {
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
     ConfigurationFileReader fr;
     fr.load_alerts(alerts_file_path, alerts);

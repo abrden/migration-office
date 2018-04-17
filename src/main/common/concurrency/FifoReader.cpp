@@ -8,7 +8,7 @@ FifoReader::FifoReader(const std::string name) : Fifo(name) {
 void FifoReader::fifo_open() {
 	fd = open(name.c_str(), O_RDONLY);
     if (fd == -1) {
-        throw std::system_error(errno, std::system_category(), "Error in open: could not open file.");
+        throw std::system_error(errno, std::system_category(), "Error in open: could not open Fifo file in read mode");
     }
 }
 
