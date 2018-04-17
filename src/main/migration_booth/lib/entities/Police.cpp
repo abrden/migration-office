@@ -18,6 +18,10 @@ void Police::receive_fugitives() {
     fugitives_fifo_lock.lock();
     ssize_t read_1 = fugitives_fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(size_t));
     std::cout << "[MIGRATION BOOTH] Read: " << read_1 << std::endl;
+    if (read_1 <= 0) {
+        std::cout << "[MIGRATION BOOTH] Invalid read, closing.." << std::endl;
+        return;
+    }
     unsigned int fugi[BUFFERSIZE];
     ssize_t read_2 = fugitives_fifo.fifo_read(static_cast<void*>(fugi), sizeof(unsigned int) * n_fugitives);
     std::cout << "[MIGRATION BOOTH] Read: " << read_2 << std::endl;
