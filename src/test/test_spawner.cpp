@@ -4,7 +4,9 @@
 
 #include "catch.hpp"
 #include <list>
+//#include "PeopleSpawner.h"
 
+/*
 TEST_CASE("Spawner sort") {
 
     SECTION("security alerts") {
@@ -44,3 +46,4 @@ TEST_CASE("Spawner run") {
         s.run();
     }
 }
+*/

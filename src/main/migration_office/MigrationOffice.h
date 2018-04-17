@@ -15,14 +15,15 @@ class MigrationOffice {
         const std::string log_file;
 
         SIGINTHandler sigint_handler;
-        std::list<pid_t> booths_pids;
+        std::list<pid_t> children_pids;
 
     public:
         MigrationOffice(const int booths_number, const int stampers_number,
                         const std::string people_file, const std::string alerts_file, const std::string fugitives_file,
                         const bool debug, const std::string log_file);
         void open_booths();
-        void wait_booths();
+        void fork_spawner();
+        void wait_children();
         ~MigrationOffice();
 
 };

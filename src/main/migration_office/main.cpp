@@ -110,7 +110,9 @@ int main(int argc, char *argv[]) {
 
     office.open_booths();
 
-    office.wait_booths();
+    office.fork_spawner();
+
+    office.wait_children();
 
     return 0;
 }

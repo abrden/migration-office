@@ -4,8 +4,12 @@
 #include <vector>
 #include <sys/wait.h>
 #include <system_error>
+#include <iostream>
 
 #include "SignalHandler.h"
+
+const static std::string BOOTH_BINARY = "./migration_booth";
+const static std::string SPAWNER_BINARY = "./migration_spawner";
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -27,27 +31,46 @@ void MigrationOffice::open_booths() {
         if (pid < 0) {
             throw std::system_error(errno, std::generic_category());
         } else if (pid > 0) {
-            booths_pids.emplace_back(pid);
+            children_pids.emplace_back(pid);
         } else {
             std::string debug_flag = debug ? "1" : "0";
 
             std::vector<char*> booth_argv;
-            booth_argv.push_back(const_cast<char*>(people_file.c_str()));
-            booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
-            booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
+            booth_argv.push_back(const_cast<char*>(BOOTH_BINARY.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);
 
-            execv("./migration_booth", &booth_argv[0]);
+            execv(booth_argv[0], &booth_argv[0]);
         }
     }
 }
 
-void MigrationOffice::wait_booths() {
-    while (!booths_pids.empty()) {
+void MigrationOffice::fork_spawner() {
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        throw std::system_error(errno, std::generic_category());
+    } else if (pid > 0) {
+        children_pids.emplace_back(pid);
+    } else {
+        std::string debug_flag = debug ? "1" : "0";
+
+        std::vector<char*> spawner_argv;
+        spawner_argv.push_back(const_cast<char*>(SPAWNER_BINARY.c_str()));
+        spawner_argv.push_back(const_cast<char*>(people_file.c_str()));
+        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
+        spawner_argv.push_back(nullptr);
+
+        execv(spawner_argv[0], &spawner_argv[0]);
+    }
+}
+
+void MigrationOffice::wait_children() {
+    while (!children_pids.empty()) {
         pid_t child_pid = wait(nullptr);
-        booths_pids.remove(child_pid);
+        children_pids.remove(child_pid);
     }
 }
 
