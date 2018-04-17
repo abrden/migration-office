@@ -1,8 +1,6 @@
 #ifndef MIGRATION_OFFICE_SPAWNEABLE_H
 #define MIGRATION_OFFICE_SPAWNEABLE_H
 
-#include "Spawnable.h"
-
 #include <utility>
 #include <list>
 #include <string>
@@ -19,7 +17,7 @@ class Spawnables {
         Spawnables::iterator erase(Spawnables::iterator iterator);
         void sort_by_ascending_timestamp();
         bool empty();
-        void push_spawnable(int timestamp, std::string spawnable);
+        void push_spawnable(int timestamp, std::string& spawnable);
         std::list<std::pair<int, std::string>>& get_items();
         virtual ~Spawnables();
 

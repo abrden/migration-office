@@ -12,7 +12,7 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
         : Spawner(people), people_file(people_file), debug(debug), log_file(log_file), fifo(fifo_file) {
 
     ConfigurationFileReader fr;
-    fr.load_persons(people_file, people);
+    fr.load_spawnables(people_file, people);
 
     fifo.fifo_open();
 

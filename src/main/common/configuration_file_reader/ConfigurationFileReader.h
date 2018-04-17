@@ -14,9 +14,8 @@ class ConfigurationFileReader {
         std::list<Feature*> extract_features(std::vector<std::string>& raw_features);
 
     public:
-        void load_alerts(const std::string& file_path, Spawnables& alerts);
         void load_fugitives_ids(const std::string& fugitives_file_path, std::list<std::string>& fugitives_ids);
-        void load_persons(const std::string& people_file_path, Spawnables& persons);
+        void load_spawnables(const std::string& file_path, Spawnables& persons);
 
 };
 

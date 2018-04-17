@@ -7,7 +7,7 @@
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path) {
     ConfigurationFileReader fr;
-    fr.load_alerts(alerts_file_path, alerts);
+    fr.load_spawnables(alerts_file_path, alerts);
 }
 
 Spawnables& MinisterOfSecurity::get_alerts() {

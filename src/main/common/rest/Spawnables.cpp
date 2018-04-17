@@ -20,8 +20,8 @@ bool Spawnables::empty() {
     return items.empty();
 }
 
-void Spawnables::push_spawnable(int timestamp, std::string spawnable){
-    items.emplace_back(std::make_pair(timestamp,spawnable));
+void Spawnables::push_spawnable(int timestamp, std::string& spawnable){
+    items.emplace_back(std::make_pair(timestamp, spawnable));
 }
 
 std::list<std::pair<int, std::string>>& Spawnables::get_items() {

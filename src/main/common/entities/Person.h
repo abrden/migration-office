@@ -13,7 +13,7 @@ class Person {
         explicit Person(std::list<Feature*> features);
         std::list<Feature*> get_features();
         virtual bool has_id() = 0;
-        ~Person();
+        virtual ~Person();
 
 };
 
