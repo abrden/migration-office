@@ -18,6 +18,7 @@ class Police {
         std::vector<unsigned int> fugitives;
 
         void receive_fugitives();
+
     public:
         Police();
         bool is_fugitive(Resident* resident);
