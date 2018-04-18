@@ -13,8 +13,6 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
     ConfigurationFileReader fr;
     fr.load_spawnables(people_file, people);
 
-    fifo.fifo_open();
-
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
 
