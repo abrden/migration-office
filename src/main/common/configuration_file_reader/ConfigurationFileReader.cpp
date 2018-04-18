@@ -6,7 +6,7 @@
 
 const static char SEPARATOR = ',';
 
-std::vector<std::string> ConfigurationFileReader::split_line_into_tokens(std::string& line) const {
+std::vector<std::string> ConfigurationFileReader::split_line_into_tokens(std::string& line) {
     std::vector<std::string> result;
 
     std::stringstream lineStream(line);
@@ -18,14 +18,14 @@ std::vector<std::string> ConfigurationFileReader::split_line_into_tokens(std::st
     return result;
 }
 
-std::list<Feature*> ConfigurationFileReader::extract_features(std::vector<std::string>& raw_features) const {
+std::list<Feature*> ConfigurationFileReader::extract_features(std::vector<std::string>& raw_features) {
     std::list<Feature*> l;
     for (auto const &i : raw_features) l.push_back(new Feature(i));
     return l;
 }
 
 void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path,
-                                                 std::vector<unsigned int> &fugitives_ids) const {
+                                                 std::vector<unsigned int> &fugitives_ids) {
     // TODO add exception handling
     std::ifstream ifs(fugitives_file_path);
     std::string fugitive_id;
@@ -37,7 +37,7 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
     }
 }
 
-void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spawnables& persons) const {
+void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spawnables& persons) {
     // TODO add exception handling
     std::ifstream ifs(file_path);
     std::string line;

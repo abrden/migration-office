@@ -10,8 +10,7 @@ static const std::string FIFO_FILE = "/tmp/spawnerfifo";
 PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, const std::string& log_file)
         : Spawner(people), people_file(people_file), debug(debug), log_file(log_file), fifo(FIFO_FILE) {
 
-    ConfigurationFileReader fr;
-    fr.load_spawnables(people_file, people);
+    ConfigurationFileReader::load_spawnables(people_file, people);
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
