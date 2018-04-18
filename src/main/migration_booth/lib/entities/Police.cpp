@@ -49,7 +49,8 @@ bool Police::is_wanted_person(Foreigner* foreigner) {
 }
 
 void Police::report(Resident* resident) {
-    // TODO
-    std::cout << "Resident " << resident->get_id() << " you are arrested" << std::endl;
+    std::cout << "[MIGRATION BOOTH] Resident " << resident->get_id() << " you are arrested" << std::endl;
+    arrested_residents++;
+    delete resident;
 }
 
