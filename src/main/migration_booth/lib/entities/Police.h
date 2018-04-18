@@ -4,6 +4,7 @@
 #include "Resident.h"
 #include "Foreigner.h"
 #include "FifoReader.h"
+#include "FifoWriter.h"
 #include "ExclusiveLock.h"
 
 #include <vector>
@@ -12,6 +13,7 @@ class Police {
 
     private:
         FifoReader fugitives_fifo;
+        FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
         std::vector<unsigned int> fugitives;
 

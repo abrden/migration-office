@@ -5,10 +5,13 @@
 
 // TODO review this
 static const std::string FIFO_FILE = "/tmp/archivofifo";
+static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
 static const std::string LOCK_FILE = "/tmp/archivolock";
 static const size_t BUFFERSIZE = 2;
 
-Police::Police() : fugitives_fifo(FIFO_FILE), fugitives_fifo_lock(LOCK_FILE) {
+Police::Police() : fugitives_fifo(FIFO_FILE),
+                   ministry_fifo(BOOTH_FIFO_FILE),
+                   fugitives_fifo_lock(LOCK_FILE) {
     receive_fugitives();
 }
 
@@ -30,6 +33,10 @@ void Police::receive_fugitives() {
     std::cout << "[MIGRATION BOOTH] Received " << n_fugitives << " fugitives ids" << std::endl;
     std::cout << "[MIGRATION BOOTH] First fugitive is: " << fugitives.at(0) << std::endl;
     std::cout << "[MIGRATION BOOTH] Second fugitive is: " << fugitives.at(1) << std::endl;
+
+    std::cout << "[MIGRATION BOOTH] Sending read confirmation" << std::endl;
+    bool confirmation = true;
+    ministry_fifo.fifo_write(static_cast<void*>(&confirmation), sizeof(bool));
     fugitives_fifo_lock.unlock();
 }
 
