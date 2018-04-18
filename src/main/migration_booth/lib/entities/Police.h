@@ -16,6 +16,7 @@ class Police {
         FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
         std::vector<unsigned int> fugitives;
+        size_t arrested_residents;
 
         void receive_fugitives();
 
