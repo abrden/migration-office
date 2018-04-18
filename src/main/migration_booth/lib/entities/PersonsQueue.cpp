@@ -25,7 +25,7 @@ Person* PersonsQueue::front() {
     char buffer[BUFF_SIZE]; //TODO raise exception if size exceeds BUFF_SIZE
     std::cout << "[PERSONS QUEUE] Trying to read serialized person" << std::endl;
     bytes_read = fifo.fifo_read(static_cast<void*>(buffer), sizeof(char) * buffer_size);
-    if (bytes_read != sizeof(unsigned long)) {
+    if ((unsigned long) bytes_read != buffer_size) {
         std::cout << "[PERSONS QUEUE] I couldnt read a person. I read this many bytes: " << bytes_read << std::endl;
         return nullptr;
     }
