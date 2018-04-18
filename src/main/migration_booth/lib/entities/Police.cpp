@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 
 #include "ExclusiveLock.h"
 #include "Police.h"
@@ -41,8 +42,7 @@ void Police::receive_fugitives() {
 }
 
 bool Police::is_fugitive(Resident* resident) {
-    // TODO
-    return false;
+    return std::find(fugitives.begin(), fugitives.end(), resident->get_id()) != fugitives.end();
 }
 
 bool Police::is_wanted_person(Foreigner* foreigner) {
