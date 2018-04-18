@@ -15,6 +15,7 @@ void MigrationBooth::attend_resident(Resident* resident) {
         arrived_residents.emplace_back(resident);
     } else {
         police.report(resident);
+        detained_residents.emplace_back(resident);
     }
 }
 
@@ -45,6 +46,12 @@ MigrationBooth::~MigrationBooth() {
         delete arrived_residents.back();
         arrived_residents.pop_back();
     }
+
+    while (!detained_residents.empty()) {
+        delete detained_residents.back();
+        detained_residents.pop_back();
+    }
+
     while (!arrived_foreigners.empty()) {
         delete arrived_foreigners.back();
         arrived_foreigners.pop_back();

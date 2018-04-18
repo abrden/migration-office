@@ -27,6 +27,7 @@ class MigrationBooth {
 
         // Do we need this?
         std::list<Resident*> arrived_residents;
+        std::list<Resident*> detained_residents;
         std::list<Foreigner*> arrived_foreigners;
 
     public:
