@@ -1,7 +1,6 @@
 #include <csignal>
 #include <iostream>
 #include "Person.h"
-#include "PersonSerializer.h"
 #include "SignalHandler.h"
 #include "ConfigurationFileReader.h"
 #include "PeopleSpawner.h"
@@ -19,9 +18,7 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
 
-
 void PeopleSpawner::spawn(std::string serialized_person) {
-    //std::string serialized_person = PersonSerializer::serialize((Person*)spawnable); // TODO dont use persons on this side
     std::cout << "Serialized person " << serialized_person << std::endl;
 
     unsigned long serialization_length = serialized_person.size();
