@@ -60,7 +60,8 @@ void ConfigurationFileReader::load_alerts(const std::string& alerts_file_path, S
     }
 }
 
-void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path, std::list<std::string>& fugitives_ids) {
+void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path,
+                                                 std::vector<unsigned int> &fugitives_ids) {
     // TODO add exception handling
     std::ifstream ifs(fugitives_file_path);
     std::string fugitive_id;
@@ -68,7 +69,7 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
     // Get header
     std::getline(ifs, fugitive_id);
     while (std::getline(ifs, fugitive_id)) {
-        fugitives_ids.emplace_back(fugitive_id);
+        fugitives_ids.push_back(std::stoi(fugitive_id));
     }
 }
 
