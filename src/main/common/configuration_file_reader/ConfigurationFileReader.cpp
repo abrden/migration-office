@@ -95,7 +95,7 @@ void ConfigurationFileReader::load_persons(const std::string& people_file_path, 
         if (resident) {
             persons.push_spawnable(timestamp, new Resident(id, person_features));
         } else {
-            persons.push_spawnable(timestamp, new Foreigner(Passport(passport_id), person_features));
+            persons.push_spawnable(timestamp, new Foreigner(passport_id, person_features));
         }
     }
 }

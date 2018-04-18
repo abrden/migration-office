@@ -2,6 +2,7 @@
 #define MIGRATION_OFFICE_FILE_H
 
 #include <vector>
+#include <list>
 
 #include "Spawnables.h"
 #include "Feature.h"

@@ -14,7 +14,6 @@
 class MigrationBooth {
 
     private:
-        const std::string people_file, alerts_file, fugitives_file;
         const bool debug;
         const std::string log_file;
 
@@ -31,8 +30,7 @@ class MigrationBooth {
         std::list<Foreigner*> arrived_foreigners;
 
     public:
-        MigrationBooth(const std::string people_file, const std::string alerts_file, const std::string fugitives_file,
-                       const bool debug, const std::string log_file);
+        MigrationBooth(const bool debug, const std::string log_file);
         void open();
         ~MigrationBooth();
 

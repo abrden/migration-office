@@ -24,6 +24,7 @@ class MigrationOffice {
                         const std::string fugitives_file, const bool debug, const std::string log_file);
         void open_ministry_of_security();
         void open_booths();
+        void fork_spawner();
         ~MigrationOffice();
 
 };

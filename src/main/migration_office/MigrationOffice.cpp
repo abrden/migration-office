@@ -7,8 +7,8 @@
 
 #include "SignalHandler.h"
 
-static const std::string MS_PROCESS = "./ministry_of_security";
-static const std::string MB_PROCESS = "./migration_booth";
+const static std::string BOOTH_BINARY = "./migration_booth";
+const static std::string SPAWNER_BINARY = "./migration_spawner";
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -57,16 +57,34 @@ void MigrationOffice::open_booths() {
             std::string debug_flag = debug ? "1" : "0";
 
             std::vector<char*> booth_argv;
-            booth_argv.push_back(const_cast<char*>(MB_PROCESS.c_str()));
-            booth_argv.push_back(const_cast<char*>(people_file.c_str()));
-            booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
-            booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
+            booth_argv.push_back(const_cast<char*>(BOOTH_BINARY.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);
 
             execv(booth_argv[0], &booth_argv[0]);
         }
+    }
+}
+
+void MigrationOffice::fork_spawner() {
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        throw std::system_error(errno, std::generic_category());
+    } else if (pid > 0) {
+        children_pids.emplace_back(pid);
+    } else {
+        std::string debug_flag = debug ? "1" : "0";
+
+        std::vector<char*> spawner_argv;
+        spawner_argv.push_back(const_cast<char*>(SPAWNER_BINARY.c_str()));
+        spawner_argv.push_back(const_cast<char*>(people_file.c_str()));
+        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
+        spawner_argv.push_back(nullptr);
+
+        execv(spawner_argv[0], &spawner_argv[0]);
     }
 }
 

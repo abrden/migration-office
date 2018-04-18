@@ -1,7 +1,7 @@
 #include <system_error>
 #include "FifoWriter.h"
 
-FifoWriter::FifoWriter(const std::string nombre) : Fifo(nombre) {
+FifoWriter::FifoWriter(const std::string name) : Fifo(name) {
 	fifo_open();
 }
 
