@@ -14,23 +14,23 @@ Police::Police() : fugitives_fifo(FIFO_FILE), fugitives_fifo_lock(LOCK_FILE) {
 
 void Police::receive_fugitives() {
 
-    size_t n_fugitives;
     fugitives_fifo_lock.lock();
+    size_t n_fugitives;
     ssize_t read_1 = fugitives_fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(size_t));
-    std::cout << "[MIGRATION BOOTH] Read: " << read_1 << std::endl;
+    std::cout << "[MIGRATION BOOTH] Read size: " << read_1 << std::endl;
     if (read_1 <= 0) {
         std::cout << "[MIGRATION BOOTH] Invalid read, closing.." << std::endl;
         return;
     }
     unsigned int fugi[BUFFERSIZE];
     ssize_t read_2 = fugitives_fifo.fifo_read(static_cast<void*>(fugi), sizeof(unsigned int) * n_fugitives);
-    std::cout << "[MIGRATION BOOTH] Read: " << read_2 << std::endl;
-    fugitives_fifo_lock.unlock();
+    std::cout << "[MIGRATION BOOTH] Read fugitives size: " << read_2 << std::endl;
 
     fugitives.assign(fugi, std::end(fugi));
     std::cout << "[MIGRATION BOOTH] Received " << n_fugitives << " fugitives ids" << std::endl;
     std::cout << "[MIGRATION BOOTH] First fugitive is: " << fugitives.at(0) << std::endl;
     std::cout << "[MIGRATION BOOTH] Second fugitive is: " << fugitives.at(1) << std::endl;
+    fugitives_fifo_lock.unlock();
 }
 
 bool Police::is_fugitive(Resident* resident) {
