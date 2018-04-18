@@ -9,6 +9,7 @@
 
 const static std::string BOOTH_BINARY = "./migration_booth";
 const static std::string SPAWNER_BINARY = "./migration_spawner";
+const static std::string MINISTER_BINARY = "./ministry_of_security";
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -33,7 +34,7 @@ void MigrationOffice::open_ministry_of_security() {
         std::string debug_flag = debug ? "1" : "0";
 
         std::vector<char*> booth_argv;
-        booth_argv.push_back(const_cast<char*>(MS_PROCESS.c_str()));
+        booth_argv.push_back(const_cast<char*>(MINISTER_BINARY.c_str()));
         booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
         booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
         booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
