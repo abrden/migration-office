@@ -32,8 +32,6 @@ void Police::receive_fugitives() {
 
     fugitives.assign(fugi, std::end(fugi));
     std::cout << "[MIGRATION BOOTH] Received " << n_fugitives << " fugitives ids" << std::endl;
-    std::cout << "[MIGRATION BOOTH] First fugitive is: " << fugitives.at(0) << std::endl;
-    std::cout << "[MIGRATION BOOTH] Second fugitive is: " << fugitives.at(1) << std::endl;
 
     std::cout << "[MIGRATION BOOTH] Sending read confirmation" << std::endl;
     bool confirmation = true;
