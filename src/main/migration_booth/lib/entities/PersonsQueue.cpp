@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Foreigner.h"
-#include "PersonDeserializer.h"
+#include "src/main/common/configuration_file_reader/PersonDeserializer.h"
 #include "PersonsQueue.h"
 
 static const std::string FIFO_FILE = "/tmp/spawnerfifo";

@@ -1,12 +1,11 @@
 #include "PersonDeserializer.h"
 #include "Resident.h"
 #include "Foreigner.h"
+#include "ConfigurationFileReader.h"
 
 #include <fstream>
 #include <sstream>
 #include <vector>
-
-const static char SEPARATOR = ',';
 
 enum PEOPLE_FIELDS {
     is_resident,
@@ -16,20 +15,14 @@ enum PEOPLE_FIELDS {
 };
 
 Person* PersonDeserializer::deserialize(std::string& serialized_person) {
-    std::vector<std::string> tokenized_line;
+    ConfigurationFileReader fr;
 
-    std::stringstream line_stream(serialized_person);
-    std::string cell;
-
-    while (std::getline(line_stream, cell, SEPARATOR)) {
-        tokenized_line.push_back(cell);
-    }
+    std::vector<std::string> tokenized_line = fr.split_line_into_tokens(serialized_person);
 
     bool resident = stoi(tokenized_line[PEOPLE_FIELDS::is_resident]) == 1;
 
     std::vector<std::string> raw_features(tokenized_line.begin() + PEOPLE_FIELDS::features_start, tokenized_line.end());
-    std::list<Feature*> features;
-    for (auto const &i : raw_features) features.push_back(new Feature(i));
+    std::list<Feature*> features = fr.extract_features(raw_features);
 
     if (resident) {
         unsigned int id = (unsigned int) stoi(tokenized_line[PEOPLE_FIELDS::id]);
