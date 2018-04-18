@@ -8,7 +8,7 @@
 static const std::string FIFO_FILE = "/tmp/archivofifo";
 static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
 static const std::string LOCK_FILE = "/tmp/archivolock";
-static const size_t BUFFERSIZE = 2;
+static const size_t BUFFERSIZE = 100;
 
 Police::Police() : fugitives_fifo(FIFO_FILE),
                    ministry_fifo(BOOTH_FIFO_FILE),
