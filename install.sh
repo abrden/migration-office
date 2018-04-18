@@ -13,4 +13,7 @@ echo "==================== Running tests ===================="
 valgrind --leak-check=full\
          --show-leak-kinds=all\
          --trace-children=yes\
-         --error-exitcode=1 --errors-for-leak-kinds=all ./tests
+         --error-exitcode=1 --errors-for-leak-kinds=all\
+         ./migration_office -p ../resources/people.txt\
+         -a ../resources/alerts.txt\
+         -f ../resources/fugitives.txt -b 4 -s 1
