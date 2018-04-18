@@ -2,7 +2,6 @@
 #include "SignalHandler.h"
 
 #include <iostream>
-#include <unistd.h>
 
 MigrationBooth::MigrationBooth(const bool debug, const std::string log_file)
         : debug(debug), log_file(log_file) {
@@ -31,14 +30,13 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
 }
 
 void MigrationBooth::open() {
-    while (sigint_handler.get_graceful_quit() == 0) {
-        Person* person = queue.front();
+    Person* person;
+    while ((person = queue.front()) != nullptr && sigint_handler.get_graceful_quit() == 0) {
         if (person->has_id())
             attend_resident((Resident*)person);
         else
             attend_foreigner((Foreigner*)person);
     }
-
 }
 
 MigrationBooth::~MigrationBooth() {

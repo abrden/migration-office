@@ -10,7 +10,7 @@ void Spawner::run() {
 
     std::time_t t0 = std::time(nullptr);
 
-    while (!items.empty() || !quit()) {
+    while (!items.empty() && !quit()) {
         std::time_t t = std::time(nullptr);
 
         for (Spawnables::iterator iterator = items.begin(), end = items.end();

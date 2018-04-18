@@ -16,6 +16,6 @@ void Fifo::fifo_unlink() const {
 }
 
 Fifo::~Fifo() {
-	fifo_close();
-	fifo_unlink();
+    fifo_close();
+    fifo_unlink();
 }
