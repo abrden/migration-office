@@ -16,9 +16,8 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                                                      booths_fifo(BOOTH_FIFO_FILE),
                                                                      booths_number(booths_number) {
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
-    ConfigurationFileReader fr;
-    fr.load_alerts(alerts_file_path, alerts);
-    fr.load_fugitives_ids(fugitives_file_path, fugitives);
+    ConfigurationFileReader::load_spawnables(alerts_file_path, alerts);
+    ConfigurationFileReader::load_fugitives_ids(fugitives_file_path, fugitives);
 }
 
 void MinisterOfSecurity::open() {

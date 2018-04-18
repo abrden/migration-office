@@ -7,9 +7,7 @@ static const std::string FIFO_FILE = "/tmp/spawnerfifo";
 static const std::string FIFO_LOCK_FILE = "/tmp/spawnerfifolock";
 static const int BUFF_SIZE = 1024;
 
-PersonsQueue::PersonsQueue() : fifo(FIFO_FILE), fifo_lock(FIFO_LOCK_FILE) {
-    fifo.fifo_open();
-}
+PersonsQueue::PersonsQueue() : fifo(FIFO_FILE), fifo_lock(FIFO_LOCK_FILE) {}
 
 Person* PersonsQueue::front() {
     fifo_lock.lock();

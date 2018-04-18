@@ -20,18 +20,13 @@ bool Spawnables::empty() {
     return items.empty();
 }
 
-void Spawnables::push_spawnable(int timestamp, Spawnable *spawnable){
-    items.emplace_back(std::make_pair(timestamp,spawnable));
+void Spawnables::push_spawnable(int timestamp, std::string& spawnable){
+    items.emplace_back(std::make_pair(timestamp, spawnable));
 }
 
-std::list<std::pair<int, Spawnable*>>& Spawnables::get_items() {
+std::list<std::pair<int, std::string>>& Spawnables::get_items() {
     return items;
 }
 
-Spawnables::~Spawnables() {
-    while (!items.empty()) {
-        delete items.back().second;
-        items.pop_back();
-    }
-}
+Spawnables::~Spawnables() = default;
 

@@ -18,7 +18,6 @@ void Spawner::run() {
              ++iterator) {
             spawn((*iterator).second);
             std::cout << "Time passed: " << (t - t0) << " - Spawning item with timestamp " << (*iterator).first << std::endl;
-            delete (*iterator).second; // FIXME temporary deletion to avoid mem leak
             iterator = items.erase(iterator);
         }
     }

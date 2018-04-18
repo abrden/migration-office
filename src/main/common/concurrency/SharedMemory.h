@@ -44,7 +44,7 @@ SharedMemory<T>::SharedMemory(const std::string& file_path, const char letter) :
         if (this->shm_id > 0) {
             void* tmp_ptr = shmat(this->shm_id, nullptr, 0);
             if (tmp_ptr != (void*) -1) {
-                this->data_ptr = static_cast<T *>(tmp_ptr);
+                this->data_ptr = static_cast<T*>(tmp_ptr);
             } else {
                 std::string message = std::string("Error in shmat(): ") + std::string(strerror(errno));
                 throw message;

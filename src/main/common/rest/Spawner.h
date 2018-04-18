@@ -16,7 +16,7 @@ class Spawner {
     public:
         explicit Spawner(Spawnables& items);
         void run();
-        virtual void spawn(Spawnable* spawnable) = 0;
+        virtual void spawn(std::string spawnable) = 0;
         virtual bool quit() = 0;
         virtual ~Spawner() = default;
 
