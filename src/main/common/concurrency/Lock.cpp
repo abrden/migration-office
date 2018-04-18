@@ -9,7 +9,7 @@ int Lock::unlock() {
     fl.l_type = F_UNLCK;
     int unlock_fd = fcntl(fd, F_SETLK, &(fl));
     if (unlock_fd == -1) {
-        throw std::system_error(errno, std::generic_category());
+        throw std::system_error(errno, std::generic_category(), "Error when trying to unlock file.");
     }
     return unlock_fd;
 }

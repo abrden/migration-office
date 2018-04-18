@@ -97,8 +97,6 @@ int main(int argc, char *argv[]) {
     int err = read_arguments(argc, argv, booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
     if (err) exit(err); //FIXME
 
-    MigrationOffice office(booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
-
     std::cout << "Welcome to the Conculandia Migration Office!" << std::endl;
     std::cout << "booths number = " << booths_number << std::endl;
     std::cout << "stampers number = " << stampers_number << std::endl;
@@ -108,11 +106,11 @@ int main(int argc, char *argv[]) {
     std::cout << "debug = " << debug << std::endl;
     std::cout << "log file = " << log_file << std::endl;
 
+    MigrationOffice office(booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
+
     office.open_booths();
-
+    office.open_ministry_of_security();
     office.fork_spawner();
-
-    office.wait_children();
 
     return 0;
 }
