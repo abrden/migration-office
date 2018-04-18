@@ -26,7 +26,6 @@ class MinisterOfSecurity {
                            const std::string& fugitives_file_path,
                            const size_t booths_number);
         void open();
-        Spawnables& get_alerts();
         ~MinisterOfSecurity();
 
 };

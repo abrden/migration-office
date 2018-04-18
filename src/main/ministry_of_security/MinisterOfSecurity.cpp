@@ -26,10 +26,6 @@ void MinisterOfSecurity::open() {
     }
 }
 
-Spawnables& MinisterOfSecurity::get_alerts() {
-    return alerts;
-}
-
 void MinisterOfSecurity::send_alerts() {
     std::cout << "Pato Bullrich sending high speed alerts!!" << std::endl;
     return; // FIXME implement
