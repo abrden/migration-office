@@ -69,7 +69,7 @@ void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spaw
         std::getline(line_stream, timestamp, SEPARATOR);
 
         std::string serialized_spawnable;
-        line_stream >> serialized_spawnable;
+        getline(line_stream, serialized_spawnable);
 
         persons.push_spawnable(stoi(timestamp), serialized_spawnable);
     }
