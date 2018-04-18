@@ -4,7 +4,6 @@
 #include "ExclusiveLock.h"
 #include "Police.h"
 
-// TODO review this
 static const std::string FIFO_FILE = "/tmp/archivofifo";
 static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
 static const std::string LOCK_FILE = "/tmp/archivolock";
