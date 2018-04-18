@@ -27,7 +27,7 @@ void MinisterOfSecurity::open() {
 }
 
 void MinisterOfSecurity::send_alerts() {
-    std::cout << "Pato Bullrich sending high speed alerts!!" << std::endl;
+    std::cout << "[MINISTRY] Pato Bullrich sending high speed alerts!!" << std::endl;
     return; // FIXME implement
 }
 
@@ -35,20 +35,20 @@ void MinisterOfSecurity::send_fugitives() {
     size_t n_fugitives = fugitives.size();
 
     for(size_t i = 0; i < booths_number; i++) {
-        std::cout << "I'm the prestigious Pato Bullrich and I'm sending " << fugitives.size() << " fugitives!" << std::endl;
+        std::cout << "[MINISTRY] Sending " << fugitives.size() << " fugitives!" << std::endl;
         fugitives_fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(size_t));
         fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
-        std::cout << "Fugitives sent" << std::endl;
+        std::cout << "[MINISTRY] Fugitives sent" << std::endl;
     }
 }
 
 
 void MinisterOfSecurity::receive_confirmations() {
     for(size_t i = 0; i < booths_number; i++) {
-        std::cout << "I'm receiving message confirmation number " << i << std::endl;
+        std::cout << "[MINISTRY] I'm receiving message confirmation number " << i << std::endl;
         bool confirmation;
         booths_fifo.fifo_read(static_cast<void*>(&confirmation), sizeof(bool));
-        std::cout << "Received confirmation!" << std::endl;
+        std::cout << "[MINISTRY] Received confirmation!" << std::endl;
     }
 }
 MinisterOfSecurity::~MinisterOfSecurity() {
