@@ -47,15 +47,15 @@ SharedMemory<T>::SharedMemory(const std::string& file_path, const char letter) :
                 this->data_ptr = static_cast<T*>(tmp_ptr);
             } else {
                 std::string message = std::string("Error in shmat(): ") + std::string(strerror(errno));
-                throw std::system_error(errno, std::system_category(), message);
+                throw message;
             }
         } else {
             std::string message = std::string("Error in shmget(): ") + std::string(strerror(errno));
-            throw std::system_error(errno, std::system_category(), message);
+            throw message;
         }
     } else {
         std::string message = std::string("Error in ftok(): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
+        throw message;
     }
 }
 
@@ -67,7 +67,7 @@ SharedMemory<T>::SharedMemory(const SharedMemory& origin) : shm_id(origin.shm_id
         this->data_ptr = static_cast<T*>(tmp_ptr);
     } else {
         std::string message = std::string("Error in shmat(): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
+        throw message;
     }
 }
 
@@ -84,15 +84,15 @@ void SharedMemory<T>::create(const std::string& file_path, const char letter) {
                 this->data_ptr = static_cast<T*>(tmp_ptr);
             } else {
                 std::string message = std::string("Error in shmat(): ") + std::string(strerror(errno));
-                throw std::system_error(errno, std::system_category(), message);
+                throw message;
             }
         } else {
             std::string message = std::string("Error in shmget(): ") + std::string(strerror(errno));
-            throw std::system_error(errno, std::system_category(), message);
+            throw message;
         }
     } else {
         std::string message = std::string("Error in ftok(): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
+        throw message;
     }
 }
 
@@ -107,7 +107,7 @@ void SharedMemory<T>::free() {
         }
     } else {
         std::string message = std::string("Error in shmdt(): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
+        throw message;
     }
 }
 
@@ -120,7 +120,7 @@ SharedMemory<T> &SharedMemory<T>::operator=(const SharedMemory &origin) {
         this->data_ptr = static_cast<T*>(tmp_ptr);
     } else {
         std::string message = std::string("Error in shmat(): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
+        throw message;
     }
 
     return *this;

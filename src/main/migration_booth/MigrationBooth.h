@@ -8,7 +8,6 @@
 #include "PersonsQueue.h"
 #include "Stampers.h"
 #include "Police.h"
-#include "StatisticsCommunicator.h"
 
 #include <string>
 
@@ -22,7 +21,6 @@ class MigrationBooth {
         PersonsQueue queue;
         Stampers stampers;
         Police police;
-        StatisticsCommunicator statistics_communicator;
 
         void attend_resident(Resident* resident);
         void attend_foreigner(Foreigner* foreigner);

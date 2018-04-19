@@ -111,7 +111,6 @@ int main(int argc, char *argv[]) {
     office.open_booths();
     office.open_ministry_of_security();
     office.fork_spawner();
-    office.open_statistics();
 
     return 0;
 }

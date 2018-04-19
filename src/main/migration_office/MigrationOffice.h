@@ -25,7 +25,6 @@ class MigrationOffice {
         void open_ministry_of_security();
         void open_booths();
         void fork_spawner();
-        void open_statistics();
         ~MigrationOffice();
 
 };

@@ -10,7 +10,6 @@
 const static std::string BOOTH_BINARY = "./migration_booth";
 const static std::string SPAWNER_BINARY = "./migration_spawner";
 const static std::string MINISTER_BINARY = "./ministry_of_security";
-const static std::string STATISTICS_BINARY = "./statistics";
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -28,7 +27,7 @@ void MigrationOffice::open_ministry_of_security() {
     pid_t pid = fork();
 
     if (pid < 0) {
-        throw std::system_error(errno, std::system_category());
+        throw std::system_error(errno, std::generic_category());
     } else if (pid > 0) {
         children_pids.push_back(pid);
     } else {
@@ -52,7 +51,7 @@ void MigrationOffice::open_booths() {
         pid_t pid = fork();
 
         if (pid < 0) {
-            throw std::system_error(errno, std::system_category());
+            throw std::system_error(errno, std::generic_category());
         } else if (pid > 0) {
             children_pids.emplace_back(pid);
         } else {
@@ -73,7 +72,7 @@ void MigrationOffice::fork_spawner() {
     pid_t pid = fork();
 
     if (pid < 0) {
-        throw std::system_error(errno, std::system_category());
+        throw std::system_error(errno, std::generic_category());
     } else if (pid > 0) {
         children_pids.emplace_back(pid);
     } else {
@@ -82,26 +81,6 @@ void MigrationOffice::fork_spawner() {
         std::vector<char*> spawner_argv;
         spawner_argv.push_back(const_cast<char*>(SPAWNER_BINARY.c_str()));
         spawner_argv.push_back(const_cast<char*>(people_file.c_str()));
-        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
-        spawner_argv.push_back(nullptr);
-
-        execv(spawner_argv[0], &spawner_argv[0]);
-    }
-}
-
-void MigrationOffice::open_statistics() {
-    pid_t pid = fork();
-
-    if (pid < 0) {
-        throw std::system_error(errno, std::system_category());
-    } else if (pid > 0) {
-        children_pids.emplace_back(pid);
-    } else {
-        std::string debug_flag = debug ? "1" : "0";
-
-        std::vector<char*> spawner_argv;
-        spawner_argv.push_back(const_cast<char*>(STATISTICS_BINARY.c_str()));
         spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
         spawner_argv.push_back(nullptr);
