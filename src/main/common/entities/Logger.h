@@ -9,14 +9,14 @@
 class Logger {
 
     private:
-        const std::string file;
+        std::string file;
         ExclusiveLock lock;
         std::ostringstream oss;
 
     public:
-        explicit Logger(const std::string& file);
+        explicit Logger(const bool debug, const std::string& file);
         template <typename T>
-        Logger& operator<<(T& a) {
+        Logger& operator<<(T a) {
             oss << a;
             return *this;
         }

@@ -8,14 +8,14 @@
 #include "PersonsQueue.h"
 #include "Stampers.h"
 #include "Police.h"
+#include "Logger.h"
 
 #include <string>
 
 class MigrationBooth {
 
     private:
-        const bool debug;
-        const std::string log_file;
+        Logger logger;
 
         SIGINTHandler sigint_handler;
         PersonsQueue queue;

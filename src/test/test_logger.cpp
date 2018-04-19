@@ -7,7 +7,7 @@ const static std::string LOG_FILE = "../resources/testlog.txt";
 TEST_CASE("Logger") {
 
     SECTION("Log string") {
-        Logger l(LOG_FILE);
+        Logger l(true, LOG_FILE);
         std::string line = "hi log!";
         l << line << std::endl;
 
@@ -21,8 +21,15 @@ TEST_CASE("Logger") {
         unlink(LOG_FILE.c_str());
     }
 
-    SECTION("Log string") {
-        Logger l(LOG_FILE);
+    SECTION("Debug false") {
+        Logger l(false, LOG_FILE);
+        std::string line = "hi log!";
+        l << line << std::endl;
+    }
+
+
+    /*SECTION("Log string") {
+        Logger l(true, LOG_FILE);
         std::string line = "hi im logging a number: ";
         ssize_t bytes = 45;
         l << "[TESTS] " << line << bytes << std::endl;
@@ -33,9 +40,9 @@ TEST_CASE("Logger") {
         REQUIRE(bytes_read == 34);
         std::string buffer_read(buffer);
         std::string expected("[TESTS] hi im logging a number: 45");
-        REQUIRE(buffer_read.compare(expected));
+        REQUIRE(buffer_read.compare(expected) == 0);
         close(fd);
         unlink(LOG_FILE.c_str());
-    }
+    }*/
 
 }

@@ -53,3 +53,9 @@ void Police::report(Resident* resident) {
     delete resident;
 }
 
+void Police::report(Foreigner* foreigner) {
+    std::cout << "[POLICE] Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
+    deported_foreigners++;
+    delete foreigner;
+}
+

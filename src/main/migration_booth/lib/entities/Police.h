@@ -15,8 +15,11 @@ class Police {
         FifoReader fugitives_fifo;
         FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
+
         std::vector<unsigned int> fugitives;
+
         size_t arrested_residents;
+        size_t deported_foreigners;
 
         void receive_fugitives();
 
@@ -25,6 +28,7 @@ class Police {
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report(Resident* resident);
+        void report(Foreigner* foreigner);
 
 };
 

@@ -1,11 +1,12 @@
 #include "Logger.h"
 
 #include <unistd.h>
-#include <system_error>
 
 const static std::string LOGGER_LOCK_FILE = "/tmp/logger_lock";
 
-Logger::Logger(const std::string& file) : file(file), lock(LOGGER_LOCK_FILE) {}
+Logger::Logger(const bool debug, const std::string& file) : file(file), lock(LOGGER_LOCK_FILE) {
+    if (!debug) this->file = "/dev/null";
+}
 
 Logger& Logger::operator<<(io_manip_ptr_t f) {
     if (f == (io_manip_ptr_t)&std::endl) {
