@@ -16,7 +16,10 @@ class Logger {
     public:
         explicit Logger(const std::string& file);
         template <typename T>
-        Logger& operator<<(T& a);
+        Logger& operator<<(T& a) {
+            oss << a;
+            return *this;
+        }
         typedef std::ostream&(*io_manip_ptr_t)(std::ostream&);
         Logger& operator<<(io_manip_ptr_t f);
 

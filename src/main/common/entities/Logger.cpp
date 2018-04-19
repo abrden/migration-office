@@ -7,14 +7,9 @@ const static std::string LOGGER_LOCK_FILE = "/tmp/logger_lock";
 
 Logger::Logger(const std::string& file) : file(file), lock(LOGGER_LOCK_FILE) {}
 
-template <typename T>
-Logger& Logger::operator<<(T& a) {
-    oss << a;
-    return *this;
-}
-
 Logger& Logger::operator<<(io_manip_ptr_t f) {
     if (f == (io_manip_ptr_t)&std::endl) {
+        oss << std::endl;
         lock.lock();
         int fd = open(file.c_str(), O_WRONLY | O_CREAT, 0666);
         ssize_t bytes_written = write(fd, oss.str().c_str(), oss.str().size());
