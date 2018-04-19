@@ -15,6 +15,11 @@ const std::string Logger::build_log_message() {
     return tmp.str();
 }
 
+Logger& Logger::operator()(const std::string& transmitter) {
+    oss << transmitter << ": ";
+    return *this;
+}
+
 Logger& Logger::operator<<(io_manip_ptr_t f) {
     if (f == (io_manip_ptr_t)&std::endl) {
 

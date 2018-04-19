@@ -17,6 +17,7 @@ class Logger {
 
     public:
         explicit Logger(const bool debug, const std::string& file);
+        Logger& operator()(const std::string& transmitter);
         template <typename T>
         Logger& operator<<(T a) {
             oss << a;

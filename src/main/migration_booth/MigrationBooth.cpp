@@ -9,7 +9,7 @@ MigrationBooth::MigrationBooth(const bool debug, const std::string log_file) : l
 
 void MigrationBooth::attend_resident(Resident* resident) {
     if (!police.is_fugitive(resident)) {
-        logger << "Welcome to Conculandia, resident " << resident->get_id() << std::endl;
+        logger("BOOTH") << "Welcome to Conculandia, resident " << resident->get_id() << std::endl;
         arrived_residents.emplace_back(resident);
     } else {
         police.report(resident);
@@ -20,7 +20,7 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
     if (!police.is_wanted_person(foreigner)) {
         Stamper* stamper = stampers.get_stamper();
         foreigner->get_passport().stamp_passport(stamper);
-        logger << "Welcome to Conculandia, foreigner " << foreigner->get_passport().get_id() << std::endl;
+        logger("BOOTH") << "Welcome to Conculandia, foreigner " << foreigner->get_passport().get_id() << std::endl;
         arrived_foreigners.emplace_back(foreigner);
     } else {
         police.report(foreigner);
