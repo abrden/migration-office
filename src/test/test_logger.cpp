@@ -1,8 +1,10 @@
 #include <unistd.h>
+#include <iostream>
 #include "Logger.h"
 #include "catch.hpp"
 
 const static std::string LOG_FILE = "../resources/testlog.txt";
+const static int BUFFSIZE = 15;
 
 TEST_CASE("Logger") {
 
@@ -12,11 +14,14 @@ TEST_CASE("Logger") {
         l << line << std::endl;
 
         int fd = open(LOG_FILE.c_str(), O_RDONLY);
-        char buffer[7];
-        ssize_t bytes_read = read(fd, buffer, sizeof(char) * line.size());
-        REQUIRE(bytes_read == line.size());
+
+        char buffer[BUFFSIZE];
+        ssize_t bytes_read = read(fd, buffer, sizeof(char) * BUFFSIZE);
+        REQUIRE(bytes_read >= line.size());
+
         std::string buffer_read(buffer);
-        REQUIRE(buffer_read.compare(line) == 0);
+        REQUIRE(buffer_read.find(line) != std::string::npos);
+
         close(fd);
         unlink(LOG_FILE.c_str());
     }
