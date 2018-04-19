@@ -3,6 +3,13 @@
 
 #include <cstddef>
 
+enum FIELDS {
+    ALLOWED_RESIDENTS,
+    DETAINED_RESIDENTS,
+    ALLOWED_FOREIGNERS,
+    DEPORTED_FOREIGNERS
+};
+
 typedef struct {
     size_t allowed_residents;
     size_t detained_residents;

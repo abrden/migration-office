@@ -1,10 +1,8 @@
 #include "Statistics.h"
+#include "FileNames.h
 
-static const std::string STATS_FILE = "/bin/ls";
-static const std::string LOCK_STATS_FILE = "/tmp/statistics_shm_lock";
-static const char LETTER = 'A';
-
-Statistics::Statistics() : stats_shm(STATS_FILE, LETTER), stats_shm_lock(LOCK_STATS_FILE) {
+Statistics::Statistics() : stats_shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
+                           stats_shm_lock(StatisticsSharedMemory::LOCK_STATS_FILE) {
     data = {0, 0, 0, 0};
 }
 

@@ -1,10 +1,8 @@
 #include "EnviromentInitializer.h"
+#include "FileNames.h"
 
-static const std::string STATS_FILE = "/bin/ls";
-static const std::string LOCK_STATS_FILE = "/tmp/statistics_shm_lock";
-static const char LETTER = 'A';
-
-EnviromentInitializer::EnviromentInitializer() : stats_shm(STATS_FILE, LETTER) {}
+EnviromentInitializer::EnviromentInitializer() :
+        stats_shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER) {}
 
 void EnviromentInitializer::initialize() {
     Data default_data = {0, 0, 0, 0};
