@@ -18,8 +18,19 @@ void StatisticsCommunicator::increment_field(size_t field) {
     stats_shm_lock.lock();
 
     Data data = stats_shm.read();
-    // TODO update correct value
-    data.allowed_residents = 50;
+    switch (field) {
+        case FIELDS::ALLOWED_RESIDENTS:
+            data.allowed_residents++;
+            break;
+        case FIELDS::DETAINED_RESIDENTS:
+            data.detained_residents++;
+            break;
+        case FIELDS::ALLOWED_FOREIGNERS:
+            data.allowed_foreigners++;
+            break;
+        case FIELDS::DEPORTED_FOREIGNERS:
+            data.deported_foreigners++;
+    }
     stats_shm.write(data);
 
     stats_shm_lock.unlock();
