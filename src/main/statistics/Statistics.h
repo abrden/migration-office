@@ -2,20 +2,25 @@
 #define MIGRATION_OFFICE_STATISTICS_H
 
 #include <cstddef>
+#include "SharedMemory.h"
+#include <array>
+#include "ExclusiveLock.h"
 
 class Statistics {
 
     private:
-        size_t residents_allowed;
-        size_t residents_detained;
-        size_t foreigners_allowed;
-        size_t foreigners_deported;
+        std::array<size_t, 4> data;
+        SharedMemory<size_t[4]> stats_shm;
+        ExclusiveLock stats_shm_lock;
+
+        void update_data();
+
     public:
         Statistics();
-        size_t get_allowed_residents() const;
-        size_t get_detained_residents() const;
-        size_t get_allowed_foreigners() const;
-        size_t get_deported_foreigners() const;
+        size_t get_allowed_residents();
+        size_t get_detained_residents();
+        size_t get_allowed_foreigners();
+        size_t get_deported_foreigners();
 
 };
 
