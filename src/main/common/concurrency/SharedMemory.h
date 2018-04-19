@@ -16,7 +16,7 @@ class SharedMemory {
         int shm_id;
         T* data_ptr;
 
-        int attached_processes() const;
+        shmatt_t attached_processes() const;
 
     public:
         SharedMemory();
@@ -101,7 +101,7 @@ void SharedMemory<T>::free() {
     int errorDt = shmdt((void*) this->data_ptr);
 
     if (errorDt != -1) {
-        int attached_proc = this->attached_processes();
+        shmatt_t attached_proc = this->attached_processes();
         if (attached_proc == 0) {
             shmctl(this->shm_id, IPC_RMID, nullptr);
         }
@@ -137,7 +137,7 @@ T SharedMemory<T>::read() const {
 }
 
 template<class T>
-int SharedMemory<T>::attached_processes() const {
+shmatt_t SharedMemory<T>::attached_processes() const {
     shmid_ds state;
     shmctl(this->shm_id, IPC_STAT, &state);
     return state.shm_nattch;
@@ -148,7 +148,7 @@ SharedMemory<T>::~SharedMemory() {
     int errorDt = shmdt(static_cast<void *>(this->data_ptr));
 
     if (errorDt != -1) {
-        int attached_proc = this->attached_processes();
+        shmatt_t attached_proc = this->attached_processes();
         if (attached_proc == 0) {
             shmctl(this->shm_id, IPC_RMID, nullptr);
         }
