@@ -1,10 +1,10 @@
 #ifndef MIGRATION_OFFICE_STATISTICS_H
 #define MIGRATION_OFFICE_STATISTICS_H
 
-#include <cstddef>
 #include "SharedMemory.h"
-#include <array>
 #include "ExclusiveLock.h"
+
+#include <array>
 
 class Statistics {
 
