@@ -6,11 +6,18 @@
 
 #include <array>
 
+typedef struct {
+    size_t allowed_residents;
+    size_t detained_residents;
+    size_t allowed_foreigners;
+    size_t deported_foreigners;
+} Data;
+
 class Statistics {
 
     private:
-        std::array<size_t, 4> data;
-        SharedMemory<size_t[4]> stats_shm;
+        Data data;
+        SharedMemory<Data> stats_shm;
         ExclusiveLock stats_shm_lock;
 
         void update_data();

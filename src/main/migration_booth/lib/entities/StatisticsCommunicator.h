@@ -4,10 +4,17 @@
 #include "SharedMemory.h"
 #include "ExclusiveLock.h"
 
+typedef struct {
+    size_t allowed_residents;
+    size_t detained_residents;
+    size_t allowed_foreigners;
+    size_t deported_foreigners;
+} Data;
+
 class StatisticsCommunicator {
 
     private:
-        SharedMemory<size_t[4]> stats_shm;
+        SharedMemory<Data> stats_shm;
         ExclusiveLock stats_shm_lock;
 
         void increment_field(size_t field);
