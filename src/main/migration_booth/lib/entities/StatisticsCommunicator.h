@@ -3,13 +3,7 @@
 
 #include "SharedMemory.h"
 #include "ExclusiveLock.h"
-
-typedef struct {
-    size_t allowed_residents;
-    size_t detained_residents;
-    size_t allowed_foreigners;
-    size_t deported_foreigners;
-} Data;
+#include "StatisticsData.h"
 
 class StatisticsCommunicator {
 

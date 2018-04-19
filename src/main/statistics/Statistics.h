@@ -3,15 +3,9 @@
 
 #include "SharedMemory.h"
 #include "ExclusiveLock.h"
+#include "StatisticsData.h"
 
 #include <array>
-
-typedef struct {
-    size_t allowed_residents;
-    size_t detained_residents;
-    size_t allowed_foreigners;
-    size_t deported_foreigners;
-} Data;
 
 class Statistics {
 
