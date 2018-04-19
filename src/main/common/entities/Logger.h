@@ -13,6 +13,8 @@ class Logger {
         ExclusiveLock lock;
         std::ostringstream oss;
 
+        const std::string build_log_message();
+
     public:
         explicit Logger(const bool debug, const std::string& file);
         template <typename T>
