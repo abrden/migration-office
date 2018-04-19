@@ -18,23 +18,25 @@ void StatisticsCommunicator::increment_field(size_t field) {
     stats_shm_lock.lock();
 
     Data data = stats_shm.read();
+    // TODO update correct value
+    data.allowed_residents = 50;
     stats_shm.write(data);
 
     stats_shm_lock.unlock();
 }
 
 void StatisticsCommunicator::notify_allowed_resident() {
-//    increment_field(FIELDS::ALLOWED_RESIDENTS);
+    increment_field(FIELDS::ALLOWED_RESIDENTS);
 }
 
 void StatisticsCommunicator::notify_detained_resident() {
-//    increment_field(FIELDS::DETAINED_RESIDENTS);
+    increment_field(FIELDS::DETAINED_RESIDENTS);
 }
 
 void StatisticsCommunicator::notify_allowed_foreigner() {
-//    increment_field(FIELDS::ALLOWED_FOREIGNERS);
+    increment_field(FIELDS::ALLOWED_FOREIGNERS);
 }
 
 void StatisticsCommunicator::notify_deported_foreigner() {
-//    increment_field(FIELDS::DEPORTED_FOREIGNERS);
+    increment_field(FIELDS::DEPORTED_FOREIGNERS);
 }
