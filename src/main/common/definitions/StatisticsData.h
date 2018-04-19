@@ -1,6 +1,8 @@
 #ifndef MIGRATION_OFFICE_STATISTICSDATA_H
 #define MIGRATION_OFFICE_STATISTICSDATA_H
 
+#include <cstddef>
+
 typedef struct {
     size_t allowed_residents;
     size_t detained_residents;

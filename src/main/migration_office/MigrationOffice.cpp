@@ -3,7 +3,6 @@
 #include <unistd.h>
 #include <vector>
 #include <sys/wait.h>
-#include <system_error>
 
 #include "SignalHandler.h"
 
@@ -23,6 +22,13 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
 
+void MigrationOffice::start() {
+    env.initialize();
+    open_statistics();
+    open_booths();
+    open_ministry_of_security();
+    fork_spawner();
+}
 
 void MigrationOffice::open_ministry_of_security() {
     pid_t pid = fork();
