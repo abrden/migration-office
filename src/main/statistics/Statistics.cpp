@@ -1,5 +1,5 @@
 #include "Statistics.h"
-#include "FileNames.h
+#include "FileNames.h"
 
 Statistics::Statistics() : stats_shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
                            stats_shm_lock(StatisticsSharedMemory::LOCK_STATS_FILE) {
