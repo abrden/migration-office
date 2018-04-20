@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <cstring>
+#include <system_error>
 
 const static std::string LOGGER_LOCK_FILE = "/tmp/logger_lock";
 
