@@ -6,6 +6,12 @@
 
 #include "ExclusiveLock.h"
 
+const std::string OFFICE = "OFFICE";
+const std::string BOOTH = "BOOTH";
+const std::string PEOPLE_SPAWNER = "PEOPLE_SPAWNER";
+const std::string STATISTICS = "STATISTICS";
+const std::string MINISTER = "MINISTER";
+
 class Logger {
 
     private:

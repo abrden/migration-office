@@ -19,12 +19,12 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                                                            booths_fifo(BOOTH_FIFO_FILE),
                                                                            booths_number(booths_number) {
 
-    logger << "Welcome to the Conculandia Ministry of Security " << getpid() << "!" << std::endl;
-    logger << "alerts file = " << alerts_file_path << std::endl;
-    logger << "fugitives file = " << fugitives_file_path << std::endl;
-    logger << "debug = " << debug << std::endl;
-    logger << "log file = " << log_file_path << std::endl;
-    logger << "booths_number = " << booths_number << std::endl;
+    logger(MINISTER) << "Welcome to the Conculandia Ministry of Security " << getpid() << "!" << std::endl;
+    logger(MINISTER) << "alerts file = " << alerts_file_path << std::endl;
+    logger(MINISTER) << "fugitives file = " << fugitives_file_path << std::endl;
+    logger(MINISTER) << "debug = " << debug << std::endl;
+    logger(MINISTER) << "log file = " << log_file_path << std::endl;
+    logger(MINISTER) << "booths_number = " << booths_number << std::endl;
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
     ConfigurationFileReader::load_spawnables(alerts_file_path, alerts);
@@ -37,7 +37,7 @@ void MinisterOfSecurity::open() {
 }
 
 void MinisterOfSecurity::send_alerts() {
-    std::cout << "[MINISTRY] Pato Bullrich sending high speed alerts!!" << std::endl;
+    logger(MINISTER) << "Pato Bullrich sending high speed alerts!" << std::endl;
     return; // FIXME implement
 }
 
@@ -45,20 +45,20 @@ void MinisterOfSecurity::send_fugitives() {
     size_t n_fugitives = fugitives.size();
 
     for(size_t i = 0; i < booths_number; i++) {
-        std::cout << "[MINISTRY] Sending " << fugitives.size() << " fugitives!" << std::endl;
+        logger(MINISTER) << "Sending " << fugitives.size() << " fugitives!" << std::endl;
         fugitives_fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(size_t));
         fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
-        std::cout << "[MINISTRY] Fugitives sent" << std::endl;
+        logger(MINISTER) << "Fugitives sent" << std::endl;
     }
 }
 
 
 void MinisterOfSecurity::receive_confirmations() {
     for(size_t i = 0; i < booths_number; i++) {
-        std::cout << "[MINISTRY] I'm receiving message confirmation number " << i << std::endl;
+        logger(MINISTER) << "I'm receiving message confirmation number " << i << std::endl;
         bool confirmation;
         booths_fifo.fifo_read(static_cast<void*>(&confirmation), sizeof(bool));
-        std::cout << "[MINISTRY] Received confirmation!" << std::endl;
+        logger(MINISTER) << "Received confirmation!" << std::endl;
     }
 }
 MinisterOfSecurity::~MinisterOfSecurity() {

@@ -19,14 +19,14 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
           people_file(people_file), alerts_file(alerts_file), fugitives_file(fugitives_file),
           debug(debug), log_file(log_file), logger(debug, log_file) {
 
-    logger << "Welcome to the Conculandia Migration Office!" << std::endl;
-    logger << "booths number = " << booths_number << std::endl;
-    logger << "stampers number = " << stampers_number << std::endl;
-    logger << "people file = " << people_file << std::endl;
-    logger << "alerts file = " << alerts_file << std::endl;
-    logger << "fugitives file = " << fugitives_file << std::endl;
-    logger << "debug = " << debug << std::endl;
-    logger << "log file = " << log_file << std::endl;
+    logger(OFFICE) << "Welcome to the Conculandia Migration Office!" << std::endl;
+    logger(OFFICE) << "booths number = " << booths_number << std::endl;
+    logger(OFFICE) << "stampers number = " << stampers_number << std::endl;
+    logger(OFFICE) << "people file = " << people_file << std::endl;
+    logger(OFFICE) << "alerts file = " << alerts_file << std::endl;
+    logger(OFFICE) << "fugitives file = " << fugitives_file << std::endl;
+    logger(OFFICE) << "debug = " << debug << std::endl;
+    logger(OFFICE) << "log file = " << log_file << std::endl;
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
@@ -108,5 +108,5 @@ void MigrationOffice::wait_children() {
 MigrationOffice::~MigrationOffice() {
     wait_children();
     SignalHandler::destroy();
-    logger << "========== CLOSED ==========" << std::endl;
+    logger(OFFICE) << "========== CLOSED ==========" << std::endl;
 }
