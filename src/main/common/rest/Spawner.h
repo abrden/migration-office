@@ -5,16 +5,18 @@
 #include <utility>
 #include <string>
 
+#include "Logger.h"
 #include "Spawnables.h"
 #include "ConfigurationFileReader.h"
 
 class Spawner {
 
     private:
+        Logger& logger;
         Spawnables& items;
 
     public:
-        explicit Spawner(Spawnables& items);
+        Spawner(Logger& logger, Spawnables& items);
         void run();
         virtual void spawn(std::string spawnable) = 0;
         virtual bool quit() = 0;

@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "Logger.h"
 #include "Spawnables.h"
 #include "Spawner.h"
 #include "FifoWriter.h"
@@ -15,6 +16,7 @@ class PeopleSpawner : public Spawner {
         const bool debug;
         const std::string log_file;
 
+        Logger logger;
         SIGINTHandler sigint_handler;
         Spawnables people;
         FifoWriter fifo;
