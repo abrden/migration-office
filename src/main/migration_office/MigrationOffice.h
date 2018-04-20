@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 
+#include "Logger.h"
 #include "SIGINTHandler.h"
 
 class MigrationOffice {
@@ -15,6 +16,8 @@ class MigrationOffice {
         const std::string log_file;
         SIGINTHandler sigint_handler;
         std::list<pid_t> children_pids;
+
+        Logger logger;
 
         void wait_children();
 

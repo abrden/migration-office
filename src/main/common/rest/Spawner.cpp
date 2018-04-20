@@ -3,7 +3,7 @@
 #include <ctime>
 #include <iostream>
 
-Spawner::Spawner(Spawnables& items) : items(items) {}
+Spawner::Spawner(Logger& logger, Spawnables& items) : logger(logger), items(items) {}
 
 void Spawner::run() {
     items.sort_by_ascending_timestamp();
@@ -17,10 +17,10 @@ void Spawner::run() {
              iterator != end && (*iterator).first <= (t - t0);
              ++iterator) {
             spawn((*iterator).second);
-            std::cout << "Time passed: " << (t - t0) << " - Spawning item with timestamp " << (*iterator).first << std::endl;
+            logger(SPAWNER) << "Time passed: " << (t - t0) << " - Spawning item with timestamp " << (*iterator).first << std::endl;
             iterator = items.erase(iterator);
         }
     }
 
-    std::cout << "I'm done spawning" << std::endl;
+    logger(SPAWNER) << "I'm done spawning" << std::endl;
 }
