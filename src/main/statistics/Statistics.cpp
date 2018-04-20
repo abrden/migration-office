@@ -2,8 +2,8 @@
 #include "FileNames.h"
 
 Statistics::Statistics(size_t booths_number) : booths_number(booths_number),
-                                               stats_shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
-                                               stats_shm_lock(StatisticsSharedMemory::LOCK_STATS_FILE),
+                                               shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
+                                               lock(StatisticsSharedMemory::LOCK_STATS_FILE),
                                                fifo(StatisticsSharedMemory::FIFO_FILE) {
     initialize_data();
     send_initialized_data_confirmation();
@@ -11,7 +11,7 @@ Statistics::Statistics(size_t booths_number) : booths_number(booths_number),
 
 void Statistics::initialize_data() {
     StatisticsData default_data = {0, 0, 0, 0};
-    stats_shm.write(default_data);
+    shm.write(default_data);
 }
 
 void Statistics::send_initialized_data_confirmation() {
@@ -20,9 +20,9 @@ void Statistics::send_initialized_data_confirmation() {
 }
 
 StatisticsData Statistics::update_data() {
-    stats_shm_lock.lock();
-    StatisticsData temp_data = stats_shm.read();
-    stats_shm_lock.unlock();
+    lock.lock();
+    StatisticsData temp_data = shm.read();
+    lock.unlock();
     return temp_data;
 }
 

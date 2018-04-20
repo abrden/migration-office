@@ -9,8 +9,8 @@
 class StatisticsCommunicator {
 
     private:
-        SharedMemory<StatisticsData> stats_shm;
-        ExclusiveLock stats_shm_lock;
+        SharedMemory<StatisticsData> shm;
+        ExclusiveLock lock;
         FifoReader fifo;
 
         void increment_field(size_t field);

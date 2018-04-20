@@ -12,8 +12,8 @@ class Statistics {
 
     private:
         const size_t booths_number;
-        SharedMemory<StatisticsData> stats_shm;
-        ExclusiveLock stats_shm_lock;
+        SharedMemory<StatisticsData> shm;
+        ExclusiveLock lock;
         FifoWriter fifo;
 
         void initialize_data();

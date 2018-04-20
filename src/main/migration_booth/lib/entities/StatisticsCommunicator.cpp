@@ -2,23 +2,23 @@
 #include "FileNames.h"
 
 StatisticsCommunicator::StatisticsCommunicator() :
-        stats_shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
-        stats_shm_lock(StatisticsSharedMemory::LOCK_STATS_FILE),
+        shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
+        lock(StatisticsSharedMemory::LOCK_STATS_FILE),
         fifo(StatisticsSharedMemory::FIFO_FILE) {
     wait_for_initialization();
 }
 
 void StatisticsCommunicator::wait_for_initialization() {
-    stats_shm_lock.lock();
+    lock.lock();
     bool ready;
     fifo.fifo_read(static_cast<void*>(&ready), sizeof(bool));
-    stats_shm_lock.unlock();
+    lock.unlock();
 }
 
 void StatisticsCommunicator::increment_field(size_t field) {
-    stats_shm_lock.lock();
+    lock.lock();
 
-    StatisticsData data = stats_shm.read();
+    StatisticsData data = shm.read();
     switch (field) {
         case FIELDS::ALLOWED_RESIDENTS:
             data.allowed_residents++;
@@ -32,9 +32,9 @@ void StatisticsCommunicator::increment_field(size_t field) {
         case FIELDS::DEPORTED_FOREIGNERS:
             data.deported_foreigners++;
     }
-    stats_shm.write(data);
+    shm.write(data);
 
-    stats_shm_lock.unlock();
+    lock.unlock();
 }
 
 void StatisticsCommunicator::notify_allowed_resident() {
