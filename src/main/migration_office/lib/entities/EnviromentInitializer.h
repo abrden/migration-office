@@ -7,7 +7,7 @@
 
 class EnviromentInitializer {
     private:
-        SharedMemory<Data> stats_shm;
+        SharedMemory<StatisticsData> stats_shm;
 
     public:
         EnviromentInitializer();

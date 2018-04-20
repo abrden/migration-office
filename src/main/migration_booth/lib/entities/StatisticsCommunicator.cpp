@@ -8,7 +8,7 @@ StatisticsCommunicator::StatisticsCommunicator() :
 void StatisticsCommunicator::increment_field(size_t field) {
     stats_shm_lock.lock();
 
-    Data data = stats_shm.read();
+    StatisticsData data = stats_shm.read();
     switch (field) {
         case FIELDS::ALLOWED_RESIDENTS:
             data.allowed_residents++;

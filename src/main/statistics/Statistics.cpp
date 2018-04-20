@@ -4,9 +4,9 @@
 Statistics::Statistics() : stats_shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
                            stats_shm_lock(StatisticsSharedMemory::LOCK_STATS_FILE) {}
 
-Data Statistics::update_data() {
+StatisticsData Statistics::update_data() {
     stats_shm_lock.lock();
-    Data temp_data = stats_shm.read();
+    StatisticsData temp_data = stats_shm.read();
     stats_shm_lock.unlock();
     return temp_data;
 }

@@ -15,6 +15,6 @@ typedef struct {
     size_t detained_residents;
     size_t allowed_foreigners;
     size_t deported_foreigners;
-} Data;
+} StatisticsData;
 
 #endif //MIGRATION_OFFICE_STATISTICSDATA_H
