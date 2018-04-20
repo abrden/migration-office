@@ -3,7 +3,17 @@
 
 StatisticsCommunicator::StatisticsCommunicator() :
         stats_shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
-        stats_shm_lock(StatisticsSharedMemory::LOCK_STATS_FILE) {}
+        stats_shm_lock(StatisticsSharedMemory::LOCK_STATS_FILE),
+        fifo(StatisticsSharedMemory::FIFO_FILE) {
+    wait_for_initialization();
+}
+
+void StatisticsCommunicator::wait_for_initialization() {
+    stats_shm_lock.lock();
+    bool ready;
+    fifo.fifo_read(static_cast<void*>(&ready), sizeof(bool));
+    stats_shm_lock.unlock();
+}
 
 void StatisticsCommunicator::increment_field(size_t field) {
     stats_shm_lock.lock();

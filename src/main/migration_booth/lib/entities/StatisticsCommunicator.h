@@ -3,6 +3,7 @@
 
 #include "SharedMemory.h"
 #include "ExclusiveLock.h"
+#include "FifoReader.h"
 #include "StatisticsData.h"
 
 class StatisticsCommunicator {
@@ -10,8 +11,10 @@ class StatisticsCommunicator {
     private:
         SharedMemory<StatisticsData> stats_shm;
         ExclusiveLock stats_shm_lock;
+        FifoReader fifo;
 
         void increment_field(size_t field);
+        void wait_for_initialization();
 
     public:
         StatisticsCommunicator();

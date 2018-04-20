@@ -2,9 +2,15 @@
 #include <map>
 #include "Statistics.h"
 
+enum ARGUMENTS {
+    DEBUG_POS = 1,
+    LOG_FILE_POS,
+    BOOTHS_NUMBER_POS
+};
+
 int main(int argc, char* argv[]) {
     std::cout << "Welcome to Conculandia's Statistics Department" << std::endl;
-    Statistics s;
+    Statistics s(static_cast<size_t>(std::stoi(argv[ARGUMENTS::BOOTHS_NUMBER_POS])));
 
     std::string line;
     std::cout << "> ";

@@ -5,7 +5,6 @@
 #include <string>
 
 #include "SIGINTHandler.h"
-#include "EnviromentInitializer.h"
 
 class MigrationOffice {
 
@@ -15,7 +14,6 @@ class MigrationOffice {
         const bool debug;
         const std::string log_file;
         SIGINTHandler sigint_handler;
-        EnviromentInitializer env;
         std::list<pid_t> children_pids;
 
         void wait_children();
