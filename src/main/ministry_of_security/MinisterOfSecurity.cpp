@@ -12,9 +12,20 @@ static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::string& fugitives_file_path,
-                                       const size_t booths_number) : fugitives_fifo(FUGITIVES_FIFO_FILE),
-                                                                     booths_fifo(BOOTH_FIFO_FILE),
-                                                                     booths_number(booths_number) {
+                                       const size_t booths_number,
+                                       const bool debug,
+                                       const std::string& log_file_path) : logger(debug, log_file_path),
+                                                                           fugitives_fifo(FUGITIVES_FIFO_FILE),
+                                                                           booths_fifo(BOOTH_FIFO_FILE),
+                                                                           booths_number(booths_number) {
+
+    logger << "Welcome to the Conculandia Ministry of Security " << getpid() << "!" << std::endl;
+    logger << "alerts file = " << alerts_file_path << std::endl;
+    logger << "fugitives file = " << fugitives_file_path << std::endl;
+    logger << "debug = " << debug << std::endl;
+    logger << "log file = " << log_file_path << std::endl;
+    logger << "booths_number = " << booths_number << std::endl;
+
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
     ConfigurationFileReader::load_spawnables(alerts_file_path, alerts);
     ConfigurationFileReader::load_fugitives_ids(fugitives_file_path, fugitives);

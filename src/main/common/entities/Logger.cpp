@@ -2,6 +2,7 @@
 
 #include <unistd.h>
 #include <iostream>
+#include <cstring>
 
 const static std::string LOGGER_LOCK_FILE = "/tmp/logger_lock";
 
@@ -31,12 +32,15 @@ Logger& Logger::operator<<(io_manip_ptr_t f) {
 
         lock.lock();
         int fd = open(file.c_str(), O_WRONLY | O_CREAT, 0666);
+        lseek(fd, 0, SEEK_END);
         ssize_t bytes_written = write(fd, message.c_str(), message.size());
         if ((unsigned long) bytes_written != message.size()) {
             close(fd);
             lock.unlock();
             oss.str("");
-            throw std::system_error(errno, std::system_category(), "Error in write: could not write Logger file.");
+
+            std::string message = std::string("Error in write: could not write Logger file: ") + std::string(strerror(errno));
+            throw std::system_error(errno, std::system_category(), message);
         }
         close(fd);
         lock.unlock();

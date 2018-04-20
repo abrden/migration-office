@@ -17,7 +17,16 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
                                  const bool debug, const std::string log_file)
         : booths_number(booths_number), stampers_number(stampers_number),
           people_file(people_file), alerts_file(alerts_file), fugitives_file(fugitives_file),
-          debug(debug), log_file(log_file) {
+          debug(debug), log_file(log_file), logger(debug, log_file) {
+
+    logger << "Welcome to the Conculandia Migration Office!" << std::endl;
+    logger << "booths number = " << booths_number << std::endl;
+    logger << "stampers number = " << stampers_number << std::endl;
+    logger << "people file = " << people_file << std::endl;
+    logger << "alerts file = " << alerts_file << std::endl;
+    logger << "fugitives file = " << fugitives_file << std::endl;
+    logger << "debug = " << debug << std::endl;
+    logger << "log file = " << log_file << std::endl;
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
@@ -99,4 +108,5 @@ void MigrationOffice::wait_children() {
 MigrationOffice::~MigrationOffice() {
     wait_children();
     SignalHandler::destroy();
+    logger << "========== CLOSED ==========" << std::endl;
 }

@@ -6,12 +6,14 @@
 #include "FifoWriter.h"
 #include "FifoReader.h"
 #include "SIGINTHandler.h"
+#include "Logger.h"
 
 #include <vector>
 
 class MinisterOfSecurity {
 
     private:
+        Logger logger;
         SIGINTHandler sigint_handler;
         FifoWriter fugitives_fifo;
         FifoReader booths_fifo;
@@ -26,7 +28,9 @@ class MinisterOfSecurity {
     public:
         MinisterOfSecurity(const std::string& alerts_file_path,
                            const std::string& fugitives_file_path,
-                           const size_t booths_number);
+                           const size_t booths_number,
+                           const bool debug,
+                           const std::string& log_file_path);
         void open();
         ~MinisterOfSecurity();
 

@@ -4,6 +4,11 @@
 #include <iostream>
 
 MigrationBooth::MigrationBooth(const bool debug, const std::string log_file) : logger(debug, log_file) {
+
+    logger("BOOTH") << "Welcome to the Conculandia Migration Booth!" << std::endl;
+    logger("BOOTH") << "debug = " << debug << std::endl;
+    logger("BOOTH") << "log file = " << log_file << std::endl;
+
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
 
