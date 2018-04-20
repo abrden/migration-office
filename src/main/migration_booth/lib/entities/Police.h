@@ -6,12 +6,15 @@
 #include "FifoReader.h"
 #include "FifoWriter.h"
 #include "ExclusiveLock.h"
+#include "Logger.h"
 
 #include <vector>
 
 class Police {
 
     private:
+        Logger& logger;
+
         FifoReader fugitives_fifo;
         FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
@@ -24,7 +27,7 @@ class Police {
         void receive_fugitives();
 
     public:
-        Police();
+        explicit Police(Logger& logger);
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report(Resident* resident);

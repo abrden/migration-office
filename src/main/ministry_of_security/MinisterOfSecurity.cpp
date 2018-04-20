@@ -19,7 +19,7 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                                                            booths_fifo(BOOTH_FIFO_FILE),
                                                                            booths_number(booths_number) {
 
-    logger(MINISTER) << "Welcome to the Conculandia Ministry of Security " << getpid() << "!" << std::endl;
+    logger(MINISTER) << "Welcome to the Conculandia Ministry of Security!" << std::endl;
     logger(MINISTER) << "alerts file = " << alerts_file_path << std::endl;
     logger(MINISTER) << "fugitives file = " << fugitives_file_path << std::endl;
     logger(MINISTER) << "debug = " << debug << std::endl;

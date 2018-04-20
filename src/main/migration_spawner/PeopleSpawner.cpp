@@ -8,9 +8,9 @@
 static const std::string FIFO_FILE = "/tmp/spawnerfifo";
 
 PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, const std::string& log_file)
-        : Spawner(people), people_file(people_file), debug(debug), log_file(log_file), logger(debug, log_file), fifo(FIFO_FILE) {
+        : Spawner(logger, people), people_file(people_file), debug(debug), log_file(log_file), logger(debug, log_file), fifo(FIFO_FILE) {
 
-    logger(PEOPLE_SPAWNER) << "Welcome to the Conculandia Migration Spawner " << getpid() << "!" << std::endl;
+    logger(PEOPLE_SPAWNER) << "Welcome to the Conculandia Migration Spawner!" << std::endl;
     logger(PEOPLE_SPAWNER) << "people file = " << people_file << std::endl;
     logger(PEOPLE_SPAWNER) << "debug = " << debug << std::endl;
     logger(PEOPLE_SPAWNER) << "log file = " << log_file << std::endl;

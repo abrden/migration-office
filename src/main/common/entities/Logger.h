@@ -8,7 +8,10 @@
 
 const std::string OFFICE = "OFFICE";
 const std::string BOOTH = "BOOTH";
-const std::string PEOPLE_SPAWNER = "PEOPLE_SPAWNER";
+const std::string BOOTH_POLICE = "POLICE";
+const std::string BOOTH_QUEUE = "QUEUE";
+const std::string SPAWNER = "SPAWNER";
+const std::string PEOPLE_SPAWNER = "PEOPLE SPAWNER";
 const std::string STATISTICS = "STATISTICS";
 const std::string MINISTER = "MINISTER";
 
