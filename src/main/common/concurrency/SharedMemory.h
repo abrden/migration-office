@@ -8,6 +8,7 @@
 #include <cstring>
 #include <iostream>
 #include <cerrno>
+#include <system_error>
 
 template<class T>
 class SharedMemory {
