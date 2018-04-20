@@ -15,14 +15,14 @@ int main(int argc, char* argv[]) {
     std::string line;
     std::cout << "> ";
     std::getline(std::cin, line);
-    while (line.compare("exit")) {
-        if (!line.compare("allowed residents")) {
+    while (line != "exit") {
+        if (line == "allowed residents") {
             std::cout << "Allowed residents: " << s.get_allowed_residents() << std::endl;
-        } else if (!line.compare("detained residents")){
+        } else if (line == "detained residents"){
             std::cout << "Detained residents: " << s.get_detained_residents() << std::endl;
-        } else if (!line.compare("allowed foreigners")) {
+        } else if (line == "allowed foreigners") {
             std::cout << "Allowed foreigners: " << s.get_allowed_foreigners() << std::endl;
-        } else if (!line.compare("deported foreigners")) {
+        } else if (line == "deported foreigners") {
             std::cout << "Deported foreigners: " << s.get_deported_foreigners() << std::endl;
         } else {
             std::cout << "Invalid command, try again" << std::endl;
