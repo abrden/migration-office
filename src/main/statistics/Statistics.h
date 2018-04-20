@@ -10,11 +10,10 @@
 class Statistics {
 
     private:
-        Data data;
         SharedMemory<Data> stats_shm;
         ExclusiveLock stats_shm_lock;
 
-        void update_data();
+        Data update_data();
 
     public:
         Statistics();
