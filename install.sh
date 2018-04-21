@@ -19,11 +19,11 @@ valgrind --leak-check=full\
 test_return=$?
 echo "==================== Done ===================="
 echo "==================== Running project ===================="
-valgrind --leak-check=full\
+echo "exit" | valgrind --leak-check=full\
          --show-leak-kinds=all\
          --trace-children=yes\
          --error-exitcode=1 --errors-for-leak-kinds=all\
-         echo "exit" | ./migration_office -p ../resources/people.txt\
+         ./migration_office -p ../resources/people.txt\
          -a ../resources/alerts.txt\
          -f ../resources/fugitives.txt -b 4 -s 1 -d
 
