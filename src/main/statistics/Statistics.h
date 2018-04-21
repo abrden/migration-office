@@ -6,6 +6,7 @@
 #include "StatisticsData.h"
 #include "FifoWriter.h"
 #include "Logger.h"
+#include "SIGINTHandler.h"
 
 #include <array>
 
@@ -15,6 +16,7 @@ class Statistics {
         Logger logger;
 
         const size_t booths_number;
+        SIGINTHandler sigint_handler;
         SharedMemory<StatisticsData> shm;
         ExclusiveLock lock;
         FifoWriter fifo;
@@ -28,9 +30,9 @@ class Statistics {
         size_t get_deported_foreigners();
 
     public:
-        explicit Statistics(size_t booths_number, const bool debug, const std::string& log_file);
+        Statistics(size_t booths_number, const bool debug, const std::string& log_file);
         void start();
-
+        ~Statistics();
 };
 
 #endif //MIGRATION_OFFICE_STATISTICS_H

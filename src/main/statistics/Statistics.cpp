@@ -1,5 +1,6 @@
 #include "Statistics.h"
 #include "FileNames.h"
+#include "SignalHandler.h"
 
 Statistics::Statistics(size_t booths_number, const bool debug, const std::string& log_file)
         : logger(debug, log_file), booths_number(booths_number),
@@ -9,6 +10,7 @@ Statistics::Statistics(size_t booths_number, const bool debug, const std::string
 
     logger(STATISTICS) << "Welcome to Conculandia's Statistics Department!" << std::endl;
 
+    SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
     initialize_data();
     send_initialized_data_confirmation();
 }
@@ -35,7 +37,7 @@ void Statistics::start() {
     std::cout << "Ask for statistics (allowed residents, detained residents, allowed foreigners, deported foreigners) or just exit." << std::endl;
     std::cout << "> ";
     std::getline(std::cin, line);
-    while (line != "exit") {
+    while (sigint_handler.get_graceful_quit() == 0 && line != "exit") {
         if (line == "allowed residents") {
             std::cout << "Allowed residents: " << get_allowed_residents() << std::endl;
         } else if (line == "detained residents"){
@@ -66,4 +68,8 @@ size_t Statistics::get_allowed_foreigners() {
 
 size_t Statistics::get_deported_foreigners() {
     return update_data().deported_foreigners;
+}
+
+Statistics::~Statistics() {
+    SignalHandler::destroy();
 }
