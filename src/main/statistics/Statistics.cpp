@@ -1,10 +1,14 @@
 #include "Statistics.h"
 #include "FileNames.h"
 
-Statistics::Statistics(size_t booths_number) : booths_number(booths_number),
-                                               shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
-                                               lock(StatisticsSharedMemory::LOCK_STATS_FILE),
-                                               fifo(StatisticsSharedMemory::FIFO_FILE) {
+Statistics::Statistics(size_t booths_number, const bool debug, const std::string& log_file)
+        : logger(debug, log_file), booths_number(booths_number),
+          shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
+          lock(StatisticsSharedMemory::LOCK_STATS_FILE),
+          fifo(StatisticsSharedMemory::FIFO_FILE) {
+
+    logger(STATISTICS) << "Welcome to Conculandia's Statistics Department!" << std::endl;
+
     initialize_data();
     send_initialized_data_confirmation();
 }
@@ -24,6 +28,28 @@ StatisticsData Statistics::update_data() {
     StatisticsData temp_data = shm.read();
     lock.unlock();
     return temp_data;
+}
+
+void Statistics::start() {
+    std::string line;
+    std::cout << "Ask for statistics (allowed residents, detained residents, allowed foreigners, deported foreigners) or just exit." << std::endl;
+    std::cout << "> ";
+    std::getline(std::cin, line);
+    while (line != "exit") {
+        if (line == "allowed residents") {
+            std::cout << "Allowed residents: " << get_allowed_residents() << std::endl;
+        } else if (line == "detained residents"){
+            std::cout << "Detained residents: " << get_detained_residents() << std::endl;
+        } else if (line == "allowed foreigners") {
+            std::cout << "Allowed foreigners: " << get_allowed_foreigners() << std::endl;
+        } else if (line == "deported foreigners") {
+            std::cout << "Deported foreigners: " << get_deported_foreigners() << std::endl;
+        } else {
+            std::cout << "Invalid command, try again" << std::endl;
+        }
+        std::cout << "> ";
+        std::getline(std::cin, line);
+    }
 }
 
 size_t Statistics::get_allowed_residents() {
