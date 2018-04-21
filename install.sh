@@ -19,7 +19,7 @@ valgrind --leak-check=full\
 test_return=$?
 echo "==================== Done ===================="
 echo "==================== Running project ===================="
-valgrind --leak-check=full\
+echo "exit" | valgrind --leak-check=full\
          --show-leak-kinds=all\
          --trace-children=yes\
          --error-exitcode=1 --errors-for-leak-kinds=all\
