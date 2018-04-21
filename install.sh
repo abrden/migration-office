@@ -25,7 +25,7 @@ valgrind --leak-check=full\
          --error-exitcode=1 --errors-for-leak-kinds=all\
          ./migration_office -p ../resources/people.txt\
          -a ../resources/alerts.txt\
-         -f ../resources/fugitives.txt -b 4 -s 1 -d < input.txt
+         -f ../resources/fugitives.txt -b 4 -s 1 -d < ../input.txt
 
 project_return=$?
 
