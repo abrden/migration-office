@@ -1,8 +1,6 @@
 #include "MigrationBooth.h"
 #include "SignalHandler.h"
 
-#include <iostream>
-
 MigrationBooth::MigrationBooth(const bool debug, const std::string log_file) : logger(debug, log_file),
                                                                                queue(logger),
                                                                                police(logger) {
@@ -18,8 +16,10 @@ void MigrationBooth::attend_resident(Resident* resident) {
     if (!police.is_fugitive(resident)) {
         logger(BOOTH) << "Welcome to Conculandia, resident " << resident->get_id() << std::endl;
         arrived_residents.emplace_back(resident);
+        statistics_communicator.notify_allowed_resident();
     } else {
         police.report(resident);
+        statistics_communicator.notify_detained_resident();
     }
 }
 
@@ -29,8 +29,10 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
         foreigner->get_passport().stamp_passport(stamper);
         logger(BOOTH) << "Welcome to Conculandia, foreigner " << foreigner->get_passport().get_id() << std::endl;
         arrived_foreigners.emplace_back(foreigner);
+        statistics_communicator.notify_allowed_foreigner();
     } else {
         police.report(foreigner);
+        statistics_communicator.notify_deported_foreigner();
     }
 }
 
