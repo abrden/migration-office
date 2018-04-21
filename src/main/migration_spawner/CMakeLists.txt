@@ -1,7 +1,5 @@
 project(migration_spawner)
 
-add_subdirectory(lib)
-
 set(SOURCES
         "main.cpp"
         "PeopleSpawner.cpp"

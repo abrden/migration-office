@@ -1,7 +1,5 @@
 project(ministry_of_security)
 
-add_subdirectory(lib)
-
 set(SOURCES "main.cpp"
             "MinisterOfSecurity.cpp"
             "MinisterOfSecurity.h")
