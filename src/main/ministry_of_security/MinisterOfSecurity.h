@@ -5,8 +5,8 @@
 #include "Spawner.h"
 #include "FifoWriter.h"
 #include "FifoReader.h"
-#include "SIGINTHandler.h"
 #include "Logger.h"
+#include "AlertSpawner.h"
 
 #include <vector>
 
@@ -14,14 +14,16 @@ class MinisterOfSecurity {
 
     private:
         Logger logger;
-        SIGINTHandler sigint_handler;
+
         FifoWriter fugitives_fifo;
         FifoReader booths_fifo;
-        Spawnables alerts;
+
         std::vector<unsigned int> fugitives;
         const size_t booths_number;
 
         void send_fugitives();
+
+        AlertSpawner alerts_spawner;
         void send_alerts();
         void receive_confirmations();
 

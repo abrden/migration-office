@@ -1,10 +1,7 @@
 #include "MinisterOfSecurity.h"
 #include "ConfigurationFileReader.h"
-#include "ExclusiveLock.h"
-#include "SignalHandler.h"
 
 #include <fstream>
-#include <sstream>
 #include <iostream>
 
 static const std::string FUGITIVES_FIFO_FILE = "/tmp/archivofifo";
@@ -17,7 +14,8 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::string& log_file_path) : logger(debug, log_file_path),
                                                                            fugitives_fifo(FUGITIVES_FIFO_FILE),
                                                                            booths_fifo(BOOTH_FIFO_FILE),
-                                                                           booths_number(booths_number) {
+                                                                           booths_number(booths_number),
+                                                                           alerts_spawner(logger, alerts_file_path) {
 
     logger(MINISTER) << "Welcome to the Conculandia Ministry of Security!" << std::endl;
     logger(MINISTER) << "alerts file = " << alerts_file_path << std::endl;
@@ -26,8 +24,6 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
     logger(MINISTER) << "log file = " << log_file_path << std::endl;
     logger(MINISTER) << "booths_number = " << booths_number << std::endl;
 
-    SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
-    ConfigurationFileReader::load_spawnables(alerts_file_path, alerts);
     ConfigurationFileReader::load_fugitives_ids(fugitives_file_path, fugitives);
 }
 
@@ -38,7 +34,7 @@ void MinisterOfSecurity::open() {
 
 void MinisterOfSecurity::send_alerts() {
     logger(MINISTER) << "Pato Bullrich sending high speed alerts!" << std::endl;
-    return; // FIXME implement
+    alerts_spawner.run();
 }
 
 void MinisterOfSecurity::send_fugitives() {
@@ -61,6 +57,5 @@ void MinisterOfSecurity::receive_confirmations() {
         logger(MINISTER) << "Received confirmation!" << std::endl;
     }
 }
-MinisterOfSecurity::~MinisterOfSecurity() {
-    SignalHandler::destroy();
-}
+
+MinisterOfSecurity::~MinisterOfSecurity() = default;
