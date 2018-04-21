@@ -4,6 +4,7 @@
 #include "SharedMemory.h"
 #include "ExclusiveLock.h"
 #include "StatisticsData.h"
+#include "FifoReader.h"
 #include "FifoWriter.h"
 #include "Logger.h"
 #include "SIGINTHandler.h"
@@ -20,9 +21,11 @@ class Statistics {
         SharedMemory<StatisticsData> shm;
         ExclusiveLock lock;
         FifoWriter fifo;
+        FifoReader cnf_fifo;
 
         void initialize_data();
         void send_initialized_data_confirmation();
+        void wait_for_booths();
         StatisticsData update_data();
         size_t get_allowed_residents();
         size_t get_detained_residents();

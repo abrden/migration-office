@@ -14,6 +14,7 @@ namespace StatisticsSharedMemory {
     const std::string STATS_FILE = "/bin/ls";
     const std::string LOCK_STATS_FILE = "/tmp/statistics_shm_lock";
     const std::string FIFO_FILE = "/tmp/statistics_fifo";
+    const std::string CNF_FIFO_FILE = "/tmp/statistics_cnf_fifo";
     const char LETTER = 'A';
 }
 

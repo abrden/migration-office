@@ -4,7 +4,8 @@
 StatisticsCommunicator::StatisticsCommunicator() :
         shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
         lock(StatisticsSharedMemory::LOCK_STATS_FILE),
-        fifo(StatisticsSharedMemory::FIFO_FILE) {
+        fifo(StatisticsSharedMemory::FIFO_FILE),
+        cnf_fifo(StatisticsSharedMemory::CNF_FIFO_FILE) {
     wait_for_initialization();
 }
 
@@ -12,6 +13,7 @@ void StatisticsCommunicator::wait_for_initialization() {
     lock.lock();
     bool ready;
     fifo.fifo_read(static_cast<void*>(&ready), sizeof(bool));
+    cnf_fifo.fifo_write(static_cast<void*>(&ready), sizeof(bool));
     lock.unlock();
 }
 
