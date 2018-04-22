@@ -20,12 +20,12 @@ AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file, const
 void AlertSpawner::spawn(std::string spawnable) {
     shmem_lock.lock();
     AlertData data;
-    std::size_t length = spawnable.copy(data.serialized_alert, spawnable.size(), 0);
+    size_t length = spawnable.copy(data.serialized_alert, spawnable.size(), 0);
     data.serialized_alert[length] = '\0';
     data.serialized_alert_size = spawnable.size();
     data.read_by_quantity = 0;
     shmem.write(data);
-    shmem_lock.lock();
+    shmem_lock.unlock();
 
     // TODO Send signal to booths
 

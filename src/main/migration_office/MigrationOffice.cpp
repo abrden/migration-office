@@ -3,9 +3,7 @@
 #include "FileNames.h"
 
 #include <unistd.h>
-#include <vector>
 #include <sys/wait.h>
-#include <system_error>
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -51,6 +49,10 @@ void MigrationOffice::open_ministry_of_security() {
         booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         booth_argv.push_back(const_cast<char*>(log_file.c_str()));
         booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
+        // Check this
+        for (int i = 0; i < booths_number; i++) {
+            booth_argv.push_back(const_cast<char*>(std::to_string(booth_pids.at(i)).c_str()));
+        }
         booth_argv.push_back(nullptr);
 
         execv(booth_argv[0], &booth_argv[0]);
@@ -64,7 +66,8 @@ void MigrationOffice::open_booths() {
         if (pid < 0) {
             throw std::system_error(errno, std::system_category());
         } else if (pid > 0) {
-            children_pids.emplace_back(pid);
+            children_pids.push_back(pid);
+            booth_pids.push_back(pid);
         } else {
             std::string debug_flag = debug ? "1" : "0";
 
