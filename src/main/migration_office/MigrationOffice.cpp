@@ -34,7 +34,7 @@ void MigrationOffice::start() {
     fork_spawner();
 }
 
-void MigrationOffice::open_ministry_of_security() {
+void MigrationOffice::fork_new_process(std::vector<char*>& argvs) {
     pid_t pid = fork();
 
     if (pid < 0) {
@@ -42,83 +42,63 @@ void MigrationOffice::open_ministry_of_security() {
     } else if (pid > 0) {
         children_pids.push_back(pid);
     } else {
-        std::string debug_flag = debug ? "1" : "0";
-
-        std::vector<char*> booth_argv;
-        booth_argv.push_back(const_cast<char*>(BinaryNames::MINISTER_BINARY.c_str()));
-        booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
-        booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
-        booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-        booth_argv.push_back(const_cast<char*>(log_file.c_str()));
-        booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
-        booth_argv.push_back(nullptr);
-
-        execv(booth_argv[0], &booth_argv[0]);
+        execv(argvs[0], &argvs[0]);
     }
 }
 
+void MigrationOffice::open_ministry_of_security() {
+    std::string debug_flag = debug ? "1" : "0";
+    std::vector<char*> booth_argv;
+
+    booth_argv.push_back(const_cast<char*>(BinaryNames::MINISTER_BINARY.c_str()));
+    booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
+    booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
+    booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+    booth_argv.push_back(const_cast<char*>(log_file.c_str()));
+    booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
+    booth_argv.push_back(nullptr);
+
+    fork_new_process(booth_argv);
+}
+
 void MigrationOffice::open_booths() {
+    std::string debug_flag = debug ? "1" : "0";
+    std::vector<char*> booth_argv;
+
+    booth_argv.push_back(const_cast<char*>(BinaryNames::BOOTH_BINARY.c_str()));
+    booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+    booth_argv.push_back(const_cast<char*>(log_file.c_str()));
+    booth_argv.push_back(nullptr);
+
     for (int i = 0; i < booths_number; i++) {
-        pid_t pid = fork();
-
-        if (pid < 0) {
-            throw std::system_error(errno, std::system_category());
-        } else if (pid > 0) {
-            children_pids.emplace_back(pid);
-        } else {
-            std::string debug_flag = debug ? "1" : "0";
-
-            std::vector<char*> booth_argv;
-            booth_argv.push_back(const_cast<char*>(BinaryNames::BOOTH_BINARY.c_str()));
-            booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-            booth_argv.push_back(const_cast<char*>(log_file.c_str()));
-            booth_argv.push_back(nullptr);
-
-            execv(booth_argv[0], &booth_argv[0]);
-        }
+        fork_new_process(booth_argv);
     }
 }
 
 void MigrationOffice::fork_spawner() {
-    pid_t pid = fork();
+    std::string debug_flag = debug ? "1" : "0";
+    std::vector<char*> spawner_argv;
 
-    if (pid < 0) {
-        throw std::system_error(errno, std::system_category());
-    } else if (pid > 0) {
-        children_pids.emplace_back(pid);
-    } else {
-        std::string debug_flag = debug ? "1" : "0";
+    spawner_argv.push_back(const_cast<char*>(BinaryNames::SPAWNER_BINARY.c_str()));
+    spawner_argv.push_back(const_cast<char*>(people_file.c_str()));
+    spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+    spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
+    spawner_argv.push_back(nullptr);
 
-        std::vector<char*> spawner_argv;
-        spawner_argv.push_back(const_cast<char*>(BinaryNames::SPAWNER_BINARY.c_str()));
-        spawner_argv.push_back(const_cast<char*>(people_file.c_str()));
-        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
-        spawner_argv.push_back(nullptr);
-
-        execv(spawner_argv[0], &spawner_argv[0]);
-    }
+    fork_new_process(spawner_argv);
 }
 
 void MigrationOffice::open_statistics() {
-    pid_t pid = fork();
+    std::string debug_flag = debug ? "1" : "0";
+    std::vector<char*> statistics_argv;
 
-    if (pid < 0) {
-        throw std::system_error(errno, std::system_category());
-    } else if (pid > 0) {
-        children_pids.emplace_back(pid);
-    } else {
-        std::string debug_flag = debug ? "1" : "0";
+    statistics_argv.push_back(const_cast<char*>(BinaryNames::STATISTICS_BINARY.c_str()));
+    statistics_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+    statistics_argv.push_back(const_cast<char*>(log_file.c_str()));
+    statistics_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
+    statistics_argv.push_back(nullptr);
 
-        std::vector<char*> spawner_argv;
-        spawner_argv.push_back(const_cast<char*>(BinaryNames::STATISTICS_BINARY.c_str()));
-        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
-        spawner_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
-        spawner_argv.push_back(nullptr);
-
-        execv(spawner_argv[0], &spawner_argv[0]);
-    }
+    fork_new_process(statistics_argv);
 }
 
 void MigrationOffice::wait_children() {
