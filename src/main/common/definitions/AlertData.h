@@ -5,6 +5,7 @@
 const static size_t BUFFSIZE = 1024;
 
 typedef struct {
+    size_t id;
     char serialized_alert[BUFFSIZE];
     size_t serialized_alert_size;
     size_t read_by_quantity;

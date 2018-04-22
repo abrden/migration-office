@@ -52,6 +52,9 @@ void Police::receive_alert() {
     std::string serialized_alert(data.serialized_alert);
     WantedPersonAlert* alert = AlertDeserializer::deserialize(serialized_alert);
     alerts.emplace_back(alert);
+
+    FifoWriter fifo(AlertsSharedMemory::ACK_FIFO_FILE);
+    fifo.fifo_write(static_cast<void*>(&data.id), sizeof(data.id));
 }
 
 bool Police::is_fugitive(Resident* resident) {
