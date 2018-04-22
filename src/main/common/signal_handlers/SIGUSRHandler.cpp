@@ -15,3 +15,7 @@ int SIGUSRHandler::handle_signal(int signum) {
 sig_atomic_t SIGUSRHandler::get_news_available() const {
     return news_available;
 }
+
+void SIGUSRHandler::reset() {
+    news_available = 0;
+}

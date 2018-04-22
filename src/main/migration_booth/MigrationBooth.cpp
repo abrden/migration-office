@@ -25,11 +25,10 @@ void MigrationBooth::attend_resident(Resident* resident) {
 }
 
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
-//    if (sigusr_handler.get_news_available() == 1) {
-//        // TODO continue receiveng until they are no more new alerts
-//        police.receive_alert();
-//        // TODO reset sigusr_handler's new_available attribute
-//    }
+    while (sigusr_handler.get_news_available() == 1) {
+        police.receive_alert();
+        sigusr_handler.reset();
+    }
     if (!police.is_wanted_person(foreigner)) {
         Stamper* stamper = stampers.get_stamper();
         foreigner->get_passport().stamp_passport(stamper);

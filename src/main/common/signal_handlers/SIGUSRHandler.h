@@ -15,6 +15,7 @@ class SIGUSRHandler : public EventHandler {
         ~SIGUSRHandler() override;
         int handle_signal(int signum) override;
         sig_atomic_t get_news_available() const;
+        void reset();
 
 };
 
