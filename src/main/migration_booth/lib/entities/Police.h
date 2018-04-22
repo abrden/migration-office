@@ -23,13 +23,13 @@ class Police {
         void receive_fugitives();
 
         std::list<WantedPersonAlert*> alerts;
-        void receive_alert();
 
         size_t arrested_residents;
         size_t deported_foreigners;
 
     public:
         explicit Police(Logger& logger);
+        void receive_alert();
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report(Resident* resident);

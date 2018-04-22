@@ -10,6 +10,7 @@ MigrationBooth::MigrationBooth(const bool debug, const std::string log_file) : l
     logger(BOOTH) << "log file = " << log_file << std::endl;
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
+    SignalHandler::get_instance()->register_handler(SIGUSR1, &sigusr_handler);
 }
 
 void MigrationBooth::attend_resident(Resident* resident) {
@@ -24,6 +25,11 @@ void MigrationBooth::attend_resident(Resident* resident) {
 }
 
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
+//    if (sigusr_handler.get_news_available() == 1) {
+//        // TODO continue receiveng until they are no more new alerts
+//        police.receive_alert();
+//        // TODO reset sigusr_handler's new_available attribute
+//    }
     if (!police.is_wanted_person(foreigner)) {
         Stamper* stamper = stampers.get_stamper();
         foreigner->get_passport().stamp_passport(stamper);
