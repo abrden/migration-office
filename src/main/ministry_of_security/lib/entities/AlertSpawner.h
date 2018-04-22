@@ -1,7 +1,7 @@
 #ifndef MIGRATION_OFFICE_ALERTSPAWNER_H
 #define MIGRATION_OFFICE_ALERTSPAWNER_H
 
-#include <src/main/common/signal_handlers/SIGINTHandler.h>
+#include "SIGINTHandler.h"
 #include "Spawner.h"
 
 class AlertSpawner : public Spawner {
