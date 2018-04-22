@@ -1,4 +1,4 @@
-#include <src/main/common/definitions/FileNames.h>
+#include "FileNames.h"
 #include "AlertSpawner.h"
 
 #include "SignalHandler.h"
@@ -6,8 +6,8 @@
 AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file)
         : Spawner(logger, alerts),
           logger(logger),
-          shmem(AlertSpawnerSharedMemory::SHMEM_FILE, AlertSpawnerSharedMemory::LETTER),
-          shmem_lock(AlertSpawnerSharedMemory::LOCK_SHMEM_FILE) {
+          shmem(AlertsSharedMemory::SHMEM_FILE, AlertsSharedMemory::LETTER),
+          shmem_lock(AlertsSharedMemory::LOCK_SHMEM_FILE) {
 
     ConfigurationFileReader::load_spawnables(alerts_file, alerts);
 

@@ -1,5 +1,9 @@
 #include <iostream>
 #include <algorithm>
+#include <src/main/common/definitions/FileNames.h>
+#include <src/main/common/definitions/AlertData.h>
+#include <src/main/common/concurrency/SharedMemory.h>
+#include "AlertDeserializer.h"
 
 #include "ExclusiveLock.h"
 #include "Police.h"
@@ -17,7 +21,6 @@ Police::Police(Logger& logger) : logger(logger),
 }
 
 void Police::receive_fugitives() {
-
     fugitives_fifo_lock.lock();
     size_t n_fugitives;
     ssize_t read_1 = fugitives_fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(size_t));
@@ -37,6 +40,18 @@ void Police::receive_fugitives() {
     bool confirmation = true;
     ministry_fifo.fifo_write(static_cast<void*>(&confirmation), sizeof(bool));
     fugitives_fifo_lock.unlock();
+}
+
+void Police::receive_alert() {
+    ExclusiveLock lock(AlertsSharedMemory::LOCK_SHMEM_FILE);
+    lock.lock();
+    SharedMemory<AlertData> sh_mem(AlertsSharedMemory::SHMEM_FILE, AlertsSharedMemory::LETTER);
+    AlertData data = sh_mem.read();
+    lock.unlock();
+
+    std::string serialized_alert(data.serialized_alert);
+    WantedPersonAlert* alert = AlertDeserializer::deserialize(serialized_alert);
+    alerts.emplace_back(alert);
 }
 
 bool Police::is_fugitive(Resident* resident) {

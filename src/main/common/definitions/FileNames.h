@@ -18,7 +18,7 @@ namespace StatisticsSharedMemory {
     const char LETTER = 'A';
 }
 
-namespace AlertSpawnerSharedMemory {
+namespace AlertsSharedMemory {
     const std::string SHMEM_FILE = "/bin/cat";
     const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
     const char LETTER = 'B';

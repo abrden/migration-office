@@ -9,6 +9,7 @@
 #include "Logger.h"
 
 #include <vector>
+#include "WantedPersonAlert.h"
 
 class Police {
 
@@ -18,13 +19,14 @@ class Police {
         FifoReader fugitives_fifo;
         FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
-
         std::vector<unsigned int> fugitives;
+        void receive_fugitives();
+
+        std::list<WantedPersonAlert*> alerts;
+        void receive_alert();
 
         size_t arrested_residents;
         size_t deported_foreigners;
-
-        void receive_fugitives();
 
     public:
         explicit Police(Logger& logger);
