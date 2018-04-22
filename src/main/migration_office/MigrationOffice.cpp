@@ -4,6 +4,7 @@
 
 #include <unistd.h>
 #include <sys/wait.h>
+#include <iostream>
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -51,10 +52,15 @@ void MigrationOffice::open_ministry_of_security() {
         booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
         // Check this
         for (int i = 0; i < booths_number; i++) {
+            std::cout << "Pid: " << booth_pids.at(i) << std::endl;
             booth_argv.push_back(const_cast<char*>(std::to_string(booth_pids.at(i)).c_str()));
+            std::cout << "Pushed pid: " << booth_argv.at(6 + i) << std::endl;
         }
         booth_argv.push_back(nullptr);
 
+        for (size_t i = 0; i < booth_argv.size(); i++) {
+            std::cout << "Argv[" << i << "]" << ": " << booth_argv.at(i) << std::endl;
+        }
         execv(booth_argv[0], &booth_argv[0]);
     }
 }
