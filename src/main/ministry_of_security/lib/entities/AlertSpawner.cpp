@@ -25,7 +25,7 @@ void AlertSpawner::spawn(std::string spawnable) {
     data.serialized_alert_size = spawnable.size();
     data.read_by_quantity = 0;
     shmem.write(data);
-    shmem_lock.lock();
+    shmem_lock.unlock();
 
     // TODO Send signal to booths
 
