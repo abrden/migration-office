@@ -1,16 +1,20 @@
-#include <src/main/common/concurrency/FifoReader.h>
-#include <src/main/common/definitions/AlertData.h>
+#include "FifoReader.h"
+#include "AlertData.h"
 #include "FileNames.h"
 #include "AlertSpawner.h"
-
 #include "SignalHandler.h"
 
-AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths_number)
-        : Spawner(logger, alerts),
-          logger(logger),
-          shmem(AlertsSharedMemory::SHMEM_FILE, AlertsSharedMemory::LETTER),
-          shmem_lock(AlertsSharedMemory::LOCK_SHMEM_FILE),
-          booths_number(booths_number) {
+#include <sys/types.h>
+#include <signal.h>
+
+AlertSpawner::AlertSpawner(Logger& logger,
+                           const std::string& alerts_file,
+                           const size_t booths_number,
+                           const std::vector<pid_t>& booths_ids) : Spawner(logger, alerts), logger(logger),
+                                                                   shmem(AlertsSharedMemory::SHMEM_FILE,
+                                                                         AlertsSharedMemory::LETTER),
+                                                                   shmem_lock(AlertsSharedMemory::LOCK_SHMEM_FILE),
+                                                                   booths_number(booths_number), booths_ids(booths_ids) {
 
     ConfigurationFileReader::load_spawnables(alerts_file, alerts);
 
@@ -27,7 +31,9 @@ void AlertSpawner::spawn(std::string spawnable) {
     shmem.write(data);
     shmem_lock.unlock();
 
-    // TODO Send signal to booths
+    for (size_t i = 0; i < booths_number; i++) {
+        kill(booths_ids.at(i), SIGUSR1);
+    }
 
     FifoReader fifo(AlertsSharedMemory::ACK_FIFO_FILE);
     size_t ack, received_id;

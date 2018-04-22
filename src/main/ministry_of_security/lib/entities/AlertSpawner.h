@@ -16,9 +16,10 @@ class AlertSpawner : public Spawner {
         ExclusiveLock shmem_lock;
         Spawnables alerts;
         const size_t booths_number;
+        const std::vector<pid_t> booths_ids;
 
     public:
-        AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths_number);
+        AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths_number, const std::vector<pid_t>& booths_ids);
         void spawn(std::string spawnable) override;
         bool quit() override;
         ~AlertSpawner() override;

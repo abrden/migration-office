@@ -31,6 +31,7 @@ class MinisterOfSecurity {
         MinisterOfSecurity(const std::string& alerts_file_path,
                            const std::string& fugitives_file_path,
                            const size_t booths_number,
+                           const std::vector<pid_t>& booths_ids,
                            const bool debug,
                            const std::string& log_file_path);
         void open();
