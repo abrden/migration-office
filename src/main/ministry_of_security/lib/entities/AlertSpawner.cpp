@@ -5,7 +5,7 @@
 
 #include "SignalHandler.h"
 
-AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths)
+AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths_number)
         : Spawner(logger, alerts),
           logger(logger),
           shmem(AlertsSharedMemory::SHMEM_FILE, AlertsSharedMemory::LETTER),
@@ -32,8 +32,8 @@ void AlertSpawner::spawn(std::string spawnable) {
     FifoReader fifo(AlertsSharedMemory::ACK_FIFO_FILE);
     size_t ack, received_id;
     ack = 0;
-    for (int i = 0; i < booths_number; i++) {
-        ssize_t bytes_read = fifo.fifo_read(static_cast<void*>(&received_id), sizeof(received_id));
+    for (size_t i = 0; i < booths_number; i++) {
+        fifo.fifo_read(static_cast<void*>(&received_id), sizeof(received_id));
         //TODO if (bytes_read != sizeof(received_id)) error
         if (received_id == data.id) ack++;
     }
