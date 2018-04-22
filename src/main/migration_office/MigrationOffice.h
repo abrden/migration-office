@@ -3,6 +3,7 @@
 
 #include <list>
 #include <string>
+#include <vector>
 
 #include "Logger.h"
 #include "SIGINTHandler.h"
@@ -20,6 +21,7 @@ class MigrationOffice {
         Logger logger;
 
         void wait_children();
+        void fork_new_process(std::vector<char*>& argvs);
 
     public:
         MigrationOffice(const int booths_number, const int stampers_number,
