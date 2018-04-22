@@ -18,4 +18,10 @@ namespace StatisticsSharedMemory {
     const char LETTER = 'A';
 }
 
+namespace AlertSpawnerSharedMemory {
+    const std::string SHMEM_FILE = "/bin/cat";
+    const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
+    const char LETTER = 'B';
+}
+
 #endif //MIGRATION_OFFICE_FILENAMES_H
