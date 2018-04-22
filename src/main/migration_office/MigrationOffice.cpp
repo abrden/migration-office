@@ -50,17 +50,29 @@ void MigrationOffice::open_ministry_of_security() {
         booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         booth_argv.push_back(const_cast<char*>(log_file.c_str()));
         booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
-        // Check this
+
+
+        // FIXME
+        std::vector<std::string> pids_str;
         for (int i = 0; i < booths_number; i++) {
             std::cout << "Pid: " << booth_pids.at(i) << std::endl;
-            booth_argv.push_back(const_cast<char*>(std::to_string(booth_pids.at(i)).c_str()));
+            std::string pid_str = std::to_string(booth_pids.at(i));
+            std::cout << "Pid str: " << pid_str << std::endl;
+
+            pids_str.emplace_back(pid_str);
+        }
+
+        for (int i = 0; i < booths_number; i++) {
+            booth_argv.push_back(const_cast<char *>(pids_str.at(i).c_str()));
             std::cout << "Pushed pid: " << booth_argv.at(6 + i) << std::endl;
         }
+
         booth_argv.push_back(nullptr);
 
-        for (size_t i = 0; i < booth_argv.size(); i++) {
+        for (size_t i = 0; i < booth_argv.size() - 1; i++) {
             std::cout << "Argv[" << i << "]" << ": " << booth_argv.at(i) << std::endl;
         }
+
         execv(booth_argv[0], &booth_argv[0]);
     }
 }
