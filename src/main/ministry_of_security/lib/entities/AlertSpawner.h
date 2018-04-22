@@ -15,9 +15,10 @@ class AlertSpawner : public Spawner {
         SharedMemory<AlertData> shmem;
         ExclusiveLock shmem_lock;
         Spawnables alerts;
+        const size_t booths_number;
 
     public:
-        AlertSpawner(Logger& logger, const std::string& alerts_file);
+        AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths_number);
         void spawn(std::string spawnable) override;
         bool quit() override;
         ~AlertSpawner() override;

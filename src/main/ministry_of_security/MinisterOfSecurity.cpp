@@ -15,7 +15,7 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                                                            fugitives_fifo(FUGITIVES_FIFO_FILE),
                                                                            booths_fifo(BOOTH_FIFO_FILE),
                                                                            booths_number(booths_number),
-                                                                           alerts_spawner(logger, alerts_file_path) {
+                                                                           alerts_spawner(logger, alerts_file_path, booths_number) {
 
     logger(MINISTER) << "Welcome to the Conculandia Ministry of Security!" << std::endl;
     logger(MINISTER) << "alerts file = " << alerts_file_path << std::endl;
