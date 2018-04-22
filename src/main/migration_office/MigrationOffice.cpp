@@ -49,7 +49,8 @@ void MigrationOffice::open_ministry_of_security() {
         booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
         booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         booth_argv.push_back(const_cast<char*>(log_file.c_str()));
-        booth_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
+        std::string booths_number_str = std::to_string(booths_number);
+        booth_argv.push_back(const_cast<char*>(booths_number_str.c_str()));
 
 
         // FIXME
