@@ -29,8 +29,8 @@ TEST_CASE("PersonDeserializer") {
 
     std::list<std::string> features2;
     features2.emplace_back("tez blanca");
-    features2.emplace_back("barbudo");
     features2.emplace_back("ojos verdes");
+    features2.emplace_back("barbudo");
     Features expected2(features2);
     REQUIRE(bear->get_features() == expected2);
 
