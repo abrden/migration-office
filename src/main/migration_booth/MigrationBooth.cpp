@@ -26,8 +26,10 @@ void MigrationBooth::attend_resident(Resident* resident) {
 
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
     while (sigusr_handler.get_news_available() == 1) {
+        logger(BOOTH) << "Receiving alert" << std::endl;
         police.receive_alert();
         sigusr_handler.reset();
+        logger(BOOTH) << "Received alert" << std::endl;
     }
     if (!police.is_wanted_person(foreigner)) {
         Stamper* stamper = stampers.get_stamper();

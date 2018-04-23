@@ -32,7 +32,9 @@ void AlertSpawner::spawn(std::string spawnable) {
     shmem_lock.unlock();
 
     for (size_t i = 0; i < booths_number; i++) {
+        logger(MINISTER) << "Sending signal to booth: " << booths_ids.at(i)  << std::endl;
         kill(booths_ids.at(i), SIGUSR1);
+        logger(MINISTER) << "Signal sent" << std::endl;
     }
 
     FifoReader fifo(AlertsSharedMemory::ACK_FIFO_FILE);
