@@ -67,9 +67,10 @@ bool Police::is_fugitive(Resident* resident) {
 }
 
 bool Police::is_wanted_person(Foreigner* foreigner) {
-    for (auto it = alerts.begin(); it != alerts.end(); ++it) {
-        if ((*it)->get_features() == foreigner->get_features()) return false;
-    }
+    //for (auto it = alerts.begin(); it != alerts.end(); ++it) {
+    //    if ((*it)->get_features() == foreigner->get_features()) return false;
+    //}
+    return false;
 }
 
 void Police::report(Resident* resident) {

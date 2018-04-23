@@ -20,7 +20,6 @@ class MigrationBooth {
         Logger logger;
 
         SIGINTHandler sigint_handler;
-        SIGUSRHandler sigusr_handler;
         PersonsQueue queue;
         Stampers stampers;
         Police police;

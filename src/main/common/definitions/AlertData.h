@@ -1,6 +1,7 @@
 #ifndef MIGRATION_OFFICE_ALERTDATA_H
 #define MIGRATION_OFFICE_ALERTDATA_H
 
+#include <stddef.h>
 
 const static size_t BUFFSIZE = 1024;
 

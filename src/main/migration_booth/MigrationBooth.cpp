@@ -10,8 +10,8 @@ MigrationBooth::MigrationBooth(const bool debug, const std::string log_file) : l
     logger(BOOTH) << "log file = " << log_file << std::endl;
 
     police.receive_fugitives();
+
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
-    SignalHandler::get_instance()->register_handler(SIGUSR1, &sigusr_handler);
 }
 
 void MigrationBooth::attend_resident(Resident* resident) {
