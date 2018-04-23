@@ -9,6 +9,7 @@ MigrationBooth::MigrationBooth(const bool debug, const std::string log_file) : l
     logger(BOOTH) << "debug = " << debug << std::endl;
     logger(BOOTH) << "log file = " << log_file << std::endl;
 
+    police.receive_fugitives();
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
     SignalHandler::get_instance()->register_handler(SIGUSR1, &sigusr_handler);
 }
@@ -25,12 +26,7 @@ void MigrationBooth::attend_resident(Resident* resident) {
 }
 
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
-    while (sigusr_handler.get_news_available() == 1) {
-        logger(BOOTH) << "Receiving alert" << std::endl;
-        police.receive_alert();
-        sigusr_handler.reset();
-        logger(BOOTH) << "Received alert" << std::endl;
-    }
+    police.receive_alert();
     if (!police.is_wanted_person(foreigner)) {
         Stamper* stamper = stampers.get_stamper();
         foreigner->get_passport().stamp_passport(stamper);

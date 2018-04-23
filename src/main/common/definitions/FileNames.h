@@ -21,8 +21,9 @@ namespace StatisticsSharedMemory {
 namespace AlertsSharedMemory {
     const std::string SHMEM_FILE = "/bin/cat";
     const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
-    const char LETTER = 'B';
+    const char LETTER = 'C';
     const std::string ACK_FIFO_FILE = "/tmp/alerts_ack_fifo";
+    const size_t SHMEM_SIZE = 1024;
 }
 
 #endif //MIGRATION_OFFICE_FILENAMES_H

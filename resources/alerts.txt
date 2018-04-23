@@ -1,4 +1,4 @@
 timestamp, features
-2,petiso,orejudo
+1,petiso,orejudo
 4,gatuno
 0,sombrero cónico
