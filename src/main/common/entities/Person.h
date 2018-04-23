@@ -7,11 +7,11 @@
 class Person {
 
     private:
-        std::list<Feature*> features;
+        std::list<std::string> features;
 
     public:
-        explicit Person(std::list<Feature*> features);
-        std::list<Feature*> get_features();
+        explicit Person(std::list<std::string> features);
+        std::list<std::string> get_features();
         virtual bool has_id() = 0;
         virtual ~Person();
 

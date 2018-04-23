@@ -18,10 +18,10 @@ std::vector<std::string> ConfigurationFileReader::split_line_into_tokens(std::st
     return result;
 }
 
-std::list<Feature*> ConfigurationFileReader::extract_features(std::vector<std::string>& raw_features) {
-    std::list<Feature*> l;
-    for (auto const &i : raw_features) l.push_back(new Feature(i));
-    return l;
+std::list<std::string> ConfigurationFileReader::extract_features(std::vector<std::string>& raw_features) {
+    std::list<std::string> features;
+    std::copy(raw_features.begin(), raw_features.end(), std::back_inserter(features));
+    return features;
 }
 
 void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path,
