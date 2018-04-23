@@ -5,7 +5,7 @@
 #include <list>
 
 #include "Spawnables.h"
-#include "Feature.h"
+#include "Features.h"
 
 class ConfigurationFileReader {
 
