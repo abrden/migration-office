@@ -1,8 +1,8 @@
 #include <iostream>
 #include <algorithm>
-#include <src/main/common/definitions/FileNames.h>
-#include <src/main/common/definitions/AlertData.h>
-#include <src/main/common/concurrency/SharedMemory.h>
+#include "FileNames.h"
+#include "AlertData.h"
+#include "SharedMemory.h"
 #include "AlertDeserializer.h"
 
 #include "ExclusiveLock.h"
@@ -16,7 +16,10 @@ static const size_t BUFFERSIZE = 100;
 Police::Police(Logger& logger) : logger(logger),
                                  fugitives_fifo(FIFO_FILE),
                                  ministry_fifo(BOOTH_FIFO_FILE),
-                                 fugitives_fifo_lock(LOCK_FILE) {
+                                 fugitives_fifo_lock(LOCK_FILE),
+                                 alerts_lock(AlertsSharedMemory::LOCK_SHMEM_FILE),
+                                 alerts_shm(AlertsSharedMemory::SHMEM_FILE, AlertsSharedMemory::LETTER),
+                                 alerts_fifo(AlertsSharedMemory::ACK_FIFO_FILE) {
     receive_fugitives();
 }
 
@@ -43,18 +46,15 @@ void Police::receive_fugitives() {
 }
 
 void Police::receive_alert() {
-    ExclusiveLock lock(AlertsSharedMemory::LOCK_SHMEM_FILE);
-    lock.lock();
-    SharedMemory<AlertData> sh_mem(AlertsSharedMemory::SHMEM_FILE, AlertsSharedMemory::LETTER);
-    AlertData data = sh_mem.read();
-    lock.unlock();
+    alerts_lock.lock();
+    AlertData data = alerts_shm.read();
+    alerts_lock.unlock();
 
     std::string serialized_alert(data.serialized_alert);
     WantedPersonAlert* alert = AlertDeserializer::deserialize(serialized_alert);
     alerts.emplace_back(alert);
 
-    FifoWriter fifo(AlertsSharedMemory::ACK_FIFO_FILE);
-    fifo.fifo_write(static_cast<void*>(&data.id), sizeof(data.id));
+    alerts_fifo.fifo_write(static_cast<void*>(&data.id), sizeof(data.id));
 }
 
 bool Police::is_fugitive(Resident* resident) {

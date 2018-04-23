@@ -34,6 +34,7 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
 void MinisterOfSecurity::open() {
     send_fugitives();
     receive_confirmations();
+    send_alerts();
 }
 
 void MinisterOfSecurity::send_alerts() {

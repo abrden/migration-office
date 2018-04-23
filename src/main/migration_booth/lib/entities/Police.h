@@ -1,15 +1,17 @@
 #ifndef MIGRATION_OFFICE_POLICE_H
 #define MIGRATION_OFFICE_POLICE_H
 
+#include "AlertData.h"
 #include "Resident.h"
 #include "Foreigner.h"
 #include "FifoReader.h"
 #include "FifoWriter.h"
 #include "ExclusiveLock.h"
 #include "Logger.h"
+#include "WantedPersonAlert.h"
+#include "SharedMemory.h"
 
 #include <vector>
-#include "WantedPersonAlert.h"
 
 class Police {
 
@@ -19,7 +21,10 @@ class Police {
         FifoReader fugitives_fifo;
         FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
+        ExclusiveLock alerts_lock;
+        SharedMemory<AlertData> alerts_shm;
         std::vector<unsigned int> fugitives;
+        FifoWriter alerts_fifo;
         void receive_fugitives();
 
         std::list<WantedPersonAlert*> alerts;
