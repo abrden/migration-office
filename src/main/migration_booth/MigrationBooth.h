@@ -5,6 +5,7 @@
 #include "Resident.h"
 #include "Foreigner.h"
 #include "SIGINTHandler.h"
+#include "SIGUSRHandler.h"
 #include "PersonsQueue.h"
 #include "Stampers.h"
 #include "Police.h"

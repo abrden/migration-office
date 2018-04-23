@@ -7,7 +7,7 @@
 class AlertDeserializer {
 
     public:
-        static WantedPersonAlert* deserialize(std::string& serialized_alert);
+        static WantedPersonAlert* deserialize(std::string& serialized_alert, const size_t id);
 
 };
 

@@ -10,12 +10,16 @@ static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::string& fugitives_file_path,
                                        const size_t booths_number,
+                                       const std::vector<pid_t>& booths_ids,
                                        const bool debug,
                                        const std::string& log_file_path) : logger(debug, log_file_path),
                                                                            fugitives_fifo(FUGITIVES_FIFO_FILE),
                                                                            booths_fifo(BOOTH_FIFO_FILE),
                                                                            booths_number(booths_number),
-                                                                           alerts_spawner(logger, alerts_file_path, booths_number) {
+                                                                           alerts_spawner(logger,
+                                                                                          alerts_file_path,
+                                                                                          booths_number,
+                                                                                          booths_ids) {
 
     logger(MINISTER) << "Welcome to the Conculandia Ministry of Security!" << std::endl;
     logger(MINISTER) << "alerts file = " << alerts_file_path << std::endl;
@@ -30,6 +34,7 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
 void MinisterOfSecurity::open() {
     send_fugitives();
     receive_confirmations();
+    send_alerts();
 }
 
 void MinisterOfSecurity::send_alerts() {

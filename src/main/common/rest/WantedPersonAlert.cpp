@@ -1,14 +1,14 @@
 #include "WantedPersonAlert.h"
 
-WantedPersonAlert::WantedPersonAlert(const std::list<Feature*>& person_features) : person_features(person_features) {}
+WantedPersonAlert::WantedPersonAlert(const std::list<std::string>& person_features, const size_t id)
+        : person_features(person_features), id(id) {}
 
-const std::list<Feature*>& WantedPersonAlert::get_features() {
+Features& WantedPersonAlert::get_features() {
     return person_features;
 }
 
-WantedPersonAlert::~WantedPersonAlert() {
-    while (!person_features.empty()) {
-        delete person_features.back();
-        person_features.pop_back();
-    }
+size_t WantedPersonAlert::get_id() {
+    return id;
 }
+
+WantedPersonAlert::~WantedPersonAlert() = default;

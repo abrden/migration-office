@@ -3,6 +3,7 @@
 
 #include <list>
 #include <string>
+#include <vector>
 
 #include "Logger.h"
 #include "SIGINTHandler.h"
@@ -16,6 +17,7 @@ class MigrationOffice {
         const std::string log_file;
         SIGINTHandler sigint_handler;
         std::list<pid_t> children_pids;
+        std::vector<pid_t> booth_pids;
 
         Logger logger;
 

@@ -2,16 +2,20 @@
 #define MIGRATION_OFFICE_WANTEDPERSONALERT_H
 
 #include <list>
-#include "Feature.h"
+#include <string>
+
+#include "Features.h"
 
 class WantedPersonAlert {
 
     private:
-        std::list<Feature*> person_features;
+        Features person_features;
+        const size_t id;
 
     public:
-        explicit WantedPersonAlert(const std::list<Feature*>& person_features);
-        const std::list<Feature*>& get_features();
+        explicit WantedPersonAlert(const std::list<std::string>& person_features, const size_t id);
+        Features& get_features();
+        size_t get_id();
         ~WantedPersonAlert();
 
 };

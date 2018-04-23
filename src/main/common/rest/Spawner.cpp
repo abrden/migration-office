@@ -16,8 +16,8 @@ void Spawner::run() {
         for (Spawnables::iterator iterator = items.begin(), end = items.end();
              iterator != end && (*iterator).first <= (t - t0);
              ++iterator) {
-            spawn((*iterator).second);
             logger(SPAWNER) << "Time passed: " << (t - t0) << " - Spawning item with timestamp " << (*iterator).first << std::endl;
+            spawn((*iterator).second);
             iterator = items.erase(iterator);
         }
     }
