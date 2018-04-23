@@ -1,6 +1,6 @@
 #include "Person.h"
 
-Person::Person(std::list<std::string> features) : features(features) {}
+Person::Person(const std::list<std::string>& features) : features(features) {}
 
 Features& Person::get_features() {
     return features;

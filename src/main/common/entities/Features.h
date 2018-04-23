@@ -10,7 +10,7 @@ class Features {
         const std::list<std::string> features;
 
     public:
-        explicit Features(std::list<std::string>& features);
+        explicit Features(const std::list<std::string>& features);
         bool operator==(const Features& other) const;
         ~Features();
 

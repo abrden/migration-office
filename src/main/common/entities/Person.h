@@ -10,7 +10,7 @@ class Person {
         Features features;
 
     public:
-        explicit Person(std::list<std::string> features);
+        explicit Person(const std::list<std::string>& features);
         Features& get_features();
         virtual bool has_id() = 0;
         virtual ~Person();
