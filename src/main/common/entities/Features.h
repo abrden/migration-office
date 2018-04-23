@@ -11,6 +11,7 @@ class Features {
 
     public:
         explicit Features(std::list<std::string>& features);
+        bool operator==(const Features& other) const;
         ~Features();
 
 };
