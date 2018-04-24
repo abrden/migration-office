@@ -3,8 +3,6 @@
 
 #include <string>
 
-#include "Stamper.h"
-
 class Passport {
 
     private:
@@ -12,7 +10,7 @@ class Passport {
 
     public:
         explicit Passport(const std::string& id);
-        void stamp_passport(Stamper* stamper);
+        void stamp_passport();
         const std::string& get_id();
         ~Passport();
 

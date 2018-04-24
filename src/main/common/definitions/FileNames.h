@@ -26,4 +26,9 @@ namespace Alerts {
     const size_t SHMEM_LENGTH = 1024;
 }
 
+namespace StampersSemaphore {
+    const std::string SEM_FILE = "/bin/head";
+    const char LETTER = 'B';
+}
+
 #endif //MIGRATION_OFFICE_FILENAMES_H

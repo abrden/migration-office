@@ -83,13 +83,11 @@ bool Police::is_wanted_person(Foreigner* foreigner) {
 void Police::report(Resident* resident) {
     logger(BOOTH_POLICE) << "Resident " << resident->get_id() << " you are arrested" << std::endl;
     arrested_residents++;
-    delete resident;
 }
 
 void Police::report(Foreigner* foreigner) {
     logger(BOOTH_POLICE) << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
     deported_foreigners++;
-    delete foreigner;
 }
 
 bool Police::is_new_alert(size_t id) {

@@ -83,6 +83,8 @@ void MigrationOffice::open_booths() {
 
             std::vector<char*> booth_argv;
             booth_argv.push_back(const_cast<char*>(BinaryNames::BOOTH_BINARY.c_str()));
+            std::string stampers_number_str = std::to_string(stampers_number);
+            booth_argv.push_back(const_cast<char*>(stampers_number_str.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);
