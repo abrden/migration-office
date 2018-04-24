@@ -5,6 +5,7 @@
 #include <cstring>
 #include <iostream>
 #include <system_error>
+#include <src/main/common/definitions/AlertData.h>
 
 AlertsSharedMemory::AlertsSharedMemory(const std::string& file_path, const char letter, const size_t size) : shm_id(0), alerts(nullptr) {
     key_t key = ftok(file_path.c_str(), letter);
@@ -31,13 +32,47 @@ AlertsSharedMemory::AlertsSharedMemory(const std::string& file_path, const char 
     }
 }
 
-void AlertsSharedMemory::write(size_t pos, const std::string& serialized_alert) {
+std::string AlertsSharedMemory::serialize_alert_data(AlertData data) {
+    std::string s;
+
+    char* id_arr = (char*)&data.id;
+    for (unsigned int i = 0; i < sizeof(data.id); ++i)
+        s.push_back(id_arr[i]);
+
+    char* read_by_arr = (char*)&data.read_by_quantity;
+    for (unsigned int i = 0; i < sizeof(data.read_by_quantity); ++i)
+        s.push_back(read_by_arr[i]);
+
+    char* size_arr = (char*)&data.serialized_alert_size;
+    for (unsigned int i = 0; i < sizeof(data.serialized_alert_size); ++i)
+        s.push_back(size_arr[i]);
+
+    s.append(data.serialized_alert);
+
+    return s;
+}
+
+void AlertsSharedMemory::write(size_t pos, const AlertData& alert) {
+    std::string serialized_alert = serialize_alert_data(alert);
     serialized_alert.copy(alerts[pos], SERIALIZED_ALERT_SIZE, 0);
 }
 
-std::string AlertsSharedMemory::read(size_t pos) const {
-    std::string s(alerts[pos], SERIALIZED_ALERT_SIZE);
-    return s;
+AlertData AlertsSharedMemory::read(size_t pos) const {
+    std::string serialized_alert(alerts[pos], SERIALIZED_ALERT_SIZE);
+
+    size_t id, read_by_quantity, size;
+    serialized_alert.copy((char*)&id, sizeof(size_t), 0);
+    serialized_alert.copy((char*)&read_by_quantity, sizeof(size_t), sizeof(size_t));
+    serialized_alert.copy((char*)&size, sizeof(size_t), 2 * sizeof(size_t));
+    std::string alert_str = serialized_alert.substr(3 * sizeof(size_t), size);
+
+    AlertData alert;
+    alert.id = id;
+    alert.read_by_quantity = read_by_quantity;
+    alert.serialized_alert_size = size;
+    alert_str.copy(alert.serialized_alert, size, 0);
+
+    return alert;
 }
 
 shmatt_t AlertsSharedMemory::attached_processes() const {

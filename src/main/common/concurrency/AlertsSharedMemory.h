@@ -13,11 +13,12 @@ class AlertsSharedMemory {
         SerializedAlert* alerts;
 
         shmatt_t attached_processes() const;
+        std::string serialize_alert_data(AlertData data);
 
     public:
         AlertsSharedMemory(const std::string& file_path, const char letter, const size_t size);
-        void write(size_t pos, const std::string& serialized_alert);
-        std::string read(size_t pos) const;
+        void write(size_t pos, const AlertData& alert);
+        AlertData read(size_t pos) const;
         ~AlertsSharedMemory();
 
 };
