@@ -1,9 +1,8 @@
 #!/bin/bash
 
-ZERO=0
 cd build
 echo "==================== Running tests ===================="
-TEST=$(valgrind --leak-check=full\
+TEST=$(valgrind --suppressions=../vg.supp --leak-check=full\
          --show-leak-kinds=all\
          --trace-children=yes\
          --error-exitcode=1 --errors-for-leak-kinds=all\
