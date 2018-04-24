@@ -10,7 +10,7 @@
 #include "Logger.h"
 #include "WantedPersonAlert.h"
 #include "SharedMemory.h"
-#include "SharedMemoryArray.h"
+#include "AlertsSharedMemory.h"
 
 #include <vector>
 
@@ -23,7 +23,7 @@ class Police {
         FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
         ExclusiveLock alerts_lock;
-        SharedMemoryArray<AlertData> alerts_shm_arr;
+        AlertsSharedMemory alerts_shm;
         std::vector<unsigned int> fugitives;
 
         std::list<WantedPersonAlert*> alerts;
@@ -36,7 +36,7 @@ class Police {
     public:
         explicit Police(Logger& logger);
         void receive_fugitives();
-        void receive_alert();
+        void receive_alerts();
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report(Resident* resident);

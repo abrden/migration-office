@@ -26,7 +26,7 @@ void MigrationBooth::attend_resident(Resident* resident) {
 }
 
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
-    police.receive_alert();
+    police.receive_alerts();
     if (!police.is_wanted_person(foreigner)) {
         Stamper* stamper = stampers.get_stamper();
         foreigner->get_passport().stamp_passport(stamper);

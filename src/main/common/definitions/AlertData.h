@@ -12,4 +12,8 @@ typedef struct {
     size_t read_by_quantity;
 } AlertData;
 
+const static size_t SERIALIZED_ALERT_SIZE = sizeof(size_t) * 3 + sizeof(char) * BUFFSIZE;
+
+typedef char SerializedAlert[SERIALIZED_ALERT_SIZE];
+
 #endif //MIGRATION_OFFICE_ALERTDATA_H

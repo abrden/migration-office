@@ -16,8 +16,8 @@ static const size_t BUFFERSIZE = 100;
 
 Police::Police(Logger& logger)
         : logger(logger), fugitives_fifo(FIFO_FILE), ministry_fifo(BOOTH_FIFO_FILE),
-          fugitives_fifo_lock(LOCK_FILE), alerts_lock(AlertsSharedMemory::LOCK_SHMEM_FILE),
-          alerts_shm_arr(AlertsSharedMemory::SHMEM_FILE, AlertsSharedMemory::LETTER, AlertsSharedMemory::SHMEM_SIZE) {
+          fugitives_fifo_lock(LOCK_FILE), alerts_lock(Alerts::LOCK_SHMEM_FILE),
+          alerts_shm(Alerts::SHMEM_FILE, Alerts::LETTER, Alerts::SHMEM_LENGTH) {
 }
 
 void Police::receive_fugitives() {
@@ -44,19 +44,26 @@ void Police::receive_fugitives() {
     fugitives_fifo_lock.unlock();
 }
 
-void Police::receive_alert() {
+void Police::receive_alerts() {
     alerts_lock.lock();
-    AlertData* all_data = alerts_shm_arr.read();
+    for (size_t i = 0; i < Alerts::SHMEM_LENGTH; i++){
+        std::string serialized_alert = alerts_shm.read(i);
 
-    for (size_t i = 0; i < AlertsSharedMemory::SHMEM_SIZE; i++){
-        AlertData data = all_data[i];
-        std::string serialized_alert(data.serialized_alert);
-        if (is_new_alert(data.id)) {
-            logger(BOOTH_POLICE) << "Received alert: " << serialized_alert << std::endl;
-            WantedPersonAlert* alert = AlertDeserializer::deserialize(serialized_alert, data.id);
+        size_t id, read_by_quantity, size;
+        serialized_alert.copy((char*)&id, sizeof(size_t), 0);
+        serialized_alert.copy((char*)&read_by_quantity, sizeof(size_t), sizeof(size_t));
+        serialized_alert.copy((char*)&size, sizeof(size_t), 2 * sizeof(size_t));
+
+        if (is_new_alert(id)) {
+            logger(BOOTH_POLICE) << "receive_alerts ID: " << id << std::endl;
+            logger(BOOTH_POLICE) << "receive_alerts READ_BY: " << read_by_quantity << std::endl;
+            logger(BOOTH_POLICE) << "receive_alerts SIZE: " << size << std::endl;
+            std::string alert_str = serialized_alert.substr(3 * sizeof(size_t), size);
+            logger(BOOTH_POLICE) << "Received alert: " << alert_str << std::endl;
+            WantedPersonAlert* alert = AlertDeserializer::deserialize(alert_str, id);
             alerts.emplace_back(alert);
-            data.read_by_quantity++;
-            alerts_shm_arr.write(i, data);
+            // FIXME data.read_by_quantity++;
+            // FIXME alerts_shm.write(i, data);
         }
     }
     alerts_lock.unlock();
