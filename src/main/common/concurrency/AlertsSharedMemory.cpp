@@ -47,7 +47,8 @@ std::string AlertsSharedMemory::serialize_alert_data(AlertData data) {
     for (unsigned int i = 0; i < sizeof(data.serialized_alert_size); ++i)
         s.push_back(size_arr[i]);
 
-    s.append(data.serialized_alert);
+    for (size_t i = 0; i < data.serialized_alert_size; ++i)
+        s.push_back(data.serialized_alert[i]);
 
     return s;
 }
