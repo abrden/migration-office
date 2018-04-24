@@ -32,10 +32,10 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
     if (!police.is_wanted_person(foreigner)) {
         logger(BOOTH) << "Looking available for stamper" << std::endl;
         stampers.get_stamper();
-        foreigner->get_passport().stamp_passport();
+        foreigner->get_passport().stamp_passport(logger);
+        logger(BOOTH) << "Welcome to Conculandia, foreigner " << foreigner->get_passport().get_id() << std::endl;
         logger(BOOTH) << "Returning stamper" << std::endl;
         stampers.return_stamper();
-        logger(BOOTH) << "Welcome to Conculandia, foreigner " << foreigner->get_passport().get_id() << std::endl;
         statistics_communicator.notify_allowed_foreigner();
     } else {
         police.report(foreigner);

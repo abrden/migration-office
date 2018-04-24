@@ -2,6 +2,7 @@
 #define MIGRATION_OFFICE_PASSPORT_H
 
 #include <string>
+#include "Logger.h"
 
 class Passport {
 
@@ -10,7 +11,7 @@ class Passport {
 
     public:
         explicit Passport(const std::string& id);
-        void stamp_passport();
+        void stamp_passport(Logger& logger);
         const std::string& get_id();
         ~Passport();
 
