@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <iostream>
-#include <system_error>
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -128,7 +127,7 @@ void MigrationOffice::open_statistics() {
         spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
         spawner_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
-        spawner_argv.push_back(NULL);
+        spawner_argv.push_back(nullptr);
 
         execv(spawner_argv[0], &spawner_argv[0]);
     }
