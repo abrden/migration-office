@@ -4,6 +4,7 @@
 #include <sys/shm.h>
 #include <cstring>
 #include <iostream>
+#include <system_error>
 
 AlertsSharedMemory::AlertsSharedMemory(const std::string& file_path, const char letter, const size_t size) : shm_id(0), alerts(nullptr) {
     key_t key = ftok(file_path.c_str(), letter);
