@@ -12,6 +12,4 @@ void Stampers::return_stamper() {
     stampers.v();
 }
 
-Stampers::~Stampers() {
-    stampers.destroy();
-}
+Stampers::~Stampers() = default;

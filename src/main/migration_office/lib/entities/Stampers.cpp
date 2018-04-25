@@ -6,6 +6,4 @@ Stampers::Stampers(const int stampers_number) : stampers(StampersSemaphore::SEM_
     stampers.init(stampers_number);
 }
 
-Stampers::~Stampers() {
-    stampers.destroy();
-}
+Stampers::~Stampers() = default;

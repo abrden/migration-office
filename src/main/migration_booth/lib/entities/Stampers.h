@@ -12,7 +12,6 @@ class Stampers {
         Stampers();
         void get_stamper();
         void return_stamper();
-        void destroy();
         ~Stampers();
 
 };
