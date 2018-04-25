@@ -16,8 +16,6 @@ Semaphore::Semaphore(const std::string& file, const char letter, const int initi
     }
 }
 
-Semaphore::~Semaphore() = default;
-
 int Semaphore::init() const {
     union semnum {
         int val;
@@ -66,10 +64,6 @@ int Semaphore::v() const {
     return ans;
 }
 
-void Semaphore::destroy() const {
-    int ans = semctl(id, 0, IPC_RMID);
-    if (ans < 0) {
-        std::string message = std::string("Error in semctl(): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
-    }
-}
+Semaphore::~Semaphore() {
+    semctl(id, 0, IPC_RMID);
+};
