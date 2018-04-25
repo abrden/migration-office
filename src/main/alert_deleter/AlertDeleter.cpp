@@ -22,15 +22,15 @@ void AlertDeleter::spawn(std::string spawnable) {
     size_t id = std::hash<std::string>{}(spawnable) % BUFFSIZE;
     logger(ALERT_DELETER) << "Searching for alert with id " << id  << " to be deleted." << std::endl;
 
-    size_t i = 0;
-    AlertData read_data = alerts_shm.read(i);
-    while (read_data.id != id) {
-        read_data = alerts_shm.read(i++);
+    size_t pos = 0;
+    AlertData read_data = alerts_shm.read(pos);
+    while (read_data.id != id && pos < BUFFSIZE) {
+        read_data = alerts_shm.read(pos++);
     }
 
-    logger(ALERT_DELETER) << "Alert with id " << id << " found, deleting." << std::endl;
-    alerts_shm.write(id, data);
-    logger(ALERT_DELETER) << "Alert with id " << id << " deleted." << std::endl;
+    logger(ALERT_DELETER) << "Alert with id " << id << " found in position" << pos << ", deleting." << std::endl;
+    alerts_shm.write(pos, data);
+    logger(ALERT_DELETER) << "Alert with id " << id << " found in position" << pos << " deleted." << std::endl;
 
     alerts_shmem_lock.unlock();
 }
