@@ -5,7 +5,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <iostream>
-#include <system_error>
 
 MigrationOffice::MigrationOffice(const int booths_number, const int stampers_number,
                                  const std::string people_file, const std::string alerts_file,
@@ -24,6 +23,7 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
     logger(OFFICE) << "debug = " << debug << std::endl;
     logger(OFFICE) << "log file = " << log_file << std::endl;
 
+    stampers.initialize(stampers_number);
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
 
@@ -83,8 +83,6 @@ void MigrationOffice::open_booths() {
 
             std::vector<char*> booth_argv;
             booth_argv.push_back(const_cast<char*>(BinaryNames::BOOTH_BINARY.c_str()));
-            std::string stampers_number_str = std::to_string(stampers_number);
-            booth_argv.push_back(const_cast<char*>(stampers_number_str.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);

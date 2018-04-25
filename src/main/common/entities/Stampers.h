@@ -10,7 +10,8 @@ class Stampers {
         Semaphore stampers;
 
     public:
-        Stampers(const int stampers_number);
+        Stampers();
+        void initialize(const int stampers_number);
         void get_stamper();
         void return_stamper();
         ~Stampers();

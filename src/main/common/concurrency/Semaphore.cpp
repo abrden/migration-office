@@ -1,15 +1,13 @@
 #include "Semaphore.h"
 
-Semaphore::Semaphore(const std::string& file, const char letter, const int initial_value) : initial_value(initial_value) {
+Semaphore::Semaphore(const std::string& file, const char letter) {
     key_t key = ftok(file.c_str(), letter);
-    this->id = semget(key, 1, 0666 | IPC_CREAT);
-
-    this->init();
+    this->id = semget(key, 1, 0666 | IPC_CREAT);;
 }
 
 Semaphore::~Semaphore() = default;
 
-int Semaphore::init() const {
+int Semaphore::init(const int initial_value) const {
 
     union semnum {
         int val;
@@ -18,7 +16,7 @@ int Semaphore::init() const {
     };
 
     semnum init;
-    init.val = this->initial_value;
+    init.val = initial_value;
     int resultado = semctl(this->id, 0, SETVAL, init);
     return resultado;
 }

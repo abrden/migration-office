@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-#include "Semaphore.h"
+#include "Stampers.h"
 #include "Logger.h"
 #include "SIGINTHandler.h"
 
@@ -17,6 +17,7 @@ class MigrationOffice {
         const bool debug;
         const std::string log_file;
 
+        Stampers stampers;
         SIGINTHandler sigint_handler;
         Logger logger;
 
