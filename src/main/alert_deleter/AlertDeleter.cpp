@@ -16,11 +16,11 @@ AlertDeleter::AlertDeleter(const std::string& alerts_file, const bool debug, con
 }
 
 void AlertDeleter::spawn(std::string spawnable) {
-    AlertData data;
-    data.id = 0;
+    AlertData data = {0, 0, '\0'};
 
     alerts_shmem_lock.lock();
 
+    logger(ALERT_DELETER) << "Alert to delete: " << spawnable << std::endl;
     size_t id = std::hash<std::string>{}(spawnable) % BUFFSIZE;
     logger(ALERT_DELETER) << "Searching for alert with id " << id  << " to be deleted." << std::endl;
 
