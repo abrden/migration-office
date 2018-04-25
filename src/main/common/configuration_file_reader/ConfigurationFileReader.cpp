@@ -2,6 +2,8 @@
 #include <sstream>
 #include <vector>
 #include <cstring>
+#include <stdexcept>
+
 
 #include "ConfigurationFileReader.h"
 #include "ConfigurationFileFields.h"
