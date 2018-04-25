@@ -1,8 +1,10 @@
-#include <src/main/common/definitions/AlertData.h>
+#include "AlertData.h"
 #include "AlertDeleter.h"
 #include "AlertData.h"
 #include "FileNames.h"
 #include "SignalHandler.h"
+
+#include <stdexcept>
 
 AlertDeleter::AlertDeleter(const std::string& alerts_file, const bool debug, const std::string& log_file)
         : Spawner(logger, alerts), logger(debug, log_file),
