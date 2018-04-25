@@ -1,6 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <cstring>
 
 #include "ConfigurationFileReader.h"
 #include "ConfigurationFileFields.h"
@@ -29,6 +30,12 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
                                                  std::vector<unsigned int> &fugitives_ids) {
     // TODO add exception handling
     std::ifstream ifs(fugitives_file_path);
+    if (!ifs) {
+        const std::string message = std::string("Error when opening configuration file: ") +
+                fugitives_file_path + std::string(". ") +
+                std::string(strerror(errno));
+        throw std::runtime_error(message);
+    }
     std::string fugitive_id;
 
     // Get header
@@ -41,6 +48,12 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
 void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spawnables& persons) {
     // TODO add exception handling
     std::ifstream ifs(file_path);
+    if (!ifs) {
+        const std::string message = std::string("Error when opening configuration file: ") +
+                file_path + std::string(". ") +
+                std::string(strerror(errno));
+        throw std::runtime_error(message);
+    }
     std::string line;
 
     // Get header
@@ -62,6 +75,12 @@ void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spaw
 void ConfigurationFileReader::load_alerts_deletion(const std::string &file_path, Spawnables &spawnables){
     // TODO add exception handling
     std::ifstream ifs(file_path);
+    if (!ifs) {
+        const std::string message = std::string("Error when opening configuration file: ") +
+                file_path + std::string(". ") +
+                std::string(strerror(errno));
+        throw std::runtime_error(message);
+    }
     std::string line;
 
     // Get header
