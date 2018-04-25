@@ -4,8 +4,8 @@
 #include "FileNames.h"
 #include "SignalHandler.h"
 
-AlertDeleter::AlertDeleter(Logger& logger, const std::string& alerts_file)
-        : Spawner(logger, alerts), logger(logger),
+AlertDeleter::AlertDeleter(const std::string& alerts_file, const bool debug, const std::string& log_file)
+        : Spawner(logger, alerts), logger(debug, log_file),
           alerts_shm(Alerts::SHMEM_FILE, Alerts::LETTER, Alerts::SHMEM_LENGTH),
           alerts_shmem_lock(Alerts::LOCK_SHMEM_FILE) {
     ConfigurationFileReader::load_alerts_deletion(alerts_file, alerts);

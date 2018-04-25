@@ -7,7 +7,7 @@
 
 class AlertDeleter : public Spawner {
     private:
-        Logger& logger;
+        Logger logger;
         SIGINTHandler sigint_handler;
 
         AlertsSharedMemory alerts_shm;
@@ -15,7 +15,7 @@ class AlertDeleter : public Spawner {
         Spawnables alerts;
     public:
 
-        AlertDeleter(Logger& logger, const std::string& alerts_file);
+        AlertDeleter(const std::string& alerts_file, const bool debug, const std::string& log_file);
         void spawn(std::string spawnable) override;
         virtual ~AlertDeleter();
 };
