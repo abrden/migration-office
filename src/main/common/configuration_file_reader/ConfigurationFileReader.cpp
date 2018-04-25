@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "ConfigurationFileReader.h"
+#include "ConfigurationFileFields.h"
 
 const static char SEPARATOR = ',';
 
@@ -55,5 +56,27 @@ void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spaw
         getline(line_stream, serialized_spawnable);
 
         persons.push_spawnable(stoi(timestamp), serialized_spawnable);
+    }
+}
+
+void ConfigurationFileReader::load_alerts_deletion(const std::string &file_path, Spawnables &spawnables){
+    // TODO add exception handling
+    std::ifstream ifs(file_path);
+    std::string line;
+
+    // Get header
+    std::getline(ifs, line);
+
+    while (std::getline(ifs, line)) {
+        std::stringstream line_stream(line);
+
+        std::string timestamp;
+        std::getline(line_stream, timestamp, SEPARATOR);
+        // We dont need the timestamp, only the delete timestamp
+        std::getline(line_stream, timestamp, SEPARATOR);
+        std::string serialized_spawnable;
+        getline(line_stream, serialized_spawnable);
+
+        spawnables.push_spawnable(stoi(timestamp), serialized_spawnable);
     }
 }

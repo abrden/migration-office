@@ -22,8 +22,7 @@ namespace Alerts {
     const std::string SHMEM_FILE = "/bin/cat";
     const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
     const char LETTER = 'C';
-    const std::string ACK_FIFO_FILE = "/tmp/alerts_ack_fifo";
-    const size_t SHMEM_LENGTH = 1024;
+const size_t SHMEM_LENGTH = 1024;
 }
 
 #endif //MIGRATION_OFFICE_FILENAMES_H
