@@ -32,6 +32,7 @@ class MigrationOffice {
         void open_booths();
         void fork_spawner();
         void open_statistics();
+        void open_alert_deleter();
         ~MigrationOffice();
 
 };
