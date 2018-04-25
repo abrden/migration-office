@@ -4,6 +4,7 @@
 #include <string>
 
 namespace BinaryNames {
+    const std::string ALERT_DELETER_BINARY = "./alert_deleter";
     const std::string BOOTH_BINARY = "./migration_booth";
     const std::string SPAWNER_BINARY = "./migration_spawner";
     const std::string MINISTER_BINARY = "./ministry_of_security";
