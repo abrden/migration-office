@@ -4,8 +4,6 @@
 #include "AlertSpawner.h"
 #include "SignalHandler.h"
 
-static size_t spawned_alerts = 1;
-
 AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths_number,
                            const std::vector<pid_t>& booths_ids)
         : Spawner(logger, alerts), logger(logger),
@@ -23,14 +21,14 @@ size_t AlertSpawner::find_new_alert_index() {
     size_t i;
     for (i = 0; i < Alerts::SHMEM_LENGTH; i++) {
         AlertData alert = alerts_shm.read(i);
-        if (alert.read_by_quantity == booths_number || alert.id == 0) break;
+        if (alert.id == 0) break;
     }
     return i;
 }
 
 void AlertSpawner::spawn(std::string spawnable) {
     AlertData data;
-    data.id = spawned_alerts++;
+    data.id = std::hash<std::string>{}(spawnable) % BUFFSIZE;
     size_t length = spawnable.copy(data.serialized_alert, spawnable.size(), 0);
     data.serialized_alert[length] = '\0';
     data.serialized_alert_size = spawnable.size();
