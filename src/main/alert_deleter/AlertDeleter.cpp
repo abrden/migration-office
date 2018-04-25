@@ -28,6 +28,10 @@ void AlertDeleter::spawn(std::string spawnable) {
     alerts_shmem_lock.unlock();
 }
 
+bool AlertDeleter::quit() {
+    return sigint_handler.get_graceful_quit() == 1;
+}
+
 AlertDeleter::~AlertDeleter() {
     SignalHandler::destroy();
 }

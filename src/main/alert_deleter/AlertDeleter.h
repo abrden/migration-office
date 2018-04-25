@@ -17,6 +17,7 @@ class AlertDeleter : public Spawner {
 
         AlertDeleter(const std::string& alerts_file, const bool debug, const std::string& log_file);
         void spawn(std::string spawnable) override;
+        bool quit() override;
         virtual ~AlertDeleter();
 };
 
