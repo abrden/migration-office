@@ -16,6 +16,8 @@ void Stampers::return_stamper() {
     stampers.v();
 }
 
-Stampers::~Stampers() {
+void Stampers::destroy() {
     stampers.destroy();
 }
+
+Stampers::~Stampers() = default;

@@ -144,6 +144,7 @@ void MigrationOffice::wait_children() {
 
 MigrationOffice::~MigrationOffice() {
     wait_children();
+    stampers.destroy();
     SignalHandler::destroy();
     logger(OFFICE) << "========== CLOSED ==========" << std::endl;
 }

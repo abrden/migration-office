@@ -19,7 +19,7 @@ namespace StatisticsSharedMemory {
 }
 
 namespace Alerts {
-    const std::string SHMEM_FILE = "/bin/cat";
+    const std::string SHMEM_FILE = "/bin/tar";
     const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
     const char LETTER = 'C';
     const std::string ACK_FIFO_FILE = "/tmp/alerts_ack_fifo";
@@ -27,8 +27,8 @@ namespace Alerts {
 }
 
 namespace StampersSemaphore {
-    const std::string SEM_FILE = "/bin/head";
-    const char LETTER = 'B';
+    const std::string SEM_FILE = "/bin/cat";
+    const char LETTER = 'Z';
 }
 
 #endif //MIGRATION_OFFICE_FILENAMES_H

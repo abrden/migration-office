@@ -14,6 +14,7 @@ class Stampers {
         void initialize(const int stampers_number);
         void get_stamper();
         void return_stamper();
+        void destroy();
         ~Stampers();
 
 };
