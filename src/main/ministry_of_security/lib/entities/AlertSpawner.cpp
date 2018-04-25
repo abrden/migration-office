@@ -32,7 +32,6 @@ void AlertSpawner::spawn(std::string spawnable) {
     size_t length = spawnable.copy(data.serialized_alert, spawnable.size(), 0);
     data.serialized_alert[length] = '\0';
     data.serialized_alert_size = spawnable.size();
-    data.read_by_quantity = 0;
 
     alerts_shmem_lock.lock();
     logger(MINISTER) << "Looking for index to write alert" << std::endl;
