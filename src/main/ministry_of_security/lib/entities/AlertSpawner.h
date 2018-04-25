@@ -8,6 +8,8 @@
 #include "SharedMemoryArray.h"
 #include "AlertsSharedMemory.h"
 
+#include <vector>
+
 class AlertSpawner : public Spawner {
 
     private:
