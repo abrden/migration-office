@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <src/main/common/definitions/AlertData.h>
 
 static const std::string FIFO_FILE = "/tmp/archivofifo";
 static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
@@ -44,26 +45,31 @@ void Police::receive_fugitives() {
     fugitives_fifo_lock.unlock();
 }
 
+bool Police::is_new_alert(size_t id) {
+    if (id == 0) return false;
+    for (auto it = alerts.begin(); it != alerts.end(); ++it) {
+        if ((*it)->get_id() == id) return false;
+    }
+    return true;
+}
+
 void Police::receive_alerts() {
     alerts_lock.lock();
     for (size_t i = 0; i < Alerts::SHMEM_LENGTH; i++){
-        std::string serialized_alert = alerts_shm.read(i);
+        AlertData alert_data = alerts_shm.read(i);
 
-        size_t id, read_by_quantity, size;
-        serialized_alert.copy((char*)&id, sizeof(size_t), 0);
-        serialized_alert.copy((char*)&read_by_quantity, sizeof(size_t), sizeof(size_t));
-        serialized_alert.copy((char*)&size, sizeof(size_t), 2 * sizeof(size_t));
-
-        if (is_new_alert(id)) {
-            logger(BOOTH_POLICE) << "receive_alerts ID: " << id << std::endl;
-            logger(BOOTH_POLICE) << "receive_alerts READ_BY: " << read_by_quantity << std::endl;
-            logger(BOOTH_POLICE) << "receive_alerts SIZE: " << size << std::endl;
-            std::string alert_str = serialized_alert.substr(3 * sizeof(size_t), size);
+        if (is_new_alert(alert_data.id)) {
+            logger(BOOTH_POLICE) << "receive_alerts ID: " << alert_data.id << std::endl;
+            logger(BOOTH_POLICE) << "receive_alerts READ_BY: " << alert_data.read_by_quantity << std::endl;
+            logger(BOOTH_POLICE) << "receive_alerts SIZE: " << alert_data.serialized_alert_size << std::endl;
+            std::string alert_str(alert_data.serialized_alert, alert_data.serialized_alert_size);
             logger(BOOTH_POLICE) << "Received alert: " << alert_str << std::endl;
-            WantedPersonAlert* alert = AlertDeserializer::deserialize(alert_str, id);
+
+            WantedPersonAlert* alert = AlertDeserializer::deserialize(alert_str, alert_data.id);
             alerts.emplace_back(alert);
-            // FIXME data.read_by_quantity++;
-            // FIXME alerts_shm.write(i, data);
+
+            alert_data.read_by_quantity++;
+            alerts_shm.write(i, alert_data);
         }
     }
     alerts_lock.unlock();
@@ -88,14 +94,6 @@ void Police::report(Resident* resident) {
 void Police::report(Foreigner* foreigner) {
     logger(BOOTH_POLICE) << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
     deported_foreigners++;
-}
-
-bool Police::is_new_alert(size_t id) {
-    if (id == 0) return false;
-    for (auto it = alerts.begin(); it != alerts.end(); ++it) {
-        if ((*it)->get_id() == id) return false;
-    }
-    return true;
 }
 
 Police::~Police() {
