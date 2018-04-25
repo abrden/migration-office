@@ -30,10 +30,9 @@ std::list<std::string> ConfigurationFileReader::extract_features(std::vector<std
 
 void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path,
                                                  std::vector<unsigned int> &fugitives_ids) {
-    // TODO add exception handling
     std::ifstream ifs(fugitives_file_path);
     if (!ifs) {
-        const std::string message = std::string("Error when opening configuration file: ") +
+        const std::string message = std::string("Error when opening fugitives configuration file: ") +
                 fugitives_file_path + std::string(". ") +
                 std::string(strerror(errno));
         throw std::runtime_error(message);
@@ -48,10 +47,9 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
 }
 
 void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spawnables& persons) {
-    // TODO add exception handling
     std::ifstream ifs(file_path);
     if (!ifs) {
-        const std::string message = std::string("Error when opening configuration file: ") +
+        const std::string message = std::string("Error when opening persons configuration file: ") +
                 file_path + std::string(". ") +
                 std::string(strerror(errno));
         throw std::runtime_error(message);
@@ -73,12 +71,38 @@ void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spaw
         persons.push_spawnable(stoi(timestamp), serialized_spawnable);
     }
 }
-
-void ConfigurationFileReader::load_alerts_deletion(const std::string &file_path, Spawnables &spawnables){
-    // TODO add exception handling
+void ConfigurationFileReader::load_alerts(const std::string& file_path, Spawnables& alerts){
     std::ifstream ifs(file_path);
     if (!ifs) {
-        const std::string message = std::string("Error when opening configuration file: ") +
+        const std::string message = std::string("Error when opening alerts configuration file: ") +
+                file_path + std::string(". ") +
+                std::string(strerror(errno));
+        throw std::runtime_error(message);
+    }
+    std::string line;
+
+    // Get header
+    std::getline(ifs, line);
+
+    while (std::getline(ifs, line)) {
+        std::stringstream line_stream(line);
+
+        std::string timestamp;
+        std::string del_timestamp;
+        std::string serialized_spawnable;
+
+        std::getline(line_stream, timestamp, SEPARATOR);
+        std::getline(line_stream, del_timestamp, SEPARATOR);
+        getline(line_stream, serialized_spawnable);
+
+        alerts.push_spawnable(stoi(timestamp), serialized_spawnable);
+    }
+}
+
+void ConfigurationFileReader::load_alerts_deletion(const std::string& file_path, Spawnables& spawnables){
+    std::ifstream ifs(file_path);
+    if (!ifs) {
+        const std::string message = std::string("Error when opening alerts configuration file: ") +
                 file_path + std::string(". ") +
                 std::string(strerror(errno));
         throw std::runtime_error(message);

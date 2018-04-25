@@ -1,4 +1,5 @@
 #include "AlertData.h"
+#include "ConfigurationFileReader.h"
 #include "FifoReader.h"
 #include "FileNames.h"
 #include "AlertSpawner.h"
@@ -11,7 +12,7 @@ AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file, const
           alerts_shmem_lock(Alerts::LOCK_SHMEM_FILE),
           booths_number(booths_number), booths_ids(booths_ids) {
 
-    ConfigurationFileReader::load_spawnables(alerts_file, alerts);
+    ConfigurationFileReader::load_alerts(alerts_file, alerts);
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
@@ -28,6 +29,7 @@ size_t AlertSpawner::find_new_alert_index() {
 
 void AlertSpawner::spawn(std::string spawnable) {
     AlertData data;
+    logger(MINISTER) << "Creating alert: " << spawnable << std::endl;
     data.id = std::hash<std::string>{}(spawnable) % BUFFSIZE;
     size_t length = spawnable.copy(data.serialized_alert, spawnable.size(), 0);
     data.serialized_alert[length] = '\0';
