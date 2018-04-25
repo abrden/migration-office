@@ -66,4 +66,4 @@ int Semaphore::v() const {
 
 Semaphore::~Semaphore() {
     semctl(id, 0, IPC_RMID);
-};
+}
