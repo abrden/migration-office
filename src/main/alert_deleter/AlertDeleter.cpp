@@ -3,6 +3,7 @@
 #include "AlertData.h"
 #include "FileNames.h"
 #include "SignalHandler.h"
+#include "ConfigurationFileReader.h"
 
 #include <stdexcept>
 
