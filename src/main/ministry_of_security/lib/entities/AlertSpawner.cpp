@@ -3,6 +3,7 @@
 #include "FileNames.h"
 #include "AlertSpawner.h"
 #include "SignalHandler.h"
+#include "ConfigurationFileReader.h"
 
 static size_t spawned_alerts = 1;
 

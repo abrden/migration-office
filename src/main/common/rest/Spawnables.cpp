@@ -20,6 +20,10 @@ bool Spawnables::empty() {
     return items.empty();
 }
 
+const std::pair<int, std::string>& Spawnables::front() {
+    return items.front();
+}
+
 void Spawnables::push_spawnable(int timestamp, std::string& spawnable){
     items.emplace_back(std::make_pair(timestamp, spawnable));
 }

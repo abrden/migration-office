@@ -11,6 +11,7 @@
 #include "Police.h"
 #include "StatisticsCommunicator.h"
 #include "Logger.h"
+#include "Semaphore.h"
 
 #include <string>
 
@@ -21,19 +22,15 @@ class MigrationBooth {
 
         SIGINTHandler sigint_handler;
         PersonsQueue queue;
-        Stampers stampers;
         Police police;
+        Stampers stampers;
         StatisticsCommunicator statistics_communicator;
 
         void attend_resident(Resident* resident);
         void attend_foreigner(Foreigner* foreigner);
 
-        // Do we need this?
-        std::list<Resident*> arrived_residents;
-        std::list<Foreigner*> arrived_foreigners;
-
     public:
-        MigrationBooth(const bool debug, const std::string log_file);
+        MigrationBooth(const int stampers_numer, const bool debug, const std::string log_file);
         void open();
         ~MigrationBooth();
 

@@ -1,13 +1,10 @@
 #ifndef MIGRATION_OFFICE_SPAWNER_H
 #define MIGRATION_OFFICE_SPAWNER_H
 
-#include <list>
-#include <utility>
 #include <string>
 
 #include "Logger.h"
 #include "Spawnables.h"
-#include "ConfigurationFileReader.h"
 
 class Spawner {
 
