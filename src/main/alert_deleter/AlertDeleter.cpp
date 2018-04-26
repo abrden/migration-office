@@ -25,13 +25,14 @@ void AlertDeleter::spawn(std::string spawnable) {
     size_t id = std::hash<std::string>{}(spawnable) % BUFFSIZE;
     logger(ALERT_DELETER) << "Searching for alert with id " << id  << " to be deleted." << std::endl;
 
-    size_t pos = 0;
-    AlertData read_data = alerts_shm.read(pos);
-    while (read_data.id != id && pos < BUFFSIZE) {
-        read_data = alerts_shm.read(pos++);
+    size_t  pos;
+    for (pos = 0; pos < Alerts::SHMEM_LENGTH; pos++) {
+        AlertData alert = alerts_shm.read(pos);
+        if (alert.id == 0) break;
     }
 
-    if (pos == BUFFSIZE) {
+    // FIXME not sure about throwing this exception or what to do in this case
+    if (pos == Alerts::SHMEM_LENGTH) {
         std::string message = "Error in alert deletion: alert with id " + std::to_string(id) + " not found.";
         throw std::runtime_error(message);
     }
