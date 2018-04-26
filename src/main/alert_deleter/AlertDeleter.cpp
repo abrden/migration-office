@@ -28,7 +28,7 @@ void AlertDeleter::spawn(std::string spawnable) {
     size_t  pos;
     for (pos = 0; pos < Alerts::SHMEM_LENGTH; pos++) {
         AlertData alert = alerts_shm.read(pos);
-        if (alert.id == 0) break;
+        if (alert.id == id) break;
     }
 
     // FIXME not sure about throwing this exception or what to do in this case
