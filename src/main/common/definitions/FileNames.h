@@ -27,7 +27,7 @@ namespace Alerts {
 }
 
 namespace StampersSemaphore {
-    const std::string SEM_FILE = "/bin/head";
+    const std::string SEM_FILE = "/bin/cp";
     const char LETTER = 'B';
 }
 
