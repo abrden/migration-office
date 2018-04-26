@@ -6,7 +6,6 @@
 
 
 #include "ConfigurationFileReader.h"
-#include "ConfigurationFileFields.h"
 
 const static char SEPARATOR = ',';
 
@@ -99,7 +98,7 @@ void ConfigurationFileReader::load_alerts(const std::string& file_path, Spawnabl
     }
 }
 
-void ConfigurationFileReader::load_alerts_deletion(const std::string& file_path, Spawnables& spawnables){
+void ConfigurationFileReader::load_alerts_deletion(const std::string& file_path, Spawnables& alerts){
     std::ifstream ifs(file_path);
     if (!ifs) {
         const std::string message = std::string("Error when opening alerts configuration file: ") +
@@ -116,12 +115,13 @@ void ConfigurationFileReader::load_alerts_deletion(const std::string& file_path,
         std::stringstream line_stream(line);
 
         std::string timestamp;
-        std::getline(line_stream, timestamp, SEPARATOR);
-        // We dont need the timestamp, only the delete timestamp
-        std::getline(line_stream, timestamp, SEPARATOR);
+        std::string del_timestamp;
         std::string serialized_spawnable;
+
+        std::getline(line_stream, timestamp, SEPARATOR);
+        std::getline(line_stream, del_timestamp, SEPARATOR);
         getline(line_stream, serialized_spawnable);
 
-        spawnables.push_spawnable(stoi(timestamp), serialized_spawnable);
+        alerts.push_spawnable(stoi(del_timestamp), serialized_spawnable);
     }
 }
