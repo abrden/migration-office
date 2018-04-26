@@ -19,7 +19,6 @@ class Semaphore {
         ~Semaphore();
         int p() const;
         int v() const;
-        void destroy() const;
 
 };
 
