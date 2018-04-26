@@ -10,16 +10,13 @@ class Semaphore {
 
     private:
         int id;
-        int initial_value;
-
-        int init() const;
 
     public:
-        Semaphore(const std::string& file, const char letter, const int initial_value);
+        Semaphore(const std::string& file, const char letter);
         ~Semaphore();
+        int init(const int initial_value) const;
         int p() const;
         int v() const;
-        void destroy() const;
 
 };
 

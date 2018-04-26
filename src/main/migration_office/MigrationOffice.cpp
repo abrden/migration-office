@@ -13,7 +13,7 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
                                  const bool debug, const std::string log_file)
         : booths_number(booths_number), stampers_number(stampers_number),
           people_file(people_file), alerts_file(alerts_file), fugitives_file(fugitives_file),
-          debug(debug), log_file(log_file), logger(debug, log_file) {
+          debug(debug), log_file(log_file), stampers(stampers_number), logger(debug, log_file) {
 
     logger(OFFICE) << "Welcome to the Conculandia Migration Office!" << std::endl;
     logger(OFFICE) << "booths number = " << booths_number << std::endl;
@@ -83,8 +83,6 @@ void MigrationOffice::open_booths() {
 
             std::vector<char*> booth_argv;
             booth_argv.push_back(const_cast<char*>(BinaryNames::BOOTH_BINARY.c_str()));
-            std::string stampers_number_str = std::to_string(stampers_number);
-            booth_argv.push_back(const_cast<char*>(stampers_number_str.c_str()));
             booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
             booth_argv.push_back(const_cast<char*>(log_file.c_str()));
             booth_argv.push_back(nullptr);

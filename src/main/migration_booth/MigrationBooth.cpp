@@ -1,11 +1,10 @@
 #include "MigrationBooth.h"
 #include "SignalHandler.h"
 
-MigrationBooth::MigrationBooth(const int stampers_number, const bool debug, const std::string log_file)
+MigrationBooth::MigrationBooth(const bool debug, const std::string log_file)
         : logger(debug, log_file),
           queue(logger),
-          police(logger),
-          stampers(stampers_number) {
+          police(logger) {
 
     logger(BOOTH) << "Welcome to the Conculandia Migration Booth!" << std::endl;
     logger(BOOTH) << "debug = " << debug << std::endl;
