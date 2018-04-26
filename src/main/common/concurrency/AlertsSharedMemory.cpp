@@ -1,17 +1,16 @@
 #include "AlertsSharedMemory.h"
+#include "AlertData.h"
 
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <cstring>
 #include <iostream>
 #include <system_error>
-#include <src/main/common/definitions/AlertData.h>
 
 AlertsSharedMemory::AlertsSharedMemory(const std::string& file_path, const char letter, const size_t size) : shm_id(0), alerts(nullptr) {
     key_t key = ftok(file_path.c_str(), letter);
 
     if (key > 0) {
-        std::cout << "Size of data: " << (sizeof(SerializedAlert) * size) << std::endl;
         this->shm_id = shmget(key, sizeof(SerializedAlert) * size, 0644 | IPC_CREAT);
 
         if (this->shm_id > 0) {
