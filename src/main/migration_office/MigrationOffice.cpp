@@ -1,6 +1,7 @@
 #include "MigrationOffice.h"
 #include "SignalHandler.h"
 #include "FileNames.h"
+#include "Logger.h"
 
 #include <unistd.h>
 #include <sys/wait.h>

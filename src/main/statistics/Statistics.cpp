@@ -4,9 +4,9 @@
 
 Statistics::Statistics(size_t booths_number, const bool debug, const std::string& log_file)
         : logger(debug, log_file), booths_number(booths_number),
-          shm(StatisticsSharedMemory::STATS_FILE, StatisticsSharedMemory::LETTER),
-          lock(StatisticsSharedMemory::LOCK_STATS_FILE),
-          fifo(StatisticsSharedMemory::FIFO_FILE), cnf_fifo(StatisticsSharedMemory::CNF_FIFO_FILE) {
+          shm(StatisticsSharedMem::STATS_FILE, StatisticsSharedMem::LETTER),
+          lock(StatisticsSharedMem::LOCK_STATS_FILE),
+          fifo(StatisticsSharedMem::FIFO_FILE), cnf_fifo(StatisticsSharedMem::CNF_FIFO_FILE) {
 
     logger(STATISTICS) << "Welcome to Conculandia's Statistics Department!" << std::endl;
 

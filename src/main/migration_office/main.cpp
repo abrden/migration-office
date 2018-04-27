@@ -2,11 +2,8 @@
 #include <getopt.h>
 #include <stdexcept>
 
+#include "FileNames.h"
 #include "MigrationOffice.h"
-
-const static int DEFAULT_BOOTHS_NUMBER = 10;
-const static int DEFAULT_STAMPERS_NUMBER = 5;
-const static std::string DEFAULT_LOG = "log";
 
 enum ERRORS {
     NO_CONFIG_FILE = -1,
@@ -20,9 +17,9 @@ int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_num
 
     bool people, alerts, fugitives;
     people = alerts = fugitives = debug = false;
-    booths_number = DEFAULT_BOOTHS_NUMBER;
-    stampers_number = DEFAULT_STAMPERS_NUMBER;
-    log_file = DEFAULT_LOG;
+    booths_number = OfficeDefaults::DEFAULT_BOOTHS_NUMBER;
+    stampers_number = OfficeDefaults::DEFAULT_STAMPERS_NUMBER;
+    log_file = OfficeDefaults::DEFAULT_LOG;
 
     int flag = 0;
     struct option opts[] = {
