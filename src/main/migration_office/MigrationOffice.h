@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "Stampers.h"
 #include "Logger.h"
 #include "SIGINTHandler.h"
 
@@ -15,11 +16,13 @@ class MigrationOffice {
         const std::string people_file, alerts_file, fugitives_file;
         const bool debug;
         const std::string log_file;
+
+        Stampers stampers;
         SIGINTHandler sigint_handler;
+        Logger logger;
+
         std::list<pid_t> children_pids;
         std::vector<pid_t> booth_pids;
-
-        Logger logger;
 
         void wait_children();
 

@@ -13,7 +13,7 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
                                  const bool debug, const std::string log_file)
         : booths_number(booths_number), stampers_number(stampers_number),
           people_file(people_file), alerts_file(alerts_file), fugitives_file(fugitives_file),
-          debug(debug), log_file(log_file), logger(debug, log_file) {
+          debug(debug), log_file(log_file), stampers(stampers_number), logger(debug, log_file) {
 
     logger(OFFICE) << "Welcome to the Conculandia Migration Office!" << std::endl;
     logger(OFFICE) << "booths number = " << booths_number << std::endl;

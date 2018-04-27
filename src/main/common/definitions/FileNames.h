@@ -6,7 +6,7 @@
 namespace BinaryNames {
     const std::string ALERT_DELETER_BINARY = "./alert_deleter";
     const std::string BOOTH_BINARY = "./migration_booth";
-    const std::string SPAWNER_BINARY = "./migration_spawner";
+    const std::string SPAWNER_BINARY = "./people_spawner";
     const std::string MINISTER_BINARY = "./ministry_of_security";
     const std::string STATISTICS_BINARY = "./statistics";
 }
@@ -20,10 +20,15 @@ namespace StatisticsSharedMemory {
 }
 
 namespace Alerts {
-    const std::string SHMEM_FILE = "/bin/cat";
+    const std::string SHMEM_FILE = "/bin/tar";
     const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
     const char LETTER = 'C';
 const size_t SHMEM_LENGTH = 1024;
+}
+
+namespace StampersSemaphore {
+    const std::string SEM_FILE = "/bin/cat";
+    const char LETTER = 'Z';
 }
 
 #endif //MIGRATION_OFFICE_FILENAMES_H

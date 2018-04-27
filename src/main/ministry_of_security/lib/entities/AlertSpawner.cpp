@@ -4,6 +4,7 @@
 #include "FileNames.h"
 #include "AlertSpawner.h"
 #include "SignalHandler.h"
+#include "ConfigurationFileReader.h"
 
 AlertSpawner::AlertSpawner(Logger& logger, const std::string& alerts_file, const size_t booths_number,
                            const std::vector<pid_t>& booths_ids)

@@ -1,6 +1,15 @@
+#include "FileNames.h"
 #include "Stampers.h"
 
-Stamper* Stampers::get_stamper() {
-    // TODO
-    return nullptr;
+
+Stampers::Stampers() : stampers(StampersSemaphore::SEM_FILE, StampersSemaphore::LETTER) {}
+
+void Stampers::get_stamper() {
+    stampers.p();
 }
+
+void Stampers::return_stamper() {
+    stampers.v();
+}
+
+Stampers::~Stampers() = default;
