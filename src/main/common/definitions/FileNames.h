@@ -16,7 +16,7 @@ namespace BinaryNames {
     const std::string STATISTICS_BINARY = "./statistics";
 }
 
-namespace StatisticsSharedMemory {
+namespace StatisticsSharedMem {
     const std::string STATS_FILE = "/bin/ls";
     const std::string LOCK_STATS_FILE = "/tmp/statistics_shm_lock";
     const std::string FIFO_FILE = "/tmp/statistics_fifo";
@@ -24,7 +24,7 @@ namespace StatisticsSharedMemory {
     const char LETTER = 'A';
 }
 
-namespace Alerts {
+namespace AlertsSharedMem {
     const std::string SHMEM_FILE = "/bin/tar";
     const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
     const char LETTER = 'C';
