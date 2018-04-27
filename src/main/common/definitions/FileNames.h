@@ -31,4 +31,9 @@ namespace StampersSemaphore {
     const char LETTER = 'Z';
 }
 
+namespace FugitivesFifo {
+    const std::string FUGITIVES_FIFO_FILE = "/tmp/archivofifo";
+    const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
+}
+
 #endif //MIGRATION_OFFICE_FILENAMES_H
