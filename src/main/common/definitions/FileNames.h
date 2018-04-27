@@ -5,7 +5,7 @@
 
 namespace BinaryNames {
     const std::string BOOTH_BINARY = "./migration_booth";
-    const std::string SPAWNER_BINARY = "./migration_spawner";
+    const std::string SPAWNER_BINARY = "./people_spawner";
     const std::string MINISTER_BINARY = "./ministry_of_security";
     const std::string STATISTICS_BINARY = "./statistics";
 }
