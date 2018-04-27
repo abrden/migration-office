@@ -10,5 +10,4 @@ set(SOURCES
 add_executable(${PROJECT_NAME} ${SOURCES})
 
 target_link_libraries(${PROJECT_NAME} LINK_PUBLIC _migration_booth_entities)
-target_link_libraries(${PROJECT_NAME} LINK_PUBLIC _migration_booth_signal_handlers)
 target_link_libraries(${PROJECT_NAME} LINK_PUBLIC _signal_handlers)

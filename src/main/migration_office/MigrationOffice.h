@@ -25,6 +25,7 @@ class MigrationOffice {
         std::vector<pid_t> booth_pids;
 
         void wait_children();
+        void fork_new_process(std::vector<char*>& argvs);
 
     public:
         MigrationOffice(const int booths_number, const int stampers_number,

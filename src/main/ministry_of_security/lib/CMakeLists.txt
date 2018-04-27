@@ -1,2 +1,1 @@
-add_subdirectory(signal_handlers)
 add_subdirectory(entities)
