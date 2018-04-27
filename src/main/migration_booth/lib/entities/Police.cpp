@@ -56,16 +56,12 @@ void Police::receive_alerts() {
 
         if (is_new_alert(alert_data.id)) {
             logger(BOOTH_POLICE) << "receive_alerts ID: " << alert_data.id << std::endl;
-            logger(BOOTH_POLICE) << "receive_alerts READ_BY: " << alert_data.read_by_quantity << std::endl;
             logger(BOOTH_POLICE) << "receive_alerts SIZE: " << alert_data.serialized_alert_size << std::endl;
             std::string alert_str(alert_data.serialized_alert, alert_data.serialized_alert_size);
             logger(BOOTH_POLICE) << "Received alert: " << alert_str << std::endl;
 
             WantedPersonAlert* alert = AlertDeserializer::deserialize(alert_str, alert_data.id);
             alerts.emplace_back(alert);
-
-            alert_data.read_by_quantity++;
-            alerts_shm.write(i, alert_data);
         }
     }
     alerts_lock.unlock();

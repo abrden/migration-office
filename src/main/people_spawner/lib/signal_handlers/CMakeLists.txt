@@ -1,4 +1,4 @@
-project(_migration_spawner_signal_handlers)
+project(_people_spawner_signal_handlers)
 
 file(GLOB SOURCES "*.cpp" "*.h")
 

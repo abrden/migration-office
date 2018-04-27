@@ -15,6 +15,7 @@ const std::string SPAWNER = "SPAWNER";
 const std::string PEOPLE_SPAWNER = "PEOPLE SPAWNER";
 const std::string STATISTICS = "STATISTICS";
 const std::string MINISTER = "MINISTER";
+const std::string ALERT_DELETER = "ALERT DELETER";
 
 class Logger {
 

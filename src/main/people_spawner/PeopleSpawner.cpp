@@ -14,7 +14,7 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
     logger(PEOPLE_SPAWNER) << "debug = " << debug << std::endl;
     logger(PEOPLE_SPAWNER) << "log file = " << log_file << std::endl;
 
-    ConfigurationFileReader::load_spawnables(people_file, people);
+    ConfigurationFileReader::load_persons(people_file, people);
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
 }
