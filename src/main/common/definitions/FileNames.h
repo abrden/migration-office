@@ -3,6 +3,12 @@
 
 #include <string>
 
+namespace OfficeDefaults {
+    const int DEFAULT_BOOTHS_NUMBER = 10;
+    const int DEFAULT_STAMPERS_NUMBER = 5;
+    const std::string DEFAULT_LOG = "log";
+}
+
 namespace BinaryNames {
     const std::string BOOTH_BINARY = "./migration_booth";
     const std::string SPAWNER_BINARY = "./migration_spawner";
