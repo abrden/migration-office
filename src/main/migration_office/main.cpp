@@ -1,5 +1,6 @@
 #include <iostream>
 #include <getopt.h>
+#include <stdexcept>
 
 #include "MigrationOffice.h"
 
