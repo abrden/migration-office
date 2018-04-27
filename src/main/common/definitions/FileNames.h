@@ -40,6 +40,7 @@ namespace StampersSemaphore {
 namespace FugitivesFifo {
     const std::string FUGITIVES_FIFO_FILE = "/tmp/archivofifo";
     const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
+    const std::string BOOTH_LOCK_FILE = "/tmp/archivolock";
 }
 
 namespace PeopleFifo {
