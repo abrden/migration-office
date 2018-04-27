@@ -1,4 +1,4 @@
-project(_migration_office_signal_handlers)
+project(_sigint_handler)
 
 file(GLOB SOURCES "*.cpp" "*.h")
 

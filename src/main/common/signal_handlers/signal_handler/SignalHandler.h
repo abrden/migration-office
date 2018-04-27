@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <memory.h>
 
-#include "EventHandler.h"
+#include "src/main/common/signal_handlers/signal_handler/EventHandler.h"
 
 class SignalHandler {
 

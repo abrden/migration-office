@@ -3,7 +3,7 @@
 
 #include <signal.h>
 
-#include "EventHandler.h"
+#include "src/main/common/signal_handlers/signal_handler/EventHandler.h"
 
 class SIGINTHandler : public EventHandler {
 
