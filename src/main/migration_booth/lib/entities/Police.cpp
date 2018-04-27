@@ -5,20 +5,16 @@
 #include "AlertDeserializer.h"
 #include "ExclusiveLock.h"
 #include "Police.h"
+#include "FileNames.h"
 
-#include <iostream>
 #include <algorithm>
-#include <src/main/common/definitions/AlertData.h>
 
-static const std::string FIFO_FILE = "/tmp/archivofifo";
-static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
-static const std::string LOCK_FILE = "/tmp/archivolock";
 static const size_t BUFFERSIZE = 100;
 
 Police::Police(Logger& logger)
-        : logger(logger), fugitives_fifo(FIFO_FILE), ministry_fifo(BOOTH_FIFO_FILE),
-          fugitives_fifo_lock(LOCK_FILE), alerts_lock(Alerts::LOCK_SHMEM_FILE),
-          alerts_shm(Alerts::SHMEM_FILE, Alerts::LETTER, Alerts::SHMEM_LENGTH) {
+        : logger(logger), fugitives_fifo(FugitivesFifo::FUGITIVES_FIFO_FILE), ministry_fifo(FugitivesFifo::BOOTH_FIFO_FILE),
+          fugitives_fifo_lock(FugitivesFifo::BOOTH_LOCK_FILE), alerts_lock(AlertsSharedMem::LOCK_SHMEM_FILE),
+          alerts_shm(AlertsSharedMem::SHMEM_FILE, AlertsSharedMem::LETTER, AlertsSharedMem::SHMEM_LENGTH) {
 }
 
 void Police::receive_fugitives() {
@@ -55,7 +51,7 @@ bool Police::is_new_alert(size_t id) {
 
 void Police::receive_alerts() {
     alerts_lock.lock();
-    for (size_t i = 0; i < Alerts::SHMEM_LENGTH; i++){
+    for (size_t i = 0; i < AlertsSharedMem::SHMEM_LENGTH; i++){
         AlertData alert_data = alerts_shm.read(i);
 
         if (is_new_alert(alert_data.id)) {

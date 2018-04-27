@@ -1,13 +1,11 @@
-#include <iostream>
 #include "Foreigner.h"
 #include "PersonDeserializer.h"
 #include "PersonsQueue.h"
+#include "FileNames.h"
 
-static const std::string FIFO_FILE = "/tmp/spawnerfifo";
-static const std::string FIFO_LOCK_FILE = "/tmp/spawnerfifolock";
 static const int BUFF_SIZE = 1024;
 
-PersonsQueue::PersonsQueue(Logger& logger) : logger(logger), fifo(FIFO_FILE), fifo_lock(FIFO_LOCK_FILE) {}
+PersonsQueue::PersonsQueue(Logger& logger) : logger(logger), fifo(PeopleFifo::FIFO_FILE), fifo_lock(PeopleFifo::BOOTH_LOCK_FILE) {}
 
 Person* PersonsQueue::front() {
     fifo_lock.lock();

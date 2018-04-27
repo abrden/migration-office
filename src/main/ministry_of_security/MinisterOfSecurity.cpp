@@ -1,11 +1,8 @@
 #include "MinisterOfSecurity.h"
 #include "ConfigurationFileReader.h"
+#include "FileNames.h"
 
 #include <fstream>
-#include <iostream>
-
-static const std::string FUGITIVES_FIFO_FILE = "/tmp/archivofifo";
-static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::string& fugitives_file_path,
@@ -13,8 +10,8 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::vector<pid_t>& booths_ids,
                                        const bool debug,
                                        const std::string& log_file_path) : logger(debug, log_file_path),
-                                                                           fugitives_fifo(FUGITIVES_FIFO_FILE),
-                                                                           booths_fifo(BOOTH_FIFO_FILE),
+                                                                           fugitives_fifo(FugitivesFifo::FUGITIVES_FIFO_FILE),
+                                                                           booths_fifo(FugitivesFifo::BOOTH_FIFO_FILE),
                                                                            booths_number(booths_number),
                                                                            alerts_spawner(logger,
                                                                                           alerts_file_path,
