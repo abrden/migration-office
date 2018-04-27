@@ -1,4 +1,4 @@
-timestamp, features
+timestamp,del_timestamp,features
 1,8,petiso,orejudo
 4,9,gatuno
 0,5,sombrero cónico
