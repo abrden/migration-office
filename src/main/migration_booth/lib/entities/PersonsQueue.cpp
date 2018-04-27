@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdexcept>
+
 #include "Foreigner.h"
 #include "PersonDeserializer.h"
 #include "PersonsQueue.h"
@@ -25,7 +27,7 @@ Person* PersonsQueue::front() {
     logger(BOOTH_QUEUE) << "I read size: " << buffer_size << std::endl;
 
     if (buffer_size > BUFF_SIZE) {
-        throw std::system_error(ERRORS::BUFFER_EXCEEDED, std::generic_category(), "Serialized person buffer exceeded.");
+        throw std::runtime_error("Serialized person buffer exceeded.");
     }
     char buffer[BUFF_SIZE];
     logger(BOOTH_QUEUE) << "Trying to read serialized person" << std::endl;
