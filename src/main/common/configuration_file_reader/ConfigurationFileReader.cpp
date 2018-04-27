@@ -26,7 +26,7 @@ std::list<std::string> ConfigurationFileReader::extract_features(std::vector<std
 
 void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_file_path,
                                                  std::vector<unsigned int> &fugitives_ids) {
-    // TODO add exception handling
+    // TODO add exception handling (Done in alarms deleter branch)
     std::ifstream ifs(fugitives_file_path);
     std::string fugitive_id;
 
@@ -38,7 +38,7 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
 }
 
 void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spawnables& persons) {
-    // TODO add exception handling
+    // TODO add exception handling (Done in alarms deleter branch)
     std::ifstream ifs(file_path);
     std::string line;
 
