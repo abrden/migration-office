@@ -7,6 +7,10 @@ static const std::string FIFO_FILE = "/tmp/spawnerfifo";
 static const std::string FIFO_LOCK_FILE = "/tmp/spawnerfifolock";
 static const int BUFF_SIZE = 1024;
 
+enum ERRORS {
+    BUFFER_EXCEEDED = -1
+};
+
 PersonsQueue::PersonsQueue(Logger& logger) : logger(logger), fifo(FIFO_FILE), fifo_lock(FIFO_LOCK_FILE) {}
 
 Person* PersonsQueue::front() {
@@ -20,6 +24,9 @@ Person* PersonsQueue::front() {
     }
     logger(BOOTH_QUEUE) << "I read size: " << buffer_size << std::endl;
 
+    if (buffer_size > BUFF_SIZE) {
+        throw std::system_error(ERRORS::BUFFER_EXCEEDED, std::generic_category(), "Serialized person buffer exceeded.");
+    }
     char buffer[BUFF_SIZE]; //TODO raise exception if size exceeds BUFF_SIZE
     logger(BOOTH_QUEUE) << "Trying to read serialized person" << std::endl;
     bytes_read = fifo.fifo_read(static_cast<void*>(buffer), sizeof(char) * buffer_size);
