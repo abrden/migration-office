@@ -32,6 +32,7 @@ void MigrationOffice::start() {
     open_booths();
     open_ministry_of_security();
     fork_spawner();
+    open_alert_deleter();
 }
 
 void MigrationOffice::open_ministry_of_security() {
@@ -128,6 +129,27 @@ void MigrationOffice::open_statistics() {
         spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
         spawner_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
+        spawner_argv.push_back(nullptr);
+
+        execv(spawner_argv[0], &spawner_argv[0]);
+    }
+}
+
+void MigrationOffice::open_alert_deleter() {
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        throw std::system_error(errno, std::system_category());
+    } else if (pid > 0) {
+        children_pids.emplace_back(pid);
+    } else {
+        std::string debug_flag = debug ? "1" : "0";
+
+        std::vector<char*> spawner_argv;
+        spawner_argv.push_back(const_cast<char*>(BinaryNames::ALERT_DELETER_BINARY.c_str()));
+        spawner_argv.push_back(const_cast<char*>(alerts_file.c_str()));
+        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
+        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
         spawner_argv.push_back(nullptr);
 
         execv(spawner_argv[0], &spawner_argv[0]);

@@ -4,8 +4,9 @@
 #include <string>
 
 namespace BinaryNames {
+    const std::string ALERT_DELETER_BINARY = "./alert_deleter";
     const std::string BOOTH_BINARY = "./migration_booth";
-    const std::string SPAWNER_BINARY = "./migration_spawner";
+    const std::string SPAWNER_BINARY = "./people_spawner";
     const std::string MINISTER_BINARY = "./ministry_of_security";
     const std::string STATISTICS_BINARY = "./statistics";
 }
@@ -22,8 +23,7 @@ namespace Alerts {
     const std::string SHMEM_FILE = "/bin/tar";
     const std::string LOCK_SHMEM_FILE = "/tmp/spawner_shm_lock";
     const char LETTER = 'C';
-    const std::string ACK_FIFO_FILE = "/tmp/alerts_ack_fifo";
-    const size_t SHMEM_LENGTH = 1024;
+const size_t SHMEM_LENGTH = 1024;
 }
 
 namespace StampersSemaphore {

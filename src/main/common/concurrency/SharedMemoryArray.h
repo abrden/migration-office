@@ -6,7 +6,6 @@
 #include <sys/shm.h>
 #include <string>
 #include <cstring>
-#include <iostream>
 #include <cerrno>
 #include <system_error>
 
@@ -32,7 +31,6 @@ SharedMemoryArray<T>::SharedMemoryArray(const std::string& file_path, const char
     key_t key = ftok(file_path.c_str(), letter);
 
     if (key > 0) {
-        std::cout << "Size of data: " << (sizeof(T) * size) << std::endl;
         this->shm_id = shmget(key, sizeof(T) * size, 0644 | IPC_CREAT);
 
         if (this->shm_id > 0) {
