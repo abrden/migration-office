@@ -30,7 +30,7 @@ size_t AlertSpawner::find_new_alert_index() {
 void AlertSpawner::spawn(std::string spawnable) {
     AlertData data;
     logger(MINISTER) << "Creating alert: " << spawnable << std::endl;
-    data.id = std::hash<std::string>{}(spawnable) % BUFFSIZE;
+    data.id = std::hash<std::string>{}(spawnable);
     size_t length = spawnable.copy(data.serialized_alert, spawnable.size(), 0);
     data.serialized_alert[length] = '\0';
     data.serialized_alert_size = spawnable.size();

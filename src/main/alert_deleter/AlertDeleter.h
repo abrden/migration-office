@@ -6,6 +6,7 @@
 #include "SIGINTHandler.h"
 
 class AlertDeleter : public Spawner {
+
     private:
         Logger logger;
         SIGINTHandler sigint_handler;
@@ -13,6 +14,7 @@ class AlertDeleter : public Spawner {
         AlertsSharedMemory alerts_shm;
         ExclusiveLock alerts_shmem_lock;
         Spawnables alerts;
+
     public:
 
         AlertDeleter(const std::string& alerts_file, const bool debug, const std::string& log_file);

@@ -22,7 +22,7 @@ void AlertDeleter::spawn(std::string spawnable) {
     alerts_shmem_lock.lock();
 
     logger(ALERT_DELETER) << "Alert to delete: " << spawnable << std::endl;
-    size_t id = std::hash<std::string>{}(spawnable) % BUFFSIZE;
+    size_t id = std::hash<std::string>{}(spawnable);
     logger(ALERT_DELETER) << "Searching for alert with id " << id  << " to be deleted." << std::endl;
 
     size_t  pos;
@@ -31,7 +31,6 @@ void AlertDeleter::spawn(std::string spawnable) {
         if (alert.id == id) break;
     }
 
-    // FIXME not sure about throwing this exception or what to do in this case
     if (pos == Alerts::SHMEM_LENGTH) {
         std::string message = "Error in alert deletion: alert with id " + std::to_string(id) + " not found.";
         throw std::runtime_error(message);
