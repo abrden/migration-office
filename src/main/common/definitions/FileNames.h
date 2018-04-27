@@ -36,4 +36,8 @@ namespace FugitivesFifo {
     const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
 }
 
+namespace PeopleFifo {
+    const std::string FIFO_FILE = "/tmp/spawnerfifo";
+}
+
 #endif //MIGRATION_OFFICE_FILENAMES_H
