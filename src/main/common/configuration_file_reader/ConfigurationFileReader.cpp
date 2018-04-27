@@ -45,7 +45,7 @@ void ConfigurationFileReader::load_fugitives_ids(const std::string& fugitives_fi
     }
 }
 
-void ConfigurationFileReader::load_spawnables(const std::string& file_path, Spawnables& persons) {
+void ConfigurationFileReader::load_persons(const std::string &file_path, Spawnables &persons) {
     std::ifstream ifs(file_path);
     if (!ifs) {
         const std::string message = std::string("Error when opening persons configuration file: ") +
