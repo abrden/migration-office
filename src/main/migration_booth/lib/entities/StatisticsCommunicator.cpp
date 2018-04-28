@@ -1,28 +1,16 @@
 #include "StatisticsCommunicator.h"
 #include "FileNames.h"
+#include "StatisticsData.h"
 
 StatisticsCommunicator::StatisticsCommunicator() :
-        shm(StatisticsSharedMem::STATS_FILE, StatisticsSharedMem::LETTER),
+        shm(StatisticsSharedMem::STATS_FILE, StatisticsSharedMem::LETTER, STATS_SIZE),
         lock(StatisticsSharedMem::LOCK_STATS_FILE) {}
 
-void StatisticsCommunicator::increment_field(size_t field) {
+void StatisticsCommunicator::increment_field(size_t pos) {
     lock.lock();
 
-    StatisticsData data = shm.read();
-    switch (field) {
-        case FIELDS::ALLOWED_RESIDENTS:
-            data.allowed_residents++;
-            break;
-        case FIELDS::DETAINED_RESIDENTS:
-            data.detained_residents++;
-            break;
-        case FIELDS::ALLOWED_FOREIGNERS:
-            data.allowed_foreigners++;
-            break;
-        case FIELDS::DEPORTED_FOREIGNERS:
-            data.deported_foreigners++;
-    }
-    shm.write(data);
+    size_t* data = shm.read();
+    shm.write(pos, ++data[pos]);
 
     lock.unlock();
 }

@@ -1,7 +1,7 @@
 #ifndef MIGRATION_OFFICE_STATISTICSCOMMUNICATOR_H
 #define MIGRATION_OFFICE_STATISTICSCOMMUNICATOR_H
 
-#include "SharedMemory.h"
+#include "SharedMemoryArray.h"
 #include "ExclusiveLock.h"
 #include "FifoReader.h"
 #include "FifoWriter.h"
@@ -10,10 +10,10 @@
 class StatisticsCommunicator {
 
     private:
-        SharedMemory<StatisticsData> shm;
+        SharedMemoryArray<size_t> shm;
         ExclusiveLock lock;
 
-        void increment_field(size_t field);
+        void increment_field(size_t pos);
 
     public:
         StatisticsCommunicator();
