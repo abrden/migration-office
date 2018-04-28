@@ -12,11 +12,8 @@ class StatisticsCommunicator {
     private:
         SharedMemory<StatisticsData> shm;
         ExclusiveLock lock;
-        FifoReader fifo;
-        FifoWriter cnf_fifo;
 
         void increment_field(size_t field);
-        void wait_for_initialization();
 
     public:
         StatisticsCommunicator();

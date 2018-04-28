@@ -5,30 +5,11 @@
 Statistics::Statistics(size_t booths_number, const bool debug, const std::string& log_file)
         : logger(debug, log_file), booths_number(booths_number),
           shm(StatisticsSharedMem::STATS_FILE, StatisticsSharedMem::LETTER),
-          lock(StatisticsSharedMem::LOCK_STATS_FILE),
-          fifo(StatisticsSharedMem::FIFO_FILE), cnf_fifo(StatisticsSharedMem::CNF_FIFO_FILE) {
+          lock(StatisticsSharedMem::LOCK_STATS_FILE) {
 
     logger(STATISTICS) << "Welcome to Conculandia's Statistics Department!" << std::endl;
 
     SignalHandler::get_instance()->register_handler(SIGINT, &sigint_handler);
-    initialize_data();
-    send_initialized_data_confirmation();
-    wait_for_booths();
-}
-
-void Statistics::initialize_data() {
-    StatisticsData default_data = {0, 0, 0, 0};
-    shm.write(default_data);
-}
-
-void Statistics::send_initialized_data_confirmation() {
-    const bool ready = true;
-    for(size_t i = 0; i < booths_number; i++) fifo.fifo_write(&ready, sizeof(bool));
-}
-
-void Statistics::wait_for_booths() {
-    bool ready;
-    for(size_t i = 0; i < booths_number; i++) cnf_fifo.fifo_read(&ready, sizeof(bool));
 }
 
 StatisticsData Statistics::update_data() {

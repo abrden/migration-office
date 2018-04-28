@@ -20,12 +20,7 @@ class Statistics {
         SIGINTHandler sigint_handler;
         SharedMemory<StatisticsData> shm;
         ExclusiveLock lock;
-        FifoWriter fifo;
-        FifoReader cnf_fifo;
 
-        void initialize_data();
-        void send_initialized_data_confirmation();
-        void wait_for_booths();
         StatisticsData update_data();
         size_t get_allowed_residents();
         size_t get_detained_residents();

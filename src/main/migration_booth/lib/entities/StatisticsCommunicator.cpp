@@ -3,19 +3,7 @@
 
 StatisticsCommunicator::StatisticsCommunicator() :
         shm(StatisticsSharedMem::STATS_FILE, StatisticsSharedMem::LETTER),
-        lock(StatisticsSharedMem::LOCK_STATS_FILE),
-        fifo(StatisticsSharedMem::FIFO_FILE),
-        cnf_fifo(StatisticsSharedMem::CNF_FIFO_FILE) {
-    wait_for_initialization();
-}
-
-void StatisticsCommunicator::wait_for_initialization() {
-    lock.lock();
-    bool ready;
-    fifo.fifo_read(static_cast<void*>(&ready), sizeof(bool));
-    cnf_fifo.fifo_write(static_cast<void*>(&ready), sizeof(bool));
-    lock.unlock();
-}
+        lock(StatisticsSharedMem::LOCK_STATS_FILE) {}
 
 void StatisticsCommunicator::increment_field(size_t field) {
     lock.lock();
