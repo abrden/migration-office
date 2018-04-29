@@ -6,6 +6,7 @@
 #include "ExclusiveLock.h"
 #include "Police.h"
 #include "FileNames.h"
+#include "BoothsWithUnreadFugitives.h"
 
 #include <algorithm>
 
@@ -36,9 +37,14 @@ void Police::receive_fugitives() {
     logger(BOOTH_POLICE) << "Received " << n_fugitives << " fugitives ids" << std::endl;
 
     logger(BOOTH_POLICE) << "Sending read confirmation" << std::endl;
+    BoothsWithUnreadFugitives booths;
+    booths.notify_read_fugitives();
+
+    /* TODO que vuele vuele
     bool confirmation = true;
     ministry_fifo.fifo_write(static_cast<void*>(&confirmation), sizeof(bool));
     fugitives_fifo_lock.unlock();
+    */
 }
 
 bool Police::is_new_alert(size_t id) {

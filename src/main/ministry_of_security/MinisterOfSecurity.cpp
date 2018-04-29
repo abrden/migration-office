@@ -3,6 +3,7 @@
 #include "FileNames.h"
 
 #include <fstream>
+#include "BoothsWithUnreadFugitives.h"
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::string& fugitives_file_path,
@@ -30,7 +31,6 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
 
 void MinisterOfSecurity::open() {
     send_fugitives();
-    receive_confirmations();
     send_alerts();
 }
 
@@ -48,9 +48,13 @@ void MinisterOfSecurity::send_fugitives() {
         fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
         logger(MINISTER) << "Fugitives sent" << std::endl;
     }
+
+    BoothsWithUnreadFugitives booths;
+    booths.wait_for_booths_to_read();
 }
 
 
+// TODO que vuele vuele
 void MinisterOfSecurity::receive_confirmations() {
     for(size_t i = 0; i < booths_number; i++) {
         logger(MINISTER) << "I'm receiving message confirmation number " << i << std::endl;
