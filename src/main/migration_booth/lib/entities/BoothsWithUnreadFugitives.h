@@ -9,7 +9,8 @@ class BoothsWithUnreadFugitives {
         Semaphore booths;
 
     public:
-        BoothsWithUnreadFugitives(const int booths_number);
+        BoothsWithUnreadFugitives();
+        void notify_read_fugitives();
 };
 
 #endif //MIGRATION_OFFICE_BOOTHSWITHUNREADFUGITIVES_H

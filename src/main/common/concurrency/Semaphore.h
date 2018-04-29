@@ -17,6 +17,7 @@ class Semaphore {
         int init(const int initial_value) const;
         int p() const;
         int v() const;
+        int w() const;
 
 };
 
