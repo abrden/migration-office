@@ -47,7 +47,7 @@ int Semaphore::p() const {
 
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
-        std::string message = std::string("Error in Semaphore semop(): ") + std::string(strerror(errno));
+        std::string message = std::string("Error in Semaphore semop(-1): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
 
@@ -62,7 +62,7 @@ int Semaphore::v() const {
 
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
-        std::string message = std::string("Error in Semaphore semop(): ") + std::string(strerror(errno));
+        std::string message = std::string("Error in Semaphore semop(1): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
 
@@ -77,7 +77,7 @@ int Semaphore::w() const {
 
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
-        std::string message = std::string("Error in Semaphore semop(): ") + std::string(strerror(errno));
+        std::string message = std::string("Error in Semaphore semop(0): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
 
