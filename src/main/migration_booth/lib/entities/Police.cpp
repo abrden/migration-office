@@ -1,13 +1,13 @@
 #include "AlertData.h"
 #include "FileNames.h"
 #include "AlertData.h"
-#include "SharedMemory.h"
 #include "AlertDeserializer.h"
 #include "ExclusiveLock.h"
 #include "Police.h"
 #include "FileNames.h"
 
 #include <algorithm>
+#include <iostream>
 
 static const size_t BUFFERSIZE = 100;
 
