@@ -1,7 +1,6 @@
 #ifndef MIGRATION_OFFICE_ALERTSPAWNER_H
 #define MIGRATION_OFFICE_ALERTSPAWNER_H
 
-#include "SharedMemory.h"
 #include "SIGINTHandler.h"
 #include "AlertData.h"
 #include "Spawner.h"

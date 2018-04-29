@@ -8,6 +8,7 @@
 #include <cstring>
 #include <cerrno>
 #include <system_error>
+#include <iostream>
 
 template<class T>
 class SharedMemoryArray {
@@ -52,7 +53,7 @@ SharedMemoryArray<T>::SharedMemoryArray(const std::string& file_path, const char
 }
 
 template<class T>
-void SharedMemoryArray<T>::write(size_t pos, const T &data) {
+void SharedMemoryArray<T>::write(size_t pos, const T& data) {
     this->data_ptr[pos] = data;
 }
 

@@ -9,7 +9,6 @@
 #include "ExclusiveLock.h"
 #include "Logger.h"
 #include "WantedPersonAlert.h"
-#include "SharedMemory.h"
 #include "AlertsSharedMemory.h"
 
 #include <vector>
