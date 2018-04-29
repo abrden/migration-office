@@ -6,6 +6,7 @@
 #include "FifoReader.h"
 #include "Logger.h"
 #include "AlertSpawner.h"
+#include "BoothsWithUnreadFugitives.h"
 
 #include <vector>
 
@@ -16,6 +17,7 @@ class MinisterOfSecurity {
 
         FifoWriter fugitives_fifo;
         FifoReader booths_fifo;
+        BoothsWithUnreadFugitives booths;
 
         std::vector<unsigned int> fugitives;
         const size_t booths_number;

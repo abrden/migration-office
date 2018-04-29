@@ -11,6 +11,7 @@
 #include "WantedPersonAlert.h"
 #include "SharedMemory.h"
 #include "AlertsSharedMemory.h"
+#include "BoothsWithUnreadFugitives.h"
 
 #include <vector>
 
@@ -24,6 +25,7 @@ class Police {
         ExclusiveLock fugitives_fifo_lock;
         ExclusiveLock alerts_lock;
         AlertsSharedMemory alerts_shm;
+        BoothsWithUnreadFugitives booths;
         std::vector<unsigned int> fugitives;
 
         std::list<WantedPersonAlert*> alerts;

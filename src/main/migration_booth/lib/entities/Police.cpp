@@ -13,8 +13,9 @@
 static const size_t BUFFERSIZE = 100;
 
 Police::Police(Logger& logger)
-        : logger(logger), fugitives_fifo(FugitivesFifo::FUGITIVES_FIFO_FILE), ministry_fifo(FugitivesFifo::BOOTH_FIFO_FILE),
-          fugitives_fifo_lock(FugitivesFifo::BOOTH_LOCK_FILE), alerts_lock(AlertsSharedMem::LOCK_SHMEM_FILE),
+        : logger(logger), fugitives_fifo(FugitivesFifo::FUGITIVES_FIFO_FILE),
+          ministry_fifo(FugitivesFifo::BOOTH_FIFO_FILE), fugitives_fifo_lock(FugitivesFifo::BOOTH_LOCK_FILE),
+          alerts_lock(AlertsSharedMem::LOCK_SHMEM_FILE),
           alerts_shm(AlertsSharedMem::SHMEM_FILE, AlertsSharedMem::LETTER, AlertsSharedMem::SHMEM_LENGTH) {
 }
 
@@ -37,7 +38,6 @@ void Police::receive_fugitives() {
     logger(BOOTH_POLICE) << "Received " << n_fugitives << " fugitives ids" << std::endl;
 
     logger(BOOTH_POLICE) << "Sending read confirmation" << std::endl;
-    BoothsWithUnreadFugitives booths;
     booths.notify_read_fugitives();
 
     /* TODO que vuele vuele

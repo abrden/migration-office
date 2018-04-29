@@ -1,9 +1,9 @@
 #include "MinisterOfSecurity.h"
 #include "ConfigurationFileReader.h"
 #include "FileNames.h"
+#include "BoothsWithUnreadFugitives.h"
 
 #include <fstream>
-#include "BoothsWithUnreadFugitives.h"
 
 MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const std::string& fugitives_file_path,
@@ -49,7 +49,6 @@ void MinisterOfSecurity::send_fugitives() {
         logger(MINISTER) << "Fugitives sent" << std::endl;
     }
 
-    BoothsWithUnreadFugitives booths;
     booths.wait_for_booths_to_read();
 }
 
