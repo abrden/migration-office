@@ -13,10 +13,11 @@ class Semaphore {
 
     public:
         Semaphore(const std::string& file, const char letter);
-        ~Semaphore();
         int init(const int initial_value) const;
+        int destroy() const;
         int p() const;
         int v() const;
+        int w() const;
 
 };
 

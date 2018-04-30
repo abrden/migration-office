@@ -1,6 +1,7 @@
 #include "MinisterOfSecurity.h"
 #include "ConfigurationFileReader.h"
 #include "FileNames.h"
+#include "BoothsWithUnreadFugitives.h"
 
 #include <fstream>
 
@@ -11,7 +12,6 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
                                        const bool debug,
                                        const std::string& log_file_path) : logger(debug, log_file_path),
                                                                            fugitives_fifo(FugitivesFifo::FUGITIVES_FIFO_FILE),
-                                                                           booths_fifo(FugitivesFifo::BOOTH_FIFO_FILE),
                                                                            booths_number(booths_number),
                                                                            alerts_spawner(logger,
                                                                                           alerts_file_path,
@@ -30,7 +30,6 @@ MinisterOfSecurity::MinisterOfSecurity(const std::string& alerts_file_path,
 
 void MinisterOfSecurity::open() {
     send_fugitives();
-    receive_confirmations();
     send_alerts();
 }
 
@@ -48,16 +47,10 @@ void MinisterOfSecurity::send_fugitives() {
         fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
         logger(MINISTER) << "Fugitives sent" << std::endl;
     }
-}
 
-
-void MinisterOfSecurity::receive_confirmations() {
-    for(size_t i = 0; i < booths_number; i++) {
-        logger(MINISTER) << "I'm receiving message confirmation number " << i << std::endl;
-        bool confirmation;
-        booths_fifo.fifo_read(static_cast<void*>(&confirmation), sizeof(bool));
-        logger(MINISTER) << "Received confirmation!" << std::endl;
-    }
+    logger(MINISTER) << "Waiting for booths read confirmations" << std::endl;
+    booths.wait_for_booths_to_read();
+    logger(MINISTER) << "Received all read confirmations" << std::endl;
 }
 
 MinisterOfSecurity::~MinisterOfSecurity() = default;

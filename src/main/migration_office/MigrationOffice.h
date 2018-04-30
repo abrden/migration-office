@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "Stampers.h"
+#include "BoothsWithUnreadFugitives.h"
 #include "Logger.h"
 #include "SIGINTHandler.h"
 
@@ -17,6 +18,7 @@ class MigrationOffice {
         const bool debug;
         const std::string log_file;
 
+        BoothsWithUnreadFugitives booths;
         Stampers stampers;
         SIGINTHandler sigint_handler;
         Logger logger;

@@ -11,5 +11,3 @@ void Stampers::get_stamper() {
 void Stampers::return_stamper() {
     stampers.v();
 }
-
-Stampers::~Stampers() = default;

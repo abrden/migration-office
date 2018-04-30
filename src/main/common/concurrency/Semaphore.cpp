@@ -17,10 +17,6 @@ Semaphore::Semaphore(const std::string& file, const char letter) {
     }
 }
 
-Semaphore::~Semaphore() {
-    semctl(id, 0, IPC_RMID);
-}
-
 int Semaphore::init(const int initial_value) const {
     union semnum {
         int val;
@@ -43,11 +39,11 @@ int Semaphore::p() const {
     struct sembuf op;
     op.sem_num = 0;
     op.sem_op = -1;
-    op.sem_flg = SEM_UNDO;
+    op.sem_flg = 0;
 
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
-        std::string message = std::string("Error in Semaphore semop(): ") + std::string(strerror(errno));
+        std::string message = std::string("Error in Semaphore semop(-1): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
 
@@ -58,13 +54,31 @@ int Semaphore::v() const {
     struct sembuf op;
     op.sem_num = 0;
     op.sem_op = 1;
-    op.sem_flg = SEM_UNDO;
+    op.sem_flg = 0;
 
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
-        std::string message = std::string("Error in Semaphore semop(): ") + std::string(strerror(errno));
+        std::string message = std::string("Error in Semaphore semop(1): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
 
     return ans;
+}
+
+int Semaphore::w() const {
+    struct sembuf op;
+    op.sem_num = 0;
+    op.sem_op = 0;
+    op.sem_flg = 0;
+
+    int ans = semop(this->id, &op, 1);
+    if (ans < 0) {
+        std::string message = std::string("Error in Semaphore semop(0): ") + std::string(strerror(errno));
+        throw std::system_error(errno, std::system_category(), message);
+    }
+    return ans;
+}
+
+int Semaphore::destroy() const {
+    return semctl(id, 0, IPC_RMID);
 }

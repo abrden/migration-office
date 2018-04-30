@@ -10,6 +10,7 @@
 #include "Logger.h"
 #include "WantedPersonAlert.h"
 #include "AlertsSharedMemory.h"
+#include "BoothsWithUnreadFugitives.h"
 
 #include <vector>
 
@@ -19,10 +20,10 @@ class Police {
         Logger& logger;
 
         FifoReader fugitives_fifo;
-        FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
         ExclusiveLock alerts_lock;
         AlertsSharedMemory alerts_shm;
+        BoothsWithUnreadFugitives booths;
         std::vector<unsigned int> fugitives;
 
         std::list<WantedPersonAlert*> alerts;
