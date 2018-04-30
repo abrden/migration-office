@@ -10,6 +10,8 @@ class Spawner {
 
     private:
         Logger& logger;
+
+    protected:
         Spawnables& items;
 
     public:

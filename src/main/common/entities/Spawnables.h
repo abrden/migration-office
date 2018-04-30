@@ -19,6 +19,7 @@ class Spawnables {
         bool empty();
         const std::pair<int, std::string>& front();
         void push_spawnable(int timestamp, std::string& spawnable);
+        void push_front(int timestamp, std::string& spawnable);
         std::list<std::pair<int, std::string>>& get_items();
         virtual ~Spawnables();
 
