@@ -10,6 +10,7 @@ class BoothsWithUnreadFugitives {
 
     public:
         BoothsWithUnreadFugitives(const int booths_number);
+        ~BoothsWithUnreadFugitives();
 };
 
 #endif //MIGRATION_OFFICE_BOOTHSWITHUNREADFUGITIVES_H

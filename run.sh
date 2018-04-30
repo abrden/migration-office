@@ -14,4 +14,4 @@ valgrind --suppressions=../vg.supp --leak-check=full\
          --error-exitcode=1 --errors-for-leak-kinds=all\
          ./migration_office -p ../resources/people.txt\
          -a ../resources/alerts.txt\
-         -f ../resources/fugitives.txt -b 4 -s 1 -d
+         -f ../resources/fugitives.txt -b 3 -s 1 -d

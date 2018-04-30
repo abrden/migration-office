@@ -49,7 +49,9 @@ void MinisterOfSecurity::send_fugitives() {
         logger(MINISTER) << "Fugitives sent" << std::endl;
     }
 
+    logger(MINISTER) << "Waiting for booths read confirmations" << std::endl;
     booths.wait_for_booths_to_read();
+    logger(MINISTER) << "Received all read confirmations" << std::endl;
 }
 
 
