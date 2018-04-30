@@ -1,5 +1,12 @@
 # Migration Office [![Build Status](https://travis-ci.org/abrden/migration-office.svg?branch=master)](https://travis-ci.org/abrden/migration-office)
 
+### Build
+To build the project you can use the script 
+```sh
+$ ./build.sh
+```
+This will create a `build` directory with the `migration_office` executable.
+
 ### Command line parameters
 
 - **-p, --people** people_file  
@@ -21,24 +28,36 @@ Fugitive ids file
 
 #### Using defaults without log
 ```sh
-$ ./migration_office ./migration_office -p ../resources/people.txt\
-                                        -a ../resources/alerts.txt\
-                                        -f ../resources/fugitives.txt
+$ ./migration_office -p ../resources/people.txt\
+                     -a ../resources/alerts.txt\
+                     -f ../resources/fugitives.txt
 ```
 #### Using defaults with log
 ```sh
-$ ./migration_office ./migration_office -p ../resources/people.txt\
-                                        -a ../resources/alerts.txt\
-                                        -f ../resources/fugitives.txt\
-                                        -d
+$ ./migration_office -p ../resources/people.txt\
+                     -a ../resources/alerts.txt\
+                     -f ../resources/fugitives.txt\
+                     -d
 ```
 #### Customizing everything
 ```sh
-$ ./migration_office ./migration_office -p ../resources/people.txt\
-                                        -a ../resources/alerts.txt\
-                                        -f ../resources/fugitives.txt\
-                                        -b 4 -s 1\
-                                        -d -l logex3
+$ ./migration_office -p ../resources/people.txt\
+                     -a ../resources/alerts.txt\
+                     -f ../resources/fugitives.txt\
+                     -b 4 -s 1\
+                     -d -l logex3
+```
+
+### Usage
+```
+Ask for statistics (allowed residents, detained residents, allowed foreigners, deported foreigners) or just exit.
+> allowed residents
+1
+> allowed foreigners
+0
+> deported
+Invalid command, try again
+> exit
 ```
 
 ### Configuration files examples
@@ -64,5 +83,4 @@ id
 ```
 
 ### License
-
 GNU General Public License v3.0
