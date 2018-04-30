@@ -48,7 +48,7 @@ void Police::get_current_alerts() {
     for (size_t i = 0; i < AlertsSharedMem::SHMEM_LENGTH; i++){
         AlertData alert_data = alerts_shm.read(i);
 
-        if (alert_data.id != 0) {
+        if (alert_data.id > 0) {
             std::string alert_str(alert_data.serialized_alert, alert_data.serialized_alert_size);
             logger(BOOTH_POLICE) << "Loading alert with ID: " << alert_data.id << ", size: "
                                  << alert_data.serialized_alert_size << ", and content: " << alert_str << std::endl;
