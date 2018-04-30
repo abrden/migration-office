@@ -31,12 +31,10 @@ class Police {
         size_t arrested_residents;
         size_t deported_foreigners;
 
-        bool is_new_alert(size_t id);
-
     public:
         explicit Police(Logger& logger);
         void receive_fugitives();
-        void receive_alerts();
+        void get_current_alerts();
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
         void report(Resident* resident);

@@ -42,26 +42,18 @@ void Police::receive_fugitives() {
     booths.notify_read_fugitives();
 }
 
-bool Police::is_new_alert(size_t id) {
-    if (id == 0) return false;
-    for (auto it = alerts.begin(); it != alerts.end(); ++it) {
-        if ((*it)->get_id() == id) return false;
-    }
-    return true;
-}
-
-void Police::receive_alerts() {
+void Police::get_current_alerts() {
+    alerts.clear();
     alerts_lock.lock();
     for (size_t i = 0; i < AlertsSharedMem::SHMEM_LENGTH; i++){
         AlertData alert_data = alerts_shm.read(i);
 
-        if (is_new_alert(alert_data.id)) {
-            logger(BOOTH_POLICE) << "receive_alerts ID: " << alert_data.id << std::endl;
-            logger(BOOTH_POLICE) << "receive_alerts SIZE: " << alert_data.serialized_alert_size << std::endl;
+        if (alert_data.id != 0) {
             std::string alert_str(alert_data.serialized_alert, alert_data.serialized_alert_size);
-            logger(BOOTH_POLICE) << "Received alert: " << alert_str << std::endl;
+            logger(BOOTH_POLICE) << "Loading alert with ID: " << alert_data.id << ", size: "
+                                 << alert_data.serialized_alert_size << ", and content: " << alert_str << std::endl;
 
-            WantedPersonAlert* alert = AlertDeserializer::deserialize(alert_str, alert_data.id);
+            WantedPersonAlert *alert = AlertDeserializer::deserialize(alert_str, alert_data.id);
             alerts.emplace_back(alert);
         }
     }

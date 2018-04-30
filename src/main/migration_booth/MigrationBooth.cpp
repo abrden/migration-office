@@ -27,7 +27,7 @@ void MigrationBooth::attend_resident(Resident* resident) {
 }
 
 void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
-    police.receive_alerts();
+    police.get_current_alerts();
     if (!police.is_wanted_person(foreigner)) {
         logger(BOOTH) << "Looking available for stamper" << std::endl;
         stampers.get_stamper();
