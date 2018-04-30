@@ -39,8 +39,9 @@ void Police::receive_fugitives() {
         } else if ((unsigned long) buffer_bytes_read < sizeof(unsigned int) * n_fugitives) {
             fugitives_fifo_lock.unlock();
             throw std::runtime_error("Failed to read fugitives ids buffer");
+        } else {
+            fugitives.assign(ids_buffer, std::end(ids_buffer));
         }
-        fugitives.assign(ids_buffer, std::end(ids_buffer));
     }
     fugitives_fifo_lock.unlock();
 
