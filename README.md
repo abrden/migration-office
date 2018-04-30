@@ -1,7 +1,7 @@
 # Migration Office [![Build Status](https://travis-ci.org/abrden/migration-office.svg?branch=master)](https://travis-ci.org/abrden/migration-office)
 
 ### Command line parameters
----
+
 - **-p, --people** people_file  
 People file
 - **-a, --alerts** alerts_file  
@@ -18,7 +18,7 @@ Fugitive ids file
 (Optional) Choose a file to log, default log file is *log* located in the same dir as the office's executable
 
 ### Execution examples
----
+
 #### Using defaults without log
 ```sh
 $ ./migration_office ./migration_office -p ../resources/people.txt\
@@ -42,7 +42,7 @@ $ ./migration_office ./migration_office -p ../resources/people.txt\
 ```
 
 ### Configuration files examples
----
+
 - **People file**
 ```
 timestamp,resident,id,passport_id,features
@@ -64,5 +64,5 @@ id
 ```
 
 ### License
----
+
 GNU General Public License v3.0
