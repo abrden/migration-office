@@ -16,10 +16,6 @@ Semaphore::Semaphore(const std::string& file, const char letter) {
         std::string message = std::string("Error in Semaphore semget(): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
-
-    int counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH ID: " << id << std::endl;
-    std::cout << getpid() << "============ SMPH CONSTRUCTOR() VALUE: " << counter << std::endl;
 }
 
 int Semaphore::init(const int initial_value) const {
@@ -37,10 +33,6 @@ int Semaphore::init(const int initial_value) const {
         throw std::system_error(errno, std::system_category(), message);
     }
 
-    int counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH ID: " << id << std::endl;
-    std::cout << "============ SMPH INIT() VALUE: " << counter << std::endl;
-
     return ans;
 }
 
@@ -50,22 +42,11 @@ int Semaphore::p() const {
     op.sem_op = -1;
     op.sem_flg = 0;
 
-    int counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH ID: " << id << std::endl;
-    std::cout << "============ SMPH P() VALUE: " << counter << std::endl;
-    if (counter < 0) {
-        std::string message = std::string("Error in Semaphore semctl(-1): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
-    }
-
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
         std::string message = std::string("Error in Semaphore semop(-1): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
-
-    counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH AFTER P() VALUE: " << counter << std::endl;
 
     return ans;
 }
@@ -76,23 +57,12 @@ int Semaphore::v() const {
     op.sem_op = 1;
     op.sem_flg = 0;
 
-    int counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH ID: " << id << std::endl;
-    std::cout << "============ SMPH V() VALUE: " << counter << std::endl;
-
-    if (counter < 0) {
-        std::string message = std::string("Error in Semaphore semctl(-1): ") + std::string(strerror(errno));
-        throw std::system_error(errno, std::system_category(), message);
-    }
-
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
         std::string message = std::string("Error in Semaphore semop(1): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
 
-    counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH AFTER V() VALUE: " << counter << std::endl;
     return ans;
 }
 
@@ -102,24 +72,14 @@ int Semaphore::w() const {
     op.sem_op = 0;
     op.sem_flg = 0;
 
-    int counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH ID: " << id << std::endl;
-    std::cout << "============ SMPH W() VALUE: " << counter << std::endl;
-
     int ans = semop(this->id, &op, 1);
     if (ans < 0) {
         std::string message = std::string("Error in Semaphore semop(0): ") + std::string(strerror(errno));
         throw std::system_error(errno, std::system_category(), message);
     }
-
-    counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH AFTER W() VALUE: " << counter << std::endl;
     return ans;
 }
 
 int Semaphore::destroy() const {
-    int counter = semctl(this->id, 0, GETVAL, 0);
-    std::cout << "============ SMPH ID: " << id << std::endl;
-    std::cout << "============ SMPH DESTROY() VALUE: " << counter << std::endl;
     return semctl(id, 0, IPC_RMID);
 }
