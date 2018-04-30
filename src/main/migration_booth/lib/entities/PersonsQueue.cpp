@@ -16,6 +16,7 @@ Person* PersonsQueue::front() {
     ssize_t bytes_read = fifo.fifo_read(static_cast<void*>(&buffer_size), sizeof(unsigned long));
     if (bytes_read == 0) {
         logger(BOOTH_QUEUE) << "No more persons on the queue" << std::endl;
+        fifo_lock.unlock();
         return nullptr;
     } else if (bytes_read != sizeof(unsigned long)) {
         throw std::runtime_error("I couldnt read person size ulong. I read this many bytes: " + bytes_read);

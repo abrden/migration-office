@@ -21,24 +21,30 @@ Police::Police(Logger& logger)
 
 void Police::receive_fugitives() {
     fugitives_fifo_lock.lock();
+    logger(BOOTH_POLICE) << "Reading fugitives ids" << std::endl;
     size_t n_fugitives;
-    logger(BOOTH_POLICE) << "Reading..." << std::endl;
-    ssize_t read_1 = fugitives_fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(size_t));
-    logger(BOOTH_POLICE) << "Read size: " << read_1 << std::endl;
-    if (read_1 <= 0) {
-        std::cout << "[MIGRATION BOOTH] Invalid read, closing.." << std::endl;
-        return;
+    ssize_t size_bytes_read = fugitives_fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(size_t));
+    if (size_bytes_read == 0) {
+        logger(BOOTH_POLICE) << "No fugitives size to read" << std::endl;
+    } else if ((unsigned long) size_bytes_read < sizeof(size_t)) {
+        fugitives_fifo_lock.unlock();
+        throw std::runtime_error("Failed to read size_t");
     }
-    unsigned int fugi[BUFFERSIZE];
-    ssize_t read_2 = fugitives_fifo.fifo_read(static_cast<void*>(fugi), sizeof(unsigned int) * n_fugitives);
+
+    if (size_bytes_read > 0 && n_fugitives > 0) {
+        unsigned int ids_buffer[BUFFERSIZE];
+        ssize_t buffer_bytes_read = fugitives_fifo.fifo_read(static_cast<void*>(ids_buffer), sizeof(unsigned int) * n_fugitives);
+        if (buffer_bytes_read == 0) {
+            logger(BOOTH_POLICE) << "No fugitives ids to read" << std::endl;
+        } else if ((unsigned long) buffer_bytes_read < sizeof(unsigned int) * n_fugitives) {
+            fugitives_fifo_lock.unlock();
+            throw std::runtime_error("Failed to read fugitives ids buffer");
+        }
+        fugitives.assign(ids_buffer, std::end(ids_buffer));
+    }
     fugitives_fifo_lock.unlock();
 
-    logger(BOOTH_POLICE) << "Read fugitives size: " << read_2 << std::endl;
-
-    fugitives.assign(fugi, std::end(fugi));
-    logger(BOOTH_POLICE) << "Received " << n_fugitives << " fugitives ids" << std::endl;
-
-    logger(BOOTH_POLICE) << "Sending read confirmation" << std::endl;
+    logger(BOOTH_POLICE) << "Received " << n_fugitives << " fugitives ids. Sending read confirmation" << std::endl;
     booths.notify_read_fugitives();
 }
 
