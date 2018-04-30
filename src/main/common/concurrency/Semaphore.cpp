@@ -1,7 +1,6 @@
 #include <cstring>
 #include <system_error>
 #include <iostream>
-#include <unistd.h>
 #include "Semaphore.h"
 
 Semaphore::Semaphore(const std::string& file, const char letter) {

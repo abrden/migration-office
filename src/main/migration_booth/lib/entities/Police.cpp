@@ -14,13 +14,12 @@ static const size_t BUFFERSIZE = 100;
 
 Police::Police(Logger& logger)
         : logger(logger), fugitives_fifo(FugitivesFifo::FUGITIVES_FIFO_FILE),
-          ministry_fifo(FugitivesFifo::BOOTH_FIFO_FILE), fugitives_fifo_lock(FugitivesFifo::BOOTH_LOCK_FILE),
+          fugitives_fifo_lock(FugitivesFifo::BOOTH_LOCK_FILE),
           alerts_lock(AlertsSharedMem::LOCK_SHMEM_FILE),
           alerts_shm(AlertsSharedMem::SHMEM_FILE, AlertsSharedMem::LETTER, AlertsSharedMem::SHMEM_LENGTH) {
 }
 
 void Police::receive_fugitives() {
-    logger(BOOTH_POLICE) << "Locking..." << std::endl;
     fugitives_fifo_lock.lock();
     size_t n_fugitives;
     logger(BOOTH_POLICE) << "Reading..." << std::endl;
@@ -32,6 +31,8 @@ void Police::receive_fugitives() {
     }
     unsigned int fugi[BUFFERSIZE];
     ssize_t read_2 = fugitives_fifo.fifo_read(static_cast<void*>(fugi), sizeof(unsigned int) * n_fugitives);
+    fugitives_fifo_lock.unlock();
+
     logger(BOOTH_POLICE) << "Read fugitives size: " << read_2 << std::endl;
 
     fugitives.assign(fugi, std::end(fugi));
@@ -39,12 +40,6 @@ void Police::receive_fugitives() {
 
     logger(BOOTH_POLICE) << "Sending read confirmation" << std::endl;
     booths.notify_read_fugitives();
-
-    /* TODO que vuele vuele
-    bool confirmation = true;
-    ministry_fifo.fifo_write(static_cast<void*>(&confirmation), sizeof(bool));
-    fugitives_fifo_lock.unlock();
-    */
 }
 
 bool Police::is_new_alert(size_t id) {

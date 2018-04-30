@@ -16,7 +16,6 @@ class MinisterOfSecurity {
         Logger logger;
 
         FifoWriter fugitives_fifo;
-        FifoReader booths_fifo;
         BoothsWithUnreadFugitives booths;
 
         std::vector<unsigned int> fugitives;
@@ -26,7 +25,6 @@ class MinisterOfSecurity {
 
         AlertSpawner alerts_spawner;
         void send_alerts();
-        void receive_confirmations();
 
     public:
         MinisterOfSecurity(const std::string& alerts_file_path,

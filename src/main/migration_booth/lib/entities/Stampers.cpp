@@ -1,4 +1,3 @@
-#include <iostream>
 #include "FileNames.h"
 #include "Stampers.h"
 

@@ -21,7 +21,6 @@ class Police {
         Logger& logger;
 
         FifoReader fugitives_fifo;
-        FifoWriter ministry_fifo;
         ExclusiveLock fugitives_fifo_lock;
         ExclusiveLock alerts_lock;
         AlertsSharedMemory alerts_shm;
