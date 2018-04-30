@@ -20,14 +20,13 @@ PeopleSpawner::PeopleSpawner(const std::string& people_file, const bool debug, c
 }
 
 void PeopleSpawner::spawn(std::string serialized_person) {
-    logger(PEOPLE_SPAWNER) << "Serialized person " << serialized_person << std::endl;
-
     unsigned long serialization_length = serialized_person.size();
-    logger(PEOPLE_SPAWNER) << "The length is " << serialization_length << std::endl;
+    logger(PEOPLE_SPAWNER) << "Spawning person: " << serialized_person << ". with size: " << serialization_length << std::endl;
 
+    // No need for locks, I'm the single writer of this fifo
     fifo.fifo_write(&serialization_length, sizeof(unsigned long));
     ssize_t bytes_sent = fifo.fifo_write(serialized_person.c_str(), sizeof(char) * serialization_length);
-    logger(PEOPLE_SPAWNER) << "I sent " << bytes_sent << " bytes" << std::endl;
+    logger(PEOPLE_SPAWNER) << "I sent " << bytes_sent << " bytes to the queue" << std::endl;
 }
 
 bool PeopleSpawner::quit() {
