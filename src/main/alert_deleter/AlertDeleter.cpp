@@ -32,12 +32,13 @@ void AlertDeleter::spawn(std::string spawnable) {
     }
 
     if (pos == AlertsSharedMem::SHMEM_LENGTH) {
-        std::string message = "Error in alert deletion: alert with id " + std::to_string(id) + " not found.";
-        throw std::runtime_error(message);
+        logger(ALERT_DELETER) << "Alert with id " << id << " not found. Pushing it back." << std::endl;
+        items.push_front(0, spawnable);
+    } else {
+        logger(ALERT_DELETER) << "Alert with id " << id << " found in position " << pos << ", deleting." << std::endl;
+        alerts_shm.write(pos, data);
+        logger(ALERT_DELETER) << "Alert with id " << id << " found in position " << pos << " deleted." << std::endl;
     }
-    logger(ALERT_DELETER) << "Alert with id " << id << " found in position " << pos << ", deleting." << std::endl;
-    alerts_shm.write(pos, data);
-    logger(ALERT_DELETER) << "Alert with id " << id << " found in position " << pos << " deleted." << std::endl;
 
     alerts_shmem_lock.unlock();
 }

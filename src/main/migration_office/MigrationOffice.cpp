@@ -34,7 +34,7 @@ void MigrationOffice::start() {
     open_booths();
     open_ministry_of_security();
     fork_spawner();
-//    open_alert_deleter();
+    open_alert_deleter();
 }
 
 void MigrationOffice::open_ministry_of_security() {
