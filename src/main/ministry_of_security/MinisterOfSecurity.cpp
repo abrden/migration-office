@@ -44,7 +44,8 @@ void MinisterOfSecurity::send_fugitives() {
     for(size_t i = 0; i < booths_number; i++) {
         logger(MINISTER) << "Sending " << fugitives.size() << " fugitives!" << std::endl;
         fugitives_fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(size_t));
-        fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
+        if (n_fugitives > 0)
+            fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
         logger(MINISTER) << "Fugitives sent" << std::endl;
     }
 
