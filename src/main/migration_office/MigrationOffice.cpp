@@ -37,7 +37,7 @@ void MigrationOffice::start() {
     start_alert_deleter();
 }
 
-void MigrationOffice::open_ministry_of_security() {
+void MigrationOffice::fork_new_process(std::vector<char*>& argvs) {
     pid_t pid = fork();
 
     if (pid < 0) {
@@ -45,31 +45,35 @@ void MigrationOffice::open_ministry_of_security() {
     } else if (pid > 0) {
         children_pids.push_back(pid);
     } else {
-        std::string debug_flag = debug ? "1" : "0";
-
-        std::vector<char*> booth_argv;
-        booth_argv.push_back(const_cast<char*>(BinaryNames::MINISTER_BINARY.c_str()));
-        booth_argv.push_back(const_cast<char*>(alerts_file.c_str()));
-        booth_argv.push_back(const_cast<char*>(fugitives_file.c_str()));
-        booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-        booth_argv.push_back(const_cast<char*>(log_file.c_str()));
-        std::string booths_number_str = std::to_string(booths_number);
-        booth_argv.push_back(const_cast<char*>(booths_number_str.c_str()));
-
-        std::vector<std::string> pids_str;
-        for (int i = 0; i < booths_number; i++) {
-            std::string pid_str = std::to_string(booth_pids.at(i));
-            pids_str.emplace_back(pid_str);
-        }
-
-        for (int i = 0; i < booths_number; i++) {
-            booth_argv.push_back(const_cast<char *>(pids_str.at(i).c_str()));
-        }
-
-        booth_argv.push_back(nullptr);
-
-        execv(booth_argv[0], &booth_argv[0]);
+        execv(argvs[0], &argvs[0]);
     }
+}
+
+void MigrationOffice::open_ministry_of_security() {
+    std::string debug_flag = debug ? "1" : "0";
+
+    std::vector<char*> argv;
+    argv.push_back(const_cast<char*>(BinaryNames::MINISTER_BINARY.c_str()));
+    argv.push_back(const_cast<char*>(alerts_file.c_str()));
+    argv.push_back(const_cast<char*>(fugitives_file.c_str()));
+    argv.push_back(const_cast<char*>(debug_flag.c_str()));
+    argv.push_back(const_cast<char*>(log_file.c_str()));
+    std::string booths_number_str = std::to_string(booths_number);
+    argv.push_back(const_cast<char*>(booths_number_str.c_str()));
+
+    std::vector<std::string> pids_str;
+    for (int i = 0; i < booths_number; i++) {
+        std::string pid_str = std::to_string(booth_pids.at(i));
+        pids_str.emplace_back(pid_str);
+    }
+
+    for (int i = 0; i < booths_number; i++) {
+        argv.push_back(const_cast<char *>(pids_str.at(i).c_str()));
+    }
+
+    argv.push_back(nullptr);
+
+    fork_new_process(argv);
 }
 
 void MigrationOffice::open_booths() {
