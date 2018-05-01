@@ -43,7 +43,7 @@ void Police::receive_fugitives() {
 }
 
 void Police::get_current_alerts() {
-    alerts.clear();
+    destroy_alerts();
     alerts_lock.lock();
     for (size_t i = 0; i < AlertsSharedMem::SHMEM_LENGTH; i++){
         AlertData alert_data = alerts_shm.read(i);
@@ -81,9 +81,12 @@ void Police::report(Foreigner* foreigner) {
     deported_foreigners++;
 }
 
-Police::~Police() {
+void Police::destroy_alerts() {
     while (!alerts.empty()) {
         delete alerts.back();
         alerts.pop_back();
     }
+}
+Police::~Police() {
+    destroy_alerts();
 }

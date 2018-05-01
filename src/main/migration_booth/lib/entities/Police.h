@@ -31,6 +31,7 @@ class Police {
         size_t arrested_residents;
         size_t deported_foreigners;
 
+        void destroy_alerts();
     public:
         explicit Police(Logger& logger);
         void receive_fugitives();
