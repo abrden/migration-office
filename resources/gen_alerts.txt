@@ -1,0 +1,20 @@
+0,9,large eyes,arched eyebrows,dark brown skin,square face,long hair
+9,19,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+5,11,small eyes,straight eyebrows,pale skin,round face,short hair
+0,10,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+9,10,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+4,13,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+10,12,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+6,10,large eyes,arched eyebrows,dark brown skin,square face,long hair
+1,5,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+5,11,narrow eyes,plucked eyebrows,light skin,oval face,bald hair
+1,2,large eyes,arched eyebrows,dark brown skin,square face,long hair
+9,15,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+10,15,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+8,13,small eyes,straight eyebrows,pale skin,round face,short hair
+3,5,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+3,11,narrow eyes,plucked eyebrows,light skin,oval face,bald hair
+1,2,large eyes,arched eyebrows,dark brown skin,square face,long hair
+1,11,large eyes,arched eyebrows,dark brown skin,square face,long hair
+4,14,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+9,13,narrow eyes,plucked eyebrows,light skin,oval face,bald hair

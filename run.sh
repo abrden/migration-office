@@ -12,6 +12,6 @@ valgrind --suppressions=../vg.supp --leak-check=full\
          --show-leak-kinds=all\
          --trace-children=yes\
          --error-exitcode=1 --errors-for-leak-kinds=all\
-         ./migration_office -p ../resources/people.txt\
-         -a ../resources/alerts.txt\
-         -f ../resources/fugitives.txt -b 5 -s 1 -d
+         ./migration_office -p ../resources/gen_people.txt\
+         -a ../resources/gen_alerts.txt\
+         -f ../resources/gen_fugitives.txt -b 5 -s 3 -d

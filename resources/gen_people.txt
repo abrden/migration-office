@@ -1,0 +1,20 @@
+6,0,,BBS662334,small eyes,straight eyebrows,pale skin,round face,short hair
+3,1,32511362,,narrow eyes,plucked eyebrows,light skin,oval face,bald hair
+5,0,,PHT870629,narrow eyes,plucked eyebrows,light skin,oval face,bald hair
+1,1,23502327,,large eyes,arched eyebrows,dark brown skin,square face,long hair
+8,1,10703680,,small eyes,straight eyebrows,pale skin,round face,short hair
+6,1,14614624,,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+2,1,22718167,,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+2,1,23728562,,large eyes,arched eyebrows,dark brown skin,square face,long hair
+8,0,,ITM409210,narrow eyes,plucked eyebrows,light skin,oval face,bald hair
+10,1,14778833,,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+7,0,,HZM735258,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+4,1,33387554,,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+0,0,,ETZ487363,large eyes,arched eyebrows,dark brown skin,square face,long hair
+2,0,,PGT811866,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+0,0,,HSQ061750,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+10,0,,WOP424388,squinty eyes,trim eyebrows,deep brown skin,wolfish face,shoulder-length hair
+6,0,,NLQ984011,large eyes,arched eyebrows,dark brown skin,square face,long hair
+5,1,19621576,,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
+1,1,34142638,,narrow eyes,plucked eyebrows,light skin,oval face,bald hair
+10,0,,FUM074103,sharp eyes,sparse eyebrows,amber skin,narrow face,messy hair
