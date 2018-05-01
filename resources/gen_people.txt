@@ -1,3 +1,4 @@
+timestamp,resident,id,passport_id,features
 6,0,,BBS662334,small eyes,straight eyebrows,pale skin,round face,short hair
 3,1,32052081,,narrow eyes,plucked eyebrows,light skin,oval face,bald hair
 5,0,,PHT870629,narrow eyes,plucked eyebrows,light skin,oval face,bald hair

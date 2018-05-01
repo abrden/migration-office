@@ -21,11 +21,13 @@ def generate_passport():
 
 # Fugitives
 with open("resources/gen_fugitives.txt", "w") as f:
+    f.write("id\n")
     for _ in range(20):
         f.write(str(random.randint(10000000, 40000000)) + '\n')
 
 # Persons
 with open("resources/gen_people.txt", "w") as f:
+    f.write("timestamp,resident,id,passport_id,features\n")
     for _ in range(20):
         timestamp = str(random.randint(0, 10))
         resident = str(random.randint(0, 1))
@@ -38,6 +40,7 @@ with open("resources/gen_people.txt", "w") as f:
 # Alerts
 
 with open("resources/gen_alerts.txt", "w") as f:
+    f.write("timestamp,del_timestamp,features\n")
     for _ in range(20):
         timestamp = random.randint(0, 10)
         del_timestamp = timestamp + random.randint(1, 10)
