@@ -124,24 +124,16 @@ void MigrationOffice::start_statistics() {
 }
 
 void MigrationOffice::start_alert_deleter() {
-    pid_t pid = fork();
+    std::string debug_flag = debug ? "1" : "0";
 
-    if (pid < 0) {
-        throw std::system_error(errno, std::system_category());
-    } else if (pid > 0) {
-        children_pids.emplace_back(pid);
-    } else {
-        std::string debug_flag = debug ? "1" : "0";
+    std::vector<char*> argv;
+    argv.push_back(const_cast<char*>(BinaryNames::ALERT_DELETER_BINARY.c_str()));
+    argv.push_back(const_cast<char*>(alerts_file.c_str()));
+    argv.push_back(const_cast<char*>(debug_flag.c_str()));
+    argv.push_back(const_cast<char*>(log_file.c_str()));
+    argv.push_back(nullptr);
 
-        std::vector<char*> spawner_argv;
-        spawner_argv.push_back(const_cast<char*>(BinaryNames::ALERT_DELETER_BINARY.c_str()));
-        spawner_argv.push_back(const_cast<char*>(alerts_file.c_str()));
-        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
-        spawner_argv.push_back(nullptr);
-
-        execv(spawner_argv[0], &spawner_argv[0]);
-    }
+    fork_new_process(argv);
 }
 
 void MigrationOffice::wait_children() {
