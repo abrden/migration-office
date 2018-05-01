@@ -91,24 +91,16 @@ void MigrationOffice::open_booths() {
 }
 
 void MigrationOffice::start_spawner() {
-    pid_t pid = fork();
+    std::string debug_flag = debug ? "1" : "0";
 
-    if (pid < 0) {
-        throw std::system_error(errno, std::system_category());
-    } else if (pid > 0) {
-        children_pids.emplace_back(pid);
-    } else {
-        std::string debug_flag = debug ? "1" : "0";
+    std::vector<char*> argv;
+    argv.push_back(const_cast<char*>(BinaryNames::SPAWNER_BINARY.c_str()));
+    argv.push_back(const_cast<char*>(people_file.c_str()));
+    argv.push_back(const_cast<char*>(debug_flag.c_str()));
+    argv.push_back(const_cast<char*>(log_file.c_str()));
+    argv.push_back(nullptr);
 
-        std::vector<char*> spawner_argv;
-        spawner_argv.push_back(const_cast<char*>(BinaryNames::SPAWNER_BINARY.c_str()));
-        spawner_argv.push_back(const_cast<char*>(people_file.c_str()));
-        spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-        spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
-        spawner_argv.push_back(nullptr);
-
-        execv(spawner_argv[0], &spawner_argv[0]);
-    }
+    fork_new_process(argv);
 }
 
 void MigrationOffice::start_statistics() {
