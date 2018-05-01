@@ -1,5 +1,6 @@
 timestamp,resident,id,passport_id,features
 5,1,38464269,,tez blanca,ojos oscuros
+1,1,13641107,,tez blanca,ojos celestes
 3,0,,321CRIMINAL,petiso,orejudo
 2,0,1234567,PORTOÑOL123,tez blanca,ojos verdes,barbudo
 10,0,,NOCRIMINAL,petiso,orejudo
