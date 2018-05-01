@@ -12,10 +12,6 @@
 class PeopleSpawner : public Spawner {
 
     private:
-        const std::string people_file;
-        const bool debug;
-        const std::string log_file;
-
         Logger logger;
         SIGINTHandler sigint_handler;
         Spawnables people;
