@@ -78,24 +78,15 @@ void MigrationOffice::open_ministry_of_security() {
 
 void MigrationOffice::open_booths() {
     for (int i = 0; i < booths_number; i++) {
-        pid_t pid = fork();
+        std::string debug_flag = debug ? "1" : "0";
 
-        if (pid < 0) {
-            throw std::system_error(errno, std::system_category());
-        } else if (pid > 0) {
-            children_pids.push_back(pid);
-            booth_pids.push_back(pid);
-        } else {
-            std::string debug_flag = debug ? "1" : "0";
+        std::vector<char*> argv;
+        argv.push_back(const_cast<char*>(BinaryNames::BOOTH_BINARY.c_str()));
+        argv.push_back(const_cast<char*>(debug_flag.c_str()));
+        argv.push_back(const_cast<char*>(log_file.c_str()));
+        argv.push_back(nullptr);
 
-            std::vector<char*> booth_argv;
-            booth_argv.push_back(const_cast<char*>(BinaryNames::BOOTH_BINARY.c_str()));
-            booth_argv.push_back(const_cast<char*>(debug_flag.c_str()));
-            booth_argv.push_back(const_cast<char*>(log_file.c_str()));
-            booth_argv.push_back(nullptr);
-
-            execv(booth_argv[0], &booth_argv[0]);
-        }
+        fork_new_process(argv);
     }
 }
 
