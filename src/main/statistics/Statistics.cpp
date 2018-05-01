@@ -4,8 +4,8 @@
 #include "FileNames.h"
 #include "SignalHandler.h"
 
-Statistics::Statistics(size_t booths_number, const bool debug, const std::string& log_file)
-        : logger(debug, log_file), booths_number(booths_number),
+Statistics::Statistics(const bool debug, const std::string& log_file)
+        : logger(debug, log_file),
           shm(StatisticsSharedMem::STATS_FILE, StatisticsSharedMem::LETTER, STATS_SIZE),
           lock(StatisticsSharedMem::LOCK_STATS_FILE) {
 

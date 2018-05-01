@@ -16,7 +16,6 @@ class Statistics {
     private:
         Logger logger;
 
-        const size_t booths_number;
         SIGINTHandler sigint_handler;
         SharedMemoryArray<size_t> shm;
         ExclusiveLock lock;
@@ -24,7 +23,7 @@ class Statistics {
         size_t get_field(size_t pos);
 
     public:
-        Statistics(size_t booths_number, const bool debug, const std::string& log_file);
+        Statistics(const bool debug, const std::string& log_file);
         void start();
         ~Statistics();
 };

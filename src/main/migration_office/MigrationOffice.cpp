@@ -130,7 +130,6 @@ void MigrationOffice::open_statistics() {
         spawner_argv.push_back(const_cast<char*>(BinaryNames::STATISTICS_BINARY.c_str()));
         spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
-        spawner_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
         spawner_argv.push_back(nullptr);
 
         execv(spawner_argv[0], &spawner_argv[0]);
