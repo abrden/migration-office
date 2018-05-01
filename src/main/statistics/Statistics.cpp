@@ -28,15 +28,24 @@ void Statistics::start() {
     std::getline(std::cin, line);
     while (sigint_handler.get_graceful_quit() == 0 && line != "exit") {
         if (line == "allowed residents") {
-        std::cout << "Allowed residents: " << get_field(FIELDS::ALLOWED_RESIDENTS) << std::endl;
+            size_t ans = get_field(FIELDS::ALLOWED_RESIDENTS);
+            logger(STATISTICS) << "Answering 'allowed residents' query with: " << ans << std::endl;
+            std::cout << "Allowed residents: " << ans << std::endl;
         } else if (line == "detained residents"){
-            std::cout << "Detained residents: " << get_field(FIELDS::DETAINED_RESIDENTS) << std::endl;
+            size_t ans = get_field(FIELDS::DETAINED_RESIDENTS);
+            logger(STATISTICS) << "Answering 'detained residents' query with: " << ans << std::endl;
+            std::cout << "Detained residents: " << ans << std::endl;
         } else if (line == "allowed foreigners") {
-            std::cout << "Allowed foreigners: " << get_field(FIELDS::ALLOWED_FOREIGNERS) << std::endl;
+            size_t ans = get_field(FIELDS::ALLOWED_FOREIGNERS);
+            logger(STATISTICS) << "Answering 'allowed foreigners' query with: " << ans << std::endl;
+            std::cout << "Allowed foreigners: " << ans << std::endl;
         } else if (line == "deported foreigners") {
-            std::cout << "Deported foreigners: " << get_field(FIELDS::DEPORTED_FOREIGNERS) << std::endl;
+            size_t ans = get_field(FIELDS::DEPORTED_FOREIGNERS);
+            logger(STATISTICS) << "Answering 'deported foreigners' query with: " << ans << std::endl;
+            std::cout << "Deported foreigners: " << ans << std::endl;
         } else {
-            std::cout << "Invalid command, try again" << std::endl;
+            logger(STATISTICS) << "Invalid query received: " << line  << std::endl;
+            std::cout << "Invalid query, try again" << std::endl;
         }
         std::cout << "> ";
         std::getline(std::cin, line);
