@@ -31,9 +31,9 @@ class MigrationOffice {
 
         void open_ministry_of_security();
         void open_booths();
-        void fork_spawner();
-        void open_statistics();
-        void open_alert_deleter();
+        void start_spawner();
+        void start_statistics();
+        void start_alert_deleter();
 
     public:
         MigrationOffice(const int booths_number, const int stampers_number,
