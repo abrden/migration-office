@@ -25,7 +25,7 @@ with open("resources/gen_fugitives.txt", "w") as f:
         f.write(str(random.randint(10000000, 40000000)) + '\n')
 
 # Persons
-with open("resources/gen_persons.txt", "w") as f:
+with open("resources/gen_people.txt", "w") as f:
     for _ in range(20):
         timestamp = str(random.randint(0, 10))
         resident = str(random.randint(0, 1))
