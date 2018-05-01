@@ -1,13 +1,6 @@
 import random
 import string
 
-# Fugitives
-with open("resources/gen_fugitives.txt", "w") as f:
-    for _ in range(20):
-        f.write(str(random.randint(10000000, 40000000)) + '\n')
-
-# Persons
-
 
 def generate_features():
     eyes_f = ["large", "small", "narrow", "sharp", "squinty"]
@@ -26,6 +19,12 @@ def generate_passport():
            ''.join(random.choice(string.digits) for _ in range(6))
 
 
+# Fugitives
+with open("resources/gen_fugitives.txt", "w") as f:
+    for _ in range(20):
+        f.write(str(random.randint(10000000, 40000000)) + '\n')
+
+# Persons
 with open("resources/gen_persons.txt", "w") as f:
     for _ in range(20):
         timestamp = str(random.randint(0, 10))
