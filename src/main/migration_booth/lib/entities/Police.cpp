@@ -19,6 +19,12 @@ Police::Police(Logger& logger)
           alerts_shm(AlertsSharedMem::SHMEM_FILE, AlertsSharedMem::LETTER, AlertsSharedMem::SHMEM_LENGTH) {
 }
 
+void Police::assign_fugitives(unsigned int* buffer, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        fugitives.push_back(buffer[i]);
+    }
+}
+
 void Police::receive_fugitives() {
     fugitives_fifo_lock.lock();
     logger(BOOTH_POLICE) << "Reading fugitives ids" << std::endl;
@@ -40,7 +46,7 @@ void Police::receive_fugitives() {
             fugitives_fifo_lock.unlock();
             throw std::runtime_error("Failed to read fugitives ids buffer");
         } else {
-            fugitives.assign(ids_buffer, std::end(ids_buffer));
+            assign_fugitives(ids_buffer, n_fugitives);
         }
     }
     fugitives_fifo_lock.unlock();
