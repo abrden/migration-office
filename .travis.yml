@@ -14,4 +14,4 @@ before_script:
 script:
   - ./run.sh
 after_script:
-  - cat /build/log
+  - cat build/log
