@@ -1,42 +1,76 @@
-#include <iostream>
-#include <algorithm>
-
+#include "AlertData.h"
+#include "FileNames.h"
+#include "AlertData.h"
+#include "AlertDeserializer.h"
 #include "ExclusiveLock.h"
 #include "Police.h"
+#include "FileNames.h"
+#include "BoothsWithUnreadFugitives.h"
 
-static const std::string FIFO_FILE = "/tmp/archivofifo";
-static const std::string BOOTH_FIFO_FILE = "/tmp/booth_fifo";
-static const std::string LOCK_FILE = "/tmp/archivolock";
+#include <algorithm>
+#include <iostream>
+
 static const size_t BUFFERSIZE = 100;
 
-Police::Police(Logger& logger) : logger(logger),
-                                 fugitives_fifo(FIFO_FILE),
-                                 ministry_fifo(BOOTH_FIFO_FILE),
-                                 fugitives_fifo_lock(LOCK_FILE) {
-    receive_fugitives();
+Police::Police(Logger& logger)
+        : logger(logger), fugitives_fifo(FugitivesFifo::FUGITIVES_FIFO_FILE),
+          fugitives_fifo_lock(FugitivesFifo::BOOTH_LOCK_FILE),
+          alerts_lock(AlertsSharedMem::LOCK_SHMEM_FILE),
+          alerts_shm(AlertsSharedMem::SHMEM_FILE, AlertsSharedMem::LETTER, AlertsSharedMem::SHMEM_LENGTH) {
+}
+
+void Police::assign_fugitives(unsigned int* buffer, size_t size) {
+    for (size_t i = 0; i < size; i++) {
+        fugitives.push_back(buffer[i]);
+    }
 }
 
 void Police::receive_fugitives() {
-
     fugitives_fifo_lock.lock();
+    logger(BOOTH_POLICE) << "Reading fugitives ids" << std::endl;
     size_t n_fugitives;
-    ssize_t read_1 = fugitives_fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(size_t));
-    logger(BOOTH_POLICE) << "Read size: " << read_1 << std::endl;
-    if (read_1 <= 0) {
-        std::cout << "[MIGRATION BOOTH] Invalid read, closing.." << std::endl;
-        return;
+    ssize_t size_bytes_read = fugitives_fifo.fifo_read(static_cast<void*>(&n_fugitives), sizeof(size_t));
+    if (size_bytes_read == 0) {
+        logger(BOOTH_POLICE) << "No fugitives size to read" << std::endl;
+    } else if ((unsigned long) size_bytes_read < sizeof(size_t)) {
+        fugitives_fifo_lock.unlock();
+        throw std::runtime_error("Failed to read size_t");
     }
-    unsigned int fugi[BUFFERSIZE];
-    ssize_t read_2 = fugitives_fifo.fifo_read(static_cast<void*>(fugi), sizeof(unsigned int) * n_fugitives);
-    logger(BOOTH_POLICE) << "Read fugitives size: " << read_2 << std::endl;
 
-    fugitives.assign(fugi, std::end(fugi));
-    logger(BOOTH_POLICE) << "Received " << n_fugitives << " fugitives ids" << std::endl;
-
-    logger(BOOTH_POLICE) << "Sending read confirmation" << std::endl;
-    bool confirmation = true;
-    ministry_fifo.fifo_write(static_cast<void*>(&confirmation), sizeof(bool));
+    if (size_bytes_read > 0 && n_fugitives > 0) {
+        unsigned int ids_buffer[BUFFERSIZE];
+        ssize_t buffer_bytes_read = fugitives_fifo.fifo_read(static_cast<void*>(ids_buffer), sizeof(unsigned int) * n_fugitives);
+        if (buffer_bytes_read == 0) {
+            logger(BOOTH_POLICE) << "No fugitives ids to read" << std::endl;
+        } else if ((unsigned long) buffer_bytes_read < sizeof(unsigned int) * n_fugitives) {
+            fugitives_fifo_lock.unlock();
+            throw std::runtime_error("Failed to read fugitives ids buffer");
+        } else {
+            assign_fugitives(ids_buffer, n_fugitives);
+        }
+    }
     fugitives_fifo_lock.unlock();
+
+    logger(BOOTH_POLICE) << "Received " << n_fugitives << " fugitives ids. Sending read confirmation" << std::endl;
+    booths.notify_read_fugitives();
+}
+
+void Police::get_current_alerts() {
+    destroy_alerts();
+    alerts_lock.lock();
+    for (size_t i = 0; i < AlertsSharedMem::SHMEM_LENGTH; i++){
+        AlertData alert_data = alerts_shm.read(i);
+
+        if (alert_data.id > 0) {
+            std::string alert_str(alert_data.serialized_alert, alert_data.serialized_alert_size);
+            logger(BOOTH_POLICE) << "Loading alert with ID: " << alert_data.id << ", size: "
+                                 << alert_data.serialized_alert_size << ", and content: " << alert_str << std::endl;
+
+            WantedPersonAlert *alert = AlertDeserializer::deserialize(alert_str, alert_data.id);
+            alerts.emplace_back(alert);
+        }
+    }
+    alerts_lock.unlock();
 }
 
 bool Police::is_fugitive(Resident* resident) {
@@ -44,19 +78,28 @@ bool Police::is_fugitive(Resident* resident) {
 }
 
 bool Police::is_wanted_person(Foreigner* foreigner) {
-    // TODO
+    for (auto it = alerts.begin(); it != alerts.end(); ++it) {
+        if ((*it)->get_features() == foreigner->get_features()) return true;
+    }
     return false;
 }
 
 void Police::report(Resident* resident) {
     logger(BOOTH_POLICE) << "Resident " << resident->get_id() << " you are arrested" << std::endl;
     arrested_residents++;
-    delete resident;
 }
 
 void Police::report(Foreigner* foreigner) {
     logger(BOOTH_POLICE) << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
     deported_foreigners++;
-    delete foreigner;
 }
 
+void Police::destroy_alerts() {
+    while (!alerts.empty()) {
+        delete alerts.back();
+        alerts.pop_back();
+    }
+}
+Police::~Police() {
+    destroy_alerts();
+}

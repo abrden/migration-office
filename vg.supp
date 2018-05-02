@@ -1,0 +1,18 @@
+{
+   libstdc++
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.21
+   ...
+}
+
+{
+   migration_office_statistics_argv
+   Memcheck:Param
+   execve(argv[i])
+   fun:execve
+   fun:_ZN15MigrationOffice15open_statisticsEv
+   fun:_ZN15MigrationOffice5startEv
+   fun:main
+}

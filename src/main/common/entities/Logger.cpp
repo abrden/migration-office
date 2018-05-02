@@ -27,10 +27,6 @@ Logger& Logger::operator<<(io_manip_ptr_t f) {
 
         const std::string message = build_log_message();
 
-        // FIXME Delete me when you feel ready
-        std::cout << message;
-        //
-
         lock.lock();
         int fd = open(file.c_str(), O_WRONLY | O_CREAT, 0666);
         lseek(fd, 0, SEEK_END);

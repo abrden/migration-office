@@ -10,7 +10,7 @@ class Foreigner : public Person {
         Passport passport;
 
     public:
-        Foreigner(const std::string& passport_id, std::list<Feature*>& features);
+        Foreigner(const std::string& passport_id, const std::list<std::string>& features);
         Passport& get_passport();
         bool has_id() override;
 };

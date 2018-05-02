@@ -13,5 +13,9 @@ void FifoWriter::fifo_open() {
 }
 
 ssize_t FifoWriter::fifo_write(const void* buffer,const ssize_t buffsize) const {
-	return write(fd,buffer, buffsize);
+	ssize_t written_bytes = write(fd,buffer, buffsize);
+	if (written_bytes < 0) {
+		throw std::system_error(errno, std::system_category(), "Error in fifo write.");
+	}
+	return written_bytes;
 }

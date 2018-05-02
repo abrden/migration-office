@@ -2,16 +2,16 @@
 #define MIGRATION_OFFICE_PERSON_H
 
 #include <list>
-#include "Feature.h"
+#include "Features.h"
 
 class Person {
 
     private:
-        std::list<Feature*> features;
+        Features features;
 
     public:
-        explicit Person(std::list<Feature*> features);
-        std::list<Feature*> get_features();
+        explicit Person(const std::list<std::string>& features);
+        Features& get_features();
         virtual bool has_id() = 0;
         virtual ~Person();
 

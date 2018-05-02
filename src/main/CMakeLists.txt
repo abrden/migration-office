@@ -1,8 +1,9 @@
 project(migration_office)
 
+add_subdirectory(alert_deleter)
 add_subdirectory(common)
 add_subdirectory(migration_booth)
 add_subdirectory(migration_office)
-add_subdirectory(migration_spawner)
+add_subdirectory(people_spawner)
 add_subdirectory(ministry_of_security)
 add_subdirectory(statistics)

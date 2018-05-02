@@ -1,13 +1,17 @@
 #ifndef MIGRATION_OFFICE_STAMPERS_H
 #define MIGRATION_OFFICE_STAMPERS_H
 
-
-#include "Stamper.h"
+#include "Semaphore.h"
 
 class Stampers {
 
+    private:
+        Semaphore stampers;
+
     public:
-        Stamper* get_stamper();
+        Stampers();
+        void get_stamper();
+        void return_stamper();
 
 };
 

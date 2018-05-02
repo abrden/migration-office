@@ -1,6 +1,6 @@
 #include "Resident.h"
 
-Resident::Resident(unsigned int id, std::list<Feature*> features) :
+Resident::Resident(unsigned int id, const std::list<std::string>& features) :
         Person(features), id(id) {}
 
 unsigned int Resident::get_id() {

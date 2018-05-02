@@ -1,25 +1,25 @@
 #include <iostream>
 #include <getopt.h>
+#include <stdexcept>
 
+#include "FileNames.h"
 #include "MigrationOffice.h"
 
-const static int DEFAULT_BOOTHS_NUMBER = 10;
-const static int DEFAULT_STAMPERS_NUMBER = 5;
-const static std::string DEFAULT_LOG = "log";
-
 enum ERRORS {
-   NO_CONFIG_FILE = 1
+    NO_CONFIG_FILE = -1,
+    INVALID_BOOTHS_NUMBER = -2,
+    INVALID_STAMPERS_NUMBER = -3
 };
 
 int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_number,
                    std::string& people_file, std::string& alerts_file, std::string& fugitives_file,
                    bool& debug, std::string& log_file) {
 
-    bool booths, stampers, people, alerts, fugitives, log;
-    booths = stampers = people = alerts = fugitives = debug = log = false;
-    booths_number = DEFAULT_BOOTHS_NUMBER;
-    stampers_number = DEFAULT_STAMPERS_NUMBER;
-    log_file = DEFAULT_LOG;
+    bool people, alerts, fugitives;
+    people = alerts = fugitives = debug = false;
+    booths_number = OfficeDefaults::DEFAULT_BOOTHS_NUMBER;
+    stampers_number = OfficeDefaults::DEFAULT_STAMPERS_NUMBER;
+    log_file = OfficeDefaults::DEFAULT_LOG;
 
     int flag = 0;
     struct option opts[] = {
@@ -35,14 +35,22 @@ int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_num
     while ((flag = getopt_long(argc, argv, "b:s:p:a:f:dl:", opts, nullptr)) != -1) {
         switch (flag) {
             case 'b' :
-                booths = true;
-                booths_number = std::stoi(optarg);
-                // TODO handle invalid conversion exception
+                try {
+                    booths_number = std::stoi(optarg);
+                }
+                catch(std::invalid_argument& e){
+                    std::cerr << "fatal: Invalid booths number" << std::endl;
+                    return ERRORS::INVALID_BOOTHS_NUMBER;
+                }
                 break;
             case 's' :
-                stampers = true;
-                stampers_number = std::stoi(optarg);
-                // TODO handle invalid conversion exception
+                try {
+                    stampers_number = std::stoi(optarg);
+                }
+                catch(std::invalid_argument& e){
+                    std::cerr << "fatal: Invalid stampers number" << std::endl;
+                    return ERRORS::INVALID_STAMPERS_NUMBER;
+                }
                 break;
             case 'p' :
                 people = true;
@@ -60,29 +68,14 @@ int read_arguments(int argc, char *argv[], int& booths_number, int& stampers_num
                 debug = true;
                 break;
             case 'l' :
-                log = true;
                 log_file = optarg;
                 break;
-
-                // TODO: handle default case
         }
-    }
-
-    if (!booths) {
-        // TODO Log: No booths number, using default
-    }
-
-    if (!stampers) {
-        // TODO Log: No stampers number, using default
     }
 
     if (!people || !alerts || !fugitives) {
         std::cerr << "fatal: Configuration file missing" << std::endl;
-        return ERRORS::NO_CONFIG_FILE; // TODO set errno
-    }
-
-    if (!log) {
-        // TODO Log: No log path, using default
+        return ERRORS::NO_CONFIG_FILE;
     }
 
     return 0;
@@ -94,8 +87,8 @@ int main(int argc, char *argv[]) {
     int stampers_number;
     std::string people_file, alerts_file, fugitives_file, log_file;
 
-    int err = read_arguments(argc, argv, booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
-    if (err) exit(err); //FIXME
+    int ans = read_arguments(argc, argv, booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
+    if (ans < 0) return ans;
 
     MigrationOffice office(booths_number, stampers_number, people_file, alerts_file, fugitives_file, debug, log_file);
 
