@@ -1,4 +1,4 @@
-#include <src/main/common/definitions/FileNames.h>
+#include "FileNames.h"
 #include "BoothsWithUnreadFugitives.h"
 
 BoothsWithUnreadFugitives::BoothsWithUnreadFugitives() : booths(FugitivesFifo::SEM_FILE, FugitivesFifo::LETTER) {}
