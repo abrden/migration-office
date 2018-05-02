@@ -1,1 +1,2 @@
+add_subdirectory(deserializers)
 add_subdirectory(entities)
