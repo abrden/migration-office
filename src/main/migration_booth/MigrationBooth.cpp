@@ -20,7 +20,7 @@ void MigrationBooth::attend_resident(Resident* resident) {
         logger(BOOTH) << "Welcome to Conculandia, resident " << resident->get_id() << std::endl;
         statistics_communicator.notify_allowed_resident();
     } else {
-        police.report(resident);
+        logger(BOOTH) << "Resident " << resident->get_id() << " you are arrested" << std::endl;
         statistics_communicator.notify_detained_resident();
     }
     delete resident;
@@ -37,7 +37,7 @@ void MigrationBooth::attend_foreigner(Foreigner* foreigner) {
         stampers.return_stamper();
         statistics_communicator.notify_allowed_foreigner();
     } else {
-        police.report(foreigner);
+        logger(BOOTH) << "Foreigner " << foreigner->get_passport().get_id() << " you are deported" << std::endl;
         statistics_communicator.notify_deported_foreigner();
     }
     delete foreigner;

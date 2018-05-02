@@ -8,10 +8,14 @@ def generate_features():
     skin_f = ["dark brown", "pale", "light", "amber", "deep brown"]
     face_f = ["square", "round", "oval", "narrow", "wolfish"]
     hair_f = ["long", "short", "bald", "messy", "shoulder-length"]
-    i = random.randint(0, 4)
+    e_i = random.randint(0, 4)
+    eb_i = random.randint(0, 4)
+    s_i = random.randint(0, 4)
+    f_i = random.randint(0, 4)
+    h_i = random.randint(0, 4)
 
-    return eyes_f[i] + " eyes," + eyebrows_f[i] + " eyebrows," + skin_f[i] + " skin," + face_f[i] + " face," + \
-           hair_f[i] + " hair"
+    return eyes_f[e_i] + " eyes," + eyebrows_f[eb_i] + " eyebrows," + skin_f[s_i] + " skin," + face_f[f_i] + " face," + \
+           hair_f[h_i] + " hair"
 
 
 def generate_passport():
@@ -20,15 +24,15 @@ def generate_passport():
 
 
 # Fugitives
-with open("resources/gen_fugitives.txt", "w") as f:
+with open("resources/gen_fugitives_2.txt", "w") as f:
     f.write("id\n")
-    for _ in range(20):
+    for _ in range(100):
         f.write(str(random.randint(10000000, 40000000)) + '\n')
 
 # Persons
-with open("resources/gen_people.txt", "w") as f:
+with open("resources/gen_people_2.txt", "w") as f:
     f.write("timestamp,resident,id,passport_id,features\n")
-    for _ in range(20):
+    for _ in range(100):
         timestamp = str(random.randint(0, 10))
         resident = str(random.randint(0, 1))
         res_id = str(random.randint(10000000, 40000000)) if resident == '1' else ''
@@ -39,9 +43,9 @@ with open("resources/gen_people.txt", "w") as f:
 
 # Alerts
 
-with open("resources/gen_alerts.txt", "w") as f:
+with open("resources/gen_alerts_2.txt", "w") as f:
     f.write("timestamp,del_timestamp,features\n")
-    for _ in range(20):
+    for _ in range(100):
         timestamp = random.randint(0, 10)
         del_timestamp = timestamp + random.randint(1, 10)
         features = generate_features()
