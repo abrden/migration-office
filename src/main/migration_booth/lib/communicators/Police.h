@@ -18,29 +18,23 @@ class Police {
 
     private:
         Logger& logger;
-
         FifoReader fugitives_fifo;
         ExclusiveLock fugitives_fifo_lock;
         ExclusiveLock alerts_lock;
         AlertsSharedMemory alerts_shm;
         BoothsWithUnreadFugitives booths;
         std::vector<unsigned int> fugitives;
-
         std::list<WantedPersonAlert*> alerts;
-
-        size_t arrested_residents;
-        size_t deported_foreigners;
 
         void assign_fugitives(unsigned int* buffer, size_t size);
         void destroy_alerts();
+
     public:
         explicit Police(Logger& logger);
         void receive_fugitives();
         void get_current_alerts();
         bool is_fugitive(Resident* resident);
         bool is_wanted_person(Foreigner* foreigner);
-        void report(Resident* resident);
-        void report(Foreigner* foreigner);
         ~Police();
 
 };
