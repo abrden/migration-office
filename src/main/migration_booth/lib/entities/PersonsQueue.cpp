@@ -16,12 +16,15 @@ Person* PersonsQueue::front() {
     ssize_t bytes_read = fifo.fifo_read(static_cast<void*>(&buffer_size), sizeof(unsigned long));
     if (bytes_read == 0) {
         logger(BOOTH_QUEUE) << "No more persons on the queue" << std::endl;
+        fifo_lock.unlock();
         return nullptr;
-    } else if (bytes_read != sizeof(unsigned long)) {
+    } else if ((unsigned long) bytes_read < sizeof(unsigned long)) {
+        fifo_lock.unlock();
         throw std::runtime_error("I couldnt read person size ulong. I read this many bytes: " + bytes_read);
     }
 
     if (buffer_size > BUFF_SIZE) {
+        fifo_lock.unlock();
         throw std::overflow_error("Serialized person buffer exceeded.");
     }
     char buffer[BUFF_SIZE];
@@ -29,7 +32,8 @@ Person* PersonsQueue::front() {
     bytes_read = fifo.fifo_read(static_cast<void*>(buffer), sizeof(char) * buffer_size);
     if (bytes_read == 0) {
         logger(BOOTH_QUEUE) << "No more persons to on the queue" << std::endl;
-    } else if ((unsigned long) bytes_read != buffer_size) {
+    } else if ((unsigned long) bytes_read < buffer_size) {
+        fifo_lock.unlock();
         throw std::runtime_error("I couldnt read a person. I read this many bytes: " + bytes_read);
     }
     fifo_lock.unlock();

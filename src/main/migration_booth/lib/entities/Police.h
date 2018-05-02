@@ -31,6 +31,8 @@ class Police {
         size_t arrested_residents;
         size_t deported_foreigners;
 
+        void assign_fugitives(unsigned int* buffer, size_t size);
+        void destroy_alerts();
     public:
         explicit Police(Logger& logger);
         void receive_fugitives();

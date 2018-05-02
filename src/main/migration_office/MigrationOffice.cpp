@@ -30,11 +30,11 @@ MigrationOffice::MigrationOffice(const int booths_number, const int stampers_num
 }
 
 void MigrationOffice::start() {
-    open_statistics();
+    start_statistics();
     open_booths();
     open_ministry_of_security();
-    fork_spawner();
-    open_alert_deleter();
+    start_spawner();
+    start_alert_deleter();
 }
 
 void MigrationOffice::open_ministry_of_security() {
@@ -95,7 +95,7 @@ void MigrationOffice::open_booths() {
     }
 }
 
-void MigrationOffice::fork_spawner() {
+void MigrationOffice::start_spawner() {
     pid_t pid = fork();
 
     if (pid < 0) {
@@ -116,7 +116,7 @@ void MigrationOffice::fork_spawner() {
     }
 }
 
-void MigrationOffice::open_statistics() {
+void MigrationOffice::start_statistics() {
     pid_t pid = fork();
 
     if (pid < 0) {
@@ -130,14 +130,13 @@ void MigrationOffice::open_statistics() {
         spawner_argv.push_back(const_cast<char*>(BinaryNames::STATISTICS_BINARY.c_str()));
         spawner_argv.push_back(const_cast<char*>(debug_flag.c_str()));
         spawner_argv.push_back(const_cast<char*>(log_file.c_str()));
-        spawner_argv.push_back(const_cast<char*>(std::to_string(booths_number).c_str()));
         spawner_argv.push_back(nullptr);
 
         execv(spawner_argv[0], &spawner_argv[0]);
     }
 }
 
-void MigrationOffice::open_alert_deleter() {
+void MigrationOffice::start_alert_deleter() {
     pid_t pid = fork();
 
     if (pid < 0) {

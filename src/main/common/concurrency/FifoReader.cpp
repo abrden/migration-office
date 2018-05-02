@@ -13,5 +13,9 @@ void FifoReader::fifo_open() {
 }
 
 ssize_t FifoReader::fifo_read(void* buffer,const ssize_t buffsize) const {
-	return read(fd, buffer, buffsize);
+	ssize_t read_bytes = read(fd, buffer, buffsize);
+	if (read_bytes < 0) {
+	    throw std::system_error(errno, std::system_category(), "Error in fifo read.");
+	}
+	return read_bytes;
 }

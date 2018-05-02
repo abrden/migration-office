@@ -34,7 +34,6 @@ void MinisterOfSecurity::open() {
 }
 
 void MinisterOfSecurity::send_alerts() {
-    logger(MINISTER) << "Pato Bullrich sending high speed alerts!" << std::endl;
     alerts_spawner.run();
 }
 
@@ -42,10 +41,10 @@ void MinisterOfSecurity::send_fugitives() {
     size_t n_fugitives = fugitives.size();
 
     for(size_t i = 0; i < booths_number; i++) {
-        logger(MINISTER) << "Sending " << fugitives.size() << " fugitives!" << std::endl;
+        logger(MINISTER) << "Sending " << fugitives.size() << " fugitives ids for booth " << i + 1 << std::endl;
         fugitives_fifo.fifo_write(static_cast<void*>(&n_fugitives), sizeof(size_t));
-        fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
-        logger(MINISTER) << "Fugitives sent" << std::endl;
+        if (n_fugitives > 0)
+            fugitives_fifo.fifo_write(static_cast<void*>(fugitives.data()), sizeof(unsigned int) * fugitives.size());
     }
 
     logger(MINISTER) << "Waiting for booths read confirmations" << std::endl;

@@ -13,3 +13,5 @@ before_script:
   - ./build.sh
 script:
   - ./run.sh
+after_script:
+  - cat build/log

@@ -30,17 +30,16 @@ size_t AlertSpawner::find_new_alert_index() {
 
 void AlertSpawner::spawn(std::string spawnable) {
     AlertData data;
-    logger(MINISTER) << "Creating alert: " << spawnable << std::endl;
+    logger(MINISTER) << "Spawning alert: " << spawnable << std::endl;
     data.id = std::hash<std::string>{}(spawnable);
     size_t length = spawnable.copy(data.serialized_alert, spawnable.size(), 0);
     data.serialized_alert[length] = '\0';
     data.serialized_alert_size = spawnable.size();
 
     alerts_shmem_lock.lock();
-    logger(MINISTER) << "Looking for index to write alert" << std::endl;
     size_t pos = find_new_alert_index();
-    logger(MINISTER) << "Pos: " << pos << std::endl;
     alerts_shm.write(pos, data);
+    logger(MINISTER) << "Alert '" << spawnable << "' written on buffer position: " << pos << std::endl;
     alerts_shmem_lock.unlock();
 }
 
