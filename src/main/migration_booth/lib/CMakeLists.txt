@@ -1,2 +1,3 @@
+add_subdirectory(communicators)
 add_subdirectory(deserializers)
 add_subdirectory(entities)
